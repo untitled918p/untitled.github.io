@@ -1,33 +1,107 @@
-<html lang html="es">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untitled</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untitled Beta</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            margin: 0;
+        }
 
-a{
-text-align: left;
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0; /* Ajusta este valor seg? tus preferencias */
+        }
+
+        p {
+            text-align: center;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px; /* Ajusta este valor seg? tus preferencias */
+        }
+
+.capturas{
 display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+margin-top: 400px;
+margin-left: -600px;
+}
+
+.captura{
+margin: 10px;
+display: flex;
+align-items: center;
 flex-direction: column;
-align-items: flex-start;
-text-decoration: none;
-}
-
-img{
-
-width: 200px;
 
 }
-</style>
 
+.captura img{
+width: 240px;
+height: 220px;
+margin-bottom: 10px;
+}
+
+
+    </style>
 </head>
 <body>
-<h1> Selecciona un juego<h1>
-<a href="UntitledBeta.html">Untitled</a>
-<img src="icono.png" alt="Icono Juego 1"
-width="200">
-<a href="juego2.html">Jump</a>
 
-<p>Bienvenido a mi pagina Web</p>
+    <section>
+        <div style="display: flex; flex-direction: row-reverse; align-items: center;">
+            <p style="margin-right: 10px;">Peso Del Juego: 87 MB<br>Accion / Zombie / 2D</p>
+            <h2>Untitled</h2>
+            <img src="icono.png" width="100" height="100">
+        </div>
+    </section>
+
+    <a href="Untitled.zip" download>
+        <button>Descargar</button>
+    </a>
+
+<div class="capturas">
+<div class="captura">
+<img src="imagen1.png" alt="captura 1">
+</div>
+<div class="captura">
+<img src="imagen2.png" alt="captura2">
+</div>
+<div class="captura">
+<img src="imagen3.png" alt="captura3">
+</div>
+
+<div class="captura">
+<img src="imagen4.png" alt="captura4">
+</div>
+
+<div class="captura">
+<img src="imagen5.png" alt="captura5">
+</div>
+</div>
+
+
+
+    
 </body>
 </html>
