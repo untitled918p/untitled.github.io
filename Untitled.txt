@@ -27,7 +27,8 @@ width: 200px;
 <img src="icono.png" alt="Icono Juego 1"
 width="200">
 <a href="juego2.html">Jump</a>
-
-<p>Bienvenido a mi pagina Web</p>
 </body>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4078595962989795"
+     crossorigin="anonymous"></script>
 </html>
