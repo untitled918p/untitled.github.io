@@ -5,6 +5,9 @@
 <title>Untitled</title>
 <style>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581078688556623"
+     crossorigin="anonymous"></script>
+
 a{
 text-align: left;
 display: flex;
@@ -19,7 +22,7 @@ width: 200px;
 
 }
 </style>
-<meta name="google-adsense-account" content="ca-pub-1581078688556623">
+
 </head>
 <body>
 <h1> Selecciona un juego<h1>
