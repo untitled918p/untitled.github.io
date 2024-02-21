@@ -1,13 +1,13 @@
 <html lang html="es">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581078688556623"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1581078688556623"
      crossorigin="anonymous"></script>
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untitled</title>
+<title>Untitled Juegos</title>
 <style>
-
-
+  
 a{
 text-align: left;
 display: flex;
@@ -18,17 +18,24 @@ text-decoration: none;
 
 img{
 
-width: 200px;
+width: 100px;
 
 }
 </style>
-
 </head>
 <body>
 <h1> Selecciona un juego<h1>
 <a href="UntitledBeta.html">Untitled</a>
 <img src="icono.png" alt="Icono Juego 1"
 width="200">
-<a href="juego2.html">Jump</a>
+
+
+
+<a href="Untitled2.html">Untitled 2</a>
+<img src="IconoDeUntitled2.png" alt="Icono Juego 1"
+width="200">
+
+  
 </body>
+  
 </html>
