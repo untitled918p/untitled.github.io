@@ -37,11 +37,19 @@
         }
 
         section {
+            margin-bottom: 20px; /* Ajusta el margen inferior */
+        }
+
+        #contenedor-superior {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
             margin-bottom: 20px; /* Ajusta el margen inferior */
+        }
+
+        #contenedor-disqus {
+            width: 80%; /* Ajusta el ancho del área de comentarios */
+            max-width: 600px; /* Establece un ancho máximo para el área de comentarios */
         }
 
         .capturas {
@@ -64,27 +72,17 @@
             height: 120px;
             margin-bottom: 10px;
         }
-
-        #disqus_thread {
-            margin-top: 50px; /* Ajusta la distancia desde la parte superior */
-            margin-bottom: 50px; /* Ajusta la distancia desde la parte inferior */
-            width: 80%; /* Ajusta el ancho del área de comentarios */
-            max-width: 600px; /* Establece un ancho máximo para el área de comentarios */
-            text-align: center; /* Centra el contenido del área de comentarios */
-        }
     </style>
 </head>
 
 <body>
-    <section>
-        <div>
-            <img src="iconojump.png" width="100" height="100">
-            <h2>Jump To Survive</h2>
-            <p>Peso Del Juego: 10 MB<br>Accion / Zombie / 2D / indie </p>
-            <a href="jump to survive.rar" download>
-                <button>Descargar</button>
-            </a>
-        </div>
+    <section id="contenedor-superior">
+        <img src="iconojump.png" width="100" height="100">
+        <h2>Jump To Survive</h2>
+        <p>Peso Del Juego: 10 MB<br>Accion / Zombie / 2D / indie </p>
+        <a href="jump to survive.rar" download>
+            <button>Descargar</button>
+        </a>
     </section>
 
     <div class="capturas">
@@ -99,18 +97,19 @@
         </div>
     </div>
 
-    <div id="disqus_thread"></div>
-    <script>
-        (function() {
-            var d = document,
-                s = d.createElement('script');
-            s.src = 'https://untitled-12.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
+    <div id="contenedor-disqus">
+        <div id="disqus_thread"></div>
+        <script>
+            (function() {
+                var d = document,
+                    s = d.createElement('script');
+                s.src = 'https://untitled-12.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 </body>
 
 </html>
