@@ -5,75 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jump To Survive</title>
     <style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh; /* Ajusta el tamaño de la vista para que el contenido se centre verticalmente */
-        margin: 0;
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    button {
-        padding: 10px 20px;
-        font-size: 16px;
-        margin-top: 10px;
-    }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
 
-    img {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 10px;
-    }
+        img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-    }
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
 
-    p {
-        text-align: center;
-    }
+        p {
+            text-align: center;
+        }
 
-    section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 10px;
-    }
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
 
-    .capturas {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-top: 20px; /* Reducido para evitar demasiado espacio */
-    }
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
 
-    .captura {
-        margin: 10px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
 
-    .captura img {
-        width: 140px;
-        height: 120px;
-        margin-bottom: 10px;
-    }
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
+        }
 
-    .contenido-adicional {
-        text-align: center;
-        margin-top: 400px; /* Ajusta la distancia desde la parte superior */
-        margin-left: auto; /* Centrado horizontal */
-        margin-right: auto; /* Centrado horizontal */
-    }
+        .contenido-adicional {
+            text-align: center;
+            margin-top: 200px; /* Ajusta la distancia desde la parte superior */
+        }
 
-    .textoabajo {
-        text-align: center;
-        margin-top: 20px; /* Ajusta este valor según tus preferencias */
-    }
-</style>
+        .textoabajo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #disqus_thread {
+            margin-top: 200px; /* Ajusta la distancia desde la parte superior */
+        }
+    </style>
 </head>
 
 <body>
@@ -103,22 +105,23 @@
 
     <div class="contenido-adicional">
         <p>Requisitos mínimos windows 32/64 bits, 1.2 ghz,</p>
-        <div id="disqus_thread"></div>
-        <script>
-            (function() {
-                var d = document,
-                    s = d.createElement('script');
-                s.src = 'https://untitled-12.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
     <div class="textoabajo">
         <p>Texto adicional abajo</p>
     </div>
+
+    <div id="disqus_thread"></div>
+    <script>
+        (function() {
+            var d = document,
+                s = d.createElement('script');
+            s.src = 'https://untitled-12.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </body>
 
