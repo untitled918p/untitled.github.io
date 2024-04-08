@@ -22,8 +22,6 @@
             flex-direction: column;
             align-items: center;
             padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
-            max-width: 800px; /* Ancho máximo ajustado a 800px */
-            margin: 0 auto; /* Centra el contenedor */
         }
 
         .capturas {
@@ -82,6 +80,12 @@
 
     <section id="contenedor-disqus">
         <div id="disqus_thread"></div>
+        <script>
+            var d = document, s = d.createElement('script');
+            s.src = 'https://untitled-12.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        </script>
     </section>
 
     <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
@@ -102,7 +106,5 @@
             disqusSection.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
-    <!-- Integración de Disqus en una sola línea -->
-    <script src="https://untitled-12.disqus.com/embed.js" async></script>
 </body>
 </html>
