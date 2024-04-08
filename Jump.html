@@ -6,20 +6,44 @@
     <title>Jump To Survive</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contenedor-superior {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 200vh; /* Ajusta la altura para simular más contenido */
-            margin: 0;
-        }
-
-        #contenedor-superior {
-            margin-bottom: 20px;
+            height: 100vh;
         }
 
         #contenedor-disqus {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
+        }
+
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             margin-top: 20px;
+        }
+
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
         }
 
         #boton-scroll {
@@ -39,15 +63,24 @@
 
 <body>
     <section id="contenedor-superior">
-        <h2>Contenido Superior</h2>
-        <!-- Más contenido aquí -->
+        <h2>Jump To Survive</h2>
         <img src="iconojump.png" width="100" height="100">
         <p>Peso Del Juego: 10 MB<br>Accion / Zombie / 2D / indie </p>
     </section>
 
+    <div class="capturas">
+        <div class="captura">
+            <img src="Jump2.png" alt="captura 1">
+        </div>
+        <div class="captura">
+            <img src="Jump3.png" alt="captura2">
+        </div>
+        <div class="captura">
+            <img src="Jump4.png" alt="captura3">
+        </div>
+    </div>
+
     <section id="contenedor-disqus">
-        <h2>Sección de Comentarios</h2>
-        <!-- Contenido de Disqus aquí -->
         <div id="disqus_thread"></div>
         <script>
             (function() {
