@@ -1,11 +1,8 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Jump To Survive</title>
     <style>
         body {
@@ -30,7 +27,7 @@
 
         h2 {
             text-align: center;
-            margin-top: 0; /* Ajusta este valor seg? tus preferencias */
+            margin-top: 0;
         }
 
         p {
@@ -41,58 +38,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px; /* Ajusta este valor seg? tus preferencias */
+            margin-top: 10px;
         }
 
-.capturas{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-margin-top: 200px;
-margin-left: -300px;
-}
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 200px;
+            margin-left: -300px;
+        }
 
-.captura{
-margin: 10px;
-display: flex;
-align-items: center;
-flex-direction: column;
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
 
-}
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
+        }
 
-.captura img{
-width: 140px;
-height: 120px;
-margin-bottom: 10px;
-}
+        .contenido-adicional {
+            text-align: center;
+            margin-top: 800px; /* Ajusta este valor según tus preferencias */
+            position: absolute;
+            left: 50%;
+            transform: translateY(-50%);
+        }
 
-.contenido-adicional{
-
-text-align: center;
-margin-top: 500px;
-position: absolute;
-left: 50%;
-transform: translateY(-50%);
-}
-
-.textoabjao{
-text-align: center;
-margin-top: 600px;
-position: absolute;
-left: 50%;
-transform: translateY(-50%);
-
-
-}
-
-
-
-
+        .textoabjao {
+            text-align: center;
+            margin-top: 600px;
+            position: absolute;
+            left: 50%;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
-<body>
 
+<body>
     <section>
         <div style="display: flex; flex-direction: row-reverse; align-items: center;">
             <p style="margin-right: 10px;">Peso Del Juego: 10 MB<br>Accion / Zombie / 2D / indie </p>
@@ -105,46 +94,37 @@ transform: translateY(-50%);
         <button>Descargar</button>
     </a>
 
-<div class="capturas">
-<div class="captura">
-<img src="Jump2.png" alt="captura 1">
-</div>
-<div class="captura">
-<img src="Jump3.png" alt="captura2">
-</div>
-<div class="captura">
-<img src="Jump4.png" alt="captura3">
+    <div class="capturas">
+        <div class="captura">
+            <img src="Jump2.png" alt="captura 1">
+        </div>
+        <div class="captura">
+            <img src="Jump3.png" alt="captura2">
+        </div>
+        <div class="captura">
+            <img src="Jump4.png" alt="captura3">
+        </div>
+    </div>
 
+    <div class="contenido-adicional">
+        <p>Requisitos mínimos windows 32/64 bits, 1.2 ghz,</p>
+        <div id="disqus_thread"></div>
+        <script>
+            (function() {
+                var d = document,
+                    s = d.createElement('script');
+                s.src = 'https://untitled-12.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
 
-
-
-</div>
-
-</div>
-
-<div class="contenido-adicional"><p> Requisitos minimos windows 32/64 bits,  1.2 ghz,   </p>
-    <div id="disqus_thread"></div> <script> /** * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS. * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */ /* var disqus_config = function () { this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable }; */ (function() { // DON'T EDIT BELOW THIS LINE var d = document, s = d.createElement('script'); s.src = 'https://untitled-12.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s); })(); </script> <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>    
-
-<div id="disqus_thread"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
+    <div class="textoabjao">
+        <p>Texto adicional abajo</p>
+    </div>
 
 </body>
+
 </html>
