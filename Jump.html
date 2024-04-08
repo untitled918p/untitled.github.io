@@ -9,7 +9,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 10vh;
             margin: 0;
         }
 
@@ -46,7 +46,8 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 200px;
+            margin-left: -300px;
         }
 
         .captura {
@@ -64,16 +65,12 @@
 
         .contenido-adicional {
             text-align: center;
-            margin-top: 200px; /* Ajusta la distancia desde la parte superior */
+            margin-top: 200px; /* Ajusta este valor según tus preferencias */
         }
 
         .textoabajo {
             text-align: center;
-            margin-top: 20px;
-        }
-
-        #disqus_thread {
-            margin-top: 200px; /* Ajusta la distancia desde la parte superior */
+            margin-top: 20px; /* Ajusta este valor según tus preferencias */
         }
     </style>
 </head>
@@ -105,23 +102,22 @@
 
     <div class="contenido-adicional">
         <p>Requisitos mínimos windows 32/64 bits, 1.2 ghz,</p>
+        <div id="disqus_thread"></div>
+        <script>
+            (function() {
+                var d = document,
+                    s = d.createElement('script');
+                s.src = 'https://untitled-12.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
     <div class="textoabajo">
         <p>Texto adicional abajo</p>
     </div>
-
-    <div id="disqus_thread"></div>
-    <script>
-        (function() {
-            var d = document,
-                s = d.createElement('script');
-            s.src = 'https://untitled-12.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 </body>
 
