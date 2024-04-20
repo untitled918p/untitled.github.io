@@ -2,106 +2,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untitled Beta</title>
+    <title>Jump To Survive Prologue</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 10vh;
             margin: 0;
+            padding: 0;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 0; /* Ajusta este valor seg? tus preferencias */
-        }
-
-        p {
-            text-align: center;
-        }
-
-        section {
+        #contenedor-superior {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px; /* Ajusta este valor seg? tus preferencias */
+            justify-content: center;
+            height: 100vh;
         }
 
-.capturas{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-margin-top: 400px;
-margin-left: -600px;
-}
+        #contenedor-disqus {
+            padding: 20px;
+            background-color: #f0f0f0;
+            align-items: center;
+            padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
+            min-height: 200px; /* Establecer un tamaño mínimo para el contenedor de Disqus */
+        }
 
-.captura{
-margin: 10px;
-display: flex;
-align-items: center;
-flex-direction: column;
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
 
-}
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
 
-.captura img{
-width: 240px;
-height: 220px;
-margin-bottom: 10px;
-}
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
+        }
 
-
+        #boton-scroll {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Ocultamos el botón inicialmente */
+        }
     </style>
 </head>
 <body>
-
-    <section>
-        <div style="display: flex; flex-direction: row-reverse; align-items: center;">
-            <p style="margin-right: 10px;">Peso Del Juego: 87 MB<br>Accion / Zombie / 2D</p>
-            <h2>Untitled</h2>
-            <img src="icono.png" width="100" height="100">
-        </div>
+    <section id="contenedor-superior">
+        <h2>Jump To Survive Prologue</h2>
+        <img src="IconoJump2.png" width="100" height="100">
+        <p>Peso Del Juego: 117 MB<br> Terror / Accion / Zombie / 2D / indie 
+            <a href="JumpToSurvivePrologue.rar" download>
+                <button>Descargar</button>
+            </a>
+        </p>
     </section>
 
-    <a href="Untitled.zip" download>
-        <button>Descargar</button>
-    </a>
+    <div class="capturas">
+        <div class="captura">
+            <img src="jump2-1.png" alt="captura 1">
+        </div>
+        <div class="captura">
+            <img src="jump2-2.png" alt="captura2">
+        </div>
+        <div class="captura">
+            <img src="jump2-3.png" alt="captura3">
+        </div>
+    </div>
 
-<div class="capturas">
-<div class="captura">
-<img src="imagen1.png" alt="captura 1">
-</div>
-<div class="captura">
-<img src="imagen2.png" alt="captura2">
-</div>
-<div class="captura">
-<img src="imagen3.png" alt="captura3">
-</div>
+    <section id="contenedor-disqus">
+        <div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+        </script>
+    </section>
 
-<div class="captura">
-<img src="imagen4.png" alt="captura4">
-</div>
+    <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
 
-<div class="captura">
-<img src="imagen5.png" alt="captura5">
-</div>
-</div>
+    <script>
+        window.onscroll = function() {scrollFunction()};
 
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("boton-scroll").style.display = "block";
+            } else {
+                document.getElementById("boton-scroll").style.display = "none";
+            }
+        }
 
-
-    
+        function scrollToDisqus() {
+            var disqusSection = document.getElementById("contenedor-disqus");
+            disqusSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
