@@ -50,7 +50,41 @@ background-image: url('Fondo.png');
             height: 50px; /* Ajusta la altura según tus necesidades */
   
 }
+/* Estilos para el contenedor principal */
+        .container {
+            display: flex;
+        }
 
+        /* Estilos para el menú */
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            width: 20%; /* Ancho del menú */
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        li a:hover {
+            color: #ccc;
+        }
+
+        /* Estilos para el contenido principal */
+        .contenido-principal {
+            flex-grow: 1;
+            padding: 0 20px;
+        }
 
 </style>
 </head>
