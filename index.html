@@ -53,37 +53,35 @@ background-image: url('Fondo.png');
 /* Estilos para el contenedor principal */
         .container {
             display: flex;
+            background-color: #333; /* Fondo negro */
+            color: white; /* Texto blanco */
         }
 
         /* Estilos para el menú */
         nav {
-            background-color: #333;
-            padding: 10px 0;
-            width: 20%; /* Ancho del menú */
+            width: 200px; /* Ancho del menú */
+            padding: 20px;
         }
         ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            text-align: center;
-        }
-        li {
-            margin-bottom: 10px;
         }
         li a {
             display: block;
             color: white;
             text-decoration: none;
             font-weight: bold;
+            padding: 10px 0;
         }
         li a:hover {
-            color: #ccc;
+            background-color: #555; /* Color de fondo al pasar el ratón */
         }
 
         /* Estilos para el contenido principal */
         .contenido-principal {
             flex-grow: 1;
-            padding: 0 20px;
+            padding: 20px;
         }
 
 </style>
