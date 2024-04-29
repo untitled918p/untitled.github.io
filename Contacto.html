@@ -1,14 +1,43 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactos</title>
+    <title>Mis Redes Sociales</title>
     <style>
-        
+        /* Estilos para los contenedores */
+        .red-social {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        /* Estilos para las imágenes */
+        .red-social img {
+            width: 1em; /* Tamaño relativo al tamaño del texto */
+            height: 1em; /* Tamaño relativo al tamaño del texto */
+            vertical-align: middle;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
-    
-    
+    <p>Hola, ¡aquí están mis redes sociales!</p>
+    <!-- Enlaces a las redes sociales -->
+    <div class="red-social" onclick="window.location.href='https://www.tiktok.com'">
+        <img src="tiktok_logo.png" alt="TikTok">
+        TikTok
+    </div>
+    <div class="red-social" onclick="window.location.href='https://www.facebook.com'">
+        <img src="facebook_logo.png" alt="Facebook">
+        Facebook
+    </div>
+    <div class="red-social" onclick="window.location.href='https://www.youtube.com'">
+        <img src="youtube_logo.png" alt="YouTube">
+        YouTube
+    </div>
+    <div class="red-social" onclick="window.location.href='https://www.discord.com'">
+        <img src="discord_logo.png" alt="Discord">
+        Discord
+    </div>
 </body>
 </html>
