@@ -55,55 +55,22 @@
 </div>
 
 <script>
+    var followerCount = 0;
+
     function toggleFollow() {
         var button = document.querySelector('.follow-button');
-        var followerCount = document.getElementById('followerCount');
+        var followerCountElement = document.getElementById('followerCount');
         
         if (button.innerText === 'Seguir') {
             button.innerText = 'Siguiendo';
-            incrementFollowerCount();
+            followerCount++;
         } else {
             button.innerText = 'Seguir';
-            decrementFollowerCount();
-        }
-    }
-
-    function incrementFollowerCount() {
-        fetch('seguidores.json')
-        .then(response => response.json())
-        .then(data => {
-            data.count += 1;
-            updateFollowerCount(data.count);
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function decrementFollowerCount() {
-        fetch('seguidores.json')
-        .then(response => response.json())
-        .then(data => {
-            if (data.count > 0) {
-                data.count -= 1;
-                updateFollowerCount(data.count);
+            if (followerCount > 0) {
+                followerCount--;
             }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-
-    function updateFollowerCount(count) {
-        fetch('seguidores.json', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ count: count })
-        })
-        .then(response => response.json())
-        .then(data => {
-            var followerCount = document.getElementById('followerCount');
-            followerCount.innerText = data.count;
-        })
-        .catch(error => console.error('Error:', error));
+        }
+        followerCountElement.innerText = followerCount;
     }
 </script>
 
