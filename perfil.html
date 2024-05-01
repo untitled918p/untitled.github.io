@@ -5,246 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <style>
-background-image: url('UntitledFondopng.png');
-  background-size: cover;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-}
-
-.header {
-  background-image: url('Fondo.png');
-  background-size: contain;
-  height: 50px;
-  text-align: center;
-}
-
-.header h2 {
-  margin: 0;
-  padding: 10px;
-}
-
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-}
-
-nav {
-  float: left;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  background-color: #555;
-}
-
-
-        
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        .perfil {
-            max-width: 400px;
-            margin: 0 auto;
+        .profile {
             text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 300px;
+            margin: 50px auto;
         }
-        #foto-perfil {
-            max-width: 200px;
+        .profile img {
             border-radius: 50%;
-            display: block;
-            margin: 0 auto 20px;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
         }
-        #boton-seguir {
-            padding: 10px 20px;
-            background-color: dodgerblue;
-            color: white;
+        .profile h1 {
+            margin: 0;
+            color: #333;
+        }
+        .follow-button {
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
+            margin-bottom: 10px;
         }
-        #boton-seguir:hover {
-            background-color: #007bff;
+        .followers {
+            color: #777;
+            font-size: 14px;
         }
-        #boton-seguir.siguiendo {
-            background-color: green;
-        }
-        #boton-seguir.siguiendo:hover {
-            background-color: darkgreen;
-        }
-        #seguidores {
-            margin-top: 10px;
-        }
-
-.untitled1 {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.untitled1 div {
-  margin: 0 10px;
-}
-
-.untitled1 img {
-  width: 100px;
-  display: block;
-}
-
-        
     </style>
-    <script>
-        // Al cargar la página, mostrar el número de seguidores y el estado del botón
-window.onload = function() {
-    mostrarSeguidores();
-    mostrarBotonSeguir();
-};
-
-// Función para obtener el número de seguidores del almacenamiento local
-function obtenerSeguidores() {
-    var seguidores = localStorage.getItem('numero-seguidores');
-    if (!seguidores) {
-        seguidores = 0;
-    }
-    return parseInt(seguidores);
-}
-
-// Función para mostrar el número de seguidores en la página
-function mostrarSeguidores() {
-    var numeroSeguidores = obtenerSeguidores();
-    document.getElementById('numero-seguidores').innerText = numeroSeguidores;
-}
-
-// Función para mostrar el botón "Seguir" o "Siguiendo"
-function mostrarBotonSeguir() {
-    var botonSeguir = document.getElementById('boton-seguir');
-    var siguiendo = localStorage.getItem('siguiendo');
-    if (siguiendo && siguiendo === 'true') {
-        botonSeguir.innerText = 'Siguiendo';
-        botonSeguir.classList.add('siguiendo');
-    } else {
-        botonSeguir.innerText = 'Seguir';
-        botonSeguir.classList.remove('siguiendo');
-    }
-}
-
-// Función para actualizar el número de seguidores en el almacenamiento local
-async function actualizarSeguidores() {
-    try {
-        var token = ' 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'; // Reemplaza 'tu_token_de_acceso' con tu token real
-        var headers = {
-            'Authorization': 'token ' + token
-        };
-
-        var response = await fetch('https://api.github.com/repos/untitled918p/untitled.github.io/contents/seguidores.json', {
-            method: 'GET',
-            headers: headers
-        });
-
-        if (response.ok) {
-            var data = await response.json();
-            var content = atob(data.content);
-            var seguidores = parseInt(content);
-            localStorage.setItem('numero-seguidores', seguidores);
-            mostrarSeguidores();
-        } else {
-            console.error('Error al cargar el número de seguidores:', response.status);
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-// Función para seguir a alguien
-async function seguir() {
-    var botonSeguir = document.getElementById('boton-seguir');
-    var siguiendo = localStorage.getItem('siguiendo');
-    if (!siguiendo || siguiendo === 'false') {
-        var numeroSeguidores = obtenerSeguidores();
-        numeroSeguidores++;
-        localStorage.setItem('numero-seguidores', numeroSeguidores);
-        localStorage.setItem('siguiendo', 'true');
-        botonSeguir.innerText = 'Siguiendo';
-        botonSeguir.classList.add('siguiendo');
-        await actualizarSeguidores();
-    } else {
-        var numeroSeguidores = obtenerSeguidores();
-        numeroSeguidores--;
-        localStorage.setItem('numero-seguidores', numeroSeguidores);
-        localStorage.setItem('siguiendo', 'false');
-        botonSeguir.innerText = 'Seguir';
-        botonSeguir.classList.remove('siguiendo');
-        await actualizarSeguidores();
-    }
-}
-    </script>
 </head>
 <body>
-<div class="menu-container">
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-        
-      </ul>
-    </nav>
-  </div>
 
-    
-    <div class="perfil">
-        <h1>Untitled</h1>
-        <img src="Perfilimagen.png" alt="Perfilimagen.png" id="foto-perfil">
-        <button id="boton-seguir" onclick="seguir()">Seguir</button>
-        <div id="seguidores">Seguidores: <span id="numero-seguidores">0</span></div>
-        <h2>Juegos</h2>
-        <div class="untitled1">
+<div class="profile">
+    <img src="tu_foto.jpg" alt="Mi Foto">
+    <h1>Mi Título</h1>
+    <button class="follow-button" onclick="toggleFollow()">Seguir</button>
+    <p class="followers">Seguidores: <span id="followerCount">1000</span></p>
+    <!-- Puedes cambiar "tu_foto.jpg" por la ruta de tu imagen y "Mi Título" por tu título -->
+</div>
 
-        
-        <div class="untitled1">
-    <div>
-      <a href="UntitledBeta.html">Untitled<br>
-        <img src="icono.png" alt="Icono Juego 1">
-      </a>
-    </div>
-    <div>
-      <a href="Untitled2.html">Untitled 2<br>
-        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-      </a>
-    </div>
-    <div>
-      <a href="Jump.html">Jump To Survive<br>
-        <img src="iconojump.png" alt="Icono Juego 3">
-      </a>
-    </div>
-    <div>
-      <a href="JumpPrologue.html">Jump Prologue<br>
-        <img src="IconoJump2.png" alt="Icono Juego 4">
-      </a>
-    </div>
-    <div>
-      <a href="Kasper.html">Kasper<br>
-        <img src="KasperIcono.png" alt="Icono Juego 5">
-      </a>
-    </div>
-  </div>
+<script>
+    function toggleFollow() {
+        var button = document.querySelector('.follow-button');
+        if (button.innerText === 'Seguir') {
+            button.innerText = 'Siguiendo';
+        } else {
+            button.innerText = 'Seguir';
+        }
+    }
+</script>
+
 </body>
 </html>
