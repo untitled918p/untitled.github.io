@@ -41,13 +41,13 @@
         }
     </style>
     <script>
-        // Al cargar la p醙ina, mostrar el n鷐ero de seguidores
+        // Al cargar la p谩gina, mostrar el n煤mero de seguidores
         window.onload = function() {
             mostrarSeguidores();
             mostrarBotonSeguir();
         };
 
-        // Funci髇 para obtener el n鷐ero de seguidores del almacenamiento local
+        // Funci贸n para obtener el n煤mero de seguidores del almacenamiento local
         function obtenerSeguidores() {
             var seguidores = localStorage.getItem('numero-seguidores');
             if (!seguidores) {
@@ -56,13 +56,13 @@
             return parseInt(seguidores);
         }
 
-        // Funci髇 para mostrar el n鷐ero de seguidores en la p醙ina
+        // Funci贸n para mostrar el n煤mero de seguidores en la p谩gina
         function mostrarSeguidores() {
             var numeroSeguidores = obtenerSeguidores();
             document.getElementById('numero-seguidores').innerText = numeroSeguidores;
         }
 
-        // Funci髇 para mostrar el bot髇 "Seguir" o "Siguiendo"
+        // Funci贸n para mostrar el bot贸n "Seguir" o "Siguiendo"
         function mostrarBotonSeguir() {
             var botonSeguir = document.getElementById('boton-seguir');
             var siguiendo = localStorage.getItem('siguiendo');
@@ -75,7 +75,7 @@
             }
         }
 
-        // Funci髇 para seguir a alguien
+        // Funci贸n para seguir a alguien
         function seguir() {
             var botonSeguir = document.getElementById('boton-seguir');
             var siguiendo = localStorage.getItem('siguiendo');
@@ -105,10 +105,36 @@
         <!-- Cambia "Mi Nombre" por el nombre que desees mostrar en tu perfil -->
         <button id="boton-seguir" onclick="seguir()">Seguir</button>
         <div id="seguidores">Seguidores: <span id="numero-seguidores">0</span></div>
-        <!-- Reemplaza "0" con el n鷐ero real de seguidores -->
+        <!-- Reemplaza "0" con el n煤mero real de seguidores -->
         <h2>Juegos</h2>
-        <img src="ruta/a/tu/imagen_de_juegos.png" alt="Imagen de juegos">
-        <!-- Reemplaza "ruta/a/tu/imagen.png" con la ruta de tu imagen de juegos -->
+
+        
+        <div class="untitled1">
+    <div>
+      <a href="UntitledBeta.html">Untitled<br>
+        <img src="icono.png" alt="Icono Juego 1">
+      </a>
     </div>
+    <div>
+      <a href="Untitled2.html">Untitled 2<br>
+        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+      </a>
+    </div>
+    <div>
+      <a href="Jump.html">Jump To Survive<br>
+        <img src="iconojump.png" alt="Icono Juego 3">
+      </a>
+    </div>
+    <div>
+      <a href="JumpPrologue.html">Jump Prologue<br>
+        <img src="IconoJump2.png" alt="Icono Juego 4">
+      </a>
+    </div>
+    <div>
+      <a href="Kasper.html">Kasper<br>
+        <img src="KasperIcono.png" alt="Icono Juego 5">
+      </a>
+    </div>
+  </div>
 </body>
 </html>
