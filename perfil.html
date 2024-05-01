@@ -120,14 +120,14 @@ li a:hover {
 
         // Función para obtener el número de seguidores del archivo JSON en GitHub
         async function obtenerSeguidores() {
-            const response = await fetch('https://raw.githubusercontent.com/tu_usuario/tu_repositorio/main/seguidores.json');
+            const response = await fetch('https://raw.githubusercontent.com/untitled918p/untitled918p/untitled.github.io/main/seguidores.json');
             const data = await response.json();
             return data.seguidores;
         }
 
         // Función para actualizar el número de seguidores en el archivo JSON en GitHub
         async function actualizarSeguidores(numeroSeguidores) {
-            const response = await fetch('https://api.github.com/repos/tu_usuario/tu_repositorio/contents/seguidores.json');
+            const response = await fetch('https://api.github.com/repos/untitled918p/untitled918p/untitled.github.io/contents/seguidores.json');
             const data = await response.json();
             const sha = data.sha;
             
@@ -137,11 +137,11 @@ li a:hover {
                 sha: sha
             };
             
-            await fetch('https://api.github.com/repos/tu_usuario/tu_repositorio/contents/seguidores.json', {
+            await fetch('https://api.github.com/repos/untitled918p/untitled918p/untitled.github.io/contents/seguidores.json', {
                 method: 'PUT',
                 body: JSON.stringify(nuevoContenido),
                 headers: {
-                    'Authorization': 'token tu_token_de_acceso',
+                    'Authorization': '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',
                     'Content-Type': 'application/json'
                 }
             });
