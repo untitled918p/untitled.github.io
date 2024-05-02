@@ -83,34 +83,49 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
 
         // Maneja el evento de clic en el botón de seguir
         document.getElementById('followButton').addEventListener('click', function() {
-            console.log('Botón de seguir clicado');
-            var button = document.getElementById('followButton');
+    console.log('Botón de seguir clicado');
+    var button = document.getElementById('followButton');
 
-            database.ref('users/' + uid).once('value', function(snapshot) {
-                var userData = snapshot.val();
-                var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
-                var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
+    database.ref('users/' + uid).once('value', function(snapshot) {
+        var userData = snapshot.val();
+        var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
+        var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
 
-                if (!isFollowing) {
-                    button.innerText = 'Siguiendo';
-                    followerCount++;
-                    database.ref('users/' + uid).update({
-                        isFollowing: true,
-                        followerCount: followerCount
-                    });
-                } else {
-                    button.innerText = 'Seguir';
-                    if (followerCount > 0) {
-                        followerCount--;
-                    }
-                    database.ref('users/' + uid).update({
-                        isFollowing: false,
-                        followerCount: followerCount
-                    });
-                }
-
-                document.getElementById('followerCount').innerText = followerCount;
+        if (!isFollowing) {
+            button.innerText = 'Siguiendo';
+            followerCount++;
+            database.ref('users/' + uid).update({
+                isFollowing: true,
+                followerCount: followerCount
             });
+        } else {
+            button.innerText = 'Seguir';
+            if (followerCount > 0) {
+                followerCount--;
+            }
+            database.ref('users/' + uid).update({
+                isFollowing: false,
+                followerCount: followerCount
+            });
+        }
+
+        document.getElementById('followerCount').innerText = followerCount;
+    });
+});
+
+// Al cargar la página, inicializa los datos del usuario
+database.ref('users/' + uid).once('value', function(snapshot) {
+    var userData = snapshot.val();
+    var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
+    var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
+
+    document.getElementById('followerCount').innerText = followerCount;
+    if (isFollowing) {
+        document.getElementById('followButton').innerText = 'Siguiendo';
+    } else {
+        document.getElementById('followButton').innerText = 'Seguir';
+    }
+});
         });
     </script>
 </body>
