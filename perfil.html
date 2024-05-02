@@ -86,8 +86,8 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
         document.getElementById('followButton').addEventListener('click', function() {
             database.ref('users/' + uid).transaction(function(user) {
                 if (user) {
-                    user.isFollowing = !user.isFollowing;
-                    user.followerCount = (user.followerCount || 0) + (user.isFollowing ? 1 : -1);
+                    user.isFollowing = true; // Establece isFollowing en true localmente
+                    user.followerCount = (user.followerCount || 0) + 1;
                 }
                 return user;
             });
