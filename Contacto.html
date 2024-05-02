@@ -5,96 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Redes Sociales</title>
     <style>
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-}
-
-nav {
-  float: left;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  background-color: #555;
-}
-
-       
-
-        .menu-container nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu-container nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        .menu-container nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .menu-container nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-
-        
         /* Estilos para los contenedores */
-        .red-social {
-            display: inline-block;
-            margin-right: 20px;
-            cursor: pointer;
-        }
-        /* Estilos para las imágenes */
-        .red-social img {
-            width: 1em; /* Tamaño relativo al tamaño del texto */
-            height: 1em; /* Tamaño relativo al tamaño del texto */
-            vertical-align: middle;
-            margin-right: 5px;
-        }
         .menu-container {
             background-color: #333;
-            overflow: hidden; /* Para contener los elementos flotantes */
+            overflow: hidden;
         }
+
         nav {
-            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
+
         li {
-            display: inline-block; /* Para mostrar los elementos uno al lado del otro */
-            margin-right: 20px;
+            margin-bottom: 10px; /* Espacio entre elementos del menú */
         }
+
         li a {
             display: block;
             color: white;
             text-decoration: none;
             font-weight: bold;
+            padding: 10px 20px; /* Espacio interno del enlace */
         }
+
         li a:hover {
             background-color: #555; /* Color de fondo al pasar el ratón */
         }
@@ -113,11 +53,12 @@ li a:hover {
                 <li><a href="Contacto.html">Contacto</a></li>
                 <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
                 <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
-                <li><div id="photo-container" class="photo-container"></div>
-<script src="perfil.js"></script></li>
             </ul>
         </nav>
     </div>
+    <div id="photo-container" class="photo-container"></div>
+    <script src="perfil.js"></script>
+
     <p><h2>Hola, ¡aquí están mis redes sociales!</h2></p>
     <!-- Enlaces a las redes sociales -->
     <div class="red-social" onclick="window.location.href='https://vm.tiktok.com/ZMMpfexwA/'">
@@ -136,7 +77,5 @@ li a:hover {
         <img src="discord.png" alt="https://discord.com/invite/Rbt7refz">
         Discord
     </div>
-
-    
 </body>
 </html>
