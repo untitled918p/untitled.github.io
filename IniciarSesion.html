@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión con Google</title>
+    <!-- Agrega los scripts de Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script>
+        // Inicializa Firebase con tu configuración
+               // Tu configuración de Firebase aquí
+       const 
+
+firebaseConfig = {
+  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+  authDomain: "untitled-3bfa8.firebaseapp.com",
+ 
+
+ projectId: "untitled-3bfa8",
+  storageBucket: "untitled-3bfa8.appspot.com",
+  messagingSenderId: "841576951279",
+  
+
+appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  measurementId: "G-MJ4RGPGV36"
+};
+        firebase.initializeApp(firebaseConfig);
+
+        // Obtiene una instancia del proveedor de autenticación de Google
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        // Maneja el evento de clic en el botón de inicio de sesión con Google
+        function signInWithGoogle() {
+            firebase.auth().signInWithPopup(provider)
+            .then((result) => {
+                // El usuario ha iniciado sesión correctamente
+                const user = result.user;
+                console.log('Usuario autenticado:', user);
+            }).catch((error) => {
+                // Ha ocurrido un error durante el inicio de sesión
+                console.error('Error al iniciar sesión:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Iniciar sesión con Google</h1>
+    <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+</body>
+</html>
