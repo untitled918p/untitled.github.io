@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,6 +91,7 @@
 
         // Maneja el evento de clic en el botón de seguir
         document.getElementById('followButton').addEventListener('click', function() {
+            console.log('Botón de seguir clicado'); // Añadimos un log para verificar si el evento se está activando
             var button = document.getElementById('followButton');
 
             if (button.innerText === 'Seguir') {
