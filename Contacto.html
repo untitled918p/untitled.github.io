@@ -24,7 +24,11 @@
         }
 
         li {
-            margin-bottom: 10px; /* Espacio entre elementos del menú */
+            margin-right: 20px; /* Espacio entre elementos del menú */
+        }
+
+        li:last-child {
+            margin-right: 0; /* Quita el margen derecho del último elemento del menú */
         }
 
         li a {
@@ -43,6 +47,20 @@
         .contenido-principal {
             padding: 20px;
         }
+
+        /* Estilos para las redes sociales */
+        .red-social {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .red-social img {
+            width: 40px; /* Tamaño de las imágenes */
+            height: auto; /* Altura automática para mantener la proporción */
+            vertical-align: middle;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -51,11 +69,12 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+                <li><a href="Informacion.html">Pagina oficial y más información</a></li>
+                <li><a href="IniciarSesion.html">Iniciar sesión con Google</a></li>
             </ul>
         </nav>
     </div>
+
     <div id="photo-container" class="photo-container"></div>
     <script src="perfil.js"></script>
 
