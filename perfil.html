@@ -7,6 +7,7 @@
     <!-- Agrega las importaciones de las bibliotecas de Firebase directamente desde la CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <style>
@@ -54,7 +55,6 @@
         <img src="tu_foto.jpg" alt="Mi Foto">
         <h1>Mi Título</h1>
         <button class="follow-button" id="followButton">Seguir</button>
-        <p class="followers">Seguidores: <span id="followerCount">0</span></p>
     </div>
 
     <script>
@@ -77,28 +77,52 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
 
         // Inicializa Firebase
         firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
         const database = firebase.database();
-
-        // Obtén el UID del usuario actual (simulado para este ejemplo)
-        const uid = "UID_DEL_USUARIO_ACTUAL"; // Deberás reemplazar esto con la lógica para obtener el UID del usuario actual
 
         // Maneja el evento de clic en el botón de seguir
         document.getElementById('followButton').addEventListener('click', function() {
-            database.ref('users/' + uid).transaction(function(user) {
-                if (user) {
-                    user.isFollowing = true; // Establece isFollowing en true localmente
-                    user.followerCount = (user.followerCount || 0) + 1;
-                }
-                return user;
-            });
+            // Obtén el usuario actual
+            const user = auth.currentUser;
+
+            if (user) {
+                // Obtiene el UID del usuario actual
+                const uid = user.uid;
+
+                // Consulta el estado de seguimiento del usuario actual
+                database.ref('users/' + uid).once('value', function(snapshot) {
+                    const userData = snapshot.val();
+                    if (userData && userData.isFollowing) {
+                        // Si el usuario ya está siguiendo, cambia a "Seguir"
+                        database.ref('users/' + uid).update({ isFollowing: false });
+                    } else {
+                        // Si el usuario no está siguiendo, cambia a "Siguiendo"
+                        database.ref('users/' + uid).update({ isFollowing: true });
+                    }
+                });
+            }
         });
 
-        // Escucha cambios en los datos del usuario
-        database.ref('users/' + uid).on('value', function(snapshot) {
-            const user = snapshot.val();
+        // Escucha cambios en el estado de seguimiento del usuario actual
+        auth.onAuthStateChanged(function(user) {
             if (user) {
-                document.getElementById('followerCount').innerText = user.followerCount || 0;
-                document.getElementById('followButton').innerText = user.isFollowing ? 'Siguiendo' : 'Seguir';
+                // Obtiene el UID del usuario actual
+                const uid = user.uid;
+
+                // Consulta el estado de seguimiento del usuario actual
+                database.ref('users/' + uid).on('value', function(snapshot) {
+                    const userData = snapshot.val();
+                    if (userData && userData.isFollowing) {
+                        // Si el usuario está siguiendo, muestra "Siguiendo"
+                        document.getElementById('followButton').innerText = 'Siguiendo';
+                    } else {
+                        // Si el usuario no está siguiendo, muestra "Seguir"
+                        document.getElementById('followButton').innerText = 'Seguir';
+                    }
+                });
+            } else {
+                // Si no hay usuario autenticado, muestra "Seguir"
+                document.getElementById('followButton').innerText = 'Seguir';
             }
         });
     </script>
