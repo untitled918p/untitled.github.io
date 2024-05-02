@@ -55,12 +55,19 @@
 </div>
 
 <script>
-    var followerCount = 0;
+    // Al cargar la página, intenta obtener el contador de seguidores del almacenamiento local
+    var followerCount = localStorage.getItem('followerCount');
+    // Si el contador de seguidores no está en el almacenamiento local, inicialízalo a 0
+    if (!followerCount) {
+        followerCount = 0;
+    }
+    // Actualiza el contador de seguidores en la página
+    document.getElementById('followerCount').innerText = followerCount;
 
     function toggleFollow() {
         var button = document.querySelector('.follow-button');
         var followerCountElement = document.getElementById('followerCount');
-        
+
         if (button.innerText === 'Seguir') {
             button.innerText = 'Siguiendo';
             followerCount++;
@@ -70,7 +77,10 @@
                 followerCount--;
             }
         }
+        // Actualiza el contador de seguidores en la página
         followerCountElement.innerText = followerCount;
+        // Guarda el contador de seguidores en el almacenamiento local
+        localStorage.setItem('followerCount', followerCount);
     }
 </script>
 
