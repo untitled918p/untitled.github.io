@@ -4,88 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
+    <!-- Agrega las importaciones de las bibliotecas de Firebase directamente desde la CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js"></script>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .profile {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            width: 300px;
-            margin: 50px auto;
-        }
-        .profile img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .profile h1 {
-            margin: 0;
-            color: #333;
-        }
-        .follow-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        .followers {
-            color: #777;
-            font-size: 14px;
-        }
+        /* Estilos CSS aquí */
     </style>
 </head>
 <body>
+    <div class="profile">
+        <img src="tu_foto.jpg" alt="Mi Foto">
+        <h1>Mi Título</h1>
+        <button class="follow-button" onclick="toggleFollow()">Seguir</button>
+        <p class="followers">Seguidores: <span id="followerCount">0</span></p>
+    </div>
 
-<div class="profile">
-    <img src="tu_foto.jpg" alt="Mi Foto">
-    <h1>Mi Título</h1>
-    <button class="follow-button" onclick="toggleFollow()">Seguir</button>
-    <p class="followers">Seguidores: <span id="followerCount">0</span></p>
-    <!-- Puedes cambiar "tu_foto.jpg" por la ruta de tu imagen y "Mi Título" por tu título -->
-</div>
+    <script>
+        // Tu configuración de Firebase aquí
+       const firebaseConfig = {
+  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+  authDomain: "untitled-3bfa8.firebaseapp.com",
+  projectId: "untitled-3bfa8",
+  storageBucket: "untitled-3bfa8.appspot.com",
+  messagingSenderId: "841576951279",
+  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  measurementId: "G-MJ4RGPGV36"
+};
 
-<script>
-    var followerCount = localStorage.getItem('followerCount');
-    var isFollowing = localStorage.getItem('isFollowing');
+        // Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
-    if (!followerCount) {
-        followerCount = 0;
-    }
-    if (isFollowing === 'true') {
-        document.querySelector('.follow-button').innerText = 'Siguiendo';
-    }
+        // Tu código JavaScript aquí
+        var followerCount = localStorage.getItem('followerCount');
+        var isFollowing = localStorage.getItem('isFollowing');
 
-    document.getElementById('followerCount').innerText = followerCount;
-
-    function toggleFollow() {
-        var button = document.querySelector('.follow-button');
-        var followerCountElement = document.getElementById('followerCount');
-
-        if (button.innerText === 'Seguir') {
-            button.innerText = 'Siguiendo';
-            followerCount++;
-            localStorage.setItem('isFollowing', 'true');
-        } else {
-            button.innerText = 'Seguir';
-            if (followerCount > 0) {
-                followerCount--;
-            }
-            localStorage.setItem('isFollowing', 'false');
+        if (!followerCount) {
+            followerCount = 0;
         }
-        followerCountElement.innerText = followerCount;
-        localStorage.setItem('followerCount', followerCount);
-    }
-</script>
+        if (isFollowing === 'true') {
+            document.querySelector('.follow-button').innerText = 'Siguiendo';
+        }
 
+        document.getElementById('followerCount').innerText = followerCount;
+
+        function toggleFollow() {
+            var button = document.querySelector('.follow-button');
+            var followerCountElement = document.getElementById('followerCount');
+
+            if (button.innerText === 'Seguir') {
+                button.innerText = 'Siguiendo';
+                followerCount++;
+                localStorage.setItem('isFollowing', 'true');
+            } else {
+                button.innerText = 'Seguir';
+                if (followerCount > 0) {
+                    followerCount--;
+                }
+                localStorage.setItem('isFollowing', 'false');
+            }
+            followerCountElement.innerText = followerCount;
+            localStorage.setItem('followerCount', followerCount);
+        }
+    </script>
 </body>
 </html>
