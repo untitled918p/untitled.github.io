@@ -4,27 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión con Google</title>
+    <!-- Estilos CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Color de fondo */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff; /* Color del cuadro */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333; /* Color del texto del encabezado */
+        }
+
+        button {
+            background-color: #4285f4; /* Color del botón */
+            color: #fff; /* Color del texto del botón */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ae8; /* Color del botón al pasar el ratón */
+        }
+    </style>
     <!-- Agrega los scripts de Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script>
         // Inicializa Firebase con tu configuración
-               // Tu configuración de Firebase aquí
-       const 
-
-firebaseConfig = {
+        const firebaseConfig = {
   apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
   authDomain: "untitled-3bfa8.firebaseapp.com",
- 
-
- projectId: "untitled-3bfa8",
+  projectId: "untitled-3bfa8",
   storageBucket: "untitled-3bfa8.appspot.com",
   messagingSenderId: "841576951279",
-  
-
-appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
-};
+}
         firebase.initializeApp(firebaseConfig);
 
         // Obtiene una instancia del proveedor de autenticación de Google
@@ -45,7 +78,9 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
     </script>
 </head>
 <body>
-    <h1>Iniciar sesión con Google</h1>
-    <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+    <div class="container">
+        <h1>Iniciar sesión con Google</h1>
+        <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+    </div>
 </body>
 </html>
