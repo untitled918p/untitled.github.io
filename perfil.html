@@ -85,24 +85,29 @@
 
         document.getElementById('followerCount').innerText = followerCount;
 
-        function toggleFollow() {
-            var button = document.querySelector('.follow-button');
-            var followerCountElement = document.getElementById('followerCount');
+       function toggleFollow() {
+    var button = document.querySelector('.follow-button');
+    var followerCountElement = document.getElementById('followerCount');
+    var followerCount = parseInt(localStorage.getItem('followerCount')); // Convertir a entero
 
-            if (button.innerText === 'Seguir') {
-                button.innerText = 'Siguiendo';
-                followerCount++;
-                localStorage.setItem('isFollowing', 'true');
-            } else {
-                button.innerText = 'Seguir';
-                if (followerCount > 0) {
-                    followerCount--;
-                }
-                localStorage.setItem('isFollowing', 'false');
-            }
-            followerCountElement.innerText = followerCount;
-            localStorage.setItem('followerCount', followerCount);
+    if (!followerCount || isNaN(followerCount)) { // Asegurar que followerCount sea un número válido
+        followerCount = 0;
+    }
+
+    if (button.innerText === 'Seguir') {
+        button.innerText = 'Siguiendo';
+        followerCount++;
+        localStorage.setItem('isFollowing', 'true');
+    } else {
+        button.innerText = 'Seguir';
+        if (followerCount > 0) {
+            followerCount--;
         }
+        localStorage.setItem('isFollowing', 'false');
+    }
+    followerCountElement.innerText = followerCount;
+    localStorage.setItem('followerCount', followerCount);
+}
     </script>
 </body>
 </html>
