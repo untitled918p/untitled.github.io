@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión con Google</title>
     <!-- Estilos CSS -->
-     <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9; /* Color de fondo */
@@ -18,7 +18,7 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Color del fondo del cuadro */
+            background-color: #fff; /* Color del fondo del contenedor */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,8 +79,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Iniciar sesión con Google</h1>
-        <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+        <div class="login-box">
+            <h1>Iniciar sesión con Google</h1>
+            <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
+        </div>
     </div>
 </body>
 </html>
