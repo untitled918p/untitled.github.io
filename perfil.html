@@ -58,21 +58,22 @@
     </div>
 
     <script>
-        // Tu configuración de Firebase aquí
-        // Tu configuración de Firebase aquí
+               // Tu configuración de Firebase aquí
        const 
 
 firebaseConfig = {
   apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
   authDomain: "untitled-3bfa8.firebaseapp.com",
+ 
+
  projectId: "untitled-3bfa8",
   storageBucket: "untitled-3bfa8.appspot.com",
   messagingSenderId: "841576951279",
+  
+
 appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
 };
-
- 
 
         // Inicializa Firebase
         firebase.initializeApp(firebaseConfig);
@@ -85,13 +86,8 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
         document.getElementById('followButton').addEventListener('click', function() {
             database.ref('users/' + uid).transaction(function(user) {
                 if (user) {
-                    if (!user.isFollowing) {
-                        user.isFollowing = true;
-                        user.followerCount = (user.followerCount || 0) + 1;
-                    } else {
-                        user.isFollowing = false;
-                        user.followerCount = Math.max((user.followerCount || 0) - 1, 0);
-                    }
+                    user.isFollowing = !user.isFollowing;
+                    user.followerCount = (user.followerCount || 0) + (user.isFollowing ? 1 : -1);
                 }
                 return user;
             });
@@ -102,6 +98,7 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
             const user = snapshot.val();
             if (user) {
                 document.getElementById('followerCount').innerText = user.followerCount || 0;
+                document.getElementById('followButton').innerText = user.isFollowing ? 'Siguiendo' : 'Seguir';
             }
         });
     </script>
