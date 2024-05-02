@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Redes Sociales</title>
     <style>
+.menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Color de fondo del menú */
+            color: #fff; /* Color del texto del menú */
+            padding: 10px 20px; /* Espaciado interno del menú */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
+            z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+        }
+
+        .menu-container nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-container nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .menu-container nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .menu-container nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        
         /* Estilos para los contenedores */
         .red-social {
             display: inline-block;
