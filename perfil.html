@@ -78,55 +78,32 @@ appId: "1:841576951279:web:deabdeb786d955642a1a1a",
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Obtén el UID del usuario actual
+        // Obtén el UID del usuario actual (simulado para este ejemplo)
         const uid = "UID_DEL_USUARIO_ACTUAL"; // Deberás reemplazar esto con la lógica para obtener el UID del usuario actual
 
         // Maneja el evento de clic en el botón de seguir
         document.getElementById('followButton').addEventListener('click', function() {
-    console.log('Botón de seguir clicado');
-    var button = document.getElementById('followButton');
-
-    database.ref('users/' + uid).once('value', function(snapshot) {
-        var userData = snapshot.val();
-        var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
-        var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
-
-        if (!isFollowing) {
-            button.innerText = 'Siguiendo';
-            followerCount++;
-            database.ref('users/' + uid).update({
-                isFollowing: true,
-                followerCount: followerCount
+            database.ref('users/' + uid).transaction(function(user) {
+                if (user) {
+                    if (!user.isFollowing) {
+                        user.isFollowing = true;
+                        user.followerCount = (user.followerCount || 0) + 1;
+                    } else {
+                        user.isFollowing = false;
+                        user.followerCount = Math.max((user.followerCount || 0) - 1, 0);
+                    }
+                }
+                return user;
             });
-        } else {
-            button.innerText = 'Seguir';
-            if (followerCount > 0) {
-                followerCount--;
+        });
+
+        // Escucha cambios en los datos del usuario
+        database.ref('users/' + uid).on('value', function(snapshot) {
+            const user = snapshot.val();
+            if (user) {
+                document.getElementById('followerCount').innerText = user.followerCount || 0;
             }
-            database.ref('users/' + uid).update({
-                isFollowing: false,
-                followerCount: followerCount
-            });
-        }
-
-        document.getElementById('followerCount').innerText = followerCount;
-    });
-});
-
-// Al cargar la página, inicializa los datos del usuario
-database.ref('users/' + uid).once('value', function(snapshot) {
-    var userData = snapshot.val();
-    var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
-    var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
-
-    document.getElementById('followerCount').innerText = followerCount;
-    if (isFollowing) {
-        document.getElementById('followButton').innerText = 'Siguiendo';
-    } else {
-        document.getElementById('followButton').innerText = 'Seguir';
-    }
-});
-        
+        });
     </script>
 </body>
 </html>
