@@ -7,6 +7,7 @@
     <!-- Agrega las importaciones de las bibliotecas de Firebase directamente desde la CDN -->
     <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js"></script> <!-- Agrega la biblioteca de Firebase Realtime Database -->
 
     <style>
         body {
@@ -52,62 +53,65 @@
     <div class="profile">
         <img src="tu_foto.jpg" alt="Mi Foto">
         <h1>Mi Título</h1>
-        <button class="follow-button" onclick="toggleFollow()">Seguir</button>
+        <button class="follow-button" id="followButton">Seguir</button>
         <p class="followers">Seguidores: <span id="followerCount">0</span></p>
     </div>
 
     <script>
         // Tu configuración de Firebase aquí
-        const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "TU_DOMINIO.firebaseapp.com",
-            projectId: "TU_PROYECTO_ID",
-            storageBucket: "TU_DOMINIO.appspot.com",
-            messagingSenderId: "TU_SENDER_ID",
-            appId: "TU_APP_ID",
-            measurementId: "TU_MEASUREMENT_ID"
-        };
+       const firebaseConfig = {
+  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+  authDomain: "untitled-3bfa8.firebaseapp.com",
+  projectId: "untitled-3bfa8",
+  storageBucket: "untitled-3bfa8.appspot.com",
+  messagingSenderId: "841576951279",
+  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  measurementId: "G-MJ4RGPGV36"
+};
 
         // Inicializa Firebase
         const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
+        const analytics = firebase.analytics(app);
+        const database = firebase.database(); // Inicializa la base de datos
 
         // Tu código JavaScript aquí
-        var followerCount = localStorage.getItem('followerCount');
-        var isFollowing = localStorage.getItem('isFollowing');
+        var followerCount = 0;
 
-        if (!followerCount) {
-            followerCount = 0;
-        }
-        if (isFollowing === 'true') {
-            document.querySelector('.follow-button').innerText = 'Siguiendo';
-        }
+        // Obtiene el estado de "Siguiendo" y el contador de seguidores desde Firebase
+        database.ref('profile').once('value', function(snapshot) {
+            var data = snapshot.val();
+            if (data) {
+                followerCount = data.followerCount || 0;
+                document.getElementById('followerCount').innerText = followerCount;
+                if (data.isFollowing) {
+                    document.getElementById('followButton').innerText = 'Siguiendo';
+                }
+            }
+        });
 
-        document.getElementById('followerCount').innerText = followerCount;
+        // Maneja el evento de clic en el botón de seguir
+        document.getElementById('followButton').addEventListener('click', function() {
+            var button = document.getElementById('followButton');
 
-       function toggleFollow() {
-    var button = document.querySelector('.follow-button');
-    var followerCountElement = document.getElementById('followerCount');
-    var followerCount = parseInt(localStorage.getItem('followerCount')); // Convertir a entero
-
-    if (!followerCount || isNaN(followerCount)) { // Asegurar que followerCount sea un número válido
-        followerCount = 0;
-    }
-
-    if (button.innerText === 'Seguir') {
-        button.innerText = 'Siguiendo';
-        followerCount++;
-        localStorage.setItem('isFollowing', 'true');
-    } else {
-        button.innerText = 'Seguir';
-        if (followerCount > 0) {
-            followerCount--;
-        }
-        localStorage.setItem('isFollowing', 'false');
-    }
-    followerCountElement.innerText = followerCount;
-    localStorage.setItem('followerCount', followerCount);
-}
+            if (button.innerText === 'Seguir') {
+                button.innerText = 'Siguiendo';
+                followerCount++;
+                database.ref('profile').update({
+                    isFollowing: true,
+                    followerCount: followerCount
+                });
+            } else {
+                button.innerText = 'Seguir';
+                if (followerCount > 0) {
+                    followerCount--;
+                }
+                database.ref('profile').update({
+                    isFollowing: false,
+                    followerCount: followerCount
+                });
+            }
+            document.getElementById('followerCount').innerText = followerCount;
+        });
     </script>
 </body>
 </html>
