@@ -6,9 +6,8 @@
     <title>Mi Perfil</title>
     <!-- Agrega las importaciones de las bibliotecas de Firebase directamente desde la CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
- <!-- Agrega la biblioteca de Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <style>
         body {
@@ -60,59 +59,58 @@
 
     <script>
         // Tu configuración de Firebase aquí
-       const firebaseConfig = {
+        // Tu configuración de Firebase aquí
+       const 
+
+firebaseConfig = {
   apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
   authDomain: "untitled-3bfa8.firebaseapp.com",
-  projectId: "untitled-3bfa8",
+ projectId: "untitled-3bfa8",
   storageBucket: "untitled-3bfa8.appspot.com",
   messagingSenderId: "841576951279",
-  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
 };
 
+ 
+
         // Inicializa Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
-        const database = firebase.database(); // Inicializa la base de datos
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-        // Tu código JavaScript aquí
-        var followerCount = 0;
-
-        // Obtiene el estado de "Siguiendo" y el contador de seguidores desde Firebase
-        database.ref('profile').once('value', function(snapshot) {
-            var data = snapshot.val();
-            if (data) {
-                followerCount = data.followerCount || 0;
-                document.getElementById('followerCount').innerText = followerCount;
-                if (data.isFollowing) {
-                    document.getElementById('followButton').innerText = 'Siguiendo';
-                }
-            }
-        });
+        // Obtén el UID del usuario actual
+        const uid = "UID_DEL_USUARIO_ACTUAL"; // Deberás reemplazar esto con la lógica para obtener el UID del usuario actual
 
         // Maneja el evento de clic en el botón de seguir
         document.getElementById('followButton').addEventListener('click', function() {
-            console.log('Botón de seguir clicado'); // Añadimos un log para verificar si el evento se está activando
+            console.log('Botón de seguir clicado');
             var button = document.getElementById('followButton');
 
-            if (button.innerText === 'Seguir') {
-                button.innerText = 'Siguiendo';
-                followerCount++;
-                database.ref('profile').update({
-                    isFollowing: true,
-                    followerCount: followerCount
-                });
-            } else {
-                button.innerText = 'Seguir';
-                if (followerCount > 0) {
-                    followerCount--;
+            database.ref('users/' + uid).once('value', function(snapshot) {
+                var userData = snapshot.val();
+                var followerCount = (userData && userData.followerCount) ? userData.followerCount : 0;
+                var isFollowing = (userData && userData.isFollowing) ? userData.isFollowing : false;
+
+                if (!isFollowing) {
+                    button.innerText = 'Siguiendo';
+                    followerCount++;
+                    database.ref('users/' + uid).update({
+                        isFollowing: true,
+                        followerCount: followerCount
+                    });
+                } else {
+                    button.innerText = 'Seguir';
+                    if (followerCount > 0) {
+                        followerCount--;
+                    }
+                    database.ref('users/' + uid).update({
+                        isFollowing: false,
+                        followerCount: followerCount
+                    });
                 }
-                database.ref('profile').update({
-                    isFollowing: false,
-                    followerCount: followerCount
-                });
-            }
-            document.getElementById('followerCount').innerText = followerCount;
+
+                document.getElementById('followerCount').innerText = followerCount;
+            });
         });
     </script>
 </body>
