@@ -75,6 +75,14 @@
         // Obtiene una instancia del proveedor de autenticación de Google
         const provider = new firebase.auth.GoogleAuthProvider();
 
+        // Verifica si hay una sesión de usuario almacenada localmente al cargar la página
+        window.onload = function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                displayUserPhoto(user.photoURL);
+            }
+        };
+
         // Maneja el evento de clic en el botón de inicio de sesión con Google
         function signInWithGoogle() {
             firebase.auth().signInWithPopup(provider)
@@ -82,6 +90,8 @@
                 // El usuario ha iniciado sesión correctamente
                 const user = result.user;
                 console.log('Usuario autenticado:', user);
+                // Guarda el usuario en el almacenamiento local
+                localStorage.setItem('user', JSON.stringify(user));
                 displayUserPhoto(user.photoURL);
             }).catch((error) => {
                 // Ha ocurrido un error durante el inicio de sesión
