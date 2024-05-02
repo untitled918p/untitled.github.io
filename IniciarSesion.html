@@ -6,42 +6,41 @@
     <title>Iniciar sesión con Google</title>
     <!-- Estilos CSS -->
     <style>
-        Untitled{
-text-align: center;
-display: center;
-flex-direction: column;
-align-items: flex-start;
-text-decoration: none;
-}
-        .menu-container {
-            background-color: #333;
-            overflow: hidden; /* Para contener los elementos flotantes */
-        }
-        nav {
-            float: left;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
+       body {
             margin: 0;
-        }
-        li {
-            display: inline-block; /* Para mostrar los elementos uno al lado del otro */
-            margin-right: 20px;
-        }
-        li a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        li a:hover {
-            background-color: #555; /* Color de fondo al pasar el ratón */
+            padding: 0;
         }
 
-        /* Estilos para el contenido principal */
-        .contenido-principal {
-            padding: 20px;
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Color de fondo del menú */
+            color: #fff; /* Color del texto del menú */
+            padding: 10px 20px; /* Espaciado interno del menú */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
+            z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+        }
+
+        .menu-container nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-container nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        .menu-container nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .menu-container nav ul li a:hover {
+            text-decoration: underline;
         }
         
         body {
