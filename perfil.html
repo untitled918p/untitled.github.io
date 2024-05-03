@@ -4,165 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
-    <!-- Agrega las importaciones de las bibliotecas de Firebase directamente desde la CDN -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
     <style>
-.menu-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #333; /* Color de fondo del menú */
-            color: #fff; /* Color del texto del menú */
-            padding: 10px 20px; /* Espaciado interno del menú */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
-            z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
-        }
-
-        .menu-container nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu-container nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        .menu-container nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .menu-container nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .profile {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+        /* Estilos para el contenedor del perfil */
+        .perfil-container {
             width: 300px;
-            margin: 50px auto;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .profile img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .profile h1 {
-            margin: 0;
-            color: #333;
-        }
-        .follow-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
+
+        /* Estilos para el título */
+        .perfil-title {
+            font-size: 24px;
             margin-bottom: 10px;
         }
-        .followers {
-            color: #777;
-            font-size: 14px;
+
+        /* Estilos para la imagen de perfil */
+        .perfil-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el botón */
+        .btn {
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #357ae8;
+        }
+
+        /* Estilos para el texto de estado */
+        .estado {
+            margin-top: 10px;
+            font-style: italic;
+            color: #888;
+        }
+
+        .siguiendo {
+            color: green;
         }
     </style>
 </head>
 <body>
-    <div class="profile">
-        <img src="tu_foto.jpg" alt="Mi Foto">
-        <h1>Mi Título</h1>
-        <button class="follow-button" id="followButton">Seguir</button>
+    <div class="perfil-container">
+        <div class="perfil-title">Mi Perfil</div>
+        <img src="tu-imagen-de-perfil.jpg" alt="Foto de perfil" class="perfil-img">
+        <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
+        <div id="estado" class="estado">No siguiendo</div>
     </div>
 
     <script>
-              // Tu configuración de Firebase aquí
-       const 
+        function toggleSeguir() {
+            var btn = document.getElementById('seguir-btn');
+            var estado = document.getElementById('estado');
 
-firebaseConfig = {
-  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
-  authDomain: "untitled-3bfa8.firebaseapp.com",
- 
-
- projectId: "untitled-3bfa8",
-  storageBucket: "untitled-3bfa8.appspot.com",
-  messagingSenderId: "841576951279",
-  
-
-appId: "1:841576951279:web:deabdeb786d955642a1a1a",
-  measurementId: "G-MJ4RGPGV36"
-};
-        firebase.initializeApp(firebaseConfig);
-
-        // Obtiene una instancia del proveedor de autenticación de Google
-        const provider = new firebase.auth.GoogleAuthProvider();
-
-        // Maneja el evento de clic en el botón de inicio de sesión con Google
-        function signInWithGoogle() {
-            firebase.auth().signInWithPopup(provider)
-            .then((result) => {
-                // El usuario ha iniciado sesión correctamente
-                const user = result.user;
-                console.log('Usuario autenticado:', user);
-                // Actualiza el estado del botón después de iniciar sesión
-                updateFollowButtonState();
-            }).catch((error) => {
-                // Ha ocurrido un error durante el inicio de sesión
-                console.error('Error al iniciar sesión:', error);
-            });
-        }
-
-        // Verifica el estado de autenticación del usuario y actualiza el botón
-        function updateFollowButtonState() {
-            const user = firebase.auth().currentUser;
-            const followButton = document.getElementById('followButton');
-            if (user) {
-                // El usuario está autenticado, muestra el botón "Seguir"
-                followButton.style.display = 'block';
+            if (btn.innerText === 'Seguir') {
+                btn.innerText = 'Siguiendo';
+                btn.classList.add('siguiendo');
+                estado.innerText = 'Siguiendo';
             } else {
-                // El usuario no está autenticado, oculta el botón "Seguir"
-                followButton.style.display = 'none';
+                btn.innerText = 'Seguir';
+                btn.classList.remove('siguiendo');
+                estado.innerText = 'No siguiendo';
             }
         }
-
-        // Maneja el evento de clic en el botón de seguir
-        function followUser() {
-            const user = firebase.auth().currentUser;
-            if (user) {
-                // El usuario está autenticado, puedes seguir al usuario aquí
-                console.log('Siguiendo al usuario...');
-                // Aquí puedes implementar la lógica para seguir al usuario
-            } else {
-                // El usuario no está autenticado, redirige al usuario al inicio de sesión
-                signInWithGoogle();
-            }
-        }
-    </script>
-</head>
-<body>
-    <li><script src="perfil.js"></script></li>
-    <h1>Mi Perfil</h1>
-    <button id="followButton" style="display: none;" onclick="followUser()">Seguir</button>
-    <button onclick="signInWithGoogle()">Iniciar sesión con Google</button>
-
-    <!-- Ejecuta la función para verificar y actualizar el estado del botón -->
-    <script>
-        updateFollowButtonState();
     </script>
 </body>
 </html>
