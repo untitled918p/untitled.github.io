@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <style>
+        /* Estilos para el contenedor principal */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         /* Estilos para el contenedor del perfil */
         .perfil-container {
             width: 300px;
@@ -13,6 +21,9 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Estilos para la imagen de perfil */
@@ -44,9 +55,11 @@
     </style>
 </head>
 <body>
-    <div class="perfil-container">
-        <img src="tu-imagen-de-perfil.jpg" alt="Foto de perfil" class="perfil-img">
-        <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
+    <div class="main-container">
+        <div class="perfil-container">
+            <img src="tu-imagen-de-perfil.jpg" alt="Foto de perfil" class="perfil-img">
+            <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
+        </div>
     </div>
 
     <script>
