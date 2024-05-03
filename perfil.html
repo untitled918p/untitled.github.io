@@ -5,58 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <style>
-.juegos-container {
-    display: flex;
-    justify-content: space-around; /* Distribuye uniformemente los juegos en el contenedor */
-    flex-wrap: wrap; /* Permite que los juegos se envuelvan a una nueva línea si el contenedor es demasiado pequeño */
-}
-
-.juego {
-    text-align: center;
-    width: 150px; /* Ancho de cada juego */
-    margin: 10px; /* Espacio entre los juegos */
-}
-
-.juego img {
-    width: 100px; /* Ancho de las imágenes de los juegos */
-    height: 100px; /* Altura de las imágenes de los juegos */
-}
-
-
-        
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-}
-
-nav {
-  float: left;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  background-color: #555;
-}
-
-
-        
         body {
             margin: 0;
             padding: 0;
@@ -65,7 +13,37 @@ li a:hover {
             transition: background 0.5s ease; /* Agregar transición para cambios en el fondo */
         }
 
-        /* Estilos para el contenedor principal */
+        .menu-container {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav {
+            float: left;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            background-color: #555;
+        }
+
         .main-container {
             display: flex;
             justify-content: center;
@@ -73,7 +51,6 @@ li a:hover {
             height: 100vh;
         }
 
-        /* Estilos para el contenedor del perfil */
         .perfil-container {
             width: 300px;
             background-color: #f0f0f0;
@@ -86,7 +63,6 @@ li a:hover {
             align-items: center;
         }
 
-        /* Estilos para la imagen de perfil */
         .perfil-img {
             width: 150px;
             height: 150px;
@@ -94,7 +70,6 @@ li a:hover {
             margin-bottom: 20px;
         }
 
-        /* Estilos para el botón */
         .btn {
             background-color: #4285f4;
             color: white;
@@ -112,65 +87,52 @@ li a:hover {
         .siguiendo {
             background-color: green;
         }
-.untitled1 img {
-    max-width: 100px; /* Establece un ancho máximo */
-    max-height: 100px; /* Establece una altura máxima */
-    width: auto; /* Para mantener la proporción de aspecto */
-    height: auto; /* Para mantener la proporción de aspecto */
-}
-        
+
+        .juegos-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-color: #fff; /* Fondo blanco para los juegos */
+            padding: 20px; /* Espaciado alrededor de los juegos */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+            margin-top: 20px; /* Margen superior para separar del perfil */
+        }
+
+        .juego {
+            text-align: center;
+            width: 150px;
+            margin: 10px;
+        }
+
+        .juego img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px; /* Bordes redondeados para las imágenes */
+        }
     </style>
 </head>
 <body>
 <div class="menu-container">
     <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-        <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
-        
-      </ul>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
+            <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+        </ul>
     </nav>
-  </div>
-    
-    <div class="main-container">
-        <div class="perfil-container">
-            <h2>Untitled</h2>
-            <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
-            <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
-        </div>
+</div>
+
+<div class="main-container">
+    <div class="perfil-container">
+        <h2>Untitled</h2>
+        <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
+        <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
     </div>
+</div>
 
-    <script>
-        // Verifica el estado del botón de seguir en el almacenamiento local al cargar la página
-        window.onload = function() {
-            var btn = document.getElementById('seguir-btn');
-            var siguiendo = localStorage.getItem('siguiendo');
-
-            if (siguiendo === 'true') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
-            }
-        };
-
-        function toggleSeguir() {
-            var btn = document.getElementById('seguir-btn');
-
-            if (btn.innerText === 'Seguir') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
-                localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
-            } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
-                localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
-            }
-        }
-    </script>
-
-
-    <div class="juegos-container">
+<div class="juegos-container">
     <div class="juego">
         <a href="UntitledBeta.html">
             <img src="icono.png" alt="Icono Juego 1">
@@ -202,5 +164,32 @@ li a:hover {
         </a>
     </div>
 </div>
+
+<script>
+    // Verifica el estado del botón de seguir en el almacenamiento local al cargar la página
+    window.onload = function() {
+        var btn = document.getElementById('seguir-btn');
+        var siguiendo = localStorage.getItem('siguiendo');
+
+        if (siguiendo === 'true') {
+            btn.innerText = 'Siguiendo';
+            btn.classList.add('siguiendo');
+        }
+    };
+
+    function toggleSeguir() {
+        var btn = document.getElementById('seguir-btn');
+
+        if (btn.innerText === 'Seguir') {
+            btn.innerText = 'Siguiendo';
+            btn.classList.add('siguiendo');
+            localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
+        } else {
+            btn.innerText = 'Seguir';
+            btn.classList.remove('siguiendo');
+            localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
+        }
+    }
+</script>
 </body>
 </html>
