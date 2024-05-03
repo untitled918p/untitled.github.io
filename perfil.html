@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <style>
- body {
+        body {
             margin: 0;
             padding: 0;
             height: 100vh;
             background: linear-gradient(to right, #ddd 50%, #fff 50%);
             transition: background 0.5s ease; /* Agregar transición para cambios en el fondo */
         }
-        
+
         /* Estilos para el contenedor principal */
         .main-container {
             display: flex;
@@ -72,15 +72,28 @@
     </div>
 
     <script>
+        // Verifica el estado del botón de seguir en el almacenamiento local al cargar la página
+        window.onload = function() {
+            var btn = document.getElementById('seguir-btn');
+            var siguiendo = localStorage.getItem('siguiendo');
+
+            if (siguiendo === 'true') {
+                btn.innerText = 'Siguiendo';
+                btn.classList.add('siguiendo');
+            }
+        };
+
         function toggleSeguir() {
             var btn = document.getElementById('seguir-btn');
 
             if (btn.innerText === 'Seguir') {
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
+                localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
             } else {
                 btn.innerText = 'Seguir';
                 btn.classList.remove('siguiendo');
+                localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
             }
         }
     </script>
