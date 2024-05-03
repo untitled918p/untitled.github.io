@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <style>
+.juegos-container {
+    display: flex;
+    justify-content: space-around; /* Para distribuir uniformemente los juegos en el contenedor */
+    flex-wrap: wrap; /* Permite que los juegos se envuelvan a una nueva línea si el contenedor es demasiado pequeño */
+}
+
+.juego {
+    margin: 10px; /* Espaciado entre los juegos */
+    text-align: center;
+}
+
+
+        
 .menu-container {
   background-color: #333;
   overflow: hidden;
@@ -151,32 +164,32 @@ li a:hover {
     </script>
 
 
-    <div class="untitled1">
-    <div>
-      <a href="UntitledBeta.html">Untitled<br>
-        <img src="icono.png" alt="Icono Juego 1">
-      </a>
+    <div class="juegos-container">
+    <div class="juego">
+        <a href="UntitledBeta.html">Untitled<br>
+            <img src="icono.png" alt="Icono Juego 1">
+        </a>
     </div>
-    <div>
-      <a href="Untitled2.html">Untitled 2<br>
-        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-      </a>
+    <div class="juego">
+        <a href="Untitled2.html">Untitled 2<br>
+            <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+        </a>
     </div>
-    <div>
-      <a href="Jump.html">Jump To Survive<br>
-        <img src="iconojump.png" alt="Icono Juego 3">
-      </a>
+    <div class="juego">
+        <a href="Jump.html">Jump To Survive<br>
+            <img src="iconojump.png" alt="Icono Juego 3">
+        </a>
     </div>
-    <div>
-      <a href="JumpPrologue.html">Jump Prologue<br>
-        <img src="IconoJump2.png" alt="Icono Juego 4">
-      </a>
+    <div class="juego">
+        <a href="JumpPrologue.html">Jump Prologue<br>
+            <img src="IconoJump2.png" alt="Icono Juego 4">
+        </a>
     </div>
-    <div>
-      <a href="Kasper.html">Kasper<br>
-        <img src="KasperIcono.png" alt="Icono Juego 5">
-      </a>
+    <div class="juego">
+        <a href="Kasper.html">Kasper<br>
+            <img src="KasperIcono.png" alt="Icono Juego 5">
+        </a>
     </div>
-  </div>
+</div>
 </body>
 </html>
