@@ -24,6 +24,14 @@
   background-color: #555;
 }
 
+/* Estilo para la imagen en el panel desplegable */
+.dropdown-panel img {
+  vertical-align: middle;
+  width: 20px; /* Ajusta el tamaño según sea necesario */
+  height: 20px; /* Ajusta el tamaño según sea necesario */
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
+
 
   
 body {
@@ -109,7 +117,7 @@ li a:hover {
 <li><a href="#" onclick="toggleDropdown()">Panel</a>
         <!-- Agrega el panel desplegable -->
         <div class="dropdown-panel" id="dropdownPanel">
-          <a href="#">Opción 1</a>
+          <a href="#"><img src="Perfilimagen.png" alt="Imagen 1">Opción 1</a>
           <a href="#">Opción 2</a>
           <a href="#">Opción 3</a>
         </div>
