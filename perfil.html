@@ -15,18 +15,12 @@
             text-align: center;
         }
 
-        /* Estilos para el título */
-        .perfil-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
         /* Estilos para la imagen de perfil */
         .perfil-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         /* Estilos para el botón */
@@ -37,46 +31,34 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .btn:hover {
             background-color: #357ae8;
         }
 
-        /* Estilos para el texto de estado */
-        .estado {
-            margin-top: 10px;
-            font-style: italic;
-            color: #888;
-        }
-
         .siguiendo {
-            color: green;
+            background-color: green;
         }
     </style>
 </head>
 <body>
     <div class="perfil-container">
-        <div class="perfil-title">Mi Perfil</div>
         <img src="tu-imagen-de-perfil.jpg" alt="Foto de perfil" class="perfil-img">
         <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
-        <div id="estado" class="estado">No siguiendo</div>
     </div>
 
     <script>
         function toggleSeguir() {
             var btn = document.getElementById('seguir-btn');
-            var estado = document.getElementById('estado');
 
             if (btn.innerText === 'Seguir') {
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
-                estado.innerText = 'Siguiendo';
             } else {
                 btn.innerText = 'Seguir';
                 btn.classList.remove('siguiendo');
-                estado.innerText = 'No siguiendo';
             }
         }
     </script>
