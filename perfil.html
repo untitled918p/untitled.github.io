@@ -7,13 +7,19 @@
     <style>
 .juegos-container {
     display: flex;
-    justify-content: space-around; /* Para distribuir uniformemente los juegos en el contenedor */
+    justify-content: space-around; /* Distribuye uniformemente los juegos en el contenedor */
     flex-wrap: wrap; /* Permite que los juegos se envuelvan a una nueva línea si el contenedor es demasiado pequeño */
 }
 
 .juego {
-    margin: 10px; /* Espaciado entre los juegos */
     text-align: center;
+    width: 150px; /* Ancho de cada juego */
+    margin: 10px; /* Espacio entre los juegos */
+}
+
+.juego img {
+    width: 100px; /* Ancho de las imágenes de los juegos */
+    height: 100px; /* Altura de las imágenes de los juegos */
 }
 
 
@@ -166,28 +172,33 @@ li a:hover {
 
     <div class="juegos-container">
     <div class="juego">
-        <a href="UntitledBeta.html">Untitled<br>
+        <a href="UntitledBeta.html">
             <img src="icono.png" alt="Icono Juego 1">
+            <p>Untitled</p>
         </a>
     </div>
     <div class="juego">
-        <a href="Untitled2.html">Untitled 2<br>
+        <a href="Untitled2.html">
             <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+            <p>Untitled 2</p>
         </a>
     </div>
     <div class="juego">
-        <a href="Jump.html">Jump To Survive<br>
+        <a href="Jump.html">
             <img src="iconojump.png" alt="Icono Juego 3">
+            <p>Jump To Survive</p>
         </a>
     </div>
     <div class="juego">
-        <a href="JumpPrologue.html">Jump Prologue<br>
+        <a href="JumpPrologue.html">
             <img src="IconoJump2.png" alt="Icono Juego 4">
+            <p>Jump Prologue</p>
         </a>
     </div>
     <div class="juego">
-        <a href="Kasper.html">Kasper<br>
+        <a href="Kasper.html">
             <img src="KasperIcono.png" alt="Icono Juego 5">
+            <p>Kasper</p>
         </a>
     </div>
 </div>
