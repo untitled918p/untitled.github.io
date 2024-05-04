@@ -19,35 +19,51 @@
             measurementId: "G-MJ4RGPGV36"
         };
 
-        // Inicializa Firebase
+       // Inicializa Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const database = firebase.database(); // Inicializa la referencia a la base de datos
 
-        // Lee el número de seguidores desde la base de datos al cargar la página
+        // Lee el estado del botón y el número de seguidores desde la base de datos al cargar la página
         window.onload = function() {
             database.ref('seguidoresCount').once('value').then(function(snapshot) {
                 const seguidoresCount = snapshot.val() || 0;
                 document.getElementById('seguidores-count').innerText = seguidoresCount;
+            });
+
+            database.ref('isFollowing').once('value').then(function(snapshot) {
+                const isFollowing = snapshot.val() || false;
+                updateButtonState(isFollowing);
             });
         };
 
         function toggleSeguir() {
             const btn = document.getElementById('seguir-btn');
             let seguidoresCount = parseInt(document.getElementById('seguidores-count').innerText);
+            let isFollowing = btn.classList.contains('siguiendo');
 
-            if (btn.innerText === 'Seguir') {
+            if (isFollowing) {
+                seguidoresCount--;
+            } else {
                 seguidoresCount++;
+            }
+
+            updateButtonState(!isFollowing);
+            document.getElementById('seguidores-count').innerText = seguidoresCount;
+
+            // Actualiza el número de seguidores y el estado del botón en la base de datos
+            database.ref('seguidoresCount').set(seguidoresCount);
+            database.ref('isFollowing').set(!isFollowing);
+        }
+
+        function updateButtonState(isFollowing) {
+            const btn = document.getElementById('seguir-btn');
+            if (isFollowing) {
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
             } else {
-                seguidoresCount--;
                 btn.innerText = 'Seguir';
                 btn.classList.remove('siguiendo');
             }
-
-            document.getElementById('seguidores-count').innerText = seguidoresCount;
-            // Actualiza el número de seguidores en la base de datos
-            database.ref('seguidoresCount').set(seguidoresCount);
         }
     </script>
 
