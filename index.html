@@ -195,6 +195,10 @@ function toggleDropdown() {
 
         resultados.innerHTML = "";
 
+        if (consulta.trim() === "") {
+            return; // Si la consulta está vacía, no hacemos nada
+        }
+
         const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().startsWith(consulta));
 
         if (juegosEncontrados.length === 0) {
