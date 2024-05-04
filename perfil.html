@@ -130,6 +130,7 @@
     <div class="perfil-container">
         <h2>Untitled</h2>
         <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
+        <p id="seguidores-text">Seguidores: <span id="seguidores-count">0</span></p>
         <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
     </div>
 </div>
@@ -168,29 +169,36 @@
 </div>
 
 <script>
-    // Verifica el estado del botón de seguir en el almacenamiento local al cargar la página
+    // Verifica el estado del botón de seguir y el número de seguidores en el almacenamiento local al cargar la página
     window.onload = function() {
         var btn = document.getElementById('seguir-btn');
-        var siguiendo = localStorage.getItem('siguiendo');
+        var seguidoresCount = localStorage.getItem('seguidoresCount');
 
-        if (siguiendo === 'true') {
-            btn.innerText = 'Siguiendo';
-            btn.classList.add('siguiendo');
+        if (seguidoresCount === null) {
+            seguidoresCount = 0;
+        } else {
+            seguidoresCount = parseInt(seguidoresCount);
         }
+
+        document.getElementById('seguidores-count').innerText = seguidoresCount;
     };
 
     function toggleSeguir() {
         var btn = document.getElementById('seguir-btn');
+        var seguidoresCount = parseInt(document.getElementById('seguidores-count').innerText);
 
         if (btn.innerText === 'Seguir') {
+            seguidoresCount++;
             btn.innerText = 'Siguiendo';
             btn.classList.add('siguiendo');
-            localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
         } else {
+            seguidoresCount--;
             btn.innerText = 'Seguir';
             btn.classList.remove('siguiendo');
-            localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
         }
+
+        document.getElementById('seguidores-count').innerText = seguidoresCount;
+        localStorage.setItem('seguidoresCount', seguidoresCount); // Guarda el número de seguidores en el almacenamiento local
     }
 </script>
 </body>
