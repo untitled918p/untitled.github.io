@@ -17,40 +17,48 @@
             measurementId: "G-MJ4RGPGV36"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        // Inicialización de Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 
-        // Referencia a la base de datos en tiempo real
-        var database = firebase.database();
+// Función para manejar el clic en el botón de seguir
+function toggleSeguir() {
+    var btn = document.getElementById('seguir-btn');
+    var siguiendo = btn.innerText === 'Seguir';
 
-        // Función para manejar el clic del botón Seguir
-        function toggleSeguir() {
-            var btn = document.getElementById('seguir-btn');
-            var siguiendo = btn.innerText === 'Seguir';
+    // Obtener el ID del usuario actual (debes reemplazar 'UID_DEL_USUARIO_ACTUAL' con el ID real)
+    var userId = 'UID_DEL_USUARIO_ACTUAL';
 
-            if (siguiendo) {
-                // Incrementar el contador de seguidores en la base de datos
-                database.ref('perfil/seguidores').transaction(function(currentValue) {
-                    return (currentValue || 0) + 1;
-                });
-            } else {
-                // Decrementar el contador de seguidores en la base de datos
-                database.ref('perfil/seguidores').transaction(function(currentValue) {
-                    return Math.max((currentValue || 0) - 1, 0);
-                });
+    if (siguiendo) {
+        // Incrementar el contador de seguidores en la base de datos
+        database.ref('users/' + userId).transaction(function(currentData) {
+            if (currentData) {
+                currentData.followerCount = (currentData.followerCount || 0) + 1;
             }
-        }
+            return currentData;
+        });
+    } else {
+        // Decrementar el contador de seguidores en la base de datos
+        database.ref('users/' + userId).transaction(function(currentData) {
+            if (currentData && currentData.followerCount) {
+                currentData.followerCount--;
+            }
+            return currentData;
+        });
+    }
+}
 
-        // Manejo del evento onload para mostrar el número de seguidores
-        window.onload = function() {
-            var contador = document.getElementById('seguidores');
+// Mostrar el contador de seguidores en la página
+window.onload = function() {
+    var contador = document.getElementById('seguidores');
+    var userId = 'UID_DEL_USUARIO_ACTUAL'; // ID del usuario actual
 
-            // Leer el número de seguidores de la base de datos y mostrarlo
-            database.ref('perfil/seguidores').on('value', function(snapshot) {
-                var seguidores = snapshot.val();
-                contador.innerText = "Seguidores: " + seguidores;
-            });
-        };
+    // Leer el número de seguidores de la base de datos y mostrarlo
+    database.ref('users/' + userId + '/followerCount').on('value', function(snapshot) {
+        var seguidores = snapshot.val();
+        contador.innerText = "Seguidores: " + seguidores;
+    });
+};
     </script>
 
 
