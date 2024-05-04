@@ -4,6 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+  authDomain: "untitled-3bfa8.firebaseapp.com",
+  databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
+  projectId: "untitled-3bfa8",
+  storageBucket: "untitled-3bfa8.appspot.com",
+  messagingSenderId: "841576951279",
+  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  measurementId: "G-MJ4RGPGV36"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// Referencia a la base de datos en tiempo real
+var database = firebase.database();
+
+window.onload = function() {
+    var btn = document.getElementById('seguir-btn');
+    var contador = document.getElementById('seguidores');
+
+    // Leer el número de seguidores de la base de datos y mostrarlo
+    database.ref('perfil/seguidores').once('value').then(function(snapshot) {
+        var seguidores = snapshot.val();
+        contador.innerText = "Seguidores: " + seguidores;
+    });
+
+    btn.addEventListener('click', function() {
+        var siguiendo = btn.innerText === 'Seguir';
+
+        if (siguiendo) {
+            // Incrementar el contador de seguidores en la base de datos
+            database.ref('perfil/seguidores').transaction(function(currentValue) {
+                return (currentValue || 0) + 1;
+            });
+        } else {
+            // Decrementar el contador de seguidores en la base de datos
+            database.ref('perfil/seguidores').transaction(function(currentValue) {
+                return Math.max((currentValue || 0) - 1, 0);
+            });
+        }
+    });
+};
+</script>
+
+
+
+
+    
     <style>
         body {
             margin: 0;
