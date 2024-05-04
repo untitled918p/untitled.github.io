@@ -27,6 +27,7 @@ const database = firebase.database();
 
 // Función para manejar el clic en el botón de seguir
 function toggleSeguir() {
+    console.log("Se ha hecho clic en el botón Seguir");
     var btn = document.getElementById('seguir-btn');
     var siguiendo = btn.innerText === 'Seguir';
 
