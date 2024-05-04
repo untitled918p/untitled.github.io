@@ -5,6 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Untitled Juegos</title>
 <style>
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #buscador {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        #resultados {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .juego {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .juego:hover {
+            background-color: #f5f5f5;
+        }
+
+
+
+
+
+  
 .dropdown-panel {
   display: none;
   position: absolute;
@@ -145,6 +182,39 @@ function toggleDropdown() {
   <div class="header">
     <h2>Untitled(Games)</h2>
   </div>
+
+<input type="text" id="buscador" placeholder="Buscar juegos...">
+    <div id="resultados"></div>
+
+    <script>
+        const juegos = ["Untitled", "Untitled2", "Kasper"];
+
+        function buscarJuego() {
+            const consulta = document.getElementById("buscador").value.toLowerCase();
+            const resultados = document.getElementById("resultados");
+
+            resultados.innerHTML = "";
+
+            const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().includes(consulta));
+
+            if (juegosEncontrados.length === 0) {
+                const mensaje = document.createElement("p");
+                mensaje.textContent = "No se encontraron juegos con ese nombre.";
+                resultados.appendChild(mensaje);
+            } else {
+                juegosEncontrados.forEach(juego => {
+                    const juegoEncontrado = document.createElement("div");
+                    juegoEncontrado.classList.add("juego");
+                    juegoEncontrado.textContent = juego;
+                    resultados.appendChild(juegoEncontrado);
+                });
+            }
+        }
+
+        document.getElementById("buscador").addEventListener("input", buscarJuego);
+    </script>
+
+  
   <section><a href="perfil.html"><h2>Untitled-Perfil</h2></a></section>
   <div class="untitled1">
     <div>
