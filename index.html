@@ -210,6 +210,14 @@ function toggleDropdown() {
                 const juegoEncontrado = document.createElement("div");
                 juegoEncontrado.classList.add("juego");
                 juegoEncontrado.textContent = juego;
+                juegoEncontrado.addEventListener("click", function() {
+                    // Redirige al usuario a la página correspondiente al juego
+                    if (juego === "Kasper") {
+                        window.location.href = "Kasper.html";
+                    } else {
+                        window.location.href = juego + ".html"; // Para otros juegos, asumimos que las páginas se llaman "Untitled.html", "Untitled2.html", etc.
+                    }
+                });
                 resultados.appendChild(juegoEncontrado);
             });
         }
