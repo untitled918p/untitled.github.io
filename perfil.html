@@ -29,7 +29,7 @@ window.onload = function() {
     var contador = document.getElementById('seguidores');
 
     // Leer el número de seguidores de la base de datos y mostrarlo
-    database.ref('perfil/seguidores').once('value').then(function(snapshot) {
+    database.ref('perfil/seguidores').on('value', function(snapshot) {
         var seguidores = snapshot.val();
         contador.innerText = "Seguidores: " + seguidores;
     });
