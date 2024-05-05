@@ -129,7 +129,7 @@
 <div class="main-container">
     <div class="perfil-container">
         <h2>Untitled</h2>
-        <img id="perfilimagen.img" src="" alt="Foto de perfil" class="perfil-img" style="display: none;">
+        <img id="Perfilimagen.img" src="" alt="Foto de perfil" class="perfil-img" style="display: none;">
         <button id="seguir-btn" class="btn" onclick="toggleSeguir()" style="display: none;">Seguir</button>
         <span id="seguidores">Seguidores: 0</span>
     </div>
@@ -197,19 +197,20 @@
         });
     }
 
-    // Función para actualizar la interfaz después de iniciar sesión
     function updateUI(user) {
-        var perfilImg = document.getElementById('perfil-img');
-        var btnSeguir = document.getElementById('seguir-btn');
-
-        // Mostrar la foto de perfil del usuario
-        perfilImg.src = user.photoURL;
-        perfilImg.style.display = 'block';
-
-        // Mostrar el botón de seguir y cargar los seguidores del usuario desde la base de datos
-        btnSeguir.style.display = 'block';
-        loadFollowers(user.uid);
+    var imgPerfil = document.getElementById('perfil-img');
+    if (imgPerfil) {
+        imgPerfil.src = user.photoURL;
+        imgPerfil.style.display = 'block';
     }
+
+    var btnSeguir = document.getElementById('seguir-btn');
+    var seguidores = document.getElementById('seguidores');
+
+    // Mostrar el botón de seguir y cargar los seguidores del usuario desde la base de datos
+    btnSeguir.style.display = 'block';
+    loadFollowers(user.uid, seguidores);
+}
 
     // Función para cargar los seguidores del usuario desde la base de datos
     function loadFollowers(userId) {
