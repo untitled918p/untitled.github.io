@@ -182,80 +182,56 @@
   appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
 };
-      firebase.initializeApp(firebaseConfig);
+       firebase.initializeApp(firebaseConfig);
 
-    // Función para iniciar sesión con Google
-    function signInWithGoogle() {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-            var user = result.user;
-            updateUI(user);
-        })
-        .catch((error) => {
-            console.error("Error al iniciar sesión:", error);
-        });
-    }
-
-    function updateUI(user) {
-    var imgPerfil = document.getElementById('perfil-img');
-    if (imgPerfil) {
-        imgPerfil.src = user.photoURL;
-        imgPerfil.style.display = 'block';
-    }
-
-    var btnSeguir = document.getElementById('seguir-btn');
-    var seguidores = document.getElementById('seguidores');
-
-    // Mostrar el botón de seguir y cargar los seguidores del usuario desde la base de datos
-    btnSeguir.style.display = 'block';
-    loadFollowers(user.uid, seguidores);
-}
-
-    // Función para cargar los seguidores del usuario desde la base de datos
-    function loadFollowers(userId) {
-        var database = firebase.database();
-        var userRef = database.ref('users/' + userId);
-
-        userRef.child('followerCount').on('value', function(snapshot) {
-            var seguidores = snapshot.val() || 0;
-            document.getElementById('seguidores').innerText = "Seguidores: " + seguidores;
-        });
-    }
-
-    // Función para seguir o dejar de seguir a un usuario
-    function toggleSeguir() {
-        var btnSeguir = document.getElementById('seguir-btn');
-        var userId = firebase.auth().currentUser.uid;
-        var seguir = btnSeguir.innerText === 'Seguir';
-
-        var database = firebase.database();
-        var userRef = database.ref('users/' + userId);
-
-        userRef.child('followerCount').transaction(function(followerCount) {
-            if (seguir) {
-                return (followerCount || 0) + 1;
-            } else {
-                return (followerCount || 0) - 1;
-            }
-        });
-
-        // Cambiar el texto del botón
-        btnSeguir.innerText = seguir ? 'Siguiendo' : 'Seguir';
-    }
-
-    // Verificar si el usuario está autenticado al cargar la página
+    // Verificar el estado de autenticación al cargar la página
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            // Usuario autenticado, actualizar la interfaz
-            updateUI(user);
+            // Usuario autenticado, mostrar el botón de seguir
+            document.getElementById('seguir-btn').style.display = 'block';
+            // Cargar el estado del botón siguiendo
+            loadFollowingState(user.uid);
         } else {
-            // No hay usuario autenticado, mostrar botón de inicio de sesión
-            var menuContainer = document.querySelector('.menu-container');
-            menuContainer.innerHTML = '<nav><ul><li><a href="#">Iniciar sesión con Google</a></li></ul></nav>';
-            menuContainer.querySelector('a').addEventListener('click', signInWithGoogle);
+            // Usuario no autenticado, ocultar el botón de seguir
+            document.getElementById('seguir-btn').style.display = 'none';
         }
     });
+
+    // Función para cargar el estado del botón siguiendo
+    function loadFollowingState(userId) {
+        var database = firebase.database();
+        var followingRef = database.ref('following/' + userId);
+
+        followingRef.on('value', function(snapshot) {
+            var isFollowing = snapshot.val();
+            if (isFollowing) {
+                // El usuario está siguiendo, cambiar el texto y estilo del botón
+                document.getElementById('seguir-btn').innerText = 'Siguiendo';
+                document.getElementById('seguir-btn').classList.add('siguiendo');
+            } else {
+                // El usuario no está siguiendo, restaurar el texto y estilo predeterminados del botón
+                document.getElementById('seguir-btn').innerText = 'Seguir';
+                document.getElementById('seguir-btn').classList.remove('siguiendo');
+            }
+        });
+    }
+
+    // Función para seguir o dejar de seguir al usuario
+    function toggleFollowing() {
+        var user = firebase.auth().currentUser;
+        if (user) {
+            var database = firebase.database();
+            var followingRef = database.ref('following/' + user.uid);
+
+            followingRef.transaction(function(currentState) {
+                // Invertir el estado actual (seguir / no seguir)
+                return !currentState;
+            });
+        } else {
+            // Usuario no autenticado, mostrar mensaje de error o iniciar sesión
+            console.error('Usuario no autenticado.');
+        }
+    }
 </script>
 </body>
 </html>
