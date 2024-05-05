@@ -246,18 +246,30 @@ window.onload = function() {
     };
 
     function toggleSeguir() {
-        var btn = document.getElementById('seguir-btn');
+    var btn = document.getElementById('seguir-btn');
+    var siguiendo = btn.innerText === 'Seguir';
 
-        if (btn.innerText === 'Seguir') {
-            btn.innerText = 'Siguiendo';
-            btn.classList.add('siguiendo');
-            localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
-        } else {
-            btn.innerText = 'Seguir';
-            btn.classList.remove('siguiendo');
-            localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
-        }
+    // Obtener el ID del usuario actual (debes reemplazar 'UID_DEL_USUARIO_ACTUAL' con el ID real)
+    var userId = 'UID_DEL_USUARIO_ACTUAL';
+
+    if (siguiendo) {
+        // Incrementar el contador de seguidores en la base de datos
+        database.ref('users/' + userId).transaction(function(currentData) {
+            if (currentData) {
+                currentData.followerCount = (currentData.followerCount || 0) + 1;
+            }
+            return currentData;
+        });
+    } else {
+        // Decrementar el contador de seguidores en la base de datos
+        database.ref('users/' + userId).transaction(function(currentData) {
+            if (currentData && currentData.followerCount) {
+                currentData.followerCount--;
+            }
+            return currentData;
+        });
     }
+}
 </script>
 </body>
 </html>
