@@ -4,71 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
-
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    
-<script>
-    
-        const firebaseConfig = {
-            apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
-            authDomain: "untitled-3bfa8.firebaseapp.com",
-            databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
-            projectId: "untitled-3bfa8",
-            storageBucket: "untitled-3bfa8.appspot.com",
-            messagingSenderId: "841576951279",
-            appId: "1:841576951279:web:deabdeb786d955642a1a1a",
-            measurementId: "G-MJ4RGPGV36"
-        };
-
-        // Inicialización de Firebase
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
-// Función para manejar el clic en el botón de seguir
-function toggleSeguir() {
-    console.log("Se ha hecho clic en el botón Seguir");
-    var btn = document.getElementById('seguir-btn');
-    var siguiendo = btn.innerText === 'Seguir';
-
-    // Obtener el ID del usuario actual (debes reemplazar 'UID_DEL_USUARIO_ACTUAL' con el ID real)
-    var userId = 'UID_DEL_USUARIO_ACTUAL';
-
-    if (siguiendo) {
-        // Incrementar el contador de seguidores en la base de datos
-        database.ref('users/' + userId).transaction(function(currentData) {
-            if (currentData) {
-                currentData.followerCount = (currentData.followerCount || 0) + 1;
-            }
-            return currentData;
-        });
-    } else {
-        // Decrementar el contador de seguidores en la base de datos
-        database.ref('users/' + userId).transaction(function(currentData) {
-            if (currentData && currentData.followerCount) {
-                currentData.followerCount--;
-            }
-            return currentData;
-        });
-    }
-}
-
-window.onload = function() {
-    var contador = document.getElementById('seguidores');
-    var userId = 'UID_DEL_USUARIO_ACTUAL'; // ID del usuario actual
-
-    // Leer el número de seguidores de la base de datos y mostrarlo
-    database.ref('users/' + userId + '/followerCount').on('value', function(snapshot) {
-        var seguidores = snapshot.val();
-        contador.innerText = "Seguidores: " + seguidores;
-    });
-};
-    </script>
-
-
-
-
-    
     <style>
         body {
             margin: 0;
@@ -186,7 +121,7 @@ window.onload = function() {
             <li><a href="index.html">Inicio</a></li>
             <li><a href="Contacto.html">Contacto</a></li>
             <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-            <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+            <li><a href="#" onclick="signInWithGoogle()">Iniciar sesion con Google</a></li>
         </ul>
     </nav>
 </div>
@@ -195,7 +130,7 @@ window.onload = function() {
     <div class="perfil-container">
         <h2>Untitled</h2>
         <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
-        <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
+        <button id="seguir-btn" class="btn" onclick="toggleSeguir()" style="display: none;">Seguir</button>
         <span id="seguidores">Seguidores: 0</span> <!-- Aquí se mostrará el número de seguidores -->
     </div>
 </div>
@@ -246,30 +181,18 @@ window.onload = function() {
     };
 
     function toggleSeguir() {
-    var btn = document.getElementById('seguir-btn');
-    var siguiendo = btn.innerText === 'Seguir';
+        var btn = document.getElementById('seguir-btn');
 
-    // Obtener el ID del usuario actual (debes reemplazar 'UID_DEL_USUARIO_ACTUAL' con el ID real)
-    var userId = 'UID_DEL_USUARIO_ACTUAL';
-
-    if (siguiendo) {
-        // Incrementar el contador de seguidores en la base de datos
-        database.ref('users/' + userId).transaction(function(currentData) {
-            if (currentData) {
-                currentData.followerCount = (currentData.followerCount || 0) + 1;
-            }
-            return currentData;
-        });
-    } else {
-        // Decrementar el contador de seguidores en la base de datos
-        database.ref('users/' + userId).transaction(function(currentData) {
-            if (currentData && currentData.followerCount) {
-                currentData.followerCount--;
-            }
-            return currentData;
-        });
+        if (btn.innerText === 'Seguir') {
+            btn.innerText = 'Siguiendo';
+            btn.classList.add('siguiendo');
+            localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
+        } else {
+            btn.innerText = 'Seguir';
+            btn.classList.remove('siguiendo');
+            localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
+        }
     }
-}
 </script>
 </body>
 </html>
