@@ -182,6 +182,19 @@
   appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
 };
+function signInWithGoogle() {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            var user = result.user;
+            updateUI(user);
+        })
+        .catch((error) => {
+            console.error("Error al iniciar sesión:", error);
+        });
+    }
+
+    
        firebase.initializeApp(firebaseConfig);
 
     // Verificar el estado de autenticación al cargar la página
