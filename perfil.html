@@ -182,8 +182,7 @@
   appId: "1:841576951279:web:deabdeb786d955642a1a1a",
   measurementId: "G-MJ4RGPGV36"
 };
-    // Inicialización de Firebase
-    firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
 
     // Función para iniciar sesión con Google
     function signInWithGoogle() {
@@ -191,7 +190,6 @@
         firebase.auth().signInWithPopup(provider)
         .then((result) => {
             var user = result.user;
-            // Llamamos a una función para actualizar la interfaz después de iniciar sesión
             updateUI(user);
         })
         .catch((error) => {
@@ -201,25 +199,62 @@
 
     // Función para actualizar la interfaz después de iniciar sesión
     function updateUI(user) {
+        var perfilImg = document.getElementById('perfil-img');
         var btnSeguir = document.getElementById('seguir-btn');
-        var seguidores = document.getElementById('seguidores');
-        
+
+        // Mostrar la foto de perfil del usuario
+        perfilImg.src = user.photoURL;
+        perfilImg.style.display = 'block';
+
         // Mostrar el botón de seguir y cargar los seguidores del usuario desde la base de datos
         btnSeguir.style.display = 'block';
-        loadFollowers(user.uid, seguidores);
+        loadFollowers(user.uid);
     }
 
-
     // Función para cargar los seguidores del usuario desde la base de datos
-    function loadFollowers(userId, seguidoresElement) {
+    function loadFollowers(userId) {
         var database = firebase.database();
         var userRef = database.ref('users/' + userId);
 
         userRef.child('followerCount').on('value', function(snapshot) {
             var seguidores = snapshot.val() || 0;
-            seguidoresElement.innerText = "Seguidores: " + seguidores;
+            document.getElementById('seguidores').innerText = "Seguidores: " + seguidores;
         });
     }
+
+    // Función para seguir o dejar de seguir a un usuario
+    function toggleSeguir() {
+        var btnSeguir = document.getElementById('seguir-btn');
+        var userId = firebase.auth().currentUser.uid;
+        var seguir = btnSeguir.innerText === 'Seguir';
+
+        var database = firebase.database();
+        var userRef = database.ref('users/' + userId);
+
+        userRef.child('followerCount').transaction(function(followerCount) {
+            if (seguir) {
+                return (followerCount || 0) + 1;
+            } else {
+                return (followerCount || 0) - 1;
+            }
+        });
+
+        // Cambiar el texto del botón
+        btnSeguir.innerText = seguir ? 'Siguiendo' : 'Seguir';
+    }
+
+    // Verificar si el usuario está autenticado al cargar la página
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // Usuario autenticado, actualizar la interfaz
+            updateUI(user);
+        } else {
+            // No hay usuario autenticado, mostrar botón de inicio de sesión
+            var menuContainer = document.querySelector('.menu-container');
+            menuContainer.innerHTML = '<nav><ul><li><a href="#">Iniciar sesión con Google</a></li></ul></nav>';
+            menuContainer.querySelector('a').addEventListener('click', signInWithGoogle);
+        }
+    });
 </script>
 </body>
 </html>
