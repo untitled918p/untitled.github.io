@@ -1,128 +1,188 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled 2</title>
     <style>
+
+.menu-container {
+  background-color: #333;
+  overflow: hidden;
+}
+
+nav {
+  float: left;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+li a:hover {
+  background-color: #555;
+}
+        
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 10vh;
             margin: 0;
+            padding: 0;
         }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        img {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 0; /* Ajusta este valor seg? tus preferencias */
-        }
-
-        p {
-            text-align: center;
-        }
-
-        section {
+        #contenedor-superior {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px; /* Ajusta este valor seg? tus preferencias */
+            justify-content: center;
+            height: 100vh;
         }
 
-.capturas{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-wrap: wrap;
-margin-top: 200px;
-margin-left: -300px;
-}
+        #contenedor-disqus {
+            padding: 20px;
+            background-color: #f0f0f0;
+            align-items: center;
+            padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
+            min-height: 200px; /* Establecer un tamaño mínimo para el contenedor de Disqus */
+        }
 
-.captura{
-margin: 10px;
-display: flex;
-align-items: center;
-flex-direction: column;
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
 
-}
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
 
-.captura img{
-width: 140px;
-height: 120px;
-margin-bottom: 10px;
-}
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
+        }
 
-.contenido-adicional{
-
-text-align: center;
-margin-top: 500px;
-position: absolute;
-left: 50%;
-transform: translateY(-50%);
-}
-
-.textoabjao{
-text-align: center;
-margin-top: 600px;
-position: absolute;
-left: 50%;
-transform: translateY(-50%);
-
-
-}
-
-
-
-
+        #boton-scroll {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Ocultamos el botón inicialmente */
+        }
     </style>
 </head>
 <body>
+<div class="menu-container">
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
+            <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+        </ul>
+    </nav>
+</div>
 
-    <section>
-        <div style="display: flex; flex-direction: row-reverse; align-items: center;">
-            <p style="margin-right: 10px;">Peso Del Juego: 30 MB<br>Accion / Zombie / 2D / indie </p>
-            <h2>Untitled 2</h2>
-            <img src="IconoDeUntitled2.png" width="100" height="100">
-        </div>
+
+    
+    <section id="contenedor-superior">
+        <h2>Survive In 2D</h2>
+        <img src="IconoDeUntitled2.png" width="100" height="100">
+        <p>Peso Del Juego: 30 MB<br> Terror/ Zombie / 2D / indie 
+            <a href="Untitled 2.rar" download>
+                <button>Descargar</button>
+
+            </a>
+
+        </p>
+<section><h2>juegos Creado por:</h2><a href="Perfil.html"><h2>Untitled(Games)</h2></a></section>
+<section><a><h2>Requisitos Minimos</h2><a></section>
+<section><a>Windows: XP/Vista/7/8/10<a></section>
+<section><a>Ram: 700 MB<a></section>
+<section><a>Tipo de sistema: 32/64 Bits<a></section>
+<section><a>Procesador: 1.7 GHz<a></section>
+
     </section>
 
-    <a href="Untitled 2.rar" download>
-        <button>Descargar</button>
-    </a>
 
-<div class="capturas">
-<div class="captura">
-<img src="Untitled1.png" alt="captura 1">
-</div>
-<div class="captura">
-<img src="Untitled2.png" alt="captura2">
-</div>
-<div class="captura">
-<img src="Untitled3.png" alt="captura3">
+    <div class="capturas">
 
+        <div class="captura">
+ 
+           <img src="Untitled1.png" alt="captura 1">
+        </div>
+        <div class="captura">
+            <img src="Untitled2.png" alt="captura2">
+        </div>
+        <div class="captura">
+            <img src="Untitled3.png" alt="captura3">
+        </div>
+    </div>
 
+    <section id="contenedor-disqus">
+        <div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
 
-</div>
+PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-
 
-</div>
+variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+        </script>
+    </section>
 
-<div class="contenido-adicional"><p> Requisitos minimos windows 32/64 bits,  1.1 ghz,   </p>
-</div>    
+    <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
 
-<div class="textoabjao"><p> <h3>tienes solo una vida, si mueres, reinicia </h3></p>
-</div>
+    <script>
+        window.onscroll = function() {scrollFunction()};
 
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("boton-scroll").style.display = "block";
+            } else {
+                document.getElementById("boton-scroll").style.display = "none";
+            }
+        }
 
+        function scrollToDisqus() {
+            var disqusSection = document.getElementById("contenedor-disqus");
+            disqusSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
