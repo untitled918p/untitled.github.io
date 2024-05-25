@@ -6,6 +6,17 @@
 <title>Untitled Juegos</title>
 <style>
 body {
+  background: black; /* Fondo negro sólido */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Para evitar la barra de desplazamiento horizontal */
+
+
+
+
+
+
+
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -27,6 +38,15 @@ body {
             padding: 0 20px;
         }
 
+.light-effect {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%); /* Efecto de luz con degradado radial */
+  pointer-events: none; /* Para que no afecte a los elementos por encima */
+}
         .juego {
             padding: 10px;
             border-bottom: 1px solid #eee;
