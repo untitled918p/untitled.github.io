@@ -6,18 +6,10 @@
 <title>Untitled Juegos</title>
 <style>
 body {
-  background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)); /* Degradado lineal */
+  background: black; /* Fondo negro sólido */
   margin: 0;
   padding: 0;
-
-
-
-
-
-
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+  position: relative;
         }
 
         #buscador {
@@ -40,11 +32,14 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%); /* Efecto de luz con degradado radial */
+  width: 50%; /* Ajusta el ancho de la zona iluminada según tu preferencia */
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2); /* Color y opacidad de la luz */
   pointer-events: none; /* Para que no afecte a los elementos por encima */
+  z-index: 1; /* Asegura que esté encima del contenido */
 }
+
+
         .juego {
             padding: 10px;
             border-bottom: 1px solid #eee;
@@ -161,7 +156,7 @@ li a:hover {
 </style>
 </head>
 <body>
-  
+  <div class="light-effect"></div>
   <div class="menu-container">
     <nav>
       <ul>
