@@ -12,21 +12,23 @@ body {
   position: relative;
 }
 
+.light-effect {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%; /* Ocupa toda la pantalla horizontalmente */
+  height: 100%; /* Ocupa toda la pantalla verticalmente */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, rgba(0, 0, 0, 0.9) 80%); /* Degradado radial más oscuro */
+  pointer-events: none; /* Para que no afecte a los elementos por encima */
+  z-index: -1; /* Coloca el efecto de iluminación en el fondo */
+}
+
 .container {
   position: relative;
   z-index: 0; /* Asegura que el contenido esté delante del fondo */
 }
 
-.light-effect {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%; /* Ajusta el ancho de la zona iluminada según tu preferencia */
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 10%, rgba(0, 0, 0, 0.9) 80%); /* Degradado radial */
-  pointer-events: none; /* Para que no afecte a los elementos por encima */
-  z-index: -1; /* Coloca el efecto de iluminación en el fondo */
-}
+
 
         #buscador {
             width: 100%;
