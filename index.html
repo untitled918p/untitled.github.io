@@ -83,7 +83,7 @@ body {
   background-color: #333;
   overflow: hidden;
   text-align: center;
-  padding: 10px 0; /* Espaciado interno */
+  padding: 5px 0; /* Espaciado interno reducido */
 }
 
 nav {
@@ -98,7 +98,7 @@ ul {
 
 li {
   display: inline-block;
-  margin: 0 10px; /* Espacio entre los elementos del menú */
+  margin: 0 5px; /* Espacio reducido entre los elementos del menú */
 }
 
 li a {
@@ -107,13 +107,13 @@ li a {
   text-decoration: none;
   font-weight: bold;
   background-color: #444;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   border: 2px solid #888; /* Borde para resaltar el cuadrado */
   transition: background-color 0.3s, border-color 0.3s;
   text-align: center;
-  width: 120px; /* Ancho de los cuadrados */
-  height: 40px; /* Alto de los cuadrados */
+  width: 80px; /* Ancho de los cuadrados reducido */
+  height: 30px; /* Alto de los cuadrados reducido */
   line-height: 20px; /* Alineación vertical del texto */
 }
 
@@ -155,9 +155,9 @@ li a:hover {
       <ul>
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Página oficial y más</a></li>
+        <li><a href="Informacion.html">Página oficial</a></li>
         <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-        <li><a href="#" onclick="toggleDropdown()">Perfiles / Creadores</a>
+        <li><a href="#" onclick="toggleDropdown()">Perfiles</a>
           <!-- Agrega el panel desplegable -->
           <div class="dropdown-panel" id="dropdownPanel">
             <a href="perfil.html"><img src="Perfilimagen.png" alt="Imagen 1">Untitled</a>
