@@ -80,10 +80,12 @@ body {
 .menu-container {
   background-color: #333;
   overflow: hidden;
+  text-align: center;
+  padding: 10px 0; /* Espaciado interno */
 }
 
 nav {
-  float: left;
+  display: inline-block;
 }
 
 ul {
@@ -94,7 +96,7 @@ ul {
 
 li {
   display: inline-block;
-  margin-right: 20px;
+  margin: 0 10px; /* Espacio entre los elementos del menú */
 }
 
 li a {
@@ -102,6 +104,14 @@ li a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  background-color: #444;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  text-align: center;
+  width: 100px; /* Ancho de los cuadrados */
+  height: 40px; /* Alto de los cuadrados */
+  line-height: 20px; /* Alineación vertical del texto */
 }
 
 li a:hover {
@@ -141,14 +151,14 @@ li a:hover {
       <ul>
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-        <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+        <li><a href="Informacion.html">Página oficial y más</a></li>
+        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
         <li><a href="#" onclick="toggleDropdown()">Perfiles / Creadores</a>
           <!-- Agrega el panel desplegable -->
           <div class="dropdown-panel" id="dropdownPanel">
             <a href="perfil.html"><img src="Perfilimagen.png" alt="Imagen 1">Untitled</a>
-            <a href="#">Proximamente</a>
-            <a href="#">Proximamente 2</a>
+            <a href="#">Próximamente</a>
+            <a href="#">Próximamente 2</a>
           </div>
         </li>
         <li>
