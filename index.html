@@ -111,6 +111,13 @@ li a:hover {
   height: 100px; /* Establece el mismo tamaño para todas las imágenes */
   border-radius: 50%; /* Bordes redondeados */
 }
+
+.photo-container {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white; /* Agrega un borde blanco */
+  border-radius: 50%; /* Bordes redondeados */
+}
 </style>
 </head>
 <body>
@@ -122,11 +129,6 @@ li a:hover {
       <li><a href="Informacion.html">Página oficial</a></li>
       <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
     </ul>
-<!-- Contenedor de la foto del perfil -->
-  <div id="photo-container" class="photo-container" style="width: 40px; height: 40px;"></div>
-  
-  <!-- Script de perfil.js -->
-  <script src="perfil.js"></script>
   </div>
 
   <div class="header">
@@ -169,7 +171,11 @@ li a:hover {
     </div>
   </div>
 
+  <!-- Contenedor de la foto del perfil con bordes -->
+  <div id="photo-container" class="photo-container"></div>
   
+  <!-- Script de perfil.js -->
+  <script src="perfil.js"></script>
 
 </body>
 </html>
