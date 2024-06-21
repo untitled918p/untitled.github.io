@@ -270,7 +270,7 @@
             }
         }
 
-  function showSection(sectionId) {
+ function showSection(sectionId) {
     const sections = document.querySelectorAll('.juego-section');
     const tabs = document.querySelectorAll('.tab');
     const indicator = document.querySelector('.indicator');
@@ -282,7 +282,7 @@
 
     tabs.forEach(tab => {
         tab.classList.remove('active');
-        // Convertimos el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
+        // Convertir el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
         if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
             tab.classList.add('active');
             // Calcular la posición y tamaño del indicador cuando se encuentra la pestaña activa
@@ -298,7 +298,7 @@
     if (activeSection) {
         activeSection.classList.add('active');
     }
-}
+        }
 
         // Initial indicator positioning
         document.addEventListener('DOMContentLoaded', () => {
