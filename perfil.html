@@ -15,6 +15,7 @@
             --btn-bg-color: var(--primary-color);
             --btn-bg-color-hover: var(--primary-color-hover);
             --btn-color: white;
+            --active-color: var(--primary-color);
         }
 
         body {
@@ -62,7 +63,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: calc(100vh - 50px); /* Ajustar altura para tener en cuenta el menú */
+            height: calc(100vh - 50px);
         }
 
         .perfil-container {
@@ -104,8 +105,8 @@
 
         .juegos-container {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -113,6 +114,32 @@
             margin-top: 20px;
             overflow-x: auto;
             max-width: 100%;
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .tab {
+            margin: 0 15px;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            color: var(--active-color);
+        }
+
+        .indicator {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            background-color: var(--active-color);
+            transition: left 0.3s ease, width 0.3s ease;
         }
 
         .juego {
@@ -125,6 +152,16 @@
             width: 100px;
             height: 100px;
             border-radius: 10px;
+        }
+
+        .juego-section {
+            display: none;
+        }
+
+        .juego-section.active {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -149,46 +186,60 @@
     </main>
 
     <section class="juegos-container">
-        <div class="juego">
-            <a href="UntitledBeta.html">
-                <img src="icono.png" alt="Icono Juego 1">
-                <p>Untitled</p>
-            </a>
+        <div class="tab-container">
+            <div class="tab active" onclick="showSection('juegos')">Juegos</div>
+            <div class="tab" onclick="showSection('remake')">Remake</div>
+            <div class="tab" onclick="showSection('remastered')">Remastered</div>
+            <div class="indicator"></div>
         </div>
-        <div class="juego">
-            <a href="Untitled2.html">
-                <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-                <p>Untitled 2</p>
-            </a>
+
+        <div id="juegos" class="juego-section active">
+            <div class="juego">
+                <a href="UntitledBeta.html">
+                    <img src="icono.png" alt="Icono Juego 1">
+                    <p>Untitled</p>
+                </a>
+            </div>
+            <div class="juego">
+                <a href="Untitled2.html">
+                    <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+                    <p>Untitled 2</p>
+                </a>
+            </div>
         </div>
-        <div class="juego">
-            <a href="Jump.html">
-                <img src="iconojump.png" alt="Icono Juego 3">
-                <p>Jump To Survive</p>
-            </a>
+
+        <div id="remake" class="juego-section">
+            <div class="juego">
+                <a href="Jump.html">
+                    <img src="iconojump.png" alt="Icono Juego 3">
+                    <p>Jump To Survive</p>
+                </a>
+            </div>
         </div>
-        <div class="juego">
-            <a href="JumpPrologue.html">
-                <img src="IconoJump2.png" alt="Icono Juego 4">
-                <p>Jump Prologue</p>
-            </a>
-        </div>
-        <div class="juego">
-            <a href="Kasper.html">
-                <img src="KasperIcono.png" alt="Icono Juego 5">
-                <p>Kasper</p>
-            </a>
-        </div>
-        <div class="juego">
-            <a href="SurviveIn2D.html">
-                <img src="In2DIcon.png" alt="Icono Juego 5">
-                <p>Survive In 2D</p>
-            </a>
+
+        <div id="remastered" class="juego-section">
+            <div class="juego">
+                <a href="JumpPrologue.html">
+                    <img src="IconoJump2.png" alt="Icono Juego 4">
+                    <p>Jump Prologue</p>
+                </a>
+            </div>
+            <div class="juego">
+                <a href="Kasper.html">
+                    <img src="KasperIcono.png" alt="Icono Juego 5">
+                    <p>Kasper</p>
+                </a>
+            </div>
+            <div class="juego">
+                <a href="SurviveIn2D.html">
+                    <img src="In2DIcon.png" alt="Icono Juego 5">
+                    <p>Survive In 2D</p>
+                </a>
+            </div>
         </div>
     </section>
 
     <script>
-        // Verifica el estado del botón de seguir en el almacenamiento local al cargar la página
         window.onload = function() {
             const btn = document.getElementById('seguir-btn');
             const siguiendo = localStorage.getItem('siguiendo');
@@ -205,13 +256,49 @@
             if (btn.innerText === 'Seguir') {
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
-                localStorage.setItem('siguiendo', 'true'); // Guarda el estado en el almacenamiento local
+                localStorage.setItem('siguiendo', 'true');
             } else {
                 btn.innerText = 'Seguir';
                 btn.classList.remove('siguiendo');
-                localStorage.setItem('siguiendo', 'false'); // Guarda el estado en el almacenamiento local
+                localStorage.setItem('siguiendo', 'false');
             }
         }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.juego-section');
+            const tabs = document.querySelectorAll('.tab');
+            const indicator = document.querySelector('.indicator');
+            let activeTab = null;
+
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.innerText.toLowerCase() === sectionId.toLowerCase()) {
+                    activeTab = tab;
+                }
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            activeTab.classList.add('active');
+
+            const tabRect = activeTab.getBoundingClientRect();
+            const containerRect = activeTab.parentElement.getBoundingClientRect();
+            indicator.style.left = `${tabRect.left - containerRect.left}px`;
+            indicator.style.width = `${tabRect.width}px`;
+        }
+
+        // Initial indicator positioning
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeTab = document.querySelector('.tab.active');
+            const tabRect = activeTab.getBoundingClientRect();
+            const containerRect = activeTab.parentElement.getBoundingClientRect();
+            const indicator = document.querySelector('.indicator');
+            indicator.style.left = `${tabRect.left - containerRect.left}px`;
+            indicator.style.width = `${tabRect.width}px`;
+        });
     </script>
 </body>
 </html>
