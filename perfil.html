@@ -270,7 +270,7 @@
             }
         }
 
-     function showSection(sectionId) {
+    function showSection(sectionId) {
     const sections = document.querySelectorAll('.juego-section');
     const tabs = document.querySelectorAll('.tab');
     const indicator = document.querySelector('.indicator');
@@ -282,22 +282,22 @@
 
     tabs.forEach(tab => {
         tab.classList.remove('active');
-        if (tab.innerText.toLowerCase() === sectionId.toLowerCase()) {
+        // Convertimos el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
+        if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
             tab.classList.add('active');
+            // Calcular la posición y tamaño del indicador cuando se encuentra la pestaña activa
+            const tabRect = tab.getBoundingClientRect();
+            const containerRect = tab.parentElement.getBoundingClientRect();
+            indicator.style.left = `${tabRect.left - containerRect.left}px`;
+            indicator.style.width = `${tabRect.width}px`;
         }
     });
 
-    // Encontrar la pestaña activa y calcular la posición del indicador
-    const activeTab = document.querySelector('.tab.active');
-    const tabRect = activeTab.getBoundingClientRect();
-    const containerRect = activeTab.parentElement.getBoundingClientRect();
-
-    // Calcular la posición y tamaño del indicador
-    indicator.style.left = `${tabRect.left - containerRect.left}px`;
-    indicator.style.width = `${tabRect.width}px`;
-
     // Mostrar la sección correspondiente
-    document.getElementById(sectionId).classList.add('active');
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
 }
 
         // Initial indicator positioning
