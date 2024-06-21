@@ -272,7 +272,7 @@
     const tabs = document.querySelectorAll('.tab');
     const indicator = document.querySelector('.indicator');
 
-    // Remueve la clase 'active' de todas las secciones y pestañas
+    // Remover la clase 'active' de todas las secciones y pestañas
     sections.forEach(section => {
         section.classList.remove('active');
     });
@@ -284,7 +284,7 @@
         }
     });
 
-    // Encuentra la pestaña activa y calcula la posición del indicador
+    // Encontrar la pestaña activa y calcular la posición del indicador
     const activeTab = document.querySelector('.tab.active');
     const tabRect = activeTab.getBoundingClientRect();
     const containerRect = activeTab.parentElement.getBoundingClientRect();
@@ -292,7 +292,7 @@
     indicator.style.left = `${tabRect.left - containerRect.left}px`;
     indicator.style.width = `${tabRect.width}px`;
 
-    // Muestra la sección correspondiente
+    // Mostrar la sección correspondiente
     document.getElementById(sectionId).classList.add('active');
 }
 
