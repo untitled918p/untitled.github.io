@@ -240,6 +240,9 @@
         <div id="remastered" class="juego-section">
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
+        <div id="Cronologia 4" class="juego-section">
+            <p class="empty-message">No hay juegos remastered por el momento.</p>
+        </div>
     </section>
 
     <script>
@@ -267,7 +270,7 @@
             }
         }
 
-      function showSection(sectionId) {
+     function showSection(sectionId) {
     const sections = document.querySelectorAll('.juego-section');
     const tabs = document.querySelectorAll('.tab');
     const indicator = document.querySelector('.indicator');
@@ -289,6 +292,7 @@
     const tabRect = activeTab.getBoundingClientRect();
     const containerRect = activeTab.parentElement.getBoundingClientRect();
 
+    // Calcular la posición y tamaño del indicador
     indicator.style.left = `${tabRect.left - containerRect.left}px`;
     indicator.style.width = `${tabRect.width}px`;
 
