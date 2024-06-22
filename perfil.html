@@ -248,7 +248,7 @@
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
         <div id="programas" class="juego-section">
-            <p class="empty-message">No hay Programas por el momento.</p>
+            <p class="empty-message">No hay programas por el momento.</p>
         </div>
     </section>
 
@@ -261,6 +261,8 @@
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
             }
+
+            setIndicator();
         };
 
         function toggleSeguir() {
@@ -303,16 +305,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const activeTab = document.querySelector('.tab.active');
-            const tabRect = activeTab.getBoundingClientRect();
-            const containerRect = activeTab.parentElement.getBoundingClientRect();
-            const indicator = document.querySelector('.indicator');
-            indicator.style.left = `${tabRect.left - containerRect.left}px`;
-            indicator.style.width = `${tabRect.width}px`;
-        });
-
-        window.addEventListener('resize', () => {
+        function setIndicator() {
             const activeTab = document.querySelector('.tab.active');
             if (activeTab) {
                 const tabRect = activeTab.getBoundingClientRect();
@@ -321,7 +314,10 @@
                 indicator.style.left = `${tabRect.left - containerRect.left}px`;
                 indicator.style.width = `${tabRect.width}px`;
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', setIndicator);
+        window.addEventListener('resize', setIndicator);
     </script>
 </body>
 </html>
