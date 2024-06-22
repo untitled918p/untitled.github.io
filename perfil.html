@@ -7,12 +7,13 @@
     <style>
         :root {
             --primary-color: #4285f4;
+            --primary-color-hover: #357ae8;
             --menu-bg-color: #333;
             --menu-hover-color: #555;
             --perfil-bg-color: #f0f0f0;
             --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: #357ae8;
+            --btn-bg-color-hover: var(--primary-color-hover);
             --btn-color: white;
             --active-color: var(--primary-color);
         }
@@ -20,9 +21,7 @@
         body {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            height: 100vh;
             background: linear-gradient(to right, #ddd 50%, #fff 50%);
             transition: background 0.5s ease;
         }
@@ -64,7 +63,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex: 1;
+            height: calc(100vh - 50px);
         }
 
         .perfil-container {
@@ -115,7 +114,6 @@
             margin-top: 20px;
             overflow-x: auto;
             max-width: 100%;
-            position: relative; /* Añadido para posicionamiento del indicador */
         }
 
         .tab-container {
@@ -130,7 +128,6 @@
             padding: 10px;
             cursor: pointer;
             font-weight: bold;
-            transition: color 0.3s;
         }
 
         .tab.active {
@@ -166,21 +163,16 @@
             justify-content: space-around;
             flex-wrap: wrap;
         }
-
-        .empty-message {
-            font-size: 18px;
-            color: #555;
-        }
     </style>
 </head>
 <body>
     <header class="menu-container">
         <nav>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Página oficial y más información</a></li>
-                <li><a href="#">Iniciar sesión con Google</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><a href="Informacion.html">Página oficial y más información</a></li>
+                <li><a href="IniciarSesion.html">Iniciar sesión con Google</a></li>
             </ul>
         </nav>
     </header>
@@ -196,57 +188,68 @@
     <section class="juegos-container">
         <div class="tab-container">
             <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
+            <div class="tab" onclick="showSection('remake')">Remake</div>
             <div class="tab" onclick="showSection('remastered')">Remastered</div>
-            <div class="tab" onclick="showSection('programas')">Programas</div>
+            <div class="tab" onclick="showSection('Programas')">programas</div>
             <div class="indicator"></div>
         </div>
 
         <div id="juegos" class="juego-section active">
+
             <div class="juego">
-                <a href="#">
+                <a href="SurviveIn2D.html">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
                     <p>Survive In 2D</p>
                 </a>
             </div>
-            <div class="juego">
-                <a href="#">
+<div class="juego">
+                <a href="JumpPrologue.html">
                     <img src="IconoJump2.png" alt="Icono Juego 4">
                     <p>Jump Prologue</p>
                 </a>
             </div>
+
             <div class="juego">
-                <a href="#">
+                <a href="Jump.html">
                     <img src="iconojump.png" alt="Icono Juego 3">
                     <p>Jump To Survive</p>
                 </a>
             </div>
+            
             <div class="juego">
-                <a href="#">
+                <a href="UntitledBeta.html">
                     <img src="icono.png" alt="Icono Juego 1">
                     <p>Untitled</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="#">
+                <a href="Untitled2.html">
                     <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
                     <p>Untitled 2</p>
                 </a>
             </div>
+            
+            
             <div class="juego">
-                <a href="#">
+                <a href="Kasper.html">
                     <img src="KasperIcono.png" alt="Icono Juego 5">
                     <p>Kasper</p>
                 </a>
             </div>
+            
+        </div>
+
+        <div id="remake" class="juego-section">
+            <p class="empty-message">No hay juegos remake por el momento.</p>
         </div>
 
         <div id="remastered" class="juego-section">
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
-        
-        <div id="programas" class="juego-section">
-            <p class="empty-message">No hay programas por el momento.</p>
+<div id="programa" class="juego-section">
+            <p class="empty-message">No hay Programas por el momento.</p>
         </div>
+        
     </section>
 
     <script>
@@ -274,31 +277,45 @@
             }
         }
 
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.juego-section');
-            const tabs = document.querySelectorAll('.tab');
-            const indicator = document.querySelector('.indicator');
+ function showSection(sectionId) {
+    const sections = document.querySelectorAll('.juego-section');
+    const tabs = document.querySelectorAll('.tab');
+    const indicator = document.querySelector('.indicator');
 
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+    // Remover la clase 'active' de todas las secciones y pestañas
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
 
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
-                    tab.classList.add('active');
-                    const tabRect = tab.getBoundingClientRect();
-                    const containerRect = tab.parentElement.getBoundingClientRect();
-                    indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                    indicator.style.width = `${tabRect.width}px`;
-                }
-            });
-
-            const activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+        // Convertir el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
+        if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
+            tab.classList.add('active');
+            // Calcular la posición y tamaño del indicador cuando se encuentra la pestaña activa
+            const tabRect = tab.getBoundingClientRect();
+            const containerRect = tab.parentElement.getBoundingClientRect();
+            indicator.style.left = ${tabRect.left - containerRect.left}px;
+            indicator.style.width = ${tabRect.width}px;
         }
+    });
+
+    // Mostrar la sección correspondiente
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
+        }
+
+        // Initial indicator positioning
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeTab = document.querySelector('.tab.active');
+            const tabRect = activeTab.getBoundingClientRect();
+            const containerRect = activeTab.parentElement.getBoundingClientRect();
+            const indicator = document.querySelector('.indicator');
+            indicator.style.left = ${tabRect.left - containerRect.left}px;
+            indicator.style.width = ${tabRect.width}px;
+        });
     </script>
 </body>
 </html>
