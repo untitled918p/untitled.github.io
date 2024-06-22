@@ -92,6 +92,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px;
         }
 
         .btn:hover {
@@ -278,7 +279,7 @@
             sections.forEach(section => section.classList.remove('active'));
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            const activeTab = Array.from(tabs).find(tab => tab.innerText.trim().toLowerCase() === sectionId);
+            const activeTab = Array.from(tabs).find(tab => tab.innerText.trim().toLowerCase() === (sectionId === 'programa' ? 'programas' : 'todos los juegos'));
             if (activeTab) {
                 activeTab.classList.add('active');
                 const tabRect = activeTab.getBoundingClientRect();
