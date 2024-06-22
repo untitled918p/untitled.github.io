@@ -21,19 +21,19 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
             background: linear-gradient(to right, #ddd 50%, #fff 50%);
             transition: background 0.5s ease;
         }
 
         .menu-container {
             background-color: var(--menu-bg-color);
-            overflow: hidden;
         }
 
         nav {
             display: flex;
             justify-content: center;
+            padding: 10px 0;
         }
 
         ul {
@@ -48,15 +48,16 @@
         }
 
         li a {
-            display: block;
             color: white;
             text-decoration: none;
             font-weight: bold;
             padding: 10px;
+            transition: background-color 0.3s ease;
         }
 
         li a:hover {
             background-color: var(--menu-hover-color);
+            border-radius: 5px;
         }
 
         .main-container {
@@ -64,6 +65,7 @@
             justify-content: center;
             align-items: center;
             height: calc(100vh - 50px);
+            padding: 20px;
         }
 
         .perfil-container {
@@ -73,9 +75,6 @@
             border-radius: 10px;
             box-shadow: var(--perfil-shadow);
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .perfil-img {
@@ -111,9 +110,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: var(--perfil-shadow);
-            margin-top: 20px;
-            overflow-x: auto;
-            max-width: 100%;
+            margin: 20px;
+            width: calc(100% - 40px);
         }
 
         .tab-container {
@@ -121,6 +119,7 @@
             justify-content: center;
             margin-bottom: 20px;
             position: relative;
+            border-bottom: 1px solid #ccc;
         }
 
         .tab {
@@ -128,6 +127,7 @@
             padding: 10px;
             cursor: pointer;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .tab.active {
@@ -136,7 +136,7 @@
 
         .indicator {
             position: absolute;
-            bottom: 0;
+            bottom: -1px;
             height: 3px;
             background-color: var(--active-color);
             transition: left 0.3s ease, width 0.3s ease;
@@ -166,6 +166,7 @@
     </style>
 </head>
 <body>
+    <!-- Menú de navegación -->
     <header class="menu-container">
         <nav>
             <ul>
@@ -177,6 +178,7 @@
         </nav>
     </header>
 
+    <!-- Contenedor principal -->
     <main class="main-container">
         <div class="perfil-container">
             <h2>Untitled (Juegos)</h2>
@@ -185,37 +187,35 @@
         </div>
     </main>
 
+    <!-- Sección de juegos -->
     <section class="juegos-container">
         <div class="tab-container">
             <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
             <div class="tab" onclick="showSection('remake')">Remake</div>
             <div class="tab" onclick="showSection('remastered')">Remastered</div>
-            <div class="tab" onclick="showSection('Programas')">programas</div>
+            <div class="tab" onclick="showSection('programa')">Programas</div>
             <div class="indicator"></div>
         </div>
 
         <div id="juegos" class="juego-section active">
-
             <div class="juego">
                 <a href="SurviveIn2D.html">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
                     <p>Survive In 2D</p>
                 </a>
             </div>
-<div class="juego">
+            <div class="juego">
                 <a href="JumpPrologue.html">
                     <img src="IconoJump2.png" alt="Icono Juego 4">
                     <p>Jump Prologue</p>
                 </a>
             </div>
-
             <div class="juego">
                 <a href="Jump.html">
                     <img src="iconojump.png" alt="Icono Juego 3">
                     <p>Jump To Survive</p>
                 </a>
             </div>
-            
             <div class="juego">
                 <a href="UntitledBeta.html">
                     <img src="icono.png" alt="Icono Juego 1">
@@ -228,15 +228,12 @@
                     <p>Untitled 2</p>
                 </a>
             </div>
-            
-            
             <div class="juego">
                 <a href="Kasper.html">
                     <img src="KasperIcono.png" alt="Icono Juego 5">
                     <p>Kasper</p>
                 </a>
             </div>
-            
         </div>
 
         <div id="remake" class="juego-section">
@@ -246,12 +243,13 @@
         <div id="remastered" class="juego-section">
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
-<div id="programa" class="juego-section">
+        
+        <div id="programa" class="juego-section">
             <p class="empty-message">No hay Programas por el momento.</p>
         </div>
-        
     </section>
 
+    <!-- Script para manejar el comportamiento dinámico -->
     <script>
         window.onload = function() {
             const btn = document.getElementById('seguir-btn');
@@ -277,44 +275,33 @@
             }
         }
 
- function showSection(sectionId) {
-    const sections = document.querySelectorAll('.juego-section');
-    const tabs = document.querySelectorAll('.tab');
-    const indicator = document.querySelector('.indicator');
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.juego-section');
+            const tabs = document.querySelectorAll('.tab');
+            const indicator = document.querySelector('.indicator');
 
-    // Remover la clase 'active' de todas las secciones y pestañas
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
+            sections.forEach(section => section.classList.remove('active'));
+            tabs.forEach(tab => tab.classList.remove('active'));
 
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-        // Convertir el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
-        if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
-            tab.classList.add('active');
-            // Calcular la posición y tamaño del indicador cuando se encuentra la pestaña activa
-            const tabRect = tab.getBoundingClientRect();
-            const containerRect = tab.parentElement.getBoundingClientRect();
-            indicator.style.left = ${tabRect.left - containerRect.left}px;
-            indicator.style.width = ${tabRect.width}px;
-        }
-    });
+            const activeTab = Array.from(tabs).find(tab => tab.innerText.trim().toLowerCase() === sectionId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                indicator.style.width = `${tabRect.width}px`;
+            }
 
-    // Mostrar la sección correspondiente
-    const activeSection = document.getElementById(sectionId);
-    if (activeSection) {
-        activeSection.classList.add('active');
-    }
+            document.getElementById(sectionId).classList.add('active');
         }
 
-        // Initial indicator positioning
         document.addEventListener('DOMContentLoaded', () => {
             const activeTab = document.querySelector('.tab.active');
             const tabRect = activeTab.getBoundingClientRect();
             const containerRect = activeTab.parentElement.getBoundingClientRect();
             const indicator = document.querySelector('.indicator');
-            indicator.style.left = ${tabRect.left - containerRect.left}px;
-            indicator.style.width = ${tabRect.width}px;
+            indicator.style.left = `${tabRect.left - containerRect.left}px`;
+            indicator.style.width = `${tabRect.width}px`;
         });
     </script>
 </body>
