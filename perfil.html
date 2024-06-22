@@ -75,6 +75,19 @@
             border-radius: 10px;
             box-shadow: var(--perfil-shadow);
             text-align: center;
+            position: relative;
+        }
+
+        .perfil-bg-img {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            border-radius: 10px;
+            opacity: 0.5;
         }
 
         .perfil-img {
@@ -82,6 +95,8 @@
             height: 150px;
             border-radius: 50%;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .btn {
@@ -187,6 +202,7 @@
     <!-- Contenedor principal -->
     <main class="main-container">
         <div class="perfil-container">
+            <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
             <h2>Untitled (Juegos)</h2>
             <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
             <button id="seguir-btn" class="btn" onclick="toggleSeguir()">Seguir</button>
@@ -279,7 +295,8 @@
             sections.forEach(section => section.classList.remove('active'));
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            const activeTab = Array.from(tabs).find(tab => tab.innerText.trim().toLowerCase() === (sectionId === 'programa' ? 'programas' : 'todos los juegos'));
+            document.getElementById(sectionId).classList.add('active');
+            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
             if (activeTab) {
                 activeTab.classList.add('active');
                 const tabRect = activeTab.getBoundingClientRect();
@@ -287,17 +304,17 @@
                 indicator.style.left = `${tabRect.left - containerRect.left}px`;
                 indicator.style.width = `${tabRect.width}px`;
             }
-
-            document.getElementById(sectionId).classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const activeTab = document.querySelector('.tab.active');
-            const tabRect = activeTab.getBoundingClientRect();
-            const containerRect = activeTab.parentElement.getBoundingClientRect();
-            const indicator = document.querySelector('.indicator');
-            indicator.style.left = `${tabRect.left - containerRect.left}px`;
-            indicator.style.width = `${tabRect.width}px`;
+            if (activeTab) {
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                const indicator = document.querySelector('.indicator');
+                indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                indicator.style.width = `${tabRect.width}px`;
+            }
         });
     </script>
 </body>
