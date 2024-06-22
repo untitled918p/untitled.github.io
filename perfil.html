@@ -28,12 +28,12 @@
 
         .menu-container {
             background-color: var(--menu-bg-color);
+            padding: 10px 0;
         }
 
         nav {
             display: flex;
             justify-content: center;
-            padding: 10px 0;
         }
 
         ul {
@@ -163,6 +163,11 @@
             justify-content: space-around;
             flex-wrap: wrap;
         }
+
+        .empty-message {
+            color: #888;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -191,8 +196,6 @@
     <section class="juegos-container">
         <div class="tab-container">
             <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
-            <div class="tab" onclick="showSection('remake')">Remake</div>
-            <div class="tab" onclick="showSection('remastered')">Remastered</div>
             <div class="tab" onclick="showSection('programa')">Programas</div>
             <div class="indicator"></div>
         </div>
@@ -236,16 +239,8 @@
             </div>
         </div>
 
-        <div id="remake" class="juego-section">
-            <p class="empty-message">No hay juegos remake por el momento.</p>
-        </div>
-
-        <div id="remastered" class="juego-section">
-            <p class="empty-message">No hay juegos remastered por el momento.</p>
-        </div>
-        
         <div id="programa" class="juego-section">
-            <p class="empty-message">No hay Programas por el momento.</p>
+            <p class="empty-message">No hay programas por el momento.</p>
         </div>
     </section>
 
