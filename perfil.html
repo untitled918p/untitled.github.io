@@ -24,6 +24,8 @@
             height: 100vh;
             background: linear-gradient(to right, #ddd 50%, #fff 50%);
             transition: background 0.5s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .menu-container {
@@ -63,7 +65,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: calc(100vh - 50px);
+            flex: 1;
         }
 
         .perfil-container {
@@ -163,6 +165,11 @@
             justify-content: space-around;
             flex-wrap: wrap;
         }
+
+        .empty-message {
+            font-size: 18px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -190,32 +197,29 @@
             <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
             <div class="tab" onclick="showSection('remake')">Remake</div>
             <div class="tab" onclick="showSection('remastered')">Remastered</div>
-            <div class="tab" onclick="showSection('Programas')">programas</div>
+            <div class="tab" onclick="showSection('programas')">Programas</div>
             <div class="indicator"></div>
         </div>
 
         <div id="juegos" class="juego-section active">
-
             <div class="juego">
                 <a href="SurviveIn2D.html">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
                     <p>Survive In 2D</p>
                 </a>
             </div>
-<div class="juego">
+            <div class="juego">
                 <a href="JumpPrologue.html">
                     <img src="IconoJump2.png" alt="Icono Juego 4">
                     <p>Jump Prologue</p>
                 </a>
             </div>
-
             <div class="juego">
                 <a href="Jump.html">
                     <img src="iconojump.png" alt="Icono Juego 3">
                     <p>Jump To Survive</p>
                 </a>
             </div>
-            
             <div class="juego">
                 <a href="UntitledBeta.html">
                     <img src="icono.png" alt="Icono Juego 1">
@@ -228,15 +232,12 @@
                     <p>Untitled 2</p>
                 </a>
             </div>
-            
-            
             <div class="juego">
                 <a href="Kasper.html">
                     <img src="KasperIcono.png" alt="Icono Juego 5">
                     <p>Kasper</p>
                 </a>
             </div>
-            
         </div>
 
         <div id="remake" class="juego-section">
@@ -246,10 +247,9 @@
         <div id="remastered" class="juego-section">
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
-<div id="programa" class="juego-section">
+        <div id="programas" class="juego-section">
             <p class="empty-message">No hay Programas por el momento.</p>
         </div>
-        
     </section>
 
     <script>
@@ -277,37 +277,32 @@
             }
         }
 
- function showSection(sectionId) {
-    const sections = document.querySelectorAll('.juego-section');
-    const tabs = document.querySelectorAll('.tab');
-    const indicator = document.querySelector('.indicator');
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.juego-section');
+            const tabs = document.querySelectorAll('.tab');
+            const indicator = document.querySelector('.indicator');
 
-    // Remover la clase 'active' de todas las secciones y pestañas
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
 
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
-        // Convertir el texto de la pestaña y el sectionId a minúsculas para comparar sin problemas de mayúsculas/minúsculas
-        if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
-            tab.classList.add('active');
-            // Calcular la posición y tamaño del indicador cuando se encuentra la pestaña activa
-            const tabRect = tab.getBoundingClientRect();
-            const containerRect = tab.parentElement.getBoundingClientRect();
-            indicator.style.left = `${tabRect.left - containerRect.left}px`;
-            indicator.style.width = `${tabRect.width}px`;
-        }
-    });
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.innerText.trim().toLowerCase() === sectionId.trim().toLowerCase()) {
+                    tab.classList.add('active');
+                    const tabRect = tab.getBoundingClientRect();
+                    const containerRect = tab.parentElement.getBoundingClientRect();
+                    indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                    indicator.style.width = `${tabRect.width}px`;
+                }
+            });
 
-    // Mostrar la sección correspondiente
-    const activeSection = document.getElementById(sectionId);
-    if (activeSection) {
-        activeSection.classList.add('active');
-    }
+            const activeSection = document.getElementById(sectionId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
         }
 
-        // Initial indicator positioning
         document.addEventListener('DOMContentLoaded', () => {
             const activeTab = document.querySelector('.tab.active');
             const tabRect = activeTab.getBoundingClientRect();
@@ -315,6 +310,17 @@
             const indicator = document.querySelector('.indicator');
             indicator.style.left = `${tabRect.left - containerRect.left}px`;
             indicator.style.width = `${tabRect.width}px`;
+        });
+
+        window.addEventListener('resize', () => {
+            const activeTab = document.querySelector('.tab.active');
+            if (activeTab) {
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                const indicator = document.querySelector('.indicator');
+                indicator.style.left = `${tabRect.left - containerRect.left}px`;
+                indicator.style.width = `${tabRect.width}px`;
+            }
         });
     </script>
 </body>
