@@ -7,13 +7,12 @@
     <style>
         :root {
             --primary-color: #4285f4;
-            --primary-color-hover: #357ae8;
             --menu-bg-color: #333;
             --menu-hover-color: #555;
             --perfil-bg-color: #f0f0f0;
             --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: var(--primary-color-hover);
+            --btn-bg-color-hover: #357ae8;
             --btn-color: white;
             --active-color: var(--primary-color);
         }
@@ -21,11 +20,11 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            background: linear-gradient(to right, #ddd 50%, #fff 50%);
-            transition: background 0.5s ease;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            background: linear-gradient(to right, #ddd 50%, #fff 50%);
+            transition: background 0.5s ease;
         }
 
         .menu-container {
@@ -116,6 +115,7 @@
             margin-top: 20px;
             overflow-x: auto;
             max-width: 100%;
+            position: relative; /* Añadido para posicionamiento del indicador */
         }
 
         .tab-container {
@@ -130,6 +130,7 @@
             padding: 10px;
             cursor: pointer;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         .tab.active {
@@ -176,10 +177,10 @@
     <header class="menu-container">
         <nav>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Página oficial y más información</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión con Google</a></li>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li><a href="#">Página oficial y más información</a></li>
+                <li><a href="#">Iniciar sesión con Google</a></li>
             </ul>
         </nav>
     </header>
@@ -195,7 +196,6 @@
     <section class="juegos-container">
         <div class="tab-container">
             <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
-            <div class="tab" onclick="showSection('remake')">Remake</div>
             <div class="tab" onclick="showSection('remastered')">Remastered</div>
             <div class="tab" onclick="showSection('programas')">Programas</div>
             <div class="indicator"></div>
@@ -203,50 +203,47 @@
 
         <div id="juegos" class="juego-section active">
             <div class="juego">
-                <a href="SurviveIn2D.html">
+                <a href="#">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
                     <p>Survive In 2D</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="JumpPrologue.html">
+                <a href="#">
                     <img src="IconoJump2.png" alt="Icono Juego 4">
                     <p>Jump Prologue</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="Jump.html">
+                <a href="#">
                     <img src="iconojump.png" alt="Icono Juego 3">
                     <p>Jump To Survive</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="UntitledBeta.html">
+                <a href="#">
                     <img src="icono.png" alt="Icono Juego 1">
                     <p>Untitled</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="Untitled2.html">
+                <a href="#">
                     <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
                     <p>Untitled 2</p>
                 </a>
             </div>
             <div class="juego">
-                <a href="Kasper.html">
+                <a href="#">
                     <img src="KasperIcono.png" alt="Icono Juego 5">
                     <p>Kasper</p>
                 </a>
             </div>
         </div>
 
-        <div id="remake" class="juego-section">
-            <p class="empty-message">No hay juegos remake por el momento.</p>
-        </div>
-
         <div id="remastered" class="juego-section">
             <p class="empty-message">No hay juegos remastered por el momento.</p>
         </div>
+        
         <div id="programas" class="juego-section">
             <p class="empty-message">No hay programas por el momento.</p>
         </div>
@@ -261,8 +258,6 @@
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
             }
-
-            setIndicator();
         };
 
         function toggleSeguir() {
@@ -304,20 +299,6 @@
                 activeSection.classList.add('active');
             }
         }
-
-        function setIndicator() {
-            const activeTab = document.querySelector('.tab.active');
-            if (activeTab) {
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                const indicator = document.querySelector('.indicator');
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', setIndicator);
-        window.addEventListener('resize', setIndicator);
     </script>
 </body>
 </html>
