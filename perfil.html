@@ -21,191 +21,104 @@
             
 
         body {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
         margin: 0;
+        padding: 0;
         font-family: Arial, sans-serif;
         background: linear-gradient(to right, #ddd 50%, #fff 50%);
         transition: background 0.5s ease;
+    }
+
+    .menu-container {
+        background-color: #333;
+        padding: 10px 0;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    li {
+        margin-right: 20px;
+    }
+
+    li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    li a:hover {
+        background-color: #555;
+        border-radius: 5px;
     }
 
     .main-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex: 1;
+        height: calc(100vh - 50px);
         padding: 20px;
     }
 
     .perfil-container {
-        width: 90%; /* Ancho del 90% del contenedor principal */
-        max-width: 600px; /* Máximo ancho de 600px */
-        margin: 0 auto; /* Centrar horizontalmente */
-        background-color: #e0e0e0; /* Color de fondo gris claro */
+        width: 300px;
+        background-color: #f0f0f0;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
     }
 
-    
+    .perfil-bg-img {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        border-radius: 10px;
+        opacity: 0.5;
+    }
 
-    
+    .perfil-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+    }
 
-        
+    .btn {
+        background-color: #4285f4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        margin-top: 20px;
+    }
 
-        .menu-container {
-            background-color: var(--menu-bg-color);
-            padding: 10px 0;
-        }
+    .btn:hover {
+        background-color: #357ae8;
+    }
 
-        nav {
-            display: flex;
-            justify-content: center;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        li {
-            margin-right: 20px;
-        }
-
-        li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        li a:hover {
-            background-color: var(--menu-hover-color);
-            border-radius: 5px;
-        }
-
-        
-
-        .perfil-container {
-            width: 300px;
-            background-color: var(--perfil-bg-color);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            text-align: center;
-            position: relative;
-        }
-
-        .perfil-bg-img {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            border-radius: 10px;
-            opacity: 0.5;
-        }
-
-        .perfil-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn {
-            background-color: var(--btn-bg-color);
-            color: var(--btn-color);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: var(--btn-bg-color-hover);
-        }
-
-        .siguiendo {
-            background-color: green;
-        }
-
-        .juegos-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            margin: 20px;
-            width: calc(100% - 40px);
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .tab {
-            margin: 0 15px;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .tab.active {
-            color: blue;
-        }
-
-        .tab:hover {
-            color: red;
-        }
-
-        .indicator {
-            display: none;
-        }
-
-        .juego {
-            text-align: center;
-            width: 150px;
-            margin: 10px;
-        }
-
-        .juego img {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-        }
-
-        .juego-section {
-            display: none;
-        }
-
-        .juego-section.active {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .empty-message {
-            color: #888;
-            font-style: italic;
-        }
+    .siguiendo {
+        background-color: green;
+    }
     </style>
 </head>
 <body>
