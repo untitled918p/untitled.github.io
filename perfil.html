@@ -7,15 +7,15 @@
     <style>
         :root {
             --primary-color: #4285f4;
+            --primary-color-hover: #357ae8;
             --menu-bg-color: #333;
             --menu-hover-color: #555;
             --perfil-bg-color: #f0f0f0;
             --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: #357ae8;
+            --btn-bg-color-hover: var(--primary-color-hover);
             --btn-color: white;
             --active-color: var(--primary-color);
-            --inactive-color: #888; /* Color de texto inactivo */
         }
 
         body {
@@ -48,11 +48,11 @@
         }
 
         li a {
-            color: var(--inactive-color); /* Color inicial del texto */
+            color: white;
             text-decoration: none;
             font-weight: bold;
             padding: 10px;
-            transition: color 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         li a:hover {
@@ -147,7 +147,15 @@
         }
 
         .tab.active {
-            color: var(--primary-color); /* Cambia el color del texto activo */
+            color: var(--active-color);
+        }
+
+        .indicator {
+            position: absolute;
+            bottom: -1px;
+            height: 3px;
+            background-color: var(--active-color);
+            transition: left 0.3s ease, width 0.3s ease;
         }
 
         .juego {
@@ -204,11 +212,12 @@
     <!-- Sección de juegos -->
     <section class="juegos-container">
         <div class="tab-container">
-            <div class="tab" onclick="showSection('juegos')">Todos los Juegos</div>
+            <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
             <div class="tab" onclick="showSection('programa')">Programas</div>
+            <div class="indicator"></div>
         </div>
 
-        <div id="juegos" class="juego-section">
+        <div id="juegos" class="juego-section active">
             <div class="juego">
                 <a href="SurviveIn2D.html">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
@@ -281,19 +290,32 @@
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.juego-section');
             const tabs = document.querySelectorAll('.tab');
+            const indicator = document.querySelector('.indicator');
 
             sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => {
-                if (tab.textContent.toLowerCase() === sectionId.toLowerCase()) {
-                    tab.classList.add('active');
-                    tab.style.color = 'var(--primary-color)';
-                } else {
-                    tab.classList.remove('active');
-                    tab.style.color = 'var(--inactive-color)';
-            });
+            tabs.forEach(tab => tab.classList.remove('active'));
 
             document.getElementById(sectionId).classList.add('active');
+            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
+            if (activeTab) {
+                activeTab.classList.add('active');
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                indicator.style.left = ${tabRect.left - containerRect.left}px;
+                indicator.style.width = ${tabRect.width}px;
+            }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeTab = document.querySelector('.tab.active');
+            if (activeTab) {
+                const tabRect = activeTab.getBoundingClientRect();
+                const containerRect = activeTab.parentElement.getBoundingClientRect();
+                const indicator = document.querySelector('.indicator');
+                indicator.style.left = ${tabRect.left - containerRect.left}px;
+                indicator.style.width = ${tabRect.width}px;
+            }
+        });
     </script>
 </body>
 </html>
