@@ -5,15 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mas Informacion</title>
     <style>
-        /* Estilos para los contenedores */
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Estilos para el menú */
         .menu-container {
             background-color: #333;
             overflow: hidden;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin-bottom: 20px;
         }
 
         nav {
-            float: none;
             text-align: center;
+            padding: 10px 0;
         }
 
         ul {
@@ -24,28 +45,51 @@
 
         li {
             display: inline-block;
-            margin-right: 20px; /* Espacio entre elementos del menú */
+            margin-right: 20px;
         }
 
         li:last-child {
-            margin-right: 0; /* Quita el margen derecho del último elemento del menú */
+            margin-right: 0;
         }
 
         li a {
             display: block;
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            padding: 10px 20px; /* Espacio interno del enlace */
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
         }
 
         li a:hover {
-            background-color: #555; /* Color de fondo al pasar el ratón */
+            background-color: #555;
+            border-radius: 5px;
         }
 
         /* Estilos para el contenido principal */
         .contenido-principal {
+            text-align: justify;
             padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para las secciones */
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -57,36 +101,54 @@
                 <li><a href="Contacto.html">Contacto</a></li>
                 <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
                 <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
-                <li>
-                    <div id="photo-container" class="photo-container"></div>
-                    <script src="perfil.js"></script>
-                </li>
             </ul>
         </nav>
     </div>
-    <h1>Mas Informacion...</h1>
-    <section><h3>hola a todos, antes de empezar todo este texto largo solo quiero decir que</h3></section>
-    <section><h3> esta pagina no es de jegos piratas, solo son juegos de creadores que quieren subir su proyectos/Juegos</h3></section>
-    <section><h3>Si quieren subir su juego en esta pagina entren a mi Discord, al entrar a mi discord</h3></section>
-    <section><h3> veran un canal llamado "Publicar-Juegos" su juego debe pesar menosde 25 mb(Si pesa mas no se preocupen me fijo yo que hacer)</h3></section>
-    <section><h3> es gratis subir juegos y descargar, esta pagina no es nada ilegal, si ya se no soy muy bueno creando paginas y juegos </h3></section>
-    <section><h3> quieres cobrar por tu juego? solo necesitas usar paypal</h3></section>
-    <h1>Apoyen para mas proyectos/ Juegos</h1>
-    <h1>Eventos de Youtube</h1>
-    <section><h3>Los Eentos de Youtube que hago son estos, si quieres salir en los creditos</h3></section>
-    <section><h3>Solo tienes que comentar en el video. Tu nombre o un apodo</h3></section>
-    <section><h3>Si no me creen vayan a mi canal de Youtube, en tik tok tambien hice eso</h3></section>
-    <h1>Otras forma de salir en los creditos de mi juego?</h1>
-    <section><h3>En Discord a un canal llamado Sprites para los juegos(solo los mios)</h3></section>
-    <section><h3>Lo que tienen que hacer es Sprites (pixeles de cualquier cosa) y saldran en una </h3></section>
-    <section><h3>Parte importante en los creditos</h2></section>
-    <h1>Por que mi pagina se llama Untitled(Games)?</h1>
-    <section><h3>Le puse Untitled por una algo... si tienen un traductor en google o otro navegador</h3></section>
-    <section><h3>Le saldra como Sin titulo o intitolado, y es U-N-T-I-T-L-E-D</h3></section>
-    <section><h3>Eso es todo por ahora, mas adelante saldran mas juegos de diferentes creadores</h3></section>
-    <h1>Requisitos para poder publicar tu juego</h1>
-    <section><h3>Tener 3 imagenes del juego y una para el icono(4 total)</h3></section>
-    <section><h3>tiene que tener categoria como "accion, zombies, simulacion" algo asi o mas</h3></section>
-    <section><h3>Si quieres cambiar el fondo de la pagina de tu juego solo mandame mensaje en discord</h3></section>
+
+    <div class="container">
+        <div class="contenido-principal">
+            <h1>Mas Informacion...</h1>
+
+            <div class="section">
+                <h3>¡Hola a todos!</h3>
+                <p>Antes de empezar, quiero aclarar que esta página no promueve juegos piratas. Aquí se comparten proyectos y juegos creados por desarrolladores que desean mostrar sus creaciones.</p>
+            </div>
+
+            <div class="section">
+                <h3>¿Quieres publicar tu juego?</h3>
+                <p>Si estás interesado en subir tu juego a esta página, únete a mi Discord. Encontrarás un canal llamado "Publicar-Juegos" donde podrás compartir tu juego. El tamaño máximo permitido es de 25 MB, pero no te preocupes si es más grande, yo me encargo.</p>
+                <p>La publicación y descarga de juegos en esta página es gratuita y completamente legal.</p>
+            </div>
+
+            <div class="section">
+                <h3>Apoyen para más proyectos/Juegos</h3>
+                <p>Aquí podrías añadir información sobre cómo apoyar o contribuir a nuevos proyectos y juegos.</p>
+            </div>
+
+            <div class="section">
+                <h2>Eventos de YouTube</h2>
+                <p>Los eventos de YouTube que organizo te ofrecen la oportunidad de aparecer en los créditos de mis videos. ¡Solo necesitas comentar en el video con tu nombre o apodo para participar!</p>
+                <p>Si quieres más detalles, visita mi canal de YouTube o mi perfil en TikTok donde también promociono estos eventos.</p>
+            </div>
+
+            <div class="section">
+                <h2>Otras formas de aparecer en los créditos de mis juegos</h2>
+                <p>En mi Discord, dispongo de un canal llamado "Sprites para los juegos" (exclusivo para mis juegos). Si creas sprites (píxeles de cualquier cosa), podrás aparecer en una parte importante de los créditos de mis juegos.</p>
+            </div>
+
+            <div class="section">
+                <h2>¿Por qué mi página se llama Untitled(Games)?</h2>
+                <p>Le puse Untitled por una razón... Si utilizas un traductor en Google u otro navegador, notarás que aparece como "Sin título" o "intitolado". Es una elección estilística para destacar la naturaleza única y creativa de los proyectos que se comparten aquí.</p>
+                <p>Estoy constantemente mejorando esta página para ofrecer más contenido y funcionalidades. ¡Tu apoyo a cada proyecto y juego es fundamental!</p>
+            </div>
+
+            <div class="section">
+                <h2>Requisitos para publicar tu juego</h2>
+                <p>Para poder publicar tu juego en esta plataforma, necesitas tener al menos 3 imágenes del juego y una para el icono (4 en total).</p>
+                <p>Además, asegúrate de categorizar tu juego como "acción", "zombies", "simulación" u otras categorías adecuadas.</p>
+                <p>Si deseas cambiar el fondo de la página de tu juego, simplemente envíame un mensaje en Discord para coordinar los detalles.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
