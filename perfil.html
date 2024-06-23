@@ -263,9 +263,13 @@
     const btn = document.getElementById('seguir-btn');
     const siguiendo = localStorage.getItem('siguiendo');
 
+    // Inicializa el estado del botón según lo que está almacenado en localStorage
     if (siguiendo === 'true') {
         btn.innerText = 'Siguiendo';
         btn.classList.add('siguiendo');
+    } else {
+        btn.innerText = 'Seguir';
+        btn.classList.remove('siguiendo');
     }
 };
 
