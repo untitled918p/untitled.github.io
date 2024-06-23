@@ -5,122 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Untitled Juegos</title>
 <style>
-body {
-  background-color: #333; /* Fondo gris oscuro */
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
+  body {
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #fff; /* Texto blanco para mejor contraste */
+  }
 
-#buscador {
-  width: calc(100% - 40px); /* Ancho completo menos márgenes */
-  padding: 15px 20px;
-  font-size: 16px;
-  border: 1px solid #ccc; /* Borde alrededor del buscador */
-  border-radius: 5px; /* Bordes redondeados */
-  outline: none;
-  box-sizing: border-box;
-  margin: 20px auto; /* Márgenes superior e inferior */
-  display: block; /* Centrar el input horizontalmente */
-}
+  .menu-container {
+    background-color: #444;
+    overflow: hidden;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el menú */
+  }
 
-#resultados {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 0 20px;
-}
+  .menu-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 
-.juego {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.3s;
-}
+  .menu-container li {
+    display: inline-block;
+    margin: 0 15px;
+  }
 
-.juego:hover {
-  background-color: #f5f5f5;
-}
+  .menu-container li a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
 
-.header {
-  background-image: url('Fondo.png');
-  background-size: contain;
-  height: 50px;
-  text-align: center;
-}
+  .menu-container li a:hover {
+    background-color: #555;
+    transform: scale(1.1); /* Efecto de agrandamiento */
+  }
 
-.header h2 {
-  margin: 0;
-  padding: 10px;
-}
+  .header {
+    background-image: url('Fondo.png');
+    background-size: cover;
+    height: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el header */
+  }
 
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-  text-align: center;
-  padding: 10px 0; /* Espaciado interno */
-}
+  .header h2 {
+    margin: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente para el texto */
+    border-radius: 10px;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+  #buscador {
+    width: calc(100% - 40px);
+    max-width: 600px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+    margin: 20px auto;
+    display: block;
+    background-color: #444; /* Fondo más oscuro */
+    color: #fff; /* Texto blanco */
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px; /* Espacio entre los elementos del menú */
-  vertical-align: middle;
-}
+  #resultados {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
 
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  background-color: #444;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  text-align: center;
-  width: 100px; /* Ancho de los cuadrados */
-  height: 40px; /* Alto de los cuadrados */
-  line-height: 20px; /* Alineación vertical del texto */
-}
+  .juego {
+    padding: 10px;
+    border-bottom: 1px solid #555;
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
 
-li a:hover {
-  background-color: #555;
-}
+  .juego:hover {
+    background-color: #555;
+  }
 
-.untitled1 {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto; /* Agrega desplazamiento horizontal */
-  background-color: #444; /* Fondo gris para el contenedor de los juegos */
-  border: 1px solid #ccc; /* Borde para el contenedor de los juegos */
-  border-radius: 10px; /* Bordes redondeados para el contenedor */
-  padding: 20px; /* Espaciado interno */
-  max-width: 90%; /* Ancho máximo */
-  margin: 20px auto; /* Centrar y margen superior/inferior */
-}
+  .untitled1 {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los juegos se envuelvan a la siguiente línea */
+    justify-content: center;
+    background-color: #444;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 90%;
+    margin: 20px auto;
+  }
 
-.untitled1 div {
-  margin: 0 10px;
-}
+  .untitled1 div {
+    margin: 10px;
+    text-align: center;
+  }
 
-.untitled1 img {
-  width: 100px;
-  height: 100px; /* Establece el mismo tamaño para todas las imágenes */
-  border-radius: 10px; /* Bordes redondeados */
-}
+  .untitled1 a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: #555;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
 
-.photo-container img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Esto hace que la imagen sea redonda */
-  border: 2px solid white; /* Agrega un borde blanco */
-}
+  .untitled1 a:hover {
+    background-color: #666;
+    transform: scale(1.05); /* Efecto de agrandamiento */
+  }
+
+  .untitled1 img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .photo-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
 </style>
 </head>
 <body>
@@ -132,7 +152,6 @@ li a:hover {
       <li><a href="Informacion.html">Página oficial</a></li>
       <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
       <li>
-        <!-- Contenedor de la foto del perfil al lado del botón "Iniciar sesión" -->
         <div id="photo-container" class="photo-container"></div>
       </li>
     </ul>
@@ -178,11 +197,9 @@ li a:hover {
     </div>
   </div>
 
-  <!-- Script de perfil.js -->
   <script src="perfil.js"></script>
 
   <script>
-    // Función para mostrar los juegos según la búsqueda
     const juegos = ["UntitledBeta", "Untitled2", "Jump", "JumpPrologue", "Kasper", "SurviveIn2D"];
 
     function buscarJuego() {
@@ -192,7 +209,7 @@ li a:hover {
       resultados.innerHTML = "";
 
       if (consulta.trim() === "") {
-        return; // Si la consulta está vacía, no hacemos nada
+        return;
       }
 
       const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().startsWith(consulta));
@@ -207,11 +224,10 @@ li a:hover {
           juegoEncontrado.classList.add("juego");
           juegoEncontrado.textContent = juego;
           juegoEncontrado.addEventListener("click", function() {
-            // Redirige al usuario a la página correspondiente al juego
             if (juego === "Kasper") {
               window.location.href = "Kasper.html";
             } else {
-              window.location.href = juego + ".html"; // Para otros juegos, asumimos que las páginas se llaman "Untitled.html", "Untitled2.html", etc.
+              window.location.href = juego + ".html";
             }
           });
           resultados.appendChild(juegoEncontrado);
