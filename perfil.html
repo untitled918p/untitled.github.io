@@ -147,16 +147,16 @@
         }
 
         .tab.active {
-            color: var(--active-color);
-        }
+    color: blue; /* Cambia el color del texto cuando la pestaña está activa */
+}
 
-        .indicator {
-            position: absolute;
-            bottom: -1px;
-            height: 3px;
-            background-color: var(--active-color);
-            transition: left 0.3s ease, width 0.3s ease;
-        }
+.indicator {
+    position: absolute;
+    bottom: -1px;
+    height: 3px;
+    background-color: var(--active-color);
+    transition: left 0.3s ease, width 0.3s ease;
+}
 
         .juego {
             text-align: center;
@@ -288,23 +288,23 @@
         }
 
         function showSection(sectionId) {
-            const sections = document.querySelectorAll('.juego-section');
-            const tabs = document.querySelectorAll('.tab');
-            const indicator = document.querySelector('.indicator');
+    const sections = document.querySelectorAll('.juego-section');
+    const tabs = document.querySelectorAll('.tab');
+    const indicator = document.querySelector('.indicator');
 
-            sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
+    sections.forEach(section => section.classList.remove('active'));
+    tabs.forEach(tab => tab.classList.remove('active'));
 
-            document.getElementById(sectionId).classList.add('active');
-            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
-            if (activeTab) {
-                activeTab.classList.add('active');
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                indicator.style.left = ${tabRect.left - containerRect.left}px;
-                indicator.style.width = ${tabRect.width}px;
-            }
-        }
+    document.getElementById(sectionId).classList.add('active');
+    const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
+    if (activeTab) {
+        activeTab.classList.add('active');
+        const tabRect = activeTab.getBoundingClientRect();
+        const containerRect = activeTab.parentElement.getBoundingClientRect();
+        indicator.style.left = `${tabRect.left - containerRect.left}px`;
+        indicator.style.width = `${tabRect.width}px`;
+    }
+}
 
         document.addEventListener('DOMContentLoaded', () => {
             const activeTab = document.querySelector('.tab.active');
