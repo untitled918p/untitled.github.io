@@ -29,6 +29,7 @@
         .menu-container {
             background-color: var(--menu-bg-color);
             padding: 10px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         nav {
@@ -52,12 +53,13 @@
             text-decoration: none;
             font-weight: bold;
             padding: 10px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         li a:hover {
             background-color: var(--menu-hover-color);
             border-radius: 5px;
+            transform: scale(1.1);
         }
 
         .main-container {
@@ -78,25 +80,25 @@
             position: relative;
         }
 
-      .perfil-bg-img {
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 90px;
-    right: 90px; /* Cambiamos el valor para posicionar a la derecha */
-    z-index: 1;
-    border-radius: 10px;
-    opacity: 0.5;
-}
+        .perfil-bg-img {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 90px;
+            right: 90px;
+            z-index: 1;
+            border-radius: 10px;
+            opacity: 0.5;
+        }
 
-.perfil-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-}
+        .perfil-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
 
         .btn {
             background-color: var(--btn-bg-color);
@@ -161,12 +163,18 @@
             text-align: center;
             width: 150px;
             margin: 10px;
+            transition: transform 0.3s ease;
         }
 
         .juego img {
             width: 100px;
             height: 100px;
             border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .juego:hover {
+            transform: scale(1.1);
         }
 
         .juego-section {
