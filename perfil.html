@@ -155,11 +155,7 @@
         }
 
         .indicator {
-            position: absolute;
-            bottom: -1px;
-            height: 3px;
-            background-color: var(--active-color);
-            transition: left 0.3s ease, width 0.3s ease;
+            display: none;
         }
 
         .juego {
@@ -298,7 +294,6 @@
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.juego-section');
             const tabs = document.querySelectorAll('.tab');
-            const indicator = document.querySelector('.indicator');
 
             sections.forEach(section => section.classList.remove('active'));
             tabs.forEach(tab => tab.classList.remove('active'));
@@ -307,10 +302,6 @@
             const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
             if (activeTab) {
                 activeTab.classList.add('active');
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
             }
         }
     </script>
