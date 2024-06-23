@@ -139,15 +139,19 @@
         }
 
         .tab {
-            margin: 0 15px;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
+    margin: 0 15px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
 
-        .tab.active {
+.tab.active {
     color: blue; /* Cambia el color del texto cuando la pestaña está activa */
+}
+
+.tab:hover {
+    color: red; /* Cambia el color del texto cuando se hace hover */
 }
 
 .indicator {
@@ -212,6 +216,7 @@
     <section class="juegos-container">
     <div class="tab-container">
         <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
+        <div class="tab" onclick="showSection('programas')">Programas</div>
         <div class="indicator"></div>
     </div>
 
