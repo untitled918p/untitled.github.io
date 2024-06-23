@@ -139,28 +139,28 @@
         }
 
         .tab {
-    margin: 0 15px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
+            margin: 0 15px;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
 
-.tab.active {
-    color: blue; /* Cambia el color del texto cuando la pestaña está activa */
-}
+        .tab.active {
+            color: blue;
+        }
 
-.tab:hover {
-    color: red; /* Cambia el color del texto cuando se hace hover */
-}
+        .tab:hover {
+            color: red;
+        }
 
-.indicator {
-    position: absolute;
-    bottom: -1px;
-    height: 3px;
-    background-color: var(--active-color);
-    transition: left 0.3s ease, width 0.3s ease;
-}
+        .indicator {
+            position: absolute;
+            bottom: -1px;
+            height: 3px;
+            background-color: var(--active-color);
+            transition: left 0.3s ease, width 0.3s ease;
+        }
 
         .juego {
             text-align: center;
@@ -204,30 +204,30 @@
     </header>
 
     <!-- Contenedor principal -->
-   <main class="main-container">
-    <div class="perfil-container">
-        <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
-        <h2>Untitled (Juegos)</h2>
-        <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
-        <button id="seguir-btn" class="btn">Seguir</button>
-    </div>
-</main>
+    <main class="main-container">
+        <div class="perfil-container">
+            <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
+            <h2>Untitled (Juegos)</h2>
+            <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
+            <button id="seguir-btn" class="btn">Seguir</button>
+        </div>
+    </main>
 
     <section class="juegos-container">
-    <div class="tab-container">
-        <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
-        <div class="tab" onclick="showSection('programas')">Programas</div>
-        <div class="indicator"></div>
-    </div>
-
-    <div id="juegos" class="juego-section active">
-        <!-- Contenido de juegos -->
-        <div class="juego">
-            <a href="SurviveIn2D.html">
-                <img src="In2DIcon.png" alt="Icono Juego 6">
-                <p>Survive In 2D</p>
-            </a>
+        <div class="tab-container">
+            <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
+            <div class="tab" onclick="showSection('programas')">Programas</div>
+            <div class="indicator"></div>
         </div>
+
+        <div id="juegos" class="juego-section active">
+            <!-- Contenido de juegos -->
+            <div class="juego">
+                <a href="SurviveIn2D.html">
+                    <img src="In2DIcon.png" alt="Icono Juego 6">
+                    <p>Survive In 2D</p>
+                </a>
+            </div>
             <div class="juego">
                 <a href="JumpPrologue.html">
                     <img src="IconoJump2.png" alt="Icono Juego 4">
@@ -260,14 +260,10 @@
             </div>
         </div>
 
-<div id="programas" class="programas-section active">
-<div class="juego">
-                <a href="Kasper.html">
-                    <img src="KasperIcono.png" alt="Icono Juego 5">
-                    <p>Kasper</p>
-                </a>
-            </div>
-                
+        <div id="programas" class="juego-section">
+            <!-- Mensaje de sección vacía -->
+            <p class="empty-message">Esta sección está vacía aún.</p>
+        </div>
     </section>
 
     <!-- Script para manejar el comportamiento dinámico -->
