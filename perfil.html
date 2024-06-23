@@ -18,13 +18,32 @@
             --active-color: var(--primary-color);
         }
 
+            
+
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ddd 50%, #fff 50%);
-            transition: background 0.5s ease;
-        }
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        padding: 20px;
+    }
+
+    .perfil-container {
+        width: 100%;
+        height: 100%;
+        background-color: var(--perfil-bg-color);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: var(--perfil-shadow);
+    }
+
+        
 
         .menu-container {
             background-color: var(--menu-bg-color);
@@ -60,13 +79,7 @@
             border-radius: 5px;
         }
 
-        .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 50px);
-            padding: 20px;
-        }
+        
 
         .perfil-container {
             width: 300px;
