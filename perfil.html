@@ -276,20 +276,33 @@
 // Función para alternar entre Seguir y Siguiendo
         
 
-        // Función para alternar entre Seguir y Siguiendo
-        function toggleSeguir() {
-            const btn = document.getElementById('seguir-btn');
+        document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('seguir-btn');
+        const siguiendo = localStorage.getItem('siguiendo');
 
-            if (btn.innerText === 'Seguir') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
-                localStorage.setItem('siguiendo', 'true');
-            } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
-                localStorage.setItem('siguiendo', 'false');
-            }
+        // Inicializa el estado del botón según lo que está almacenado en localStorage
+        if (siguiendo === 'true') {
+            btn.innerText = 'Siguiendo';
+            btn.classList.add('siguiendo');
+        } else {
+            btn.innerText = 'Seguir';
+            btn.classList.remove('siguiendo');
         }
+    });
+
+    function toggleSeguir() {
+        const btn = document.getElementById('seguir-btn');
+
+        if (btn.innerText === 'Seguir') {
+            btn.innerText = 'Siguiendo';
+            btn.classList.add('siguiendo');
+            localStorage.setItem('siguiendo', 'true');
+        } else {
+            btn.innerText = 'Seguir';
+            btn.classList.remove('siguiendo');
+            localStorage.setItem('siguiendo', 'false');
+        }
+    }
    
 
         function showSection(sectionId) {
@@ -310,17 +323,6 @@
         indicator.style.width = `${tabRect.width}px`;
     }
 }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const activeTab = document.querySelector('.tab.active');
-            if (activeTab) {
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                const indicator = document.querySelector('.indicator');
-                indicator.style.left = ${tabRect.left - containerRect.left}px;
-                indicator.style.width = ${tabRect.width}px;
-    }
-            }
         );
     </script>
 </body>
