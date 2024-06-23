@@ -36,7 +36,7 @@
         }
 
         .menu-container nav ul li {
-            display: inline;
+            display: inline-block; /* Alinea los elementos en línea y permite usar padding */
             margin-right: 20px;
         }
 
@@ -47,10 +47,14 @@
         .menu-container nav ul li a {
             color: #fff;
             text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
         }
 
         .menu-container nav ul li a:hover {
-            text-decoration: underline;
+            background-color: #555;
         }
 
         .container {
