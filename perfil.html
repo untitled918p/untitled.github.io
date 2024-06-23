@@ -97,11 +97,6 @@
             margin-bottom: 20px;
             position: relative;
             z-index: 2;
-            transition: transform 0.3s ease;
-        }
-
-        .perfil-img:hover {
-            transform: scale(1.1);
         }
 
         .btn {
@@ -306,8 +301,8 @@
                 activeTab.classList.add('active');
                 const tabRect = activeTab.getBoundingClientRect();
                 const containerRect = activeTab.parentElement.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
+                indicator.style.left = ${tabRect.left - containerRect.left}px;
+                indicator.style.width = ${tabRect.width}px;
             }
         }
 
@@ -317,8 +312,8 @@
                 const tabRect = activeTab.getBoundingClientRect();
                 const containerRect = activeTab.parentElement.getBoundingClientRect();
                 const indicator = document.querySelector('.indicator');
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
+                indicator.style.left = ${tabRect.left - containerRect.left}px;
+                indicator.style.width = ${tabRect.width}px;
             }
         });
     </script>
