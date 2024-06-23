@@ -15,6 +15,7 @@
             --btn-bg-color-hover: #357ae8;
             --btn-color: white;
             --active-color: var(--primary-color);
+            --inactive-color: #888; /* Color de texto inactivo */
         }
 
         body {
@@ -47,11 +48,11 @@
         }
 
         li a {
-            color: white;
+            color: var(--inactive-color); /* Color inicial del texto */
             text-decoration: none;
             font-weight: bold;
             padding: 10px;
-            transition: background-color 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         li a:hover {
@@ -285,9 +286,10 @@
             tabs.forEach(tab => {
                 if (tab.textContent.toLowerCase() === sectionId.toLowerCase()) {
                     tab.classList.add('active');
+                    tab.style.color = 'var(--primary-color)';
                 } else {
                     tab.classList.remove('active');
-                }
+                    tab.style.color = 'var(--inactive-color)';
             });
 
             document.getElementById(sectionId).classList.add('active');
