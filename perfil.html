@@ -277,29 +277,32 @@
         
 
         document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.getElementById('seguir-btn');
-        const siguiendo = localStorage.getItem('siguiendo');
+    const btn = document.getElementById('seguir-btn');
+    const siguiendo = localStorage.getItem('siguiendo');
 
-        // Inicializa el estado del botón según lo que está almacenado en localStorage
-        if (siguiendo === 'true') {
+    // Inicializa el estado del botón según lo que está almacenado en localStorage
+    if (siguiendo === 'true') {
+        btn.innerText = 'Siguiendo';
+        btn.classList.add('siguiendo');
+    } else {
+        btn.innerText = 'Seguir';
+        btn.classList.remove('siguiendo');
+    }
+
+    // Función para alternar entre Seguir y Siguiendo
+    btn.addEventListener('click', function() {
+        if (btn.innerText === 'Seguir') {
             btn.innerText = 'Siguiendo';
             btn.classList.add('siguiendo');
+            localStorage.setItem('siguiendo', 'true');
         } else {
             btn.innerText = 'Seguir';
             btn.classList.remove('siguiendo');
+            localStorage.setItem('siguiendo', 'false');
         }
     });
+});
 
-    function toggleSeguir() {
-            const btn = document.getElementById('seguir-btn');
-            if (btn.innerText === 'Seguir') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
-            } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
-            }
-        }
    
 
         function showSection(sectionId) {
