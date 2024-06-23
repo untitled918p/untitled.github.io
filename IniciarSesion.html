@@ -6,20 +6,26 @@
     <title>Iniciar sesión con Google</title>
     <!-- Estilos CSS -->
     <style>
-       body {
+        body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, rgb(230, 126, 34), rgb(231, 76, 60)); /* Fondo degradado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .menu-container {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             background-color: #333; /* Color de fondo del menú */
             color: #fff; /* Color del texto del menú */
-            padding: 10px 20px; /* Espaciado interno del menú */
+            padding: 10px 0; /* Espaciado interno del menú */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del menú */
+            text-align: center; /* Centra los elementos del menú */
+            position: fixed;
+            top: 0;
             z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
         }
 
@@ -34,6 +40,10 @@
             margin-right: 20px;
         }
 
+        .menu-container nav ul li:last-child {
+            margin-right: 0;
+        }
+
         .menu-container nav ul li a {
             color: #fff;
             text-decoration: none;
@@ -42,17 +52,6 @@
         .menu-container nav ul li a:hover {
             text-decoration: underline;
         }
-        
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(to right, rgb(230, 126, 34), rgb(231, 76, 60)); /* Fondo degradado */
-        }
 
         .container {
             background-color: rgba(255, 255, 255, 0.9); /* Color del fondo del contenedor */
@@ -60,6 +59,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-top: 80px; /* Añade espacio para el menú fijo */
         }
 
         h1 {
@@ -80,7 +80,8 @@
         button:hover {
             background-color: #357ae8; /* Color del botón al pasar el ratón */
         }
-.photo-container {
+
+        .photo-container {
             position: absolute;
             top: 20px;
             right: 20px;
@@ -91,7 +92,6 @@
             height: 40px;
             border-radius: 50%;
         }
-        
     </style>
     <!-- Agrega los scripts de Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -99,15 +99,15 @@
     <script>
         // Inicializa Firebase con tu configuración
         const firebaseConfig = {
-  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
-  authDomain: "untitled-3bfa8.firebaseapp.com",
-  projectId: "untitled-3bfa8",
-  storageBucket: "untitled-3bfa8.appspot.com",
-  messagingSenderId: "841576951279",
-  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
-  measurementId: "G-MJ4RGPGV36"
-}
-         firebase.initializeApp(firebaseConfig);
+            apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+            authDomain: "untitled-3bfa8.firebaseapp.com",
+            projectId: "untitled-3bfa8",
+            storageBucket: "untitled-3bfa8.appspot.com",
+            messagingSenderId: "841576951279",
+            appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+            measurementId: "G-MJ4RGPGV36"
+        };
+        firebase.initializeApp(firebaseConfig);
 
         // Obtiene una instancia del proveedor de autenticación de Google
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -145,18 +145,18 @@
     </script>
 </head>
 <body>
-<div class="menu-container">
-    <nav>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="Contacto.html">Contacto</a></li>
-            <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-            <li><a href="IniciarSesion.html">Iniciar Sesion con google</a></li>
-            <li><div id="photo-container" class="photo-container"></div>
-<script src="perfil.js"></script></li>
-        </ul>
-    </nav>
-</div>
+    <div class="menu-container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
+                <li><a href="IniciarSesion.html">Iniciar Sesion con google</a></li>
+                <li><div id="photo-container" class="photo-container"></div>
+                <script src="perfil.js"></script></li>
+            </ul>
+        </nav>
+    </div>
     
     <div class="container">
         <div class="login-box">
