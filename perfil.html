@@ -7,13 +7,12 @@
     <style>
         :root {
             --primary-color: #4285f4;
-            --primary-color-hover: #357ae8;
             --menu-bg-color: #333;
             --menu-hover-color: #555;
             --perfil-bg-color: #f0f0f0;
             --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: var(--primary-color-hover);
+            --btn-bg-color-hover: #357ae8;
             --btn-color: white;
             --active-color: var(--primary-color);
         }
@@ -150,14 +149,6 @@
             color: var(--active-color);
         }
 
-        .indicator {
-            position: absolute;
-            bottom: -1px;
-            height: 3px;
-            background-color: var(--active-color);
-            transition: left 0.3s ease, width 0.3s ease;
-        }
-
         .juego {
             text-align: center;
             width: 150px;
@@ -212,12 +203,11 @@
     <!-- Sección de juegos -->
     <section class="juegos-container">
         <div class="tab-container">
-            <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
+            <div class="tab" onclick="showSection('juegos')">Todos los Juegos</div>
             <div class="tab" onclick="showSection('programa')">Programas</div>
-            <div class="indicator"></div>
         </div>
 
-        <div id="juegos" class="juego-section active">
+        <div id="juegos" class="juego-section">
             <div class="juego">
                 <a href="SurviveIn2D.html">
                     <img src="In2DIcon.png" alt="Icono Juego 6">
@@ -271,7 +261,6 @@
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
             }
-            updateIndicator();
         };
 
         function toggleSeguir() {
@@ -293,29 +282,16 @@
             const tabs = document.querySelectorAll('.tab');
 
             sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase() === sectionId.toLowerCase()) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
 
             document.getElementById(sectionId).classList.add('active');
-            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
-            if (activeTab) {
-                activeTab.classList.add('active');
-                updateIndicator();
-            }
         }
-
-        function updateIndicator() {
-            const activeTab = document.querySelector('.tab.active');
-            const indicator = document.querySelector('.indicator');
-
-            if (activeTab && indicator) {
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentNode.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
-            }
-        }
-
-        window.addEventListener('resize', updateIndicator);
     </script>
 </body>
 </html>
