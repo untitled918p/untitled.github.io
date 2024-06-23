@@ -271,6 +271,7 @@
                 btn.innerText = 'Siguiendo';
                 btn.classList.add('siguiendo');
             }
+            updateIndicator();
         };
 
         function toggleSeguir() {
@@ -299,14 +300,11 @@
             const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
             if (activeTab) {
                 activeTab.classList.add('active');
-                const tabRect = activeTab.getBoundingClientRect();
-                const containerRect = activeTab.parentElement.getBoundingClientRect();
-                indicator.style.left = `${tabRect.left - containerRect.left}px`;
-                indicator.style.width = `${tabRect.width}px`;
+                updateIndicator();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function updateIndicator() {
             const activeTab = document.querySelector('.tab.active');
             if (activeTab) {
                 const tabRect = activeTab.getBoundingClientRect();
@@ -315,7 +313,10 @@
                 indicator.style.left = `${tabRect.left - containerRect.left}px`;
                 indicator.style.width = `${tabRect.width}px`;
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', updateIndicator);
+        window.addEventListener('resize', updateIndicator);
     </script>
 </body>
 </html>
