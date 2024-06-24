@@ -5,41 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled</title>
     <style>
-
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-}
-
-nav {
-  float: left;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  background-color: #555;
-}
-        
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .menu-container {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-container nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-container nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .menu-container nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .menu-container nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-container nav ul li a:hover {
+            background-color: #555;
+            transform: scale(1.1);
         }
 
         #contenedor-superior {
@@ -48,14 +59,15 @@ li a:hover {
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin-top: 60px; /* Añade espacio para el menú fijo */
         }
 
         #contenedor-disqus {
             padding: 20px;
             background-color: #f0f0f0;
             align-items: center;
-            padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
-            min-height: 200px; /* Establecer un tamaño mínimo para el contenedor de Disqus */
+            padding-bottom: 50px;
+            min-height: 200px;
         }
 
         .capturas {
@@ -89,7 +101,7 @@ li a:hover {
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: none; /* Ocultamos el botón inicialmente */
+            display: none;
         }
     </style>
 </head>
@@ -105,83 +117,63 @@ li a:hover {
     </nav>
 </div>
 
+<section id="contenedor-superior">
+    <h2>Untitled 1</h2>
+    <img src="icono.png" width="100" height="100">
+    <p>Peso Del Juego: 50 MB<br> Terror/ Zombie / 2D / indie 
+        <section><a href="Untitled.zip" download>
+        <button id="boton-descarga">Descargar</button>
+    </a></section>
+    </p>
+    <section><h2>juegos Creado por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
+    <section><a><h2>Requisitos Minimos</h2></a></section>
+    <section><a>Windows: XP/Vista/7/8/10</a></section>
+    <section><a>Ram: 700 MB</a></section>
+    <section><a>Tipo de sistema: 32/64 Bits</a></section>
+    <section><a>Procesador: 1.4 GHz</a></section>
+</section>
 
-    
-    <section id="contenedor-superior">
-        <h2>Untitled 1</h2>
-        <img src="icono.png" width="100" height="100">
-        <p>Peso Del Juego: 50 MB<br> Terror/ Zombie / 2D / indie 
-            <section><a href="Untitled.zip" download>
-            <button id="boton-descarga">Descargar</button>
-        </a></section>
-
-        </p>
-<section><h2>juegos Creado por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
-<section><a><h2>Requisitos Minimos</h2><a></section>
-<section><a>Windows: XP/Vista/7/8/10<a></section>
-<section><a>Ram: 700 MB<a></section>
-<section><a>Tipo de sistema: 32/64 Bits<a></section>
-<section><a>Procesador: 1.4 GHz<a></section>
-
-    </section>
-
-
-    <div class="capturas">
-
-        <div class="captura">
- 
-           <img src="imagen1.png" alt="captura 1">
-        </div>
-        <div class="captura">
-            <img src="imagen2.png" alt="captura2">
-        </div>
-        <div class="captura">
-            <img src="imagen3.png" alt="captura3">
-        </div>
+<div class="capturas">
+    <div class="captura">
+        <img src="imagen1.png" alt="captura 1">
     </div>
+    <div class="captura">
+        <img src="imagen2.png" alt="captura 2">
+    </div>
+    <div class="captura">
+        <img src="imagen3.png" alt="captura 3">
+    </div>
+</div>
 
-    <section id="contenedor-disqus">
-        <div id="disqus_thread"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
-
-PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-
-
-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-        </script>
-    </section>
-
-    <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
-
+<section id="contenedor-disqus">
+    <div id="disqus_thread"></div>
     <script>
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("boton-scroll").style.display = "block";
-            } else {
-                document.getElementById("boton-scroll").style.display = "none";
-            }
-        }
-
-        function scrollToDisqus() {
-            var disqusSection = document.getElementById("contenedor-disqus");
-            disqusSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
     </script>
+</section>
+
+<button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
+
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("boton-scroll").style.display = "block";
+        } else {
+            document.getElementById("boton-scroll").style.display = "none";
+        }
+    }
+
+    function scrollToDisqus() {
+        var disqusSection = document.getElementById("contenedor-disqus");
+        disqusSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
