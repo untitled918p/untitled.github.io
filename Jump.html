@@ -3,42 +3,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jump To Survive</title>
-   <style>
-
-.menu-container {
-  background-color: #333;
-  overflow: hidden;
-}
-
-nav {
-  float: left;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-li a:hover {
-  background-color: #555;
-}
-        
+    <style>
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+        }
+
+        .menu-container {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-container nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-container nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .menu-container nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .menu-container nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-container nav ul li a:hover {
+            background-color: #555;
+            transform: scale(1.1);
         }
 
         #contenedor-superior {
@@ -47,14 +60,18 @@ li a:hover {
             align-items: center;
             justify-content: center;
             height: 100vh;
+            margin-top: 60px; /* Añade espacio para el menú fijo */
+            text-align: center;
         }
 
         #contenedor-disqus {
             padding: 20px;
             background-color: #f0f0f0;
-            align-items: center;
-            padding-bottom: 50px; /* Espacio adicional para que el botón no cubra el contenido */
-            min-height: 200px; /* Establecer un tamaño mínimo para el contenedor de Disqus */
+            color: #333;
+            padding-bottom: 50px;
+            min-height: 200px;
+            border-radius: 8px;
+            margin: 20px;
         }
 
         .capturas {
@@ -76,6 +93,30 @@ li a:hover {
             width: 140px;
             height: 120px;
             margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .captura img:hover {
+            transform: scale(1.05);
+        }
+
+        #boton-descarga {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #boton-descarga:hover {
+            background-color: #218838;
+            transform: scale(1.05);
         }
 
         #boton-scroll {
@@ -88,7 +129,7 @@ li a:hover {
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: none; /* Ocultamos el botón inicialmente */
+            display: none;
         }
     </style>
 </head>
@@ -98,78 +139,72 @@ li a:hover {
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="Contacto.html">Contacto</a></li>
-            <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-            <li><a href="IniciarSesion.html">Iniciar sesion con google</a></li>
+            <li><a href="Informacion.html">Página oficial y más información</a></li>
+            <li><a href="IniciarSesion.html">Iniciar sesión con Google</a></li>
         </ul>
     </nav>
 </div>
-    <section id="contenedor-superior">
-        <h2>Jump To Survive</h2>
-        <img src="iconojump.png" width="100" height="100">
-        <p>Peso Del Juego: 100 MB<br>Accion / Zombie / 2D / indie 
-            <section><a href="Jump To Survive.rar" download>
+
+<section id="contenedor-superior">
+    <h2>Jump To Survive</h2>
+    <img src="iconojump.png" width="100" height="100">
+    <p>Peso del Juego: 100 MB<br>Acción / Zombie / 2D / Indie</p>
+    <section>
+        <a href="JumpToSurvive.rar" download>
             <button id="boton-descarga">Descargar</button>
-        </a></section>
-
-        </p>
-<section><h2>juegos Creado por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
-<section><a><h2>Requisitos Minimos</h2><a></section>
-<section><a>Windows: XP/Vista/7/8/10<a></section>
-<section><a>Ram: 700 MB<a></section>
-<section><a>Tipo de sistema: 32/64 Bits<a></section>
-<section><a>Procesador: 1.5 GHz<a></section>
+        </a>
     </section>
+    <section>
+        <h2>Juegos creado por:</h2>
+        <a href="perfil.html">Untitled(Games)</a>
+    </section>
+    <section>
+        <h2>Requisitos Mínimos</h2>
+        <p>Windows: XP/Vista/7/8/10<br>Ram: 700 MB<br>Tipo de sistema: 32/64 Bits<br>Procesador: 1.5 GHz</p>
+    </section>
+</section>
 
-    <div class="capturas">
-        <div class="captura">
-            <img src="Jump2.png" alt="captura 1">
-        </div>
-        <div class="captura">
-            <img src="Jump3.png" alt="captura2">
-        </div>
-        <div class="captura">
-            <img src="Jump4.png" alt="captura3">
-        </div>
+<div class="capturas">
+    <div class="captura">
+        <img src="Jump2.png" alt="captura 1">
     </div>
+    <div class="captura">
+        <img src="Jump3.png" alt="captura 2">
+    </div>
+    <div class="captura">
+        <img src="Jump4.png" alt="captura 3">
+    </div>
+</div>
 
-    <section id="contenedor-disqus">
-        <div id="disqus_thread"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-        </script>
-    </section>
-
-    <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
-
+<section id="contenedor-disqus">
+    <div id="disqus_thread"></div>
     <script>
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("boton-scroll").style.display = "block";
-            } else {
-                document.getElementById("boton-scroll").style.display = "none";
-            }
-        }
-
-        function scrollToDisqus() {
-            var disqusSection = document.getElementById("contenedor-disqus");
-            disqusSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
     </script>
+</section>
+
+<button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
+
+<script>
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("boton-scroll").style.display = "block";
+        } else {
+            document.getElementById("boton-scroll").style.display = "none";
+        }
+    }
+
+    function scrollToDisqus() {
+        var disqusSection = document.getElementById("contenedor-disqus");
+        disqusSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
