@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+    <title>Crear cuenta</title>
     <style>
         body {
             margin: 0;
@@ -125,6 +125,19 @@
         .upload-btn:hover {
             background-color: #666;
         }
+
+        .photo-preview {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .photo-preview img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
     </style>
 </head>
 <body>
@@ -134,27 +147,40 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
                 <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-                <li><a href="IniciarSesion.html">Iniciar Sesion</a></li>
+                <li><a href="CrearCuenta.html">Crear cuenta</a></li>
             </ul>
         </nav>
     </div>
     
     <div class="container">
-        <h1>Iniciar sesión</h1>
-        <input type="email" id="email" class="login-input" placeholder="Correo electrónico">
-        <input type="password" id="password" class="login-input" placeholder="Contraseña">
+        <h1>Crear cuenta</h1>
+        <input type="email" id="email" class="login-input" placeholder="Correo electrónico" oninput="validateForm()">
+        <input type="password" id="password" class="login-input" placeholder="Contraseña" oninput="validateForm()">
         <div class="photo-container">
             <img id="profile-photo" src="placeholder.png" alt="Foto de perfil">
-            <input type="file" id="photo-input" accept="image/png">
+            <input type="file" id="photo-input" accept="image/png" onchange="previewPhoto()">
             <button class="upload-btn" onclick="document.getElementById('photo-input').click()">Subir foto de perfil</button>
         </div>
-        <button onclick="signIn()">Iniciar sesión</button>
+        <button id="create-account-btn" onclick="createAccount()" disabled>Crear cuenta</button>
     </div>
 
+    <div id="photo-preview" class="photo-preview"></div>
+
     <script>
-        // Muestra la imagen seleccionada en el contenedor de la foto de perfil
-        document.getElementById('photo-input').addEventListener('change', function(event) {
-            const file = event.target.files[0];
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const createAccountBtn = document.getElementById('create-account-btn');
+
+            if (email.includes('@gmail.com') && password.length >= 4 && password.length <= 16) {
+                createAccountBtn.disabled = false;
+            } else {
+                createAccountBtn.disabled = true;
+            }
+        }
+
+        function previewPhoto() {
+            const file = document.getElementById('photo-input').files[0];
             if (file && file.type === 'image/png') {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -164,10 +190,9 @@
             } else {
                 alert('Por favor, selecciona una imagen en formato PNG.');
             }
-        });
+        }
 
-        // Función de inicio de sesión (aquí deberías agregar tu lógica de autenticación)
-        function signIn() {
+        function createAccount() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const profilePhoto = document.getElementById('profile-photo').src;
@@ -176,7 +201,11 @@
             console.log('Password:', password);
             console.log('Foto de perfil:', profilePhoto);
 
-            // Aquí puedes agregar la lógica para autenticar al usuario con email y contraseña
+            // Aquí puedes agregar la lógica para crear la cuenta
+
+            // Mostrar la foto de perfil en la esquina superior derecha
+            const photoPreview = document.getElementById('photo-preview');
+            photoPreview.innerHTML = `<img src="${profilePhoto}" alt="Foto de perfil">`;
         }
     </script>
 </body>
