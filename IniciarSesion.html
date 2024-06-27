@@ -63,6 +63,17 @@
             text-align: center;
         }
 
+        .photo-container {
+            margin-top: 20px;
+        }
+
+        .photo-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
         input[type="email"], input[type="password"], button {
             display: block;
             width: 100%;
@@ -105,11 +116,14 @@
             <li><a href="Contacto.html">Contacto</a></li>
             <li><a href="Informacion.html">Página oficial</a></li>
             <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+            <li>
+                <div id="photo-container" class="photo-container"></div>
+            </li>
         </ul>
     </div>
 
     <div class="header">
-        <h1>Iniciar sesión</h1>
+        <h1>Iniciar sesión y perfil</h1>
     </div>
 
     <div class="container" id="loginContainer">
@@ -119,10 +133,28 @@
         <button onclick="signIn()">Iniciar sesión</button>
     </div>
 
+    <div class="container" id="profileContainer" style="display: none;">
+        <h2>Bienvenido</h2>
+        <p>Has iniciado sesión correctamente.</p>
+        <div class="photo-container">
+            <img id="profilePhoto" src="" alt="Foto de perfil">
+        </div>
+    </div>
+
     <script>
         function signIn() {
-            // Función vacía, se puede agregar lógica de inicio de sesión aquí si es necesario.
-            alert('Función de inicio de sesión no implementada.');
+            // Aquí puedes agregar la lógica de inicio de sesión si es necesario.
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simulación de inicio de sesión exitoso
+            if (email && password) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('profileContainer').style.display = 'block';
+                document.getElementById('profilePhoto').src = 'ruta/a/tu/foto.jpg'; // Ruta a la foto de perfil
+            } else {
+                alert('Por favor, ingresa tu correo electrónico y contraseña.');
+            }
         }
     </script>
 
