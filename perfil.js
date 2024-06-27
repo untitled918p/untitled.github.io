@@ -20,7 +20,7 @@ function signIn() {
     // Simulación de inicio de sesión exitoso
     user = {
         email: email,
-        photoURL: 'ruta/a/imagen.png'  // Aquí deberías ajustar la ruta de la imagen
+        photoURL: 'ruta/a/imagen.png'  // Ajusta la ruta de la imagen
     };
 
     // Guardar usuario en localStorage
