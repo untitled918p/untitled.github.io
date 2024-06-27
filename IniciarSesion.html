@@ -246,11 +246,10 @@
             const password = document.getElementById('password').value;
             const profilePhoto = document.getElementById('profile-photo').src;
 
-            console.log('Email:', email);
-            console.log('Password:', password);
-            console.log('Foto de perfil:', profilePhoto);
-
-            // Aquí puedes agregar la lógica para crear la cuenta
+            // Guardar datos en localStorage
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+            localStorage.setItem('profilePhoto', profilePhoto);
 
             // Mostrar la foto de perfil en la esquina superior derecha
             const photoPreview = document.getElementById('photo-preview');
@@ -261,10 +260,29 @@
             document.getElementById('success-message').style.display = 'block';
         }
 
+        function loadAccount() {
+            const email = localStorage.getItem('email');
+            const password = localStorage.getItem('password');
+            const profilePhoto = localStorage.getItem('profilePhoto');
+
+            if (email && password && profilePhoto) {
+                // Mostrar la foto de perfil en la esquina superior derecha
+                const photoPreview = document.getElementById('photo-preview');
+                photoPreview.innerHTML = `<img src="${profilePhoto}" alt="Foto de perfil">`;
+
+                // Ocultar el formulario y mostrar el mensaje de éxito
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+            }
+        }
+
         function login() {
             // Aquí puedes agregar la lógica para iniciar sesión
             alert('Iniciar sesión no implementado.');
         }
+
+        // Cargar datos de la cuenta al iniciar la página
+        document.addEventListener('DOMContentLoaded', loadAccount);
     </script>
 </body>
 </html>
