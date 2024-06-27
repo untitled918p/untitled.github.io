@@ -152,9 +152,7 @@
       <li><a href="Contacto.html">Contacto</a></li>
       <li><a href="Informacion.html">Página oficial</a></li>
       <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-      <li>
-        <div id="photo-container" class="photo-container"></div>
-      </li>
+      <li id="profile-photo-container" class="photo-container"></li>
     </ul>
   </div>
 
@@ -242,6 +240,18 @@
     }
 
     document.getElementById("buscador").addEventListener("input", buscarJuego);
+
+    // Función para mostrar la foto de perfil en el menú de navegación
+    function displayUserPhoto() {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      if (userData && userData.photo) {
+        const profilePhotoContainer = document.getElementById('profile-photo-container');
+        profilePhotoContainer.innerHTML = `<img src="${userData.photo}" alt="Foto de perfil de usuario">`;
+      }
+    }
+
+    // Llamar a la función para mostrar la foto de perfil al cargar la página
+    window.onload = displayUserPhoto;
   </script>
 
 </body>
