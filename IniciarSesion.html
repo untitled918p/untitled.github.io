@@ -29,7 +29,7 @@
             top: 0;
             z-index: 1000;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
@@ -37,10 +37,10 @@
             list-style-type: none;
             margin: 0;
             padding: 0;
+            display: flex;
         }
 
         .menu-container nav ul li {
-            display: inline-block;
             margin-right: 20px;
         }
 
@@ -155,7 +155,7 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
+                <li><a href="Informacion.html">Página oficial y más información</a></li>
                 <li><a href="CrearCuenta.html">Crear cuenta</a></li>
             </ul>
         </nav>
@@ -172,6 +172,7 @@
             <img id="profile-photo" src="placeholder.png" alt="Foto de perfil">
             <input type="file" id="photo-input" accept="image/png" onchange="previewPhoto()">
             <button class="upload-btn" onclick="document.getElementById('photo-input').click()">Subir foto de perfil</button>
+            <div id="photo-error" class="error-message">Debes subir una foto de perfil en formato PNG</div>
         </div>
         <button id="create-account-btn" onclick="validateAndCreateAccount()">Crear cuenta</button>
         <button id="login-btn" onclick="login()">Iniciar sesión</button>
@@ -184,10 +185,11 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     document.getElementById('profile-photo').src = e.target.result;
+                    document.getElementById('photo-error').style.display = 'none';
                 }
                 reader.readAsDataURL(file);
             } else {
-                alert('Por favor, selecciona una imagen en formato PNG.');
+                document.getElementById('photo-error').style.display = 'block';
             }
         }
 
@@ -196,6 +198,8 @@
             const password = document.getElementById('password').value;
             const emailError = document.getElementById('email-error');
             const passwordError = document.getElementById('password-error');
+            const photoInput = document.getElementById('photo-input');
+            const photoError = document.getElementById('photo-error');
             let valid = true;
 
             // Validar correo electrónico
@@ -216,6 +220,14 @@
             } else {
                 passwordError.style.display = 'none';
                 document.getElementById('password').classList.remove('invalid');
+            }
+
+            // Validar foto de perfil
+            if (!photoInput.files.length) {
+                photoError.style.display = 'block';
+                valid = false;
+            } else {
+                photoError.style.display = 'none';
             }
 
             if (valid) {
