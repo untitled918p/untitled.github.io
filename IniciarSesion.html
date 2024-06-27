@@ -9,17 +9,19 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, rgb(230, 126, 34), rgb(231, 76, 60));
+            background: url('your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            color: #333;
         }
 
         .menu-container {
             width: 100%;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.9);
             color: #fff;
             padding: 10px 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -27,6 +29,9 @@
             position: fixed;
             top: 0;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .menu-container nav ul {
@@ -57,16 +62,22 @@
             background-color: #555;
         }
 
+        .photo-preview img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-top: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-top: 100px;
+            width: 90%;
+            max-width: 400px;
         }
 
         h1 {
@@ -78,7 +89,6 @@
             padding: 10px;
             font-size: 16px;
             width: 100%;
-            max-width: 300px;
             border: 1px solid #ccc;
             border-radius: 4px;
             outline: none;
@@ -86,6 +96,12 @@
 
         .login-input.invalid {
             border-color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
         }
 
         button {
@@ -97,6 +113,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -131,19 +148,6 @@
         .upload-btn:hover {
             background-color: #666;
         }
-
-        .photo-preview {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        .photo-preview img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
     </style>
 </head>
 <body>
@@ -156,21 +160,23 @@
                 <li><a href="CrearCuenta.html">Crear cuenta</a></li>
             </ul>
         </nav>
+        <div id="photo-preview" class="photo-preview"></div>
     </div>
     
     <div class="container">
         <h1>Crear cuenta</h1>
         <input type="email" id="email" class="login-input" placeholder="Correo electrónico" oninput="validateForm()">
+        <div id="email-error" class="error-message">El correo debe ser @gmail.com</div>
         <input type="password" id="password" class="login-input" placeholder="Contraseña" oninput="validateForm()">
+        <div id="password-error" class="error-message">La contraseña debe tener entre 4 y 16 caracteres</div>
         <div class="photo-container">
             <img id="profile-photo" src="placeholder.png" alt="Foto de perfil">
             <input type="file" id="photo-input" accept="image/png" onchange="previewPhoto()">
             <button class="upload-btn" onclick="document.getElementById('photo-input').click()">Subir foto de perfil</button>
         </div>
         <button id="create-account-btn" onclick="createAccount()" disabled>Crear cuenta</button>
+        <button id="login-btn" onclick="login()">Iniciar sesión</button>
     </div>
-
-    <div id="photo-preview" class="photo-preview"></div>
 
     <script>
         function validateForm() {
@@ -180,18 +186,22 @@
 
             let valid = true;
 
-            if (!email.includes('@gmail.com')) {
+            if (!email.endsWith('@gmail.com')) {
                 document.getElementById('email').classList.add('invalid');
+                document.getElementById('email-error').style.display = 'block';
                 valid = false;
             } else {
                 document.getElementById('email').classList.remove('invalid');
+                document.getElementById('email-error').style.display = 'none';
             }
 
             if (password.length < 4 || password.length > 16) {
                 document.getElementById('password').classList.add('invalid');
+                document.getElementById('password-error').style.display = 'block';
                 valid = false;
             } else {
                 document.getElementById('password').classList.remove('invalid');
+                document.getElementById('password-error').style.display = 'none';
             }
 
             createAccountBtn.disabled = !valid;
@@ -224,6 +234,11 @@
             // Mostrar la foto de perfil en la esquina superior derecha
             const photoPreview = document.getElementById('photo-preview');
             photoPreview.innerHTML = `<img src="${profilePhoto}" alt="Foto de perfil">`;
+        }
+
+        function login() {
+            // Aquí puedes agregar la lógica para iniciar sesión
+            alert('Iniciar sesión no implementado.');
         }
     </script>
 </body>
