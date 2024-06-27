@@ -60,37 +60,39 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin-top: 60px; /* Añade espacio para el menú fijo */
+            min-height: 100vh;
+            padding: 20px;
             text-align: center;
         }
 
-        #lanzamiento,
-        #recomendado {
+        .cuadro-info {
             background-color: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 10px;
+            padding: 20px;
             border-radius: 8px;
             margin: 10px;
+            text-align: center;
+            width: 40%; /* Ajusta el ancho del cuadro */
+            max-width: 300px; /* Establece un ancho máximo */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #lanzamiento {
-            order: 1; /* Controla el orden de aparición */
+        .cuadro-info h3 {
+            margin-top: 0;
+            font-size: 20px;
         }
 
-        #recomendado {
-            order: 3; /* Controla el orden de aparición */
+        .cuadro-info p {
+            margin-bottom: 0;
+            font-size: 18px;
         }
 
-        #contenedor-disqus {
-            padding: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-            padding-bottom: 50px;
-            min-height: 200px;
-            border-radius: 8px;
-            margin: 20px;
-            order: 2; /* Controla el orden de aparición */
+        .cuadro-info.recomendado {
+            background-color: #4CAF50;
+        }
+
+        .cuadro-info.lanzamiento {
+            background-color: #3498db;
         }
 
         .capturas {
@@ -158,8 +160,8 @@
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="Contacto.html">Contacto</a></li>
-            <li><a href="Informacion.html">Pagina oficial y mas informacion</a></li>
-            <li><a href="IniciarSesion.html">Iniciar sesion</a></li>
+            <li><a href="Informacion.html">Página oficial y más información</a></li>
+            <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
         </ul>
     </nav>
 </div>
@@ -167,20 +169,25 @@
 <section id="contenedor-superior">
     <h2>Viktor</h2>
     <img src="ViktorIcon.png" width="100" height="100">
-    <p>Peso Del Juego: 50 MB<br> Terror/ Robots / 2D / indie</p>
+    <p>Peso Del Juego: 50 MB<br> Terror / Robots / 2D / indie</p>
 
-    <div id="lanzamiento">Lanzamiento: 27/06/2024</div>
-    <div id="recomendado">Recomendado</div>
+    <div class="cuadro-info lanzamiento">
+        <h3>Lanzamiento</h3>
+        <p>27/06/2024</p>
+    </div>
+
+    <div class="cuadro-info recomendado">
+        <h3>Recomendado</h3>
+        <p>Windows: XP/Vista/7/8/10<br>
+        RAM: 700 MB<br>
+        Tipo de sistema: 32/64 Bits<br>
+        Procesador: 1.4 GHz</p>
+    </div>
 
     <section><a href="Viktor.zip" download>
         <button id="boton-descarga">Descargar</button>
     </a></section>
     <section><h2>Juegos creado por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
-    <section><h2>Requisitos Minimos</h2></section>
-    <section>Windows: XP/Vista/7/8/10</section>
-    <section>Ram: 700 MB</section>
-    <section>Tipo de sistema: 32/64 Bits</section>
-    <section>Procesador: 1.4 GHz</section>
 </section>
 
 <div class="capturas">
@@ -194,18 +201,6 @@
         <img src="ViktorCap3.png" alt="captura 3">
     </div>
 </div>
-
-<section id="contenedor-disqus">
-    <div id="disqus_thread"></div>
-    <script>
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-</section>
 
 <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
 
