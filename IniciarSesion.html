@@ -47,12 +47,6 @@
             transform: scale(1.1);
         }
 
-        .header {
-            background-color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
-
         .container {
             max-width: 600px;
             margin: 20px auto;
@@ -87,7 +81,7 @@
             box-sizing: border-box;
         }
 
-        /* Estilo para los campos de nombre y apellido */
+        /* Estilo para los campos de Nombre y Apellido */
         #name, #lastname {
             width: calc(50% - 5px); /* 50% del ancho menos el espacio entre ellos */
             display: inline-block;
@@ -136,10 +130,6 @@
         </ul>
     </div>
 
-    <div class="header">
-        <h1>Iniciar sesión y perfil</h1>
-    </div>
-
     <div class="container" id="loginContainer">
         <h2>Iniciar sesión</h2>
         <input type="text" id="name" placeholder="Nombre">
@@ -160,11 +150,16 @@
     <div class="success-message" id="successMessage" style="display: none;">
         <h2>Cuenta creada</h2>
         <p class="small-message">Disfruta de nuestros servicios.</p>
+        <div class="photo-container">
+            <img id="profilePhoto" src="" alt="Foto de perfil">
+        </div>
     </div>
 
     <script>
         const profilePhotoInput = document.getElementById('profilePhotoInput');
         const profilePhotoPreview = document.getElementById('profilePhotoPreview');
+        const profilePhotoContainer = document.getElementById('profilePhoto');
+        const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
 
         profilePhotoInput.addEventListener('change', function() {
             const file = this.files[0];
@@ -223,6 +218,8 @@
             if (valid) {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
+                profilePhotoContainer.src = profilePhoto; // Mostrar la foto de perfil en el mensaje de éxito
+                menuProfilePhotoContainer.style.display = 'block'; // Mostrar la foto de perfil en el menú superior
                 clearForm();
             }
         }
