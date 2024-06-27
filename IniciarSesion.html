@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6b73ff 100%);
             color: #fff;
             margin: 0;
             padding: 0;
@@ -132,14 +132,24 @@
             text-align: center;
         }
 
-        .profile-container img {
-            display: block;
-            margin: 20px auto;
-        }
-
         .small-message {
             font-size: 12px;
             color: #777;
+        }
+
+        .logout-button {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
         }
     </style>
 </head>
@@ -182,7 +192,7 @@
         <h2>Cuenta creada</h2>
         <p>Tu cuenta ha sido creada exitosamente.</p>
         <p class="small-message">Disfruta de nuestros servicios.</p>
-        <img id="profilePhoto" src="" alt="Foto de perfil">
+        <button class="logout-button" onclick="logout()">Salir de la cuenta</button>
     </div>
 
     <script>
@@ -212,7 +222,6 @@
             if (validateEmail(email) && validatePassword(password)) {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('profileContainer').style.display = 'block';
-                document.getElementById('profilePhoto').src = profilePhotoPreview.src;
                 showProfilePhotoInMenu(profilePhotoPreview.src);
             } else {
                 alert('Por favor, ingresa tu correo electrónico y contraseña correctamente.');
@@ -263,28 +272,39 @@
             return password.length >= 4 && password.length <= 16;
         }
 
-        function showProfilePhotoInMenu(photoSrc) {
-            const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
-            const menuProfilePhoto = document.getElementById('menuProfilePhoto');
-            menuProfilePhoto.src = photoSrc;
-            menuProfilePhotoContainer.style.display = 'inline-block';
-        }
-
         function disableFormFields() {
             document.getElementById('email').disabled = true;
             document.getElementById('password').disabled = true;
             document.getElementById('profilePhotoInput').disabled = true;
-            document.querySelectorAll('.button-container button').forEach(button => button.style.display = 'none');
+            document.querySelector('.button-container').style.display = 'none';
+        }
+
+        function showProfilePhotoInMenu(photoSrc) {
+            const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
+            const menuProfilePhoto = document.getElementById('menuProfilePhoto');
+            menuProfilePhoto.src = photoSrc;
+            menuProfilePhotoContainer.style.display = 'block';
         }
 
         function showSuccessMessage() {
-            const loginContainer = document.getElementById('loginContainer');
-            loginContainer.innerHTML = `
-                <h2>Cuenta creada</h2>
-                <p>Tu cuenta ha sido creada exitosamente.</p>
-                <p class="small-message">Disfruta de nuestros servicios.</p>
-                <img src="${profilePhotoPreview.src}" alt="Foto de perfil" class="photo-container img">
-            `;
+            document.getElementById('profileContainer').style.display = 'block';
+        }
+
+        function logout() {
+            document.getElementById('email').disabled = false;
+            document.getElementById('password').disabled = false;
+            document.getElementById('profilePhotoInput').disabled = false;
+            document.querySelector('.button-container').style.display = 'flex';
+
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('profileContainer').style.display = 'none';
+
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            profilePhotoPreview.src = '';
+            profilePhotoPreview.style.display = 'none';
+
+            document.getElementById('menuProfilePhotoContainer').style.display = 'none';
         }
     </script>
 
