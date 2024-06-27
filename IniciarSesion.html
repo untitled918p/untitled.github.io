@@ -105,6 +105,7 @@
         .error-message {
             color: #f44336;
             margin-top: 10px;
+            font-size: 14px;
         }
 
         .button-container {
@@ -134,9 +135,12 @@
     <div class="container" id="loginContainer">
         <h2>Iniciar sesión</h2>
         <input type="email" id="email" placeholder="Correo electrónico">
+        <p id="emailError" class="error-message" style="display: none;">El correo debe ser una dirección @gmail.com.</p>
         <input type="password" id="password" placeholder="Contraseña">
+        <p id="passwordError" class="error-message" style="display: none;">La contraseña debe tener entre 4 y 16 caracteres.</p>
         <div class="photo-container">
             <input type="file" id="profilePhotoInput" accept="image/*">
+            <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil.</p>
             <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
         </div>
         <div class="button-container">
@@ -164,6 +168,7 @@
                 reader.onload = function(e) {
                     profilePhotoPreview.src = e.target.result;
                     profilePhotoPreview.style.display = 'block';
+                    document.getElementById('photoError').style.display = 'none';
                 }
                 reader.readAsDataURL(file);
             }
@@ -173,12 +178,12 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            if (email && password) {
+            if (validateEmail(email) && validatePassword(password)) {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('profileContainer').style.display = 'block';
                 document.getElementById('profilePhoto').src = profilePhotoPreview.src;
             } else {
-                alert('Por favor, ingresa tu correo electrónico y contraseña.');
+                alert('Por favor, ingresa tu correo electrónico y contraseña correctamente.');
             }
         }
 
@@ -187,12 +192,42 @@
             const password = document.getElementById('password').value;
             const profilePhoto = profilePhotoPreview.src;
 
-            if (email && password && profilePhoto) {
+            let valid = true;
+
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if (!validatePassword(password)) {
+                document.getElementById('passwordError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            if (!profilePhoto) {
+                document.getElementById('photoError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('photoError').style.display = 'none';
+            }
+
+            if (valid) {
                 alert('Cuenta creada exitosamente.');
                 // Aquí puedes agregar la lógica para crear la cuenta, como enviar los datos a un servidor.
-            } else {
-                alert('Por favor, completa todos los campos y sube una foto de perfil.');
             }
+        }
+
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return regex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 4 && password.length <= 16;
         }
     </script>
 
