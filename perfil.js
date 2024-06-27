@@ -1,72 +1,73 @@
-// Función para crear una cuenta
-document.getElementById('createAccountButton').addEventListener('click', function() {
-    const email = document.getElementById('email').value;
+// Simulación de datos de usuario
+let user = null;
+
+function signIn() {
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
-    const profilePhoto = document.getElementById('photo').src; // Assuming the photo element has id 'photo'
 
-    // Validación del correo electrónico
+    // Validar email
     if (!email.endsWith('@gmail.com')) {
-        alert('Por favor, use una dirección de correo electrónico de Gmail válida.');
+        displayError('Por favor ingrese un correo válido de Gmail.');
         return;
     }
 
-    // Validación de la contraseña
+    // Validar longitud de la contraseña
     if (password.length < 4 || password.length > 16) {
-        alert('La contraseña debe tener entre 4 y 16 caracteres.');
+        displayError('La contraseña debe tener entre 4 y 16 caracteres.');
         return;
     }
 
-    // Guardar los datos del usuario en localStorage
-    const userData = {
+    // Simulación de inicio de sesión exitoso
+    user = {
         email: email,
-        password: password,
-        photo: profilePhoto
+        photoURL: 'ruta/a/imagen.png'  // Aquí deberías ajustar la ruta de la imagen
     };
 
-    localStorage.setItem('user', JSON.stringify(userData));
+    // Guardar usuario en localStorage
+    localStorage.setItem('user', JSON.stringify(user));
 
-    // Mostrar mensaje de éxito y foto de perfil
-    const crearCuentaDiv = document.getElementById('crearCuenta');
-    const profilePhotoDiv = document.getElementById('profile-photo');
-    crearCuentaDiv.style.display = 'block';
-    profilePhotoDiv.innerHTML = `<img src="${profilePhoto}" alt="Foto de perfil de usuario">`;
+    // Mostrar foto de perfil y mensaje de éxito
+    displayProfile();
+}
 
-    alert('¡Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+function displayProfile() {
+    const loginContainer = document.getElementById('loginContainer');
+    const profileContainer = document.getElementById('profileContainer');
+    const profilePhoto = document.getElementById('profilePhoto');
 
-    // Limpiar campos después de crear la cuenta (opcional)
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-});
+    if (user) {
+        // Mostrar el contenedor del perfil y ocultar el de inicio de sesión
+        loginContainer.style.display = 'none';
+        profileContainer.style.display = 'block';
 
-// Función para iniciar sesión
-document.getElementById('loginButton').addEventListener('click', function() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+        // Mostrar foto de perfil
+        profilePhoto.src = user.photoURL;
 
-    // Obtener los datos del usuario desde localStorage
-    const userData = JSON.parse(localStorage.getItem('user'));
-
-    // Validar si el usuario y la contraseña coinciden
-    if (userData && userData.email === email && userData.password === password) {
-        alert('¡Inicio de sesión exitoso!');
-        window.location.href = 'index.html'; // Redirigir a la página principal
-    } else {
-        alert('Correo electrónico o contraseña incorrectos.');
-    }
-});
-
-// Función para mostrar la foto de perfil en el menú de navegación
-function displayUserPhoto() {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData && userData.photo) {
-        const profilePhotoContainer = document.getElementById('profile-photo-container');
-        profilePhotoContainer.innerHTML = `<img src="${userData.photo}" alt="Foto de perfil de usuario">`;
-        const crearCuentaDiv = document.getElementById('crearCuenta');
-        const profilePhotoDiv = document.getElementById('profile-photo');
-        crearCuentaDiv.style.display = 'block';
-        profilePhotoDiv.innerHTML = `<img src="${userData.photo}" alt="Foto de perfil de usuario">`;
+        // Mostrar foto de perfil en el menú de navegación
+        displayUserPhoto(user.photoURL);
     }
 }
 
-// Llamar a la función para mostrar la foto de perfil al cargar la página
-window.onload = displayUserPhoto;
+function displayUserPhoto(photoURL) {
+    const photoContainer = document.getElementById('photo-container');
+    if (photoContainer) {
+        photoContainer.innerHTML = `<img src="${photoURL}" alt="Foto de perfil">`;
+    }
+}
+
+function displayError(message) {
+    const loginContainer = document.getElementById('loginContainer');
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('error-message');
+    errorMessage.textContent = message;
+    loginContainer.appendChild(errorMessage);
+}
+
+// Comprobar sesión almacenada localmente al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+        user = JSON.parse(storedUser);
+        displayProfile();
+    }
+});
