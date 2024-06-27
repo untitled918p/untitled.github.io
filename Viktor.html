@@ -61,8 +61,25 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin-top: 60px; /* A�ade espacio para el men� fijo */
+            margin-top: 60px; /* Añade espacio para el menú fijo */
             text-align: center;
+        }
+
+        #lanzamiento,
+        #recomendado {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        #lanzamiento {
+            order: 1; /* Controla el orden de aparición */
+        }
+
+        #recomendado {
+            order: 3; /* Controla el orden de aparición */
         }
 
         #contenedor-disqus {
@@ -73,6 +90,7 @@
             min-height: 200px;
             border-radius: 8px;
             margin: 20px;
+            order: 2; /* Controla el orden de aparición */
         }
 
         .capturas {
@@ -150,6 +168,10 @@
     <h2>Viktor</h2>
     <img src="ViktorIcon.png" width="100" height="100">
     <p>Peso Del Juego: 50 MB<br> Terror/ Robots / 2D / indie</p>
+
+    <div id="lanzamiento">Lanzamiento: 27/06/2024</div>
+    <div id="recomendado">Recomendado</div>
+
     <section><a href="Viktor.zip" download>
         <button id="boton-descarga">Descargar</button>
     </a></section>
