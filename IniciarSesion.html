@@ -112,6 +112,30 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .profile-photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .profile-photo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .profile-container {
+            display: none;
+            text-align: center;
+        }
+
+        .profile-container img {
+            display: block;
+            margin: 20px auto;
+        }
     </style>
 </head>
 <body>
@@ -122,8 +146,8 @@
             <li><a href="Contacto.html">Contacto</a></li>
             <li><a href="Informacion.html">Página oficial</a></li>
             <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            <li>
-                <div id="photo-container" class="photo-container"></div>
+            <li class="profile-photo-container" id="menuProfilePhotoContainer" style="display: none;">
+                <img id="menuProfilePhoto" src="" alt="Foto de perfil">
             </li>
         </ul>
     </div>
@@ -139,8 +163,8 @@
         <input type="password" id="password" placeholder="Contraseña">
         <p id="passwordError" class="error-message" style="display: none;">La contraseña debe tener entre 4 y 16 caracteres.</p>
         <div class="photo-container">
-            <input type="file" id="profilePhotoInput" accept="image/*">
-            <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil.</p>
+            <input type="file" id="profilePhotoInput" accept="image/png">
+            <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil en formato PNG.</p>
             <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
         </div>
         <div class="button-container">
@@ -149,12 +173,10 @@
         </div>
     </div>
 
-    <div class="container" id="profileContainer" style="display: none;">
-        <h2>Bienvenido</h2>
-        <p>Has iniciado sesión correctamente.</p>
-        <div class="photo-container">
-            <img id="profilePhoto" src="" alt="Foto de perfil">
-        </div>
+    <div class="container profile-container" id="profileContainer">
+        <h2>Cuenta creada</h2>
+        <p>Tu cuenta ha sido creada exitosamente.</p>
+        <img id="profilePhoto" src="" alt="Foto de perfil">
     </div>
 
     <script>
@@ -163,7 +185,7 @@
 
         profilePhotoInput.addEventListener('change', function() {
             const file = this.files[0];
-            if (file) {
+            if (file && file.type === 'image/png') {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePhotoPreview.src = e.target.result;
@@ -171,6 +193,9 @@
                     document.getElementById('photoError').style.display = 'none';
                 }
                 reader.readAsDataURL(file);
+            } else {
+                profilePhotoPreview.style.display = 'none';
+                document.getElementById('photoError').style.display = 'block';
             }
         });
 
@@ -182,6 +207,7 @@
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('profileContainer').style.display = 'block';
                 document.getElementById('profilePhoto').src = profilePhotoPreview.src;
+                showProfilePhotoInMenu(profilePhotoPreview.src);
             } else {
                 alert('Por favor, ingresa tu correo electrónico y contraseña correctamente.');
             }
@@ -208,7 +234,7 @@
                 document.getElementById('passwordError').style.display = 'none';
             }
 
-            if (!profilePhoto) {
+            if (!profilePhoto || !profilePhotoInput.files[0] || profilePhotoInput.files[0].type !== 'image/png') {
                 document.getElementById('photoError').style.display = 'block';
                 valid = false;
             } else {
@@ -216,6 +242,10 @@
             }
 
             if (valid) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('profileContainer').style.display = 'block';
+                document.getElementById('profilePhoto').src = profilePhoto;
+                showProfilePhotoInMenu(profilePhoto);
                 alert('Cuenta creada exitosamente.');
                 // Aquí puedes agregar la lógica para crear la cuenta, como enviar los datos a un servidor.
             }
@@ -228,6 +258,13 @@
 
         function validatePassword(password) {
             return password.length >= 4 && password.length <= 16;
+        }
+
+        function showProfilePhotoInMenu(photoSrc) {
+            const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
+            const menuProfilePhoto = document.getElementById('menuProfilePhoto');
+            menuProfilePhoto.src = photoSrc;
+            menuProfilePhotoContainer.style.display = 'inline-block';
         }
     </script>
 
