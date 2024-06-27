@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
     <style>
-      
         body {
             font-family: Arial, sans-serif;
             background-color: #333;
@@ -64,17 +63,6 @@
             text-align: center;
         }
 
-        .photo-container {
-            margin-top: 20px;
-        }
-
-        .photo-container img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
         input[type="email"], input[type="password"], button {
             display: block;
             width: 100%;
@@ -117,14 +105,11 @@
             <li><a href="Contacto.html">Contacto</a></li>
             <li><a href="Informacion.html">Página oficial</a></li>
             <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            <li>
-                <div id="photo-container" class="photo-container"></div>
-            </li>
         </ul>
     </div>
 
     <div class="header">
-        <h1>Iniciar sesión y perfil</h1>
+        <h1>Iniciar sesión</h1>
     </div>
 
     <div class="container" id="loginContainer">
@@ -134,15 +119,12 @@
         <button onclick="signIn()">Iniciar sesión</button>
     </div>
 
-    <div class="container" id="profileContainer" style="display: none;">
-        <h2>Bienvenido</h2>
-        <p>Has iniciado sesión correctamente.</p>
-        <div class="photo-container">
-            <img id="profilePhoto" src="" alt="Foto de perfil">
-        </div>
-    </div>
-
-    <script src="perfil.js"></script>
+    <script>
+        function signIn() {
+            // Función vacía, se puede agregar lógica de inicio de sesión aquí si es necesario.
+            alert('Función de inicio de sesión no implementada.');
+        }
+    </script>
 
 </body>
 </html>
