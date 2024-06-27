@@ -74,7 +74,7 @@
             border: 2px solid #fff;
         }
 
-        input[type="email"], input[type="password"], button {
+        input[type="email"], input[type="password"], input[type="file"], button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -106,6 +106,11 @@
             color: #f44336;
             margin-top: 10px;
         }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -130,7 +135,14 @@
         <h2>Iniciar sesión</h2>
         <input type="email" id="email" placeholder="Correo electrónico">
         <input type="password" id="password" placeholder="Contraseña">
-        <button onclick="signIn()">Iniciar sesión</button>
+        <div class="photo-container">
+            <input type="file" id="profilePhotoInput" accept="image/*">
+            <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
+        </div>
+        <div class="button-container">
+            <button onclick="signIn()">Iniciar sesión</button>
+            <button onclick="createAccount()">Crear cuenta</button>
+        </div>
     </div>
 
     <div class="container" id="profileContainer" style="display: none;">
@@ -142,18 +154,44 @@
     </div>
 
     <script>
+        const profilePhotoInput = document.getElementById('profilePhotoInput');
+        const profilePhotoPreview = document.getElementById('profilePhotoPreview');
+
+        profilePhotoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePhotoPreview.src = e.target.result;
+                    profilePhotoPreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
         function signIn() {
-            // Aquí puedes agregar la lógica de inicio de sesión si es necesario.
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Simulación de inicio de sesión exitoso
             if (email && password) {
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('profileContainer').style.display = 'block';
-                document.getElementById('profilePhoto').src = 'ruta/a/tu/foto.jpg'; // Ruta a la foto de perfil
+                document.getElementById('profilePhoto').src = profilePhotoPreview.src;
             } else {
                 alert('Por favor, ingresa tu correo electrónico y contraseña.');
+            }
+        }
+
+        function createAccount() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const profilePhoto = profilePhotoPreview.src;
+
+            if (email && password && profilePhoto) {
+                alert('Cuenta creada exitosamente.');
+                // Aquí puedes agregar la lógica para crear la cuenta, como enviar los datos a un servidor.
+            } else {
+                alert('Por favor, completa todos los campos y sube una foto de perfil.');
             }
         }
     </script>
