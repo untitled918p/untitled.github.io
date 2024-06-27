@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6b73ff 100%);
-            color: #fff;
+            color: #333;
             margin: 0;
             padding: 0;
         }
@@ -48,7 +48,7 @@
         }
 
         .header {
-            background-color: #222;
+            background-color: #fff;
             text-align: center;
             padding: 20px 0;
         }
@@ -56,14 +56,16 @@
         .container {
             max-width: 600px;
             margin: 20px auto;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            text-align: left;
         }
 
         .photo-container {
+            display: flex;
+            align-items: center;
             margin-top: 20px;
         }
 
@@ -71,10 +73,10 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 2px solid #fff;
+            border: 2px solid #333;
         }
 
-        input[type="email"], input[type="password"], input[type="file"], button {
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"], button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -98,58 +100,18 @@
         }
 
         .success-message {
-            color: #4CAF50;
-            margin-top: 10px;
-        }
-
-        .error-message {
-            color: #f44336;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .profile-photo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .profile-photo-container img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-
-        .profile-container {
-            display: none;
+            color: #333;
+            background-color: #fff;
+            padding: 10px;
             text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .small-message {
             font-size: 12px;
             color: #777;
-        }
-
-        .logout-button {
-            background-color: #f44336;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            padding: 10px 20px;
-            margin-top: 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .logout-button:hover {
-            background-color: #d32f2f;
         }
     </style>
 </head>
@@ -173,26 +135,24 @@
 
     <div class="container" id="loginContainer">
         <h2>Iniciar sesión</h2>
+        <input type="text" id="name" placeholder="Nombre">
+        <input type="text" id="lastname" placeholder="Apellido">
         <input type="email" id="email" placeholder="Correo electrónico">
         <p id="emailError" class="error-message" style="display: none;">El correo debe ser una dirección @gmail.com.</p>
         <input type="password" id="password" placeholder="Contraseña">
         <p id="passwordError" class="error-message" style="display: none;">La contraseña debe tener entre 4 y 16 caracteres.</p>
         <div class="photo-container">
+            <label for="profilePhotoInput">Foto de perfil (PNG)</label>
             <input type="file" id="profilePhotoInput" accept="image/png">
             <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil en formato PNG.</p>
             <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
         </div>
-        <div class="button-container">
-            <button onclick="signIn()">Iniciar sesión</button>
-            <button onclick="createAccount()">Crear cuenta</button>
-        </div>
+        <button onclick="createAccount()">Crear cuenta</button>
     </div>
 
-    <div class="container profile-container" id="profileContainer">
+    <div class="success-message" id="successMessage" style="display: none;">
         <h2>Cuenta creada</h2>
-        <p>Tu cuenta ha sido creada exitosamente.</p>
         <p class="small-message">Disfruta de nuestros servicios.</p>
-        <button class="logout-button" onclick="logout()">Salir de la cuenta</button>
     </div>
 
     <script>
@@ -215,25 +175,22 @@
             }
         });
 
-        function signIn() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            if (validateEmail(email) && validatePassword(password)) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('profileContainer').style.display = 'block';
-                showProfilePhotoInMenu(profilePhotoPreview.src);
-            } else {
-                alert('Por favor, ingresa tu correo electrónico y contraseña correctamente.');
-            }
-        }
-
         function createAccount() {
+            const name = document.getElementById('name').value;
+            const lastname = document.getElementById('lastname').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const profilePhoto = profilePhotoPreview.src;
 
             let valid = true;
+
+            if (!validateName(name)) {
+                valid = false;
+            }
+
+            if (!validateLastname(lastname)) {
+                valid = false;
+            }
 
             if (!validateEmail(email)) {
                 document.getElementById('emailError').style.display = 'block';
@@ -257,10 +214,18 @@
             }
 
             if (valid) {
-                disableFormFields();
-                showProfilePhotoInMenu(profilePhoto);
-                showSuccessMessage();
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                clearForm();
             }
+        }
+
+        function validateName(name) {
+            return name.trim() !== '';
+        }
+
+        function validateLastname(lastname) {
+            return lastname.trim() !== '';
         }
 
         function validateEmail(email) {
@@ -272,39 +237,13 @@
             return password.length >= 4 && password.length <= 16;
         }
 
-        function disableFormFields() {
-            document.getElementById('email').disabled = true;
-            document.getElementById('password').disabled = true;
-            document.getElementById('profilePhotoInput').disabled = true;
-            document.querySelector('.button-container').style.display = 'none';
-        }
-
-        function showProfilePhotoInMenu(photoSrc) {
-            const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
-            const menuProfilePhoto = document.getElementById('menuProfilePhoto');
-            menuProfilePhoto.src = photoSrc;
-            menuProfilePhotoContainer.style.display = 'block';
-        }
-
-        function showSuccessMessage() {
-            document.getElementById('profileContainer').style.display = 'block';
-        }
-
-        function logout() {
-            document.getElementById('email').disabled = false;
-            document.getElementById('password').disabled = false;
-            document.getElementById('profilePhotoInput').disabled = false;
-            document.querySelector('.button-container').style.display = 'flex';
-
-            document.getElementById('loginContainer').style.display = 'block';
-            document.getElementById('profileContainer').style.display = 'none';
-
+        function clearForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('lastname').value = '';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
             profilePhotoPreview.src = '';
             profilePhotoPreview.style.display = 'none';
-
-            document.getElementById('menuProfilePhotoContainer').style.display = 'none';
         }
     </script>
 
