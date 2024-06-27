@@ -136,6 +136,11 @@
             display: block;
             margin: 20px auto;
         }
+
+        .small-message {
+            font-size: 12px;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -176,6 +181,7 @@
     <div class="container profile-container" id="profileContainer">
         <h2>Cuenta creada</h2>
         <p>Tu cuenta ha sido creada exitosamente.</p>
+        <p class="small-message">Disfruta de nuestros servicios.</p>
         <img id="profilePhoto" src="" alt="Foto de perfil">
     </div>
 
@@ -242,12 +248,9 @@
             }
 
             if (valid) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('profileContainer').style.display = 'block';
-                document.getElementById('profilePhoto').src = profilePhoto;
+                disableFormFields();
                 showProfilePhotoInMenu(profilePhoto);
-                alert('Cuenta creada exitosamente.');
-                // Aquí puedes agregar la lógica para crear la cuenta, como enviar los datos a un servidor.
+                showSuccessMessage();
             }
         }
 
@@ -265,6 +268,23 @@
             const menuProfilePhoto = document.getElementById('menuProfilePhoto');
             menuProfilePhoto.src = photoSrc;
             menuProfilePhotoContainer.style.display = 'inline-block';
+        }
+
+        function disableFormFields() {
+            document.getElementById('email').disabled = true;
+            document.getElementById('password').disabled = true;
+            document.getElementById('profilePhotoInput').disabled = true;
+            document.querySelectorAll('.button-container button').forEach(button => button.style.display = 'none');
+        }
+
+        function showSuccessMessage() {
+            const loginContainer = document.getElementById('loginContainer');
+            loginContainer.innerHTML = `
+                <h2>Cuenta creada</h2>
+                <p>Tu cuenta ha sido creada exitosamente.</p>
+                <p class="small-message">Disfruta de nuestros servicios.</p>
+                <img src="${profilePhotoPreview.src}" alt="Foto de perfil" class="photo-container img">
+            `;
         }
     </script>
 
