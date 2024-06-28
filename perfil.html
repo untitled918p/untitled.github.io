@@ -3,324 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Untitled</title>
+    <title>Iniciar sesión</title>
     <style>
-        :root {
-            --primary-color: #4285f4;
-            --primary-color-hover: #357ae8;
-            --menu-bg-color: #333;
-            --menu-hover-color: #555;
-            --perfil-bg-color: #f0f0f0;
-            --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: var(--primary-color-hover);
-            --btn-color: white;
-            --active-color: var(--primary-color);
-        }
-
         body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #6b73ff 100%);
+            color: #333;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ddd 50%, #fff 50%);
-            transition: background 0.5s ease;
         }
 
         .menu-container {
-            background-color: var(--menu-bg-color);
-            padding: 10px 0;
+            background-color: #444;
+            overflow: hidden;
+            text-align: center;
+            padding: 15px 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
         }
 
-        ul {
+        .menu-container ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
             display: flex;
+            align-items: center;
         }
 
-        li {
-            margin-right: 20px;
+        .menu-container li {
+            display: inline-block;
+            margin: 0 15px;
         }
 
-        li a {
-            color: white;
+        .menu-container li a {
+            display: inline-block;
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
-            padding: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        li a:hover {
-            background-color: var(--menu-hover-color);
-            border-radius: 5px;
+        .menu-container li a:hover {
+            background-color: #555;
             transform: scale(1.1);
         }
 
-        .main-container {
+        .profile-photo-container {
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: calc(100vh - 50px);
-            padding: 20px;
         }
 
-        .perfil-container {
-            width: 300px;
-            background-color: var(--perfil-bg-color);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            text-align: center;
-            position: relative;
-        }
-
-        .perfil-bg-img {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 90px;
-            right: 90px;
-            z-index: 1;
-            border-radius: 10px;
-            opacity: 0.5;
-        }
-
-        .perfil-img {
-            width: 150px;
-            height: 150px;
+        .profile-photo-container img {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
+            border: 2px solid #fff;
         }
 
-        .btn {
-            background-color: var(--btn-bg-color);
-            color: var(--btn-color);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .photo-container {
+            display: flex;
+            align-items: center;
             margin-top: 20px;
         }
 
-        .btn:hover {
-            background-color: var(--btn-bg-color-hover);
+        .photo-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #333;
         }
 
-        .siguiendo {
-            background-color: green;
-        }
-
-        .juegos-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            margin: 20px;
-            width: calc(100% - 40px);
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .tab {
-            margin: 0 15px;
+        input[type="text"], input[type="email"], input[type="password"], input[type="file"], button {
+            display: block;
+            width: 100%;
             padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para los campos de Nombre y Apellido */
+        #name, #lastname {
+            width: calc(50% - 5px); /* 50% del ancho menos el espacio entre ellos */
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
             cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        .tab.active {
-            color: blue;
+        button:hover {
+            background-color: #357ae8;
         }
 
-        .tab:hover {
-            color: red;
-        }
-
-        .indicator {
-            display: none;
-        }
-
-        .juego {
+        .success-message {
+            color: #333;
+            background-color: #fff;
+            padding: 10px;
             text-align: center;
-            width: 150px;
-            margin: 10px;
-            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .juego img {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .juego:hover {
-            transform: scale(1.1);
-        }
-
-        .juego-section {
-            display: none;
-        }
-
-        .juego-section.active {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .empty-message {
-            color: #888;
-            font-style: italic;
+        .small-message {
+            font-size: 12px;
+            color: #777;
         }
     </style>
 </head>
 <body>
-    <!-- Menú de navegación -->
-    <header class="menu-container">
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Página oficial y más información</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Contenedor principal -->
-    <main class="main-container">
-        <div class="perfil-container">
-            <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
-            <h2>Untitled (Juegos)</h2>
-            <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
-            <button id="seguir-btn" class="btn">Seguir</button>
+    <div class="menu-container">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Informacion.html">Página oficial</a></li>
+            <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+        </ul>
+        <div class="profile-photo-container" id="menuProfilePhotoContainer" style="display: none;">
+            <img id="menuProfilePhoto" src="" alt="Foto de perfil">
         </div>
-    </main>
+    </div>
 
-    <section class="juegos-container">
-        <div class="tab-container">
-            <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
-            <div class="tab" onclick="showSection('programas')">Programas</div>
-            <div class="indicator"></div>
+    <div class="container" id="loginContainer">
+        <h2>Iniciar sesión</h2>
+        <input type="text" id="name" placeholder="Nombre">
+        <input type="text" id="lastname" placeholder="Apellido">
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <p id="emailError" class="error-message" style="display: none;">El correo debe ser una dirección @gmail.com.</p>
+        <input type="password" id="password" placeholder="Contraseña">
+        <p id="passwordError" class="error-message" style="display: none;">La contraseña debe tener entre 4 y 16 caracteres.</p>
+        <div class="photo-container">
+            <label for="profilePhotoInput">Foto de perfil (PNG)</label>
+            <input type="file" id="profilePhotoInput" accept="image/png">
+            <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil en formato PNG.</p>
+            <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
         </div>
+        <button onclick="createAccount()">Crear cuenta</button>
+    </div>
 
-        <div id="juegos" class="juego-section active">
-            <!-- Contenido de juegos -->
-            <div class="juego">
-                <a href="SurviveIn2D.html">
-                    <img src="In2DIcon.png" alt="Icono Juego 6">
-                    <p>Survive In 2D</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="JumpPrologue.html">
-                    <img src="IconoJump2.png" alt="Icono Juego 4">
-                    <p>Jump Prologue</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Jump.html">
-                    <img src="iconojump.png" alt="Icono Juego 3">
-                    <p>Jump To Survive</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="UntitledBeta.html">
-                    <img src="icono.png" alt="Icono Juego 1">
-                    <p>Untitled</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Untitled2.html">
-                    <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-                    <p>Untitled 2</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Kasper.html">
-                    <img src="KasperIcono.png" alt="Icono Juego 5">
-                    <p>Kasper</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Viktor.html">
-                    <img src="ViktorIcon.png" alt="Icono Juego 6">
-                    <p>Viktor</p>
-                </a>
-            </div>
-        </div>
+    <div class="success-message" id="successMessage" style="display: none;">
+        <h2>Cuenta creada</h2>
+        <p class="small-message">Disfruta de nuestros servicios.</p>
+        <button onclick="logout()">Salir de la cuenta</button>
+    </div>
 
-        <div id="programas" class="juego-section">
-            <div class="juego">
-                <a href="CodigoMorse.html">
-                    <img src="iconoCodigoM.png" alt="Icono programa 1">
-                    <p>Codigo Morse</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Script para manejar el comportamiento dinámico -->
     <script>
-        window.onload = function() {
-            const btn = document.getElementById('seguir-btn');
-            const siguiendo = localStorage.getItem('siguiendo');
+        const profilePhotoInput = document.getElementById('profilePhotoInput');
+        const profilePhotoPreview = document.getElementById('profilePhotoPreview');
+        const menuProfilePhoto = document.getElementById('menuProfilePhoto');
+        const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
 
-            // Inicializa el estado del botón según lo que está almacenado en localStorage
-            if (siguiendo === 'true') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
+        profilePhotoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file && file.type === 'image/png') {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePhotoPreview.src = e.target.result;
+                    profilePhotoPreview.style.display = 'block';
+                    document.getElementById('photoError').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
             } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
+                profilePhotoPreview.style.display = 'none';
+                document.getElementById('photoError').style.display = 'block';
+            }
+        });
+
+        function createAccount() {
+            const name = document.getElementById('name').value;
+            const lastname = document.getElementById('lastname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const profilePhoto = profilePhotoPreview.src;
+
+            let valid = true;
+
+            if (!validateName(name)) {
+                valid = false;
             }
 
-            // Función para alternar entre Seguir y Siguiendo
-            btn.addEventListener('click', function() {
-                if (btn.innerText === 'Seguir') {
-                    btn.innerText = 'Siguiendo';
-                    btn.classList.add('siguiendo');
-                    localStorage.setItem('siguiendo', 'true');
-                } else {
-                    btn.innerText = 'Seguir';
-                    btn.classList.remove('siguiendo');
-                    localStorage.setItem('siguiendo', 'false');
-                }
-            });
-        };
+            if (!validateLastname(lastname)) {
+                valid = false;
+            }
 
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.juego-section');
-            const tabs = document.querySelectorAll('.tab');
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
 
-            sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
+            if (!validatePassword(password)) {
+                document.getElementById('passwordError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
 
-            document.getElementById(sectionId).classList.add('active');
-            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
-            if (activeTab) {
-                activeTab.classList.add('active');
+            if (!profilePhoto || !profilePhotoInput.files[0] || profilePhotoInput.files[0].type !== 'image/png') {
+                document.getElementById('photoError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('photoError').style.display = 'none';
+            }
+
+            if (valid) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                menuProfilePhoto.src = profilePhoto;
+                menuProfilePhotoContainer.style.display = 'flex';
+                clearForm();
             }
         }
+
+        function validateName(name) {
+            return name.trim() !== '';
+        }
+
+        function validateLastname(lastname) {
+            return lastname.trim() !== '';
+        }
+
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return regex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 4 && password.length <= 16;
+        }
+
+        function clearForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('lastname').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            profilePhotoPreview.src = '';
+            profilePhotoPreview.style.display = 'none';
+        }
+
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            menuProfilePhotoContainer.style.display = 'none';
+        }
     </script>
+
 </body>
 </html>
