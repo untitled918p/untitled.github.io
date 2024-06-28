@@ -15,16 +15,19 @@
 
         .menu-container {
             background-color: #444;
-            overflow: hidden;
-            text-align: center;
-            padding: 15px 0;
+            padding: 15px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .menu-container ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
+            display: flex;
+            align-items: center;
         }
 
         .menu-container li {
@@ -45,6 +48,19 @@
         .menu-container li a:hover {
             background-color: #555;
             transform: scale(1.1);
+        }
+
+        .profile-photo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-photo-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            margin-left: 10px;
         }
 
         .container {
@@ -72,7 +88,6 @@
 
         input[type="text"], input[type="email"], input[type="password"], input[type="file"], button {
             display: block;
-            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             font-size: 16px;
@@ -81,11 +96,14 @@
             box-sizing: border-box;
         }
 
-        /* Estilo para los campos de Nombre y Apellido */
         #name, #lastname {
-            width: calc(50% - 5px); /* 50% del ancho menos el espacio entre ellos */
+            width: calc(50% - 10px);
             display: inline-block;
             margin-right: 10px;
+        }
+
+        #lastname {
+            margin-right: 0;
         }
 
         button {
@@ -103,17 +121,28 @@
         .success-message {
             color: #333;
             background-color: #fff;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .small-message {
             font-size: 12px;
             color: #777;
+            margin-top: 10px;
         }
+
+        .error-message {
+            color: #f44336;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -124,10 +153,10 @@
             <li><a href="Contacto.html">Contacto</a></li>
             <li><a href="Informacion.html">Página oficial</a></li>
             <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            <li class="profile-photo-container" id="menuProfilePhotoContainer" style="display: none;">
-                <img id="menuProfilePhoto" src="" alt="Foto de perfil">
-            </li>
         </ul>
+        <div class="profile-photo-container" id="menuProfilePhotoContainer" style="display: none;">
+            <img id="menuProfilePhoto" src="" alt="Foto de perfil">
+        </div>
     </div>
 
     <div class="container" id="loginContainer">
@@ -148,18 +177,20 @@
     </div>
 
     <div class="success-message" id="successMessage" style="display: none;">
-        <h2>Cuenta creada</h2>
-        <p class="small-message">Disfruta de nuestros servicios.</p>
-        <div class="photo-container">
-            <img id="profilePhoto" src="" alt="Foto de perfil">
+        <img id="createdProfilePhoto" src="" alt="Foto de perfil">
+        <div>
+            <h2>Cuenta creada</h2>
+            <p class="small-message">Disfruta de nuestros servicios.</p>
+            <button onclick="logout()">Salir de la cuenta</button>
         </div>
     </div>
 
     <script>
         const profilePhotoInput = document.getElementById('profilePhotoInput');
         const profilePhotoPreview = document.getElementById('profilePhotoPreview');
-        const profilePhotoContainer = document.getElementById('profilePhoto');
+        const menuProfilePhoto = document.getElementById('menuProfilePhoto');
         const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
+        const createdProfilePhoto = document.getElementById('createdProfilePhoto');
 
         profilePhotoInput.addEventListener('change', function() {
             const file = this.files[0];
@@ -217,9 +248,10 @@
 
             if (valid) {
                 document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                profilePhotoContainer.src = profilePhoto; // Mostrar la foto de perfil en el mensaje de éxito
-                menuProfilePhotoContainer.style.display = 'block'; // Mostrar la foto de perfil en el menú superior
+                document.getElementById('successMessage').style.display = 'flex';
+                createdProfilePhoto.src = profilePhoto;
+                menuProfilePhoto.src = profilePhoto;
+                menuProfilePhotoContainer.style.display = 'flex';
                 clearForm();
             }
         }
@@ -246,10 +278,16 @@
             document.getElementById('lastname').value = '';
             document.getElementById('email').value = '';
             document.getElementById('password').value = '';
+            profilePhotoInput.value = '';
             profilePhotoPreview.src = '';
             profilePhotoPreview.style.display = 'none';
         }
-    </script>
 
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            menuProfilePhotoContainer.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
