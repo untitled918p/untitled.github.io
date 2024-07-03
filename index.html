@@ -6,10 +6,12 @@
 <title>Untitled Juegos</title>
 <style>
   :root {
-    --bg-color: #fff;
+    --bg-color: #f0f0f0; /* Color de fondo ligeramente gris */
+    --content-bg-color: #fff;
     --menu-bg-color: #444;
     --text-color: #000;
     --hover-bg-color: #555;
+    --shadow-color: rgba(0, 0, 0, 0.2);
   }
 
   body {
@@ -25,11 +27,12 @@
   }
 
   .main-container {
-    background-color: var(--bg-color);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--content-bg-color);
+    box-shadow: 0 4px 10px var(--shadow-color), 0 -4px 10px var(--shadow-color), 4px 0 10px var(--shadow-color), -4px 0 10px var(--shadow-color);
     width: 100%;
     max-width: 1200px;
     padding: 20px;
+    margin: 20px; /* Añadir un margen para asegurarse de que la sombra se ve bien */
   }
 
   .menu-container {
@@ -272,7 +275,8 @@
     }
 
     // Llamar a la función para mostrar la foto de perfil al cargar la página
-    document.addEventListener('DOMContentLoaded', displayUserPhoto);
+    window.onload = displayUserPhoto;
   </script>
+
 </body>
 </html>
