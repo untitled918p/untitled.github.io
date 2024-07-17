@@ -56,8 +56,9 @@
       height: 100px; /* Ajusta la altura del encabezado */
       text-align: center;
       display: flex;
-      justify-content: center;
+      justify-content: space-between; /* Ajusta para alinear el contenido */
       align-items: center;
+      padding: 0 20px; /* Añade padding para espacio interno */
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
@@ -70,15 +71,13 @@
 
     #buscador {
       width: calc(100% - 40px);
-      max-width: 600px;
+      max-width: 300px; /* Ajusta el ancho del buscador */
       padding: 15px 20px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 5px;
       outline: none;
       box-sizing: border-box;
-      margin: 20px auto;
-      display: block;
       background-color: #444;
       color: #fff;
     }
@@ -160,10 +159,10 @@
   </div>
 
   <div class="header">
+    <input type="text" id="buscador" placeholder="Buscar juegos...">
     <h2>Untitled(Games)</h2>
   </div>
 
-  <input type="text" id="buscador" placeholder="Buscar juegos...">
   <div id="resultados"></div>
 
   <div class="untitled1">
