@@ -68,8 +68,14 @@
       border-radius: 10px;
     }
 
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
     #buscador {
-      width: 60%; /* Doble de ancho comparado con antes */
+      width: 40%; /* Ajuste del ancho */
       padding: 15px 20px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -158,7 +164,9 @@
 
   <div class="header">
     <h2>Untitled(Games)</h2>
-    <input type="text" id="buscador" placeholder="Buscar juegos...">
+    <div class="search-container">
+      <input type="text" id="buscador" placeholder="Buscar juegos...">
+    </div>
   </div>
 
   <div id="resultados"></div>
