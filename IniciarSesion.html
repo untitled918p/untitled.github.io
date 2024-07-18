@@ -183,6 +183,16 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (loggedInUser) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('menuProfilePhoto').src = loggedInUser.profilePhoto;
+                document.getElementById('menuProfilePhotoContainer').style.display = 'flex';
+            }
+        });
+
         const profilePhotoInput = document.getElementById('profilePhotoInput');
         const profilePhotoPreview = document.getElementById('profilePhotoPreview');
         const menuProfilePhoto = document.getElementById('menuProfilePhoto');
@@ -247,6 +257,7 @@
                 document.getElementById('successMessage').style.display = 'block';
                 menuProfilePhoto.src = profilePhoto;
                 menuProfilePhotoContainer.style.display = 'flex';
+                localStorage.setItem('loggedInUser', JSON.stringify({ profilePhoto }));
                 clearForm();
             }
         }
@@ -279,6 +290,7 @@
         }
 
         function logout() {
+            localStorage.removeItem('loggedInUser');
             document.getElementById('loginContainer').style.display = 'block';
             document.getElementById('successMessage').style.display = 'none';
             menuProfilePhotoContainer.style.display = 'none';
