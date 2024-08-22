@@ -99,6 +99,9 @@
       border-radius: 10px;
       margin-bottom: 10px;
       background-color: #444;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 400px;
     }
 
     .resultados-busqueda img {
@@ -126,12 +129,13 @@
       background-color: #444;
       box-sizing: border-box;
       text-align: center;
+      width: 120px; /* Ajusta el ancho */
     }
 
     .juego span {
       margin-bottom: 10px;
       color: #fff;
-      font-size: 18px;
+      font-size: 16px; /* Ajusta el tamaño del texto */
       display: block;
     }
 
@@ -143,8 +147,8 @@
 
     .untitled1 {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Ajusta el tamaño de los cuadros */
+      gap: 10px;
       padding: 20px;
       max-width: 100%;
       margin: 0 auto;
@@ -152,6 +156,11 @@
 
     .untitled1 div {
       text-align: center;
+      border: 2px solid #fff; /* Asegura que el borde sea del tamaño correcto */
+      border-radius: 10px;
+      box-sizing: border-box;
+      background-color: #333;
+      padding: 10px;
     }
 
     .untitled1 a {
@@ -282,10 +291,7 @@
         return;
       }
 
-      // Filtrar los juegos que coincidan con la búsqueda
       const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
-
-      // Mostrar solo los primeros 3 resultados
       const resultadosLimitados = juegosEncontrados.slice(0, 3);
 
       if (resultadosLimitados.length === 0) {
