@@ -1,299 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Untitled</title>
-    <style>
-        :root {
-            --primary-color: #4285f4;
-            --primary-color-hover: #357ae8;
-            --menu-bg-color: #333;
-            --menu-hover-color: #555;
-            --perfil-bg-color: #f0f0f0;
-            --perfil-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            --btn-bg-color: var(--primary-color);
-            --btn-bg-color-hover: var(--primary-color-hover);
-            --btn-color: white;
-            --active-color: var(--primary-color);
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ddd 50%, #fff 50%);
-            transition: background 0.5s ease;
-        }
-        .menu-container {
-            background-color: var(--menu-bg-color);
-            padding: 10px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-        li {
-            margin-right: 20px;
-        }
-        li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        li a:hover {
-            background-color: var(--menu-hover-color);
-            border-radius: 5px;
-            transform: scale(1.1);
-        }
-        .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 50px);
-            padding: 20px;
-        }
-        .perfil-container {
-            width: 300px;
-            background-color: var(--perfil-bg-color);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            text-align: center;
-            position: relative;
-        }
-        .perfil-bg-img {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 90px;
-            right: 90px;
-            z-index: 1;
-            border-radius: 10px;
-            opacity: 0.5;
-        }
-        .perfil-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        .btn {
-            background-color: var(--btn-bg-color);
-            color: var(--btn-color);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            margin-top: 20px;
-        }
-        .btn:hover {
-            background-color: var(--btn-bg-color-hover);
-        }
-        .siguiendo {
-            background-color: green;
-        }
-        .juegos-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--perfil-shadow);
-            margin: 20px;
-            width: calc(100% - 40px);
-        }
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative;
-            border-bottom: 1px solid #ccc;
-        }
-        .tab {
-            margin: 0 15px;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        .tab.active {
-            color: blue;
-        }
-        .tab:hover {
-            color: red;
-        }
-        .indicator {
-            display: none;
-        }
-        .juego {
-            text-align: center;
-            width: 150px;
-            margin: 10px;
-            transition: transform 0.3s ease;
-        }
-        .juego img {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        .juego:hover {
-            transform: scale(1.1);
-        }
-        .juego-section {
-            display: none;
-        }
-        .juego-section.active {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-        .empty-message {
-            color: #888;
-            font-style: italic;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled Juegos</title>
+  <style>
+    body {
+      background-color: #333;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    .menu-container {
+      background-color: #444;
+      overflow: hidden;
+      text-align: center;
+      padding: 15px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+    }
+
+    .menu-container ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    .menu-container li {
+      margin: 0 2%;
+    }
+
+    .menu-container li a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .menu-container li a:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
+
+    .header {
+      background-image: url('Fondo.png');
+      background-size: cover;
+      background-position: center;
+      height: 20vh; /* Usar vh para un tamaño relativo a la ventana */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2%;
+    }
+
+    .header h2 {
+      margin: 0;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    #buscador {
+      width: 100%; /* Ocupa el 100% del espacio disponible en su contenedor */
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      box-sizing: border-box;
+      background-color: #444;
+      color: #fff;
+    }
+
+    #resultados {
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .juego {
+      padding: 0; /* Elimina el padding para que el contenedor se ajuste al tamaño de la imagen */
+      border: 2px solid #fff; /* Bordes blancos */
+      border-radius: 10px;
+      display: inline-block;
+      transition: background-color 0.3s;
+      cursor: pointer;
+      box-sizing: border-box; /* Asegura que el tamaño del contenedor incluye el borde */
+    }
+
+    .juego img {
+      display: block;
+      width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
+      height: auto; /* Mantiene la proporción de la imagen */
+      border-radius: 10px;
+    }
+
+    .juego:hover {
+      background-color: #555;
+    }
+
+    .untitled1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .untitled1 div {
+      text-align: center;
+    }
+
+    .untitled1 a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .photo-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        height: 15vh; /* Ajusta la altura del encabezado en pantallas pequeñas */
+      }
+
+      #buscador {
+        width: 80%;
+      }
+
+      .menu-container li {
+        margin: 0 5px;
+      }
+
+      .untitled1 {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Menú de navegación -->
-    <header class="menu-container">
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Página oficial y más información</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Contenedor principal -->
-    <main class="main-container">
-        <div class="perfil-container">
-            <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
-            <h2>Untitled (Juegos)</h2>
-            <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
-            <button id="seguir-btn" class="btn">Seguir</button>
-        </div>
-    </main>
-    <section class="juegos-container">
-        <div class="tab-container">
-            <div class="tab active" onclick="showSection('juegos')">Todos los Juegos</div>
-            <div class="tab" onclick="showSection('programas')">Programas</div>
-            <div class="indicator"></div>
-        </div>
-        <div id="juegos" class="juego-section active">
-            <!-- Contenido de juegos -->
-            <div class="juego">
-                <a href="SurviveIn2D.html">
-                    <img src="In2DIcon.png" alt="Icono Juego 6">
-                    <p>Survive In 2D</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="JumpPrologue.html">
-                    <img src="IconoJump2.png" alt="Icono Juego 4">
-                    <p>Jump Prologue</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Jump.html">
-                    <img src="iconojump.png" alt="Icono Juego 3">
-                    <p>Jump To Survive</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="UntitledBeta.html">
-                    <img src="icono.png" alt="Icono Juego 1">
-                    <p>Untitled</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Untitled2.html">
-                    <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-                    <p>Untitled 2</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Kasper.html">
-                    <img src="KasperIcono.png" alt="Icono Juego 5">
-                    <p>Kasper</p>
-                </a>
-            </div>
-            <div class="juego">
-                <a href="Viktor.html">
-                    <img src="ViktorIcon.png" alt="Icono Juego 6">
-                    <p>Viktor</p>
-                </a>
-            </div>
-            
-            <div class="juego">
-                <a href="Untitled3.html">
-                    <img src="Untitled3Icon.jpg" alt="Icono Juego 6">
-                    <p>Untitled 3</p>
-                </a>
-            </div>
-        </div>
 
-        <div id="programas" class="juego-section">
-            <div class="programas">
-            <div class="juego">
-                <a href="CodigoMorse.html">
-                    <img src="iconoCodigoM.png" alt="Icono programa 1">
-                    <p>Codigo Morse</p>
-                </a>
-            </div>
-        </div>
-    </section>
-    <!-- Script para manejar el comportamiento dinámico -->
-    <script>
-        window.onload = function() {
-            const btn = document.getElementById('seguir-btn');
-            const siguiendo = localStorage.getItem('siguiendo');
-            // Inicializa el estado del botón según lo que está almacenado en localStorage
-            if (siguiendo === 'true') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
+  <header>
+    <nav class="menu-container">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Contacto.html">Contacto</a></li>
+        <li><a href="Informacion.html">Página oficial</a></li>
+        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+        <li id="profile-photo-container" class="photo-container"></li>
+      </ul>
+    </nav>
+    <div class="header">
+      <h2>Untitled(Games)</h2>
+      <div class="search-container">
+        <input type="text" id="buscador" placeholder="Buscar juegos...">
+      </div>
+    </div>
+  </header>
+
+  <main id="resultados"></main>
+
+  <section class="untitled1">
+    <div class="juego">
+      <a href="UntitledBeta.html">Untitled<br>
+        <img src="icono.png" alt="Icono Juego 1">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="Untitled2.html">Untitled 2<br>
+        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="Jump.html">Jump To Survive<br>
+        <img src="iconojump.png" alt="Icono Juego 3">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="JumpPrologue.html">Jump Prologue<br>
+        <img src="IconoJump2.png" alt="Icono Juego 4">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="Kasper.html">Kasper<br>
+        <img src="KasperIcono.png" alt="Icono Juego 5">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="SurviveIn2D.html">Survive In 2d<br>
+        <img src="In2DIcon.png" alt="Icono Juego 6">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="Viktor.html">Viktor<br>
+        <img src="ViktorIcon.png" alt="Icono Juego 7">
+      </a>
+    </div>
+    <div class="juego">
+      <a href="Untited3.html">Untitled 3<br>
+        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+      </a>
+    </div>
+  </section>
+
+  <script src="perfil.js"></script>
+  <script>
+    const juegos = ["UntitledBeta", "Untitled2", "Jump", "JumpPrologue", "Kasper", "SurviveIn2D", "Viktor"];
+
+    function buscarJuego() {
+      const consulta = document.getElementById("buscador").value.toLowerCase();
+      const resultados = document.getElementById("resultados");
+
+      resultados.innerHTML = "";
+
+      if (consulta.trim() === "") {
+        return;
+      }
+
+      const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().startsWith(consulta));
+
+      if (juegosEncontrados.length === 0) {
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "No se encontraron juegos con ese nombre.";
+        resultados.appendChild(mensaje);
+      } else {
+        juegosEncontrados.forEach(juego => {
+          const juegoEncontrado = document.createElement("div");
+          juegoEncontrado.classList.add("juego");
+          juegoEncontrado.textContent = juego;
+          juegoEncontrado.addEventListener("click", function() {
+            if (juego === "Kasper") {
+              window.location.href = "Kasper.html";
             } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
+              window.location.href = juego + ".html";
             }
-            // Función para alternar entre Seguir y Siguiendo
-            btn.addEventListener('click', function() {
-                if (btn.innerText === 'Seguir') {
-                    btn.innerText = 'Siguiendo';
-                    btn.classList.add('siguiendo');
-                    localStorage.setItem('siguiendo', 'true');
-                } else {
-                    btn.innerText = 'Seguir';
-                    btn.classList.remove('siguiendo');
-                    localStorage.setItem('siguiendo', 'false');
-                }
-            });
-        };
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.juego-section');
-            const tabs = document.querySelectorAll('.tab');
-            sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-        }
-    </script>
+          });
+          resultados.appendChild(juegoEncontrado);
+        });
+      }
+    }
+
+    document.getElementById("buscador").addEventListener("input", buscarJuego);
+
+    function displayUserPhoto() {
+      const userData = JSON.parse(localStorage.getItem('user'));
+      if (userData && userData.photo) {
+        const profilePhotoContainer = document.getElementById('profile-photo-container');
+        profilePhotoContainer.innerHTML = `<img src="${userData.photo}" alt="Foto de perfil de usuario">`;
+      }
+    }
+
+    window.onload = displayUserPhoto;
+  </script>
+
 </body>
 </html>
