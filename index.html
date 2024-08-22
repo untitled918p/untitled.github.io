@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5338145722825225" crossorigin="anonymous"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5338145722825225" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
@@ -21,17 +19,19 @@
       text-align: center;
       padding: 15px 0;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
     }
 
     .menu-container ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
+      display: flex;
     }
 
     .menu-container li {
-      display: inline-block;
-      margin: 0 15px;
+      margin: 0 2%;
     }
 
     .menu-container li a {
@@ -53,12 +53,11 @@
       background-image: url('Fondo.png');
       background-size: cover;
       background-position: center;
-      height: 100px; /* Ajusta la altura del encabezado */
+      height: 20vh; /* Usar vh para un tamaño relativo a la ventana */
       display: flex;
-      justify-content: space-between; /* Ajusta para alinear el contenido */
+      justify-content: space-between;
       align-items: center;
-      padding: 0 20px; /* Añade padding para espacio interno */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 0 2%;
     }
 
     .header h2 {
@@ -72,11 +71,10 @@
       flex-grow: 1;
       display: flex;
       justify-content: center;
-      margin-left: -10%; /* Ajusta este valor para mover el buscador hacia la izquierda */
     }
 
     #buscador {
-      width: 40%; /* Ajuste del ancho */
+      width: 100%; /* Ocupa el 100% del espacio disponible en su contenedor */
       padding: 15px 20px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -88,7 +86,7 @@
     }
 
     #resultados {
-      max-width: 600px;
+      max-width: 90%;
       margin: 20px auto;
       padding: 0 20px;
     }
@@ -105,19 +103,15 @@
     }
 
     .untitled1 {
-      display: flex;
-      overflow-x: auto;
-      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
       padding: 20px;
-      max-width: 90%;
-      margin: 20px auto;
-      white-space: nowrap; /* Evita que los elementos se envuelvan */
-      background-color: #333; /* Hace el fondo del mismo color que el fondo principal */
-      border: none; /* Elimina cualquier borde visible */
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     .untitled1 div {
-      margin: 10px;
       text-align: center;
     }
 
@@ -126,8 +120,8 @@
       text-decoration: none;
       display: block;
       padding: 10px;
-      background-color: #333; /* Hace el fondo de los enlaces del mismo color que el fondo principal */
-      border: 2px solid #fff; /* Añade un borde blanco */
+      background-color: #333;
+      border: 2px solid #fff;
       border-radius: 10px;
       transition: background-color 0.3s, transform 0.3s;
     }
@@ -149,30 +143,49 @@
       border-radius: 50%;
       border: 2px solid white;
     }
+
+    @media (max-width: 768px) {
+      .header {
+        height: 15vh; /* Ajusta la altura del encabezado en pantallas pequeñas */
+      }
+
+      #buscador {
+        width: 80%;
+      }
+
+      .menu-container li {
+        margin: 0 5px;
+      }
+
+      .untitled1 {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="menu-container">
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="Contacto.html">Contacto</a></li>
-      <li><a href="Informacion.html">Página oficial</a></li>
-      <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-      <li id="profile-photo-container" class="photo-container"></li>
-    </ul>
-  </div>
-
-  <div class="header">
-    <h2>Untitled(Games)</h2>
-    <div class="search-container">
-      <input type="text" id="buscador" placeholder="Buscar juegos...">
+  <header>
+    <nav class="menu-container">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Contacto.html">Contacto</a></li>
+        <li><a href="Informacion.html">Página oficial</a></li>
+        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+        <li id="profile-photo-container" class="photo-container"></li>
+      </ul>
+    </nav>
+    <div class="header">
+      <h2>Untitled(Games)</h2>
+      <div class="search-container">
+        <input type="text" id="buscador" placeholder="Buscar juegos...">
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div id="resultados"></div>
+  <main id="resultados"></main>
 
-  <div class="untitled1">
+  <section class="untitled1">
     <div>
       <a href="UntitledBeta.html">Untitled<br>
         <img src="icono.png" alt="Icono Juego 1">
@@ -208,16 +221,14 @@
         <img src="ViktorIcon.png" alt="Icono Juego 7">
       </a>
     </div>
-    
     <div>
       <a href="Untited3.html">Untitled 3<br>
         <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
       </a>
     </div>
-  </div>
+  </section>
 
   <script src="perfil.js"></script>
-
   <script>
     const juegos = ["UntitledBeta", "Untitled2", "Jump", "JumpPrologue", "Kasper", "SurviveIn2D", "Viktor"];
 
@@ -256,7 +267,6 @@
 
     document.getElementById("buscador").addEventListener("input", buscarJuego);
 
-    // Función para mostrar la foto de perfil en el menú de navegación
     function displayUserPhoto() {
       const userData = JSON.parse(localStorage.getItem('user'));
       if (userData && userData.photo) {
@@ -265,7 +275,6 @@
       }
     }
 
-    // Llamar a la función para mostrar la foto de perfil al cargar la página
     window.onload = displayUserPhoto;
   </script>
 
