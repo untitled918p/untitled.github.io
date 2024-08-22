@@ -53,7 +53,7 @@
       background-image: url('Fondo.png');
       background-size: cover;
       background-position: center;
-      height: 20vh; /* Usar vh para un tamaño relativo a la ventana */
+      height: 20vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -74,7 +74,7 @@
     }
 
     #buscador {
-      width: 100%; /* Ocupa el 100% del espacio disponible en su contenedor */
+      width: 100%;
       padding: 15px 20px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -92,20 +92,27 @@
     }
 
     .juego {
-      padding: 0; /* Elimina el padding para que el contenedor se ajuste al tamaño de la imagen */
-      border: 2px solid #fff; /* Bordes blancos */
+      padding: 0;
+      border: 2px solid #fff;
       border-radius: 10px;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
       transition: background-color 0.3s;
       cursor: pointer;
-      box-sizing: border-box; /* Asegura que el tamaño del contenedor incluye el borde */
+      box-sizing: border-box;
     }
 
     .juego img {
       display: block;
-      width: 100%; /* Hace que la imagen ocupe todo el ancho del contenedor */
-      height: auto; /* Mantiene la proporción de la imagen */
+      width: 100px; /* Ajusta el tamaño de las imágenes en los resultados */
+      height: 100px;
       border-radius: 10px;
+    }
+
+    .juego-info {
+      margin-left: 10px;
+      flex-grow: 1;
     }
 
     .juego:hover {
@@ -140,7 +147,7 @@
 
     @media (max-width: 768px) {
       .header {
-        height: 15vh; /* Ajusta la altura del encabezado en pantallas pequeñas */
+        height: 15vh;
       }
 
       #buscador {
@@ -224,7 +231,15 @@
 
   <script src="perfil.js"></script>
   <script>
-    const juegos = ["UntitledBeta", "Untitled2", "Jump", "JumpPrologue", "Kasper", "SurviveIn2D", "Viktor"];
+    const juegos = [
+      { nombre: "UntitledBeta", imagen: "icono.png" },
+      { nombre: "Untitled2", imagen: "IconoDeUntitled2.png" },
+      { nombre: "Jump", imagen: "iconojump.png" },
+      { nombre: "JumpPrologue", imagen: "IconoJump2.png" },
+      { nombre: "Kasper", imagen: "KasperIcono.png" },
+      { nombre: "SurviveIn2D", imagen: "In2DIcon.png" },
+      { nombre: "Viktor", imagen: "ViktorIcon.png" }
+    ];
 
     function buscarJuego() {
       const consulta = document.getElementById("buscador").value.toLowerCase();
@@ -236,7 +251,7 @@
         return;
       }
 
-      const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().startsWith(consulta));
+      const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().startsWith(consulta));
 
       if (juegosEncontrados.length === 0) {
         const mensaje = document.createElement("p");
@@ -246,14 +261,14 @@
         juegosEncontrados.forEach(juego => {
           const juegoEncontrado = document.createElement("div");
           juegoEncontrado.classList.add("juego");
-          juegoEncontrado.textContent = juego;
-          juegoEncontrado.addEventListener("click", function() {
-            if (juego === "Kasper") {
-              window.location.href = "Kasper.html";
-            } else {
-              window.location.href = juego + ".html";
-            }
-          });
+          
+          juegoEncontrado.innerHTML = `
+            <a href="${juego.nombre}.html">
+              <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
+              <div class="juego-info">${juego.nombre}</div>
+            </a>
+          `;
+          
           resultados.appendChild(juegoEncontrado);
         });
       }
