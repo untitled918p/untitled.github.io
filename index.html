@@ -124,12 +124,17 @@
       border: 2px solid #fff;
       border-radius: 10px;
       margin-bottom: 10px;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s, transform 0.3s; /* Añadido para el efecto de agrandamiento */
       cursor: pointer;
       background-color: #444;
       box-sizing: border-box;
       text-align: center;
       width: 120px; /* Ajusta el ancho */
+    }
+
+    .juego:hover {
+      background-color: #555;
+      transform: scale(1.05); /* Efecto de agrandamiento */
     }
 
     .juego span {
@@ -163,12 +168,6 @@
       padding: 10px;
     }
 
-    .untitled1 a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-    }
-
     .photo-container img {
       width: 40px;
       height: 40px;
@@ -197,88 +196,86 @@
 </head>
 <body>
 
-  <header>
-    <nav class="menu-container">
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Página oficial</a></li>
-        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-        <li id="profile-photo-container" class="photo-container"></li>
-      </ul>
-    </nav>
-    <div class="header">
-      <h2>Untitled(Games)</h2>
-      <div class="search-container">
-        <input type="text" id="buscador" placeholder="Buscar juegos...">
-      </div>
+  <div class="menu-container">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="Contacto.html">Contacto</a></li>
+      <li><a href="Informacion.html">Página oficial</a></li>
+      <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+      <li id="profile-photo-container" class="photo-container"></li>
+    </ul>
+  </div>
+
+  <div class="header">
+    <h2>Untitled(Games)</h2>
+    <div class="search-container">
+      <input type="text" id="buscador" placeholder="Buscar juegos...">
     </div>
-  </header>
+  </div>
 
-  <main id="resultados"></main>
+  <div id="resultados"></div>
 
-  <section class="untitled1">
-    <div class="juego">
+  <div class="untitled1">
+    <div>
+      <span>Untitled</span>
       <a href="UntitledBeta.html">
-        <span>Untitled</span>
         <img src="icono.png" alt="Icono Juego 1">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Untitled 2</span>
       <a href="Untitled2.html">
-        <span>Untitled 2</span>
         <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Jump To Survive</span>
       <a href="Jump.html">
-        <span>Jump To Survive</span>
         <img src="iconojump.png" alt="Icono Juego 3">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Jump Prologue</span>
       <a href="JumpPrologue.html">
-        <span>Jump Prologue</span>
         <img src="IconoJump2.png" alt="Icono Juego 4">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Kasper</span>
       <a href="Kasper.html">
-        <span>Kasper</span>
         <img src="KasperIcono.png" alt="Icono Juego 5">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Survive In 2d</span>
       <a href="SurviveIn2D.html">
-        <span>Survive In 2D</span>
         <img src="In2DIcon.png" alt="Icono Juego 6">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Viktor</span>
       <a href="Viktor.html">
-        <span>Viktor</span>
         <img src="ViktorIcon.png" alt="Icono Juego 7">
       </a>
     </div>
-    <div class="juego">
+    <div>
+      <span>Untitled 3</span>
       <a href="Untitled3.html">
-        <span>Untitled 3</span>
         <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
       </a>
     </div>
-  </section>
+  </div>
 
-  <script src="perfil.js"></script>
   <script>
     const juegos = [
-      { nombre: "UntitledBeta", imagen: "icono.png" },
-      { nombre: "Untitled2", imagen: "IconoDeUntitled2.png" },
-      { nombre: "Jump", imagen: "iconojump.png" },
-      { nombre: "JumpPrologue", imagen: "IconoJump2.png" },
+      { nombre: "Untitled", imagen: "icono.png" },
+      { nombre: "Untitled 2", imagen: "IconoDeUntitled2.png" },
+      { nombre: "Jump To Survive", imagen: "iconojump.png" },
+      { nombre: "Jump Prologue", imagen: "IconoJump2.png" },
       { nombre: "Kasper", imagen: "KasperIcono.png" },
-      { nombre: "SurviveIn2D", imagen: "In2DIcon.png" },
+      { nombre: "Survive In 2d", imagen: "In2DIcon.png" },
       { nombre: "Viktor", imagen: "ViktorIcon.png" },
-      { nombre: "Untitled3", imagen: "Untitled3Icon.jpg" }
+      { nombre: "Untitled 3", imagen: "Untitled3Icon.jpg" }
     ];
 
     function buscarJuego() {
@@ -292,25 +289,26 @@
       }
 
       const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
-      const resultadosLimitados = juegosEncontrados.slice(0, 3);
 
-      if (resultadosLimitados.length === 0) {
+      if (juegosEncontrados.length === 0) {
         const mensaje = document.createElement("p");
         mensaje.textContent = "No se encontraron juegos con ese nombre.";
         resultados.appendChild(mensaje);
       } else {
-        resultadosLimitados.forEach(juego => {
+        juegosEncontrados.slice(0, 3).forEach(juego => {
           const juegoEncontrado = document.createElement("div");
           juegoEncontrado.classList.add("resultados-busqueda");
 
-          juegoEncontrado.innerHTML = `
-            <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
-            <div class="info">${juego.nombre}</div>
-          `;
+          const imagen = document.createElement("img");
+          imagen.src = juego.imagen;
+          imagen.alt = juego.nombre;
 
-          juegoEncontrado.addEventListener("click", function() {
-            window.location.href = `${juego.nombre}.html`;
-          });
+          const info = document.createElement("div");
+          info.classList.add("info");
+          info.textContent = juego.nombre;
+
+          juegoEncontrado.appendChild(imagen);
+          juegoEncontrado.appendChild(info);
 
           resultados.appendChild(juegoEncontrado);
         });
@@ -319,6 +317,7 @@
 
     document.getElementById("buscador").addEventListener("input", buscarJuego);
 
+    // Función para mostrar la foto de perfil en el menú de navegación
     function displayUserPhoto() {
       const userData = JSON.parse(localStorage.getItem('user'));
       if (userData && userData.photo) {
@@ -327,6 +326,7 @@
       }
     }
 
+    // Llamar a la función para mostrar la foto de perfil al cargar la página
     window.onload = displayUserPhoto;
   </script>
 
