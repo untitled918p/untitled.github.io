@@ -53,7 +53,7 @@
       background-image: url('Fondo.png');
       background-size: cover;
       background-position: center;
-      height: 20vh; /* Usar vh para un tamaño relativo a la ventana */
+      height: 20vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -74,7 +74,7 @@
     }
 
     #buscador {
-      width: 100%; /* Ocupa el 100% del espacio disponible en su contenedor */
+      width: 100%;
       padding: 15px 20px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -92,10 +92,28 @@
     }
 
     .juego {
+      display: flex;
+      align-items: center;
       padding: 10px;
-      border-bottom: 1px solid #555;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
       transition: background-color 0.3s;
       cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .juego img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      margin-right: 15px;
+    }
+
+    .juego-info {
+      color: #fff;
+      font-size: 18px;
+      flex-grow: 1;
     }
 
     .juego:hover {
@@ -119,22 +137,6 @@
       color: #fff;
       text-decoration: none;
       display: block;
-      padding: 10px;
-      background-color: #333;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .untitled1 a:hover {
-      background-color: #444;
-      transform: scale(1.05);
-    }
-
-    .untitled1 img {
-      width: 100px;
-      height: 100px;
-      border-radius: 10px;
     }
 
     .photo-container img {
@@ -146,7 +148,7 @@
 
     @media (max-width: 768px) {
       .header {
-        height: 15vh; /* Ajusta la altura del encabezado en pantallas pequeñas */
+        height: 15vh;
       }
 
       #buscador {
@@ -186,51 +188,67 @@
   <main id="resultados"></main>
 
   <section class="untitled1">
-    <div>
-      <a href="UntitledBeta.html">Untitled<br>
+    <div class="juego">
+      <a href="UntitledBeta.html">
         <img src="icono.png" alt="Icono Juego 1">
+        <span>Untitled</span>
       </a>
     </div>
-    <div>
-      <a href="Untitled2.html">Untitled 2<br>
+    <div class="juego">
+      <a href="Untitled2.html">
         <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+        <span>Untitled 2</span>
       </a>
     </div>
-    <div>
-      <a href="Jump.html">Jump To Survive<br>
+    <div class="juego">
+      <a href="Jump.html">
         <img src="iconojump.png" alt="Icono Juego 3">
+        <span>Jump To Survive</span>
       </a>
     </div>
-    <div>
-      <a href="JumpPrologue.html">Jump Prologue<br>
+    <div class="juego">
+      <a href="JumpPrologue.html">
         <img src="IconoJump2.png" alt="Icono Juego 4">
+        <span>Jump Prologue</span>
       </a>
     </div>
-    <div>
-      <a href="Kasper.html">Kasper<br>
+    <div class="juego">
+      <a href="Kasper.html">
         <img src="KasperIcono.png" alt="Icono Juego 5">
+        <span>Kasper</span>
       </a>
     </div>
-    <div>
-      <a href="SurviveIn2D.html">Survive In 2d<br>
+    <div class="juego">
+      <a href="SurviveIn2D.html">
         <img src="In2DIcon.png" alt="Icono Juego 6">
+        <span>Survive In 2d</span>
       </a>
     </div>
-    <div>
-      <a href="Viktor.html">Viktor<br>
+    <div class="juego">
+      <a href="Viktor.html">
         <img src="ViktorIcon.png" alt="Icono Juego 7">
+        <span>Viktor</span>
       </a>
     </div>
-    <div>
-      <a href="Untitled3.html">Untitled 3<br>
+    <div class="juego">
+      <a href="Untited3.html">
         <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+        <span>Untitled 3</span>
       </a>
     </div>
   </section>
 
   <script src="perfil.js"></script>
   <script>
-    const juegos = ["UntitledBeta", "Untitled2", "Jump", "JumpPrologue", "Kasper", "SurviveIn2D", "Viktor", "Untitled3"];
+    const juegos = [
+      { nombre: "UntitledBeta", imagen: "icono.png" },
+      { nombre: "Untitled2", imagen: "IconoDeUntitled2.png" },
+      { nombre: "Jump", imagen: "iconojump.png" },
+      { nombre: "JumpPrologue", imagen: "IconoJump2.png" },
+      { nombre: "Kasper", imagen: "KasperIcono.png" },
+      { nombre: "SurviveIn2D", imagen: "In2DIcon.png" },
+      { nombre: "Viktor", imagen: "ViktorIcon.png" }
+    ];
 
     function buscarJuego() {
       const consulta = document.getElementById("buscador").value.toLowerCase();
@@ -242,7 +260,7 @@
         return;
       }
 
-      const juegosEncontrados = juegos.filter(juego => juego.toLowerCase().startsWith(consulta));
+      const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().startsWith(consulta));
 
       if (juegosEncontrados.length === 0) {
         const mensaje = document.createElement("p");
@@ -252,14 +270,14 @@
         juegosEncontrados.forEach(juego => {
           const juegoEncontrado = document.createElement("div");
           juegoEncontrado.classList.add("juego");
-          juegoEncontrado.textContent = juego;
-          juegoEncontrado.addEventListener("click", function() {
-            if (juego === "Kasper") {
-              window.location.href = "Kasper.html";
-            } else {
-              window.location.href = juego + ".html";
-            }
-          });
+          
+          juegoEncontrado.innerHTML = `
+            <a href="${juego.nombre}.html">
+              <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
+              <span class="juego-info">${juego.nombre}</span>
+            </a>
+          `;
+          
           resultados.appendChild(juegoEncontrado);
         });
       }
