@@ -91,6 +91,28 @@
       padding: 0 20px;
     }
 
+    .resultados-busqueda {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #444;
+    }
+
+    .resultados-busqueda img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+
+    .resultados-busqueda .info {
+      color: #fff;
+      font-size: 18px;
+    }
+
     .juego {
       display: flex;
       flex-direction: column;
@@ -117,28 +139,6 @@
       width: 100px;
       height: 100px;
       border-radius: 10px;
-    }
-
-    .resultados-busqueda {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background-color: #444;
-    }
-
-    .resultados-busqueda img {
-      width: 50px;
-      height: 50px;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
-
-    .resultados-busqueda .info {
-      color: #fff;
-      font-size: 18px;
     }
 
     .untitled1 {
@@ -241,7 +241,7 @@
     </div>
     <div class="juego">
       <a href="SurviveIn2D.html">
-        <span>Survive In 2d</span>
+        <span>Survive In 2D</span>
         <img src="In2DIcon.png" alt="Icono Juego 6">
       </a>
     </div>
@@ -252,7 +252,7 @@
       </a>
     </div>
     <div class="juego">
-      <a href="Untited3.html">
+      <a href="Untitled3.html">
         <span>Untitled 3</span>
         <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
       </a>
@@ -268,7 +268,8 @@
       { nombre: "JumpPrologue", imagen: "IconoJump2.png" },
       { nombre: "Kasper", imagen: "KasperIcono.png" },
       { nombre: "SurviveIn2D", imagen: "In2DIcon.png" },
-      { nombre: "Viktor", imagen: "ViktorIcon.png" }
+      { nombre: "Viktor", imagen: "ViktorIcon.png" },
+      { nombre: "Untitled3", imagen: "Untitled3Icon.jpg" }
     ];
 
     function buscarJuego() {
@@ -281,14 +282,18 @@
         return;
       }
 
+      // Filtrar los juegos que coincidan con la búsqueda
       const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
 
-      if (juegosEncontrados.length === 0) {
+      // Mostrar solo los primeros 3 resultados
+      const resultadosLimitados = juegosEncontrados.slice(0, 3);
+
+      if (resultadosLimitados.length === 0) {
         const mensaje = document.createElement("p");
         mensaje.textContent = "No se encontraron juegos con ese nombre.";
         resultados.appendChild(mensaje);
       } else {
-        juegosEncontrados.forEach(juego => {
+        resultadosLimitados.forEach(juego => {
           const juegoEncontrado = document.createElement("div");
           juegoEncontrado.classList.add("resultados-busqueda");
 
@@ -318,5 +323,6 @@
 
     window.onload = displayUserPhoto;
   </script>
+
 </body>
 </html>
