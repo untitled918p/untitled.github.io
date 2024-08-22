@@ -92,11 +92,11 @@
     }
 
     .juego {
-      padding: 0;
-      border: 2px solid #fff;
-      border-radius: 10px;
       display: flex;
       align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
       margin-bottom: 10px;
       transition: background-color 0.3s;
       cursor: pointer;
@@ -104,14 +104,15 @@
     }
 
     .juego img {
-      display: block;
-      width: 100px; /* Ajusta el tamaño de las imágenes en los resultados */
+      width: 100px;
       height: 100px;
       border-radius: 10px;
+      margin-right: 15px;
     }
 
     .juego-info {
-      margin-left: 10px;
+      color: #fff;
+      font-size: 18px;
       flex-grow: 1;
     }
 
@@ -188,43 +189,51 @@
 
   <section class="untitled1">
     <div class="juego">
-      <a href="UntitledBeta.html">Untitled<br>
+      <a href="UntitledBeta.html">
         <img src="icono.png" alt="Icono Juego 1">
+        <span>Untitled</span>
       </a>
     </div>
     <div class="juego">
-      <a href="Untitled2.html">Untitled 2<br>
+      <a href="Untitled2.html">
         <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+        <span>Untitled 2</span>
       </a>
     </div>
     <div class="juego">
-      <a href="Jump.html">Jump To Survive<br>
+      <a href="Jump.html">
         <img src="iconojump.png" alt="Icono Juego 3">
+        <span>Jump To Survive</span>
       </a>
     </div>
     <div class="juego">
-      <a href="JumpPrologue.html">Jump Prologue<br>
+      <a href="JumpPrologue.html">
         <img src="IconoJump2.png" alt="Icono Juego 4">
+        <span>Jump Prologue</span>
       </a>
     </div>
     <div class="juego">
-      <a href="Kasper.html">Kasper<br>
+      <a href="Kasper.html">
         <img src="KasperIcono.png" alt="Icono Juego 5">
+        <span>Kasper</span>
       </a>
     </div>
     <div class="juego">
-      <a href="SurviveIn2D.html">Survive In 2d<br>
+      <a href="SurviveIn2D.html">
         <img src="In2DIcon.png" alt="Icono Juego 6">
+        <span>Survive In 2d</span>
       </a>
     </div>
     <div class="juego">
-      <a href="Viktor.html">Viktor<br>
+      <a href="Viktor.html">
         <img src="ViktorIcon.png" alt="Icono Juego 7">
+        <span>Viktor</span>
       </a>
     </div>
     <div class="juego">
-      <a href="Untitled3.html">Untitled 3<br>
+      <a href="Untited3.html">
         <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+        <span>Untitled 3</span>
       </a>
     </div>
   </section>
@@ -265,7 +274,7 @@
           juegoEncontrado.innerHTML = `
             <a href="${juego.nombre}.html">
               <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
-              <div class="juego-info">${juego.nombre}</div>
+              <span class="juego-info">${juego.nombre}</span>
             </a>
           `;
           
