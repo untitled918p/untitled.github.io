@@ -270,64 +270,53 @@
 
   <script src="perfil.js"></script>
   <script>
-    const juegos = [
-      { nombre: "UntitledBeta", imagen: "icono.png" },
-      { nombre: "Untitled2", imagen: "IconoDeUntitled2.png" },
-      { nombre: "Jump", imagen: "iconojump.png" },
-      { nombre: "JumpPrologue", imagen: "IconoJump2.png" },
-      { nombre: "Kasper", imagen: "KasperIcono.png" },
-      { nombre: "SurviveIn2D", imagen: "In2DIcon.png" },
-      { nombre: "Viktor", imagen: "ViktorIcon.png" },
-      { nombre: "Untitled3", imagen: "Untitled3Icon.jpg" }
-    ];
+   document.addEventListener("DOMContentLoaded", () => {
+  const juegos = Array.from(document.querySelectorAll('.juego')).map(juego => {
+    const nombre = juego.querySelector('span').textContent.trim();
+    const imagen = juego.querySelector('img').src;
+    const enlace = juego.querySelector('a').href;
+    
+    return { nombre, imagen, enlace };
+  });
 
-    function buscarJuego() {
-      const consulta = document.getElementById("buscador").value.toLowerCase();
-      const resultados = document.getElementById("resultados");
+  function buscarJuego() {
+    const consulta = document.getElementById("buscador").value.toLowerCase();
+    const resultados = document.getElementById("resultados");
 
-      resultados.innerHTML = "";
+    resultados.innerHTML = "";
 
-      if (consulta.trim() === "") {
-        return;
-      }
+    if (consulta.trim() === "") {
+      return;
+    }
 
-      const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
-      const resultadosLimitados = juegosEncontrados.slice(0, 3);
+    const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
+    const resultadosLimitados = juegosEncontrados.slice(0, 5);
 
-      if (resultadosLimitados.length === 0) {
-        const mensaje = document.createElement("p");
-        mensaje.textContent = "No se encontraron juegos con ese nombre.";
-        resultados.appendChild(mensaje);
-      } else {
-        resultadosLimitados.forEach(juego => {
-          const juegoEncontrado = document.createElement("div");
-          juegoEncontrado.classList.add("resultados-busqueda");
+    if (resultadosLimitados.length === 0) {
+      const mensaje = document.createElement("p");
+      mensaje.textContent = "No se encontraron juegos con ese nombre.";
+      resultados.appendChild(mensaje);
+    } else {
+      resultadosLimitados.forEach(juego => {
+        const juegoEncontrado = document.createElement("div");
+        juegoEncontrado.classList.add("resultados-busqueda");
 
-          juegoEncontrado.innerHTML = `
-            <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
-            <div class="info">${juego.nombre}</div>
-          `;
+        juegoEncontrado.innerHTML = `
+          <img src="${juego.imagen}" alt="Icono ${juego.nombre}">
+          <div class="info">${juego.nombre}</div>
+        `;
 
-          juegoEncontrado.addEventListener("click", function() {
-            window.location.href = `${juego.nombre}.html`;
-          });
-
-          resultados.appendChild(juegoEncontrado);
+        juegoEncontrado.addEventListener("click", function() {
+          window.location.href = juego.enlace;
         });
-      }
+
+        resultados.appendChild(juegoEncontrado);
+      });
     }
+  }
 
-    document.getElementById("buscador").addEventListener("input", buscarJuego);
-
-    function displayUserPhoto() {
-      const userData = JSON.parse(localStorage.getItem('user'));
-      if (userData && userData.photo) {
-        const profilePhotoContainer = document.getElementById('profile-photo-container');
-        profilePhotoContainer.innerHTML = `<img src="${userData.photo}" alt="Foto de perfil de usuario">`;
-      }
-    }
-
-    window.onload = displayUserPhoto;
+  document.getElementById("buscador").addEventListener("input", buscarJuego);
+});
   </script>
 
 </body>
