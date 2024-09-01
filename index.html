@@ -7,6 +7,10 @@
   <style>
     body {
       background: linear-gradient(135deg, #333, #555);
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
 
     .menu-container {
@@ -104,7 +108,6 @@
       height: 50px;
       border-radius: 5px;
       margin-right: 15px;
-      /* Asegúrate de que no tenga estilos diferentes aquí */
     }
 
     .resultados-busqueda .info {
@@ -138,8 +141,6 @@
     .juego img {
       width: 100px;
       height: 100px;
-      border-radius: 10px;
-      transition: transform 0.3s ease-in-out;
     }
 
     .juego:hover {
@@ -177,38 +178,27 @@
       border: 2px solid white;
     }
 
-    .categorias-container {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .categorias-container button {
-      background-color: #444;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-
-    .categorias-container .panel-categorias {
+    .categoria-panel {
       display: none;
-      flex-direction: column;
       position: absolute;
+      bottom: 20px;
+      left: 20px;
       background-color: #444;
-      border: 2px solid #fff;
+      border: 1px solid #555;
       border-radius: 5px;
       padding: 10px;
+      z-index: 1000;
     }
 
-    .categorias-container .panel-categorias span {
-      margin: 5px 0;
+    .categoria {
+      padding: 10px;
+      color: #fff;
       cursor: pointer;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
     }
 
-    .categorias-container .panel-categorias span:hover {
+    .categoria:hover {
       background-color: #555;
     }
 
@@ -252,18 +242,17 @@
   </header>
 
   <main id="resultados"></main>
-
-  <div class="categorias-container">
-    <button id="categoriaBtn">Categorías</button>
-    <div id="categoriaPanel" class="panel-categorias">
-      <span data-etiqueta="accion">Acción</span>
-      <span data-etiqueta="zombies">Zombies</span>
-      <span data-etiqueta="robots">Robots</span>
-      <span data-etiqueta="carreras">Carreras</span>
-    </div>
+  
+  <button id="categoriaBtn">Categorías</button>
+  <div class="categoria-panel" id="categoriaPanel">
+    <div class="categoria" data-etiqueta="accion">Acción</div>
+    <div class="categoria" data-etiqueta="zombies">Zombies</div>
+    <div class="categoria" data-etiqueta="robots">Robots</div>
+    <div class="categoria" data-etiqueta="carreras">Carreras</div>
   </div>
 
- <section class="untitled1">
+
+<section class="untitled1">
     <div class="juego" data-etiquetas="accion,zombies">
       <a href="UntitledBeta.html">
         <span>Untitled</span>
@@ -314,6 +303,13 @@
     </div>
   </section>
 
+  <div class="categoria-panel" id="categoriaPanel">
+    <div class="categoria" data-etiqueta="accion">Acción</div>
+    <div class="categoria" data-etiqueta="zombies">Zombies</div>
+    <div class="categoria" data-etiqueta="robots">Robots</div>
+    <div class="categoria" data-etiqueta="carreras">Carreras</div>
+  </div>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const juegos = Array.from(document.querySelectorAll('.juego')).map(juego => {
@@ -325,92 +321,69 @@
         };
       });
 
+      // Función para buscar juegos
       function buscarJuego() {
         const consulta = document.getElementById("buscador").value.toLowerCase();
         const resultados = document.getElementById("resultados");
-        const categoriasContainer = document.querySelector(".categorias-container");
+        const categoriaPanel = document.getElementById("categoriaPanel");
         const categoriaBtn = document.getElementById("categoriaBtn");
         
         resultados.innerHTML = "";
-        categoriasContainer.style.display = "flex";
+        categoriaPanel.style.display = "none";
+        categoriaBtn.style.display = "none";
         
         if (consulta.trim() === "") {
-          resultados.innerHTML = juegos.map(juego => `
-            <div class="resultados-busqueda">
-              <img src="${juego.imagen}" alt="${juego.nombre}">
-              <div class="info">
-                <a href="${juego.enlace}">${juego.nombre}</a>
-              </div>
-            </div>
-          `).join('');
+          document.querySelectorAll('.juego').forEach(juego => juego.style.display = "block");
           return;
         }
 
         const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
 
         if (juegosEncontrados.length > 0) {
-          resultados.innerHTML = juegosEncontrados.map(juego => `
-            <div class="resultados-busqueda">
-              <img src="${juego.imagen}" alt="${juego.nombre}">
-              <div class="info">
-                <a href="${juego.enlace}">${juego.nombre}</a>
-              </div>
-            </div>
-          `).join('');
+          juegosEncontrados.forEach(juego => {
+            const juegoDiv = document.querySelector(`.juego img[src="${juego.imagen}"]`).parentElement;
+            juegoDiv.style.display = "block";
+          });
+          document.querySelectorAll('.juego').forEach(juego => {
+            if (!juegosEncontrados.find(j => j.imagen === juego.querySelector('img').src)) {
+              juego.style.display = "none";
+            }
+          });
         } else {
-          resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+          document.querySelectorAll('.juego').forEach(juego => juego.style.display = "none");
         }
-        categoriaBtn.style.display = "none";
+      }
+
+      // Función para filtrar por categoría
+      function filtrarPorCategoria(etiqueta) {
+        document.querySelectorAll('.juego').forEach(juego => {
+          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
+          juego.style.display = etiquetas.includes(etiqueta) ? "block" : "none";
+        });
       }
 
       document.getElementById("buscador").addEventListener("input", buscarJuego);
 
       document.getElementById("categoriaBtn").addEventListener("click", function() {
         const categoriaPanel = document.getElementById("categoriaPanel");
-        categoriaPanel.style.display = categoriaPanel.style.display === "flex" ? "none" : "flex";
+        categoriaPanel.style.display = categoriaPanel.style.display === "block" ? "none" : "block";
       });
 
-      document.querySelectorAll("#categoriaPanel span").forEach(categoria => {
+      document.querySelectorAll(".categoria-panel .categoria").forEach(categoria => {
         categoria.addEventListener("click", function() {
           const etiqueta = this.getAttribute("data-etiqueta");
-          const categoriasContainer = document.querySelector(".categorias-container");
-          const categoriaBtn = document.getElementById("categoriaBtn");
-
-          const juegosFiltrados = juegos.filter(juego => juego.etiquetas.includes(etiqueta));
-          const resultados = document.getElementById("resultados");
-
-          resultados.innerHTML = juegosFiltrados.map(juego => `
-            <div class="resultados-busqueda">
-              <img src="${juego.imagen}" alt="${juego.nombre}">
-              <div class="info">
-                <a href="${juego.enlace}">${juego.nombre}</a>
-              </div>
-            </div>
-          `).join('');
-          categoriasContainer.style.display = "flex";
-          categoriaBtn.style.display = "none";
+          filtrarPorCategoria(etiqueta);
+          document.getElementById("categoriaPanel").style.display = "none";
         });
       });
 
-      document.addEventListener("click", function(event) {
-        const categoriaPanel = document.getElementById("categoriaPanel");
-        const categoriaBtn = document.getElementById("categoriaBtn");
-
-        if (!categoriaPanel.contains(event.target) && event.target !== categoriaBtn) {
-          categoriaPanel.style.display = "none";
-        }
-      });
-
+      // Ocultar el botón de categorías al buscar y mostrarlo al cerrar el buscador
       document.getElementById("buscador").addEventListener("input", function() {
-        const categoriaBtn = document.getElementById("categoriaBtn");
-        categoriaBtn.style.display = "none";
+        document.getElementById("categoriaBtn").style.display = "none";
       });
 
       document.getElementById("buscador").addEventListener("blur", function() {
-        const categoriaBtn = document.getElementById("categoriaBtn");
-        categoriaBtn.style.display = "flex";
+        document.getElementById("categoriaBtn").style.display = "block";
       });
     });
   </script>
-</body>
-</html>
