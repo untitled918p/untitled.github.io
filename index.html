@@ -12,7 +12,6 @@
       font-family: Arial, sans-serif;
       color: #fff;
     }
-
     .menu-container {
       background-color: #444;
       overflow: hidden;
@@ -22,18 +21,15 @@
       display: flex;
       justify-content: center;
     }
-
     .menu-container ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
       display: flex;
     }
-
     .menu-container li {
       margin: 0 2%;
     }
-
     .menu-container li a {
       display: inline-block;
       color: #fff;
@@ -43,12 +39,10 @@
       border-radius: 5px;
       transition: background-color 0.3s, transform 0.3s;
     }
-
     .menu-container li a:hover {
       background-color: #555;
       transform: scale(1.1);
     }
-
     .header {
       background-image: url('Fondo.png');
       background-size: cover;
@@ -59,19 +53,16 @@
       align-items: center;
       padding: 0 2%;
     }
-
     .header img {
       height: auto;
       max-height: 75px;
       width: auto;
     }
-
     .search-container {
       flex-grow: 1;
       display: flex;
       justify-content: center;
     }
-
     #buscador {
       width: 100%;
       padding: 15px 20px;
@@ -83,7 +74,6 @@
       background-color: #444;
       color: #fff;
     }
-
     #resultados {
       max-width: 90%;
       margin: 20px auto;
@@ -136,7 +126,6 @@
     .resultados-busqueda:hover {
       transform: scale(1.05);
     }
-
     .juego {
       display: flex;
       flex-direction: column;
@@ -152,23 +141,19 @@
       text-align: center;
       width: 120px;
     }
-
     .juego span {
       margin-bottom: 10px;
       color: #fff;
       font-size: 16px;
       display: block;
     }
-
     .juego img {
       width: 100px;
       height: 100px;
     }
-
     .juego:hover {
       transform: scale(1.1);
     }
-
     .untitled1 {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -177,7 +162,6 @@
       max-width: 100%;
       margin: 0 auto;
     }
-
     .untitled1 div {
       text-align: center;
       border: 2px solid #fff;
@@ -186,20 +170,17 @@
       background-color: #333;
       padding: 10px;
     }
-
     .untitled1 a {
       color: #fff;
       text-decoration: none;
       display: block;
     }
-
     .photo-container img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       border: 2px solid white;
     }
-
     #categoriaBtn {
       background-color: #444;
       color: #fff;
@@ -211,11 +192,9 @@
       margin-top: 10px;
       transition: background-color 0.3s;
     }
-
     #categoriaBtn:hover {
       background-color: #555;
     }
-
     .categoria-panel {
       display: none;
       position: absolute;
@@ -227,7 +206,6 @@
       z-index: 1000;
       flex-direction: column;
     }
-
     .categoria {
       padding: 10px;
       color: #fff;
@@ -235,31 +213,25 @@
       margin-bottom: 5px;
       transition: background-color 0.3s;
     }
-
     .categoria:hover {
       background-color: #555;
     }
-
     .search-results-container {
       background-color: #000;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
     }
-
     @media (max-width: 768px) {
       .header {
         height: 15vh;
       }
-
       #buscador {
         width: 80%;
       }
-
       .menu-container li {
         margin: 0 5px;
       }
-
       .untitled1 {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       }
@@ -267,7 +239,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <nav class="menu-container">
       <ul>
@@ -285,7 +256,6 @@
       </div>
     </div>
   </header>
-
   <div id="resultados" class="search-results-container"></div>
   
   <button id="categoriaBtn">Categorías</button>
@@ -296,7 +266,6 @@
     <div class="categoria" data-etiqueta="robots">Robots</div>
     <div class="categoria" data-etiqueta="carreras">Carreras</div>
   </div>
-
   <section class="untitled1">
     <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="UntitledBeta.html">
@@ -316,7 +285,6 @@
         <img src="iconojump.png" alt="Icono Juego 3">
       </a>
     </div>
-
 <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="JumpPrologue.html">
         <span>Jump Prologue</span>
@@ -350,7 +318,6 @@
       </a>
     </div>
   </section>
-
   <script>
     document.getElementById('buscador').addEventListener('input', function() {
   const query = this.value.toLowerCase();
@@ -358,46 +325,38 @@
   const resultados = document.getElementById('resultados');
   resultados.innerHTML = '';  // Limpiar resultados anteriores
   let count = 0;
-
   if (query.trim() === '') {
     resultados.style.display = 'none';  // Ocultar resultados si no hay texto
     document.getElementById('categoriaBtn').style.display = 'inline-block';
     return;
   }
-
   juegos.forEach(juego => {
     const titulo = juego.querySelector('span').textContent.toLowerCase();
     if (titulo.includes(query) && count < 4) {
       const clon = juego.cloneNode(true);
       clon.classList.remove('juego');  // Remover clase 'juego' para no aplicar el hover y otros estilos
       clon.classList.add('resultados-busqueda');
-
       // Ajuste del formato
       const img = clon.querySelector('img');
       const span = clon.querySelector('span');
       const infoContainer = document.createElement('div');
       infoContainer.classList.add('info');
       infoContainer.appendChild(span);
-
       clon.innerHTML = '';
       clon.appendChild(img);
       clon.appendChild(infoContainer);
-
       resultados.appendChild(clon);
       count++;
     }
   });
-
   resultados.style.display = count > 0 ? 'block' : 'none'; // Mostrar resultados solo si hay al menos uno
   document.getElementById('categoriaBtn').style.display = query ? 'none' : 'inline-block';
 });
-
 // Cerrar el panel de resultados si se hace clic fuera del buscador
 document.addEventListener('click', function(event) {
   const buscador = document.getElementById('buscador');
   const resultados = document.getElementById('resultados');
   const categoriaBtn = document.getElementById('categoriaBtn');
-
   if (!buscador.contains(event.target) && !resultados.contains(event.target) && !categoriaBtn.contains(event.target)) {
     resultados.style.display = 'none';
   }
