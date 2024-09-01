@@ -199,6 +199,7 @@
       padding: 10px 20px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
+      position: relative; /* Asegura que el panel de categorías se posicione correctamente */
     }
 
     .categoria-panel .categoria-btn {
@@ -221,8 +222,8 @@
       background-color: #555;
       padding: 10px;
       position: absolute;
-      top: 60px; /* Ajusta según sea necesario */
-      left: 20px; /* Ajusta según sea necesario */
+      top: 100%; /* Coloca el panel justo debajo del botón */
+      left: 0;
       width: 200px; /* Ajusta según sea necesario */
       z-index: 10;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
