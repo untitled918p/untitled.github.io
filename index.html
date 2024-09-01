@@ -7,8 +7,6 @@
   <style>
     body {
       background: linear-gradient(135deg, #333, #555);
-      font-family: Arial, sans-serif;
-      color: #fff;
     }
 
     .menu-container {
@@ -82,35 +80,59 @@
       color: #fff;
     }
 
-    #resultados {
-      max-width: 90%;
-      margin: 20px auto;
-      padding: 0 20px;
-    }
-
-    .resultados-busqueda {
+    .categoria-container {
       display: flex;
       align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    #categoria-btn {
       background-color: #444;
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .resultados-busqueda img {
-      width: 50px;
-      height: 50px;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
-
-    .resultados-busqueda .info {
       color: #fff;
-      font-size: 18px;
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    #categoria-btn:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
+
+    #categoria-panel {
+      display: none;
+      position: absolute;
+      background-color: #444;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      top: 70px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    #categoria-panel span {
+      display: block;
+      color: #fff;
+      padding: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #categoria-panel span:hover {
+      background-color: #555;
+    }
+
+    .untitled1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      padding: 20px;
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     .juego {
@@ -144,45 +166,6 @@
 
     .juego:hover {
       transform: scale(1.1);
-    }
-
-    .untitled1 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      padding: 20px;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-
-    .categoria-panel {
-      display: none;
-      background-color: #444;
-      padding: 10px;
-      border-radius: 5px;
-      position: absolute;
-      margin-top: 5px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .categoria-panel span {
-      display: block;
-      margin-bottom: 5px;
-      color: white;
-      cursor: pointer;
-    }
-
-    .categoria-btn {
-      background-color: #444;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .categoria-btn:hover {
-      background-color: #555;
     }
 
     @media (max-width: 768px) {
@@ -222,141 +205,130 @@
         <input type="text" id="buscador" placeholder="Buscar juegos...">
       </div>
     </div>
+    <div class="categoria-container">
+      <button id="categoria-btn">Categorías</button>
+      <div id="categoria-panel">
+        <span data-etiqueta="acción">Acción</span>
+        <span data-etiqueta="aventura">Aventura</span>
+        <span data-etiqueta="zombies">Zombies</span>
+        <span data-etiqueta="robots">Robots</span>
+        <span data-etiqueta="carreras">Carreras</span>
+      </div>
+    </div>
   </header>
 
   <main id="resultados"></main>
 
-  <div style="display: flex; justify-content: flex-start; margin-top: 20px;">
-    <button class="categoria-btn" id="categoria-btn">Categorías</button>
-  </div>
+  <section class="untitled1">
+    <div class="juego" data-etiquetas="acción,zombies">
+      <a href="UntitledBeta.html">
+        <span>Untitled</span>
+        <img src="icono.png" alt="Icono Juego 1">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="acción,aventura">
+      <a href="Untitled2.html">
+        <span>Untitled 2</span>
+        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="acción">
+      <a href="Jump.html">
+        <span>Jump To Survive</span>
+        <img src="iconojump.png" alt="Icono Juego 3">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="aventura">
+      <a href="JumpPrologue.html">
+        <span>Jump Prologue</span>
+        <img src="IconoJump2.png" alt="Icono Juego 4">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="acción,robots">
+      <a href="Kasper.html">
+        <span>Kasper</span>
+        <img src="KasperIcono.png" alt="Icono Juego 5">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="carreras">
+      <a href="SurviveIn2D.html">
+        <span>Survive In 2D</span>
+        <img src="In2DIcon.png" alt="Icono Juego 6">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="acción,robots">
+      <a href="Viktor.html">
+        <span>Viktor</span>
+        <img src="ViktorIcon.png" alt="Icono Juego 7">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="aventura">
+      <a href="Untitled3.html">
+        <span>Untitled 3</span>
+        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+      </a>
+    </div>
+  </section>
 
-  <div class="categoria-panel" id="categoria-panel">
-    <span data-etiqueta="acción">Acción</span>
-    <span data-etiqueta="zombies">Zombies</span>
-    <span data-etiqueta="robots">Robots</span>
-    <span data-etiqueta="carreras">Carreras</span>
-    <span data-etiqueta="aventura">Aventura</span>
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const juegos = Array.from(document.querySelectorAll('.juego'));
+      const categoriaBtn = document.getElementById('categoria-btn');
+      const categoriaPanel = document.getElementById('categoria-panel');
+      const buscador = document.getElementById("buscador");
+      const resultados = document.getElementById("resultados");
 
-<section class="untitled1">
-  <div class="juego" data-etiquetas="acción,zombies">
-    <a href="UntitledBeta.html">
-      <span>Untitled</span>
-      <img src="icono.png" alt="Icono Juego 1">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="acción,aventura">
-    <a href="Untitled2.html">
-      <span>Untitled 2</span>
-      <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="acción">
-    <a href="Jump.html">
-      <span>Jump To Survive</span>
-      <img src="iconojump.png" alt="Icono Juego 3">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="aventura">
-    <a href="JumpPrologue.html">
-      <span>Jump Prologue</span>
-      <img src="IconoJump2.png" alt="Icono Juego 4">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="acción,robots">
-    <a href="Kasper.html">
-      <span>Kasper</span>
-      <img src="KasperIcono.png" alt="Icono Juego 5">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="carreras">
-    <a href="SurviveIn2D.html">
-      <span>Survive In 2D</span>
-      <img src="In2DIcon.png" alt="Icono Juego 6">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="acción,robots">
-    <a href="Viktor.html">
-      <span>Viktor</span>
-      <img src="ViktorIcon.png" alt="Icono Juego 7">
-    </a>
-  </div>
-  <div class="juego" data-etiquetas="aventura">
-    <a href="Untitled3.html">
-      <span>Untitled 3</span>
-      <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
-    </a>
-  </div>
-</section>
+      // Mostrar/Ocultar el panel de categorías al hacer clic en el botón
+      categoriaBtn.addEventListener('click', function() {
+        categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
+      });
 
-<main id="resultados"></main>
+      // Filtrar juegos al hacer clic en una categoría
+      categoriaPanel.addEventListener('click', function(event) {
+        if (event.target.tagName === 'SPAN') {
+          const etiquetaSeleccionada = event.target.getAttribute('data-etiqueta');
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const juegos = Array.from(document.querySelectorAll('.juego')).map(juego => {
-      return {
-        nombre: juego.querySelector('span').textContent.trim(),
-        imagen: juego.querySelector('img').src,
-        enlace: juego.querySelector('a').href,
-        etiquetas: juego.getAttribute('data-etiquetas').split(',')
-      };
-    });
+          // Mostrar solo los juegos que tienen la etiqueta seleccionada
+          juegos.forEach(juego => {
+            juego.style.display = juego.getAttribute('data-etiquetas').split(',').includes(etiquetaSeleccionada) ? 'block' : 'none';
+          });
 
-    const categoriaBtn = document.getElementById('categoria-btn');
-    const categoriaPanel = document.getElementById('categoria-panel');
-    const buscador = document.getElementById("buscador");
-    const resultados = document.getElementById("resultados");
+          // Ocultar el panel de categorías después de la selección
+          categoriaPanel.style.display = 'none';
+        }
+      });
 
-    // Mostrar/Ocultar el panel de categorías al hacer clic en el botón
-    categoriaBtn.addEventListener('click', function() {
-      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
-    });
+      // Función de búsqueda
+      function buscarJuego() {
+        const consulta = buscador.value.toLowerCase();
+        resultados.innerHTML = "";
 
-    // Filtrar juegos al hacer clic en una categoría
-    categoriaPanel.addEventListener('click', function(event) {
-      if (event.target.tagName === 'SPAN') {
-        const etiquetaSeleccionada = event.target.getAttribute('data-etiqueta');
+        if (consulta.trim() === "") {
+          return;
+        }
 
-        // Mostrar solo los juegos que tienen la etiqueta seleccionada
-        juegos.forEach(juego => {
-          juego.element.style.display = juego.etiquetas.includes(etiquetaSeleccionada) ? 'block' : 'none';
-        });
+        const juegosEncontrados = juegos.filter(juego => juego.querySelector('span').textContent.toLowerCase().includes(consulta));
 
-        // Ocultar el panel de categorías después de la selección
-        categoriaPanel.style.display = 'none';
-      }
-    });
-
-    // Función de búsqueda
-    function buscarJuego() {
-      const consulta = buscador.value.toLowerCase();
-      resultados.innerHTML = "";
-
-      if (consulta.trim() === "") {
-        return;
+        if (juegosEncontrados.length > 0) {
+          juegosEncontrados.forEach(juego => {
+            const resultadoDiv = document.createElement('div');
+            resultadoDiv.classList.add('resultados-busqueda');
+            resultadoDiv.innerHTML = `
+              <img src="${juego.querySelector('img').src}" alt="${juego.querySelector('span').textContent}">
+              <div class="info">
+                <a href="${juego.querySelector('a').href}">${juego.querySelector('span').textContent}</a>
+              </div>
+            `;
+            resultados.appendChild(resultadoDiv);
+          });
+        } else {
+          resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+        }
       }
 
-      const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
+      buscador.addEventListener("input", buscarJuego);
+    });
+  </script>
 
-      if (juegosEncontrados.length > 0) {
-        juegosEncontrados.forEach(juego => {
-          const resultadoDiv = document.createElement('div');
-          resultadoDiv.classList.add('resultados-busqueda');
-          resultadoDiv.innerHTML = `
-            <img src="${juego.imagen}" alt="${juego.nombre}">
-            <div class="info">
-              <a href="${juego.enlace}">${juego.nombre}</a>
-            </div>
-          `;
-          resultados.appendChild(resultadoDiv);
-        });
-      } else {
-        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
-      }
-    }
-
-    buscador.addEventListener("input", buscarJuego);
-  });
-</script>
 </body>
 </html>
