@@ -344,6 +344,10 @@
 
   <script src="perfil.js"></script>
   <script>
+    document.getElementById('categoria-toggle').addEventListener('click', function() {
+      var subcategorias = document.getElementById('subcategorias');
+      subcategorias.classList.toggle('active');
+    });
     document.addEventListener("DOMContentLoaded", function() {
       const juegos = Array.from(document.querySelectorAll('.juego')).map(juego => {
         return {
