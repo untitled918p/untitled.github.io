@@ -3,12 +3,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
+  <!-- Importar Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+  <!-- Importar Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      background-color: #333;
+      background: linear-gradient(135deg, #333, #555);
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
       color: #fff;
     }
 
@@ -40,12 +44,29 @@
       font-weight: bold;
       padding: 10px 15px;
       border-radius: 5px;
-      transition: background-color 0.3s, transform 0.3s;
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-container li a::before {
+      margin-right: 8px;
+    }
+    .menu-container li:nth-child(1) a::before {
+      content: '\f015'; /* Icono de inicio */
+    }
+    .menu-container li:nth-child(2) a::before {
+      content: '\f0e0'; /* Icono de contacto */
+    }
+    .menu-container li:nth-child(3) a::before {
+      content: '\f0c1'; /* Icono de información */
+    }
+    .menu-container li:nth-child(4) a::before {
+      content: '\f2bd'; /* Icono de sesión */
     }
 
     .menu-container li a:hover {
       background-color: #555;
       transform: scale(1.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
 
     .header {
@@ -60,10 +81,10 @@
     }
 
     .header img {
-  height: auto; /* Ajusta la altura automáticamente según el tamaño de la imagen */
-  max-height: 75px; /* Establece la altura máxima del logo */
-  width: auto; /* Mantiene la proporción de la imagen */
-}
+      height: auto;
+      max-height: 75px;
+      width: auto;
+    }
 
     .search-container {
       flex-grow: 1;
@@ -81,6 +102,12 @@
       box-sizing: border-box;
       background-color: #444;
       color: #fff;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    #buscador:focus {
+      border-color: #888;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
 
     #resultados {
@@ -100,6 +127,7 @@
       box-sizing: border-box;
       width: 100%;
       max-width: 400px;
+      transition: background-color 0.3s;
     }
 
     .resultados-busqueda img {
@@ -112,6 +140,10 @@
     .resultados-busqueda .info {
       color: #fff;
       font-size: 18px;
+    }
+
+    .resultados-busqueda:hover {
+      background-color: #666;
     }
 
     .juego {
@@ -127,13 +159,24 @@
       background-color: #444;
       box-sizing: border-box;
       text-align: center;
-      width: 120px; /* Ajusta el ancho */
+      width: 120px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 0.5s forwards;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .juego span {
       margin-bottom: 10px;
       color: #fff;
-      font-size: 16px; /* Ajusta el tamaño del texto */
+      font-size: 16px;
       display: block;
     }
 
@@ -141,16 +184,15 @@
       width: 100px;
       height: 100px;
       border-radius: 10px;
-      /* Sin transición en la imagen */
     }
 
     .juego:hover {
-      transform: scale(1.1); /* Aumenta el tamaño del cuadro */
+      transform: scale(1.1);
     }
 
     .untitled1 {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Ajusta el tamaño de los cuadros */
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       gap: 10px;
       padding: 20px;
       max-width: 100%;
@@ -159,7 +201,7 @@
 
     .untitled1 div {
       text-align: center;
-      border: 2px solid #fff; /* Asegura que el borde sea del tamaño correcto */
+      border: 2px solid #fff;
       border-radius: 10px;
       box-sizing: border-box;
       background-color: #333;
