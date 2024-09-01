@@ -82,8 +82,10 @@
     }
 
    #resultados {
+  max-width: 90%;
   max-width: 80%; /* Tamaño más pequeño */
   margin: 20px auto;
+  padding: 0 20px;
   padding: 10px 20px; /* Ajusta el padding para un tamaño más pequeño */
   text-align: center;
   background-color: #333; /* Gris oscuro */
@@ -99,26 +101,35 @@
 .resultados-busqueda {
   display: flex;
   align-items: center;
+  padding: 10px;
   padding: 8px; /* Tamaño más pequeño */
   border: 2px solid #ccc; /* Gris claro */
+  border-radius: 10px;
+  margin-bottom: 10px;
   border-radius: 8px; /* Radio del borde más pequeño */
   margin-bottom: 8px; /* Espaciado más pequeño */
   background-color: #444; /* Gris oscuro */
   box-sizing: border-box;
   width: 100%;
+  max-width: 400px;
   max-width: 300px; /* Tamaño más pequeño */
   transition: transform 0.3s ease;
+  margin: 10px auto;
 }
 
 .resultados-busqueda img {
+  width: 50px;
+  height: 50px;
   width: 40px; /* Tamaño más pequeño */
   height: 40px; /* Tamaño más pequeño */
   border-radius: 5px;
+  margin-right: 15px;
   margin-right: 10px; /* Espaciado más pequeño */
 }
 
 .resultados-busqueda .info {
   color: #fff;
+  font-size: 18px;
   font-size: 16px; /* Tamaño de fuente más pequeño */
   text-align: left;
 }
@@ -361,6 +372,23 @@ document.addEventListener('click', function(event) {
     resultados.style.display = 'none';
   }
 });
+
+document.getElementById('categoriaBtn').addEventListener('click', function() {
+  const panel = document.getElementById('categoriaPanel');
+  panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+});
+
+    document.querySelectorAll('.categoria').forEach(cat => {
+      cat.addEventListener('click', function() {
+        const etiqueta = this.dataset.etiqueta;
+        const juegos = document.querySelectorAll('.untitled1 .juego');
+        juegos.forEach(juego => {
+          if (etiqueta === 'todos' || juego.dataset.etiquetas.includes(etiqueta)) {
+            juego.style.display = 'block';
+          } else {
+            juego.style.display = 'none';
+          }
+        });
       });
     });
   </script>
