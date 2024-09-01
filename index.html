@@ -238,84 +238,125 @@
     <span data-etiqueta="aventura">Aventura</span>
   </div>
 
-  <section class="untitled1">
-    <div class="juego" data-etiquetas="acción,zombies">
-      <a href="UntitledBeta.html">
-        <span>Untitled</span>
-        <img src="icono.png" alt="Icono Juego 1">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="acción,aventura">
-      <a href="Untitled2.html">
-        <span>Untitled 2</span>
-        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="acción">
-      <a href="Jump.html">
-        <span>Jump To Survive</span>
-        <img src="iconojump.png" alt="Icono Juego 3">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="aventura">
-      <a href="JumpPrologue.html">
-        <span>Jump Prologue</span>
-        <img src="IconoJump2.png" alt="Icono Juego 4">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="acción,robots">
-      <a href="Kasper.html">
-        <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 5">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="carreras">
-      <a href="SurviveIn2D.html">
-        <span>Survive In 2D</span>
-        <img src="In2DIcon.png" alt="Icono Juego 6">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="acción,robots">
-      <a href="Viktor.html">
-        <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 7">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="aventura">
-      <a href="Untitled3.html">
-        <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
-      </a>
-    </div>
-  </section>
+<section class="untitled1">
+  <div class="juego" data-etiquetas="acción,zombies">
+    <a href="UntitledBeta.html">
+      <span>Untitled</span>
+      <img src="icono.png" alt="Icono Juego 1">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="acción,aventura">
+    <a href="Untitled2.html">
+      <span>Untitled 2</span>
+      <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="acción">
+    <a href="Jump.html">
+      <span>Jump To Survive</span>
+      <img src="iconojump.png" alt="Icono Juego 3">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="aventura">
+    <a href="JumpPrologue.html">
+      <span>Jump Prologue</span>
+      <img src="IconoJump2.png" alt="Icono Juego 4">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="acción,robots">
+    <a href="Kasper.html">
+      <span>Kasper</span>
+      <img src="KasperIcono.png" alt="Icono Juego 5">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="carreras">
+    <a href="SurviveIn2D.html">
+      <span>Survive In 2D</span>
+      <img src="In2DIcon.png" alt="Icono Juego 6">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="acción,robots">
+    <a href="Viktor.html">
+      <span>Viktor</span>
+      <img src="ViktorIcon.png" alt="Icono Juego 7">
+    </a>
+  </div>
+  <div class="juego" data-etiquetas="aventura">
+    <a href="Untitled3.html">
+      <span>Untitled 3</span>
+      <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+    </a>
+  </div>
+</section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const juegos = Array.from(document.querySelectorAll('.juego'));
-      const categoriaBtn = document.getElementById('categoria-btn');
-      const categoriaPanel = document.getElementById('categoria-panel');
+<main id="resultados"></main>
 
-      // Mostrar/Ocultar el panel de categorías al hacer clic en el botón
-      categoriaBtn.addEventListener('click', function() {
-        categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
-      });
-
-      // Filtrar juegos al hacer clic en una categoría
-      categoriaPanel.addEventListener('click', function(event) {
-        if (event.target.tagName === 'SPAN') {
-          const etiquetaSeleccionada = event.target.getAttribute('data-etiqueta');
-
-          // Mostrar solo los juegos que tienen la etiqueta seleccionada
-          juegos.forEach(juego => {
-            juego.style.display = juego.getAttribute('data-etiquetas').includes(etiquetaSeleccionada) ? 'block' : 'none';
-          });
-
-          // Ocultar el panel de categorías después de la selección
-          categoriaPanel.style.display = 'none';
-        }
-      });
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const juegos = Array.from(document.querySelectorAll('.juego')).map(juego => {
+      return {
+        nombre: juego.querySelector('span').textContent.trim(),
+        imagen: juego.querySelector('img').src,
+        enlace: juego.querySelector('a').href,
+        etiquetas: juego.getAttribute('data-etiquetas').split(',')
+      };
     });
-  </script>
 
+    const categoriaBtn = document.getElementById('categoria-btn');
+    const categoriaPanel = document.getElementById('categoria-panel');
+    const buscador = document.getElementById("buscador");
+    const resultados = document.getElementById("resultados");
+
+    // Mostrar/Ocultar el panel de categorías al hacer clic en el botón
+    categoriaBtn.addEventListener('click', function() {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Filtrar juegos al hacer clic en una categoría
+    categoriaPanel.addEventListener('click', function(event) {
+      if (event.target.tagName === 'SPAN') {
+        const etiquetaSeleccionada = event.target.getAttribute('data-etiqueta');
+
+        // Mostrar solo los juegos que tienen la etiqueta seleccionada
+        juegos.forEach(juego => {
+          juego.element.style.display = juego.etiquetas.includes(etiquetaSeleccionada) ? 'block' : 'none';
+        });
+
+        // Ocultar el panel de categorías después de la selección
+        categoriaPanel.style.display = 'none';
+      }
+    });
+
+    // Función de búsqueda
+    function buscarJuego() {
+      const consulta = buscador.value.toLowerCase();
+      resultados.innerHTML = "";
+
+      if (consulta.trim() === "") {
+        return;
+      }
+
+      const juegosEncontrados = juegos.filter(juego => juego.nombre.toLowerCase().includes(consulta));
+
+      if (juegosEncontrados.length > 0) {
+        juegosEncontrados.forEach(juego => {
+          const resultadoDiv = document.createElement('div');
+          resultadoDiv.classList.add('resultados-busqueda');
+          resultadoDiv.innerHTML = `
+            <img src="${juego.imagen}" alt="${juego.nombre}">
+            <div class="info">
+              <a href="${juego.enlace}">${juego.nombre}</a>
+            </div>
+          `;
+          resultados.appendChild(resultadoDiv);
+        });
+      } else {
+        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
+      }
+    }
+
+    buscador.addEventListener("input", buscarJuego);
+  });
+</script>
 </body>
 </html>
