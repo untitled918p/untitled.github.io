@@ -101,6 +101,7 @@
       box-sizing: border-box;
       width: 100%;
       max-width: 400px;
+      transition: transform 0.3s ease;
     }
 
     .resultados-busqueda img {
@@ -113,6 +114,11 @@
     .resultados-busqueda .info {
       color: #fff;
       font-size: 18px;
+      text-align: left;
+    }
+
+    .resultados-busqueda:hover {
+      transform: scale(1.05);
     }
 
     .juego {
@@ -326,6 +332,18 @@
           const clon = juego.cloneNode(true);
           clon.classList.remove('juego');  // Remover clase 'juego' para no aplicar el hover y otros estilos
           clon.classList.add('resultados-busqueda');
+
+          // Ajuste del formato
+          const img = clon.querySelector('img');
+          const span = clon.querySelector('span');
+          const infoContainer = document.createElement('div');
+          infoContainer.classList.add('info');
+          infoContainer.appendChild(span);
+
+          clon.innerHTML = '';
+          clon.appendChild(img);
+          clon.appendChild(infoContainer);
+
           resultados.appendChild(clon);
           count++;
         }
