@@ -264,7 +264,7 @@
     </div>
   </div>
 
-  <main id="resultados"></main>
+ <main id="resultados"></main>
 
 <div class="categoria-container">
   <button class="categoria-btn" id="categoria-btn">Categorías</button>
@@ -382,26 +382,18 @@
     categoriaPanel.addEventListener('click', function(event) {
       if (event.target.tagName === 'SPAN') {
         const etiquetaSeleccionada = event.target.getAttribute('data-etiqueta');
+
+        // Filtrar los juegos por la etiqueta seleccionada
         const juegosFiltrados = juegos.filter(juego => juego.etiquetas.includes(etiquetaSeleccionada));
+        
+        // Mostrar solo los juegos que tienen la etiqueta seleccionada
+        const juegos = document.querySelectorAll('.juego');
+        juegos.forEach(juego => {
+          juego.style.display = juego.getAttribute('data-etiquetas').includes(etiquetaSeleccionada) ? 'block' : 'none';
+        });
 
-        const resultados = document.getElementById("resultados");
-        resultados.innerHTML = "";
-
-        if (juegosFiltrados.length > 0) {
-          juegosFiltrados.forEach(juego => {
-            const resultadoDiv = document.createElement('div');
-            resultadoDiv.classList.add('resultados-busqueda');
-            resultadoDiv.innerHTML = `
-              <img src="${juego.imagen}" alt="${juego.nombre}">
-              <div class="info">
-                <a href="${juego.enlace}">${juego.nombre}</a>
-              </div>
-            `;
-            resultados.appendChild(resultadoDiv);
-          });
-        } else {
-          resultados.innerHTML = "<p>No se encontraron resultados para esta categoría.</p>";
-        }
+        // Ocultar el panel de categorías después de la selección
+        categoriaPanel.style.display = 'none';
       }
     });
   });
