@@ -81,58 +81,33 @@
       text-align: center;
     }
 
-   #resultados {
-  max-width: 90%;
-  max-width: 80%; /* Tamaño más pequeño */
-  margin: 20px auto;
-  padding: 0 20px;
-  padding: 10px 20px; /* Ajusta el padding para un tamaño más pequeño */
-  text-align: center;
-  background-color: #333; /* Gris oscuro */
-  border-radius: 10px;
-  border: 1px solid #555; /* Gris medio */
-  position: absolute; /* Posición absoluta para superponerse */
-  top: 70px; /* Ajusta según tu diseño */
-  left: 10%; /* Centrado horizontalmente */
-  z-index: 1000; /* Asegura que esté sobre otros elementos */
-  display: none; /* Ocultarlo inicialmente */
-}
+    .resultados-busqueda {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #444;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+      margin: 10px auto;
+    }
 
-.resultados-busqueda {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  padding: 8px; /* Tamaño más pequeño */
-  border: 2px solid #ccc; /* Gris claro */
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px; /* Radio del borde más pequeño */
-  margin-bottom: 8px; /* Espaciado más pequeño */
-  background-color: #444; /* Gris oscuro */
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 400px;
-  max-width: 300px; /* Tamaño más pequeño */
-  transition: transform 0.3s ease;
-  margin: 10px auto;
-}
+    .resultados-busqueda img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
 
-.resultados-busqueda img {
-  width: 50px;
-  height: 50px;
-  width: 40px; /* Tamaño más pequeño */
-  height: 40px; /* Tamaño más pequeño */
-  border-radius: 5px;
-  margin-right: 15px;
-  margin-right: 10px; /* Espaciado más pequeño */
-}
-
-.resultados-busqueda .info {
-  color: #fff;
-  font-size: 18px;
-  font-size: 16px; /* Tamaño de fuente más pequeño */
-  text-align: left;
-}
+    .resultados-busqueda .info {
+      color: #fff;
+      font-size: 18px;
+      text-align: left;
+    }
 
     .resultados-busqueda:hover {
       transform: scale(1.05);
@@ -329,54 +304,45 @@
       </a>
     </div>
   </section>
+
   <script>
     document.getElementById('buscador').addEventListener('input', function() {
-  const query = this.value.toLowerCase();
-  const juegos = document.querySelectorAll('.juego');
-  const resultados = document.getElementById('resultados');
-  resultados.innerHTML = '';  // Limpiar resultados anteriores
-  let count = 0;
-  if (query.trim() === '') {
-    resultados.style.display = 'none';  // Ocultar resultados si no hay texto
-    document.getElementById('categoriaBtn').style.display = 'inline-block';
-    return;
-  }
-  juegos.forEach(juego => {
-    const titulo = juego.querySelector('span').textContent.toLowerCase();
-    if (titulo.includes(query) && count < 4) {
-      const clon = juego.cloneNode(true);
-      clon.classList.remove('juego');  // Remover clase 'juego' para no aplicar el hover y otros estilos
-      clon.classList.add('resultados-busqueda');
-      // Ajuste del formato
-      const img = clon.querySelector('img');
-      const span = clon.querySelector('span');
-      const infoContainer = document.createElement('div');
-      infoContainer.classList.add('info');
-      infoContainer.appendChild(span);
-      clon.innerHTML = '';
-      clon.appendChild(img);
-      clon.appendChild(infoContainer);
-      resultados.appendChild(clon);
-      count++;
-    }
-  });
-  resultados.style.display = count > 0 ? 'block' : 'none'; // Mostrar resultados solo si hay al menos uno
-  document.getElementById('categoriaBtn').style.display = query ? 'none' : 'inline-block';
-});
-// Cerrar el panel de resultados si se hace clic fuera del buscador
-document.addEventListener('click', function(event) {
-  const buscador = document.getElementById('buscador');
-  const resultados = document.getElementById('resultados');
-  const categoriaBtn = document.getElementById('categoriaBtn');
-  if (!buscador.contains(event.target) && !resultados.contains(event.target) && !categoriaBtn.contains(event.target)) {
-    resultados.style.display = 'none';
-  }
-});
+      const query = this.value.toLowerCase();
+      const juegos = document.querySelectorAll('.juego');
+      const resultados = document.getElementById('resultados');
+      resultados.innerHTML = '';  // Limpiar resultados anteriores
+      let count = 0;
+      juegos.forEach(juego => {
+        const titulo = juego.querySelector('span').textContent.toLowerCase();
+        if (titulo.includes(query) && count < 4) {
+          const clon = juego.cloneNode(true);
+          clon.classList.remove('juego');  // Remover clase 'juego' para no aplicar el hover y otros estilos
+          clon.classList.add('resultados-busqueda');
 
-document.getElementById('categoriaBtn').addEventListener('click', function() {
-  const panel = document.getElementById('categoriaPanel');
-  panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
-});
+          // Ajuste del formato
+          const img = clon.querySelector('img');
+          const span = clon.querySelector('span');
+          const infoContainer = document.createElement('div');
+          infoContainer.classList.add('info');
+          infoContainer.appendChild(span);
+
+          clon.innerHTML = '';
+          clon.appendChild(img);
+          clon.appendChild(infoContainer);
+
+          resultados.appendChild(clon);
+          count++;
+        }
+      });
+
+      // Mostrar u ocultar el botón de categoría según el estado de la búsqueda
+      document.getElementById('categoriaBtn').style.display = query ? 'none' : 'inline-block';
+    });
+
+    document.getElementById('categoriaBtn').addEventListener('click', function() {
+      const panel = document.getElementById('categoriaPanel');
+      panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+    });
 
     document.querySelectorAll('.categoria').forEach(cat => {
       cat.addEventListener('click', function() {
