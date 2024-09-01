@@ -194,23 +194,24 @@
 
     .categoria-panel {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      align-items: center;
       background-color: #444;
-      padding: 10px 0;
+      padding: 10px 20px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
     }
 
-    .categoria-panel .categoria {
-      margin: 0 10px;
+    .categoria-panel .categoria-btn {
       background-color: #555;
       color: #fff;
-      padding: 10px 15px;
+      padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
     }
 
-    .categoria-panel .categoria:hover {
+    .categoria-panel .categoria-btn:hover {
       background-color: #666;
       transform: scale(1.1);
     }
@@ -220,6 +221,12 @@
       flex-direction: column;
       background-color: #555;
       padding: 10px;
+      position: absolute;
+      top: 60px; /* Ajusta según sea necesario */
+      left: 20px;
+      width: 200px; /* Ajusta según sea necesario */
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .subcategoria {
@@ -272,15 +279,14 @@
   </header>
 
   <div class="categoria-panel">
-    <div class="categoria" data-category="accion">Acción</div>
-    <div class="categoria" data-category="zombies">Zombies</div>
-    <div class="categoria" data-category="robots">Robots</div>
-    <div class="categoria" data-category="carreras">Carreras</div>
-    <!-- Puedes añadir más categorías aquí -->
-  </div>
-
-  <div class="subcategorias" id="subcategorias">
-    <!-- Las subcategorías se insertarán aquí -->
+    <div class="categoria-btn" id="categoria-toggle">Categorías</div>
+    <div class="subcategorias" id="subcategorias">
+      <div class="subcategoria">Acción</div>
+      <div class="subcategoria">Zombies</div>
+      <div class="subcategoria">Robots</div>
+      <div class="subcategoria">Carreras</div>
+      <!-- Puedes añadir más subcategorías aquí -->
+    </div>
   </div>
 
   <main id="resultados"></main>
