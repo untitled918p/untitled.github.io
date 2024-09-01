@@ -88,6 +88,7 @@
       max-width: 90%;
       margin: 20px auto;
       padding: 0 20px;
+      text-align: center;
     }
 
     .resultados-busqueda {
@@ -102,6 +103,7 @@
       width: 100%;
       max-width: 400px;
       transition: transform 0.3s ease;
+      margin: 10px auto;
     }
 
     .resultados-busqueda img {
@@ -224,6 +226,13 @@
       background-color: #555;
     }
 
+    .search-results-container {
+      background-color: #000;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
     @media (max-width: 768px) {
       .header {
         height: 15vh;
@@ -263,10 +272,11 @@
     </div>
   </header>
 
-  <main id="resultados"></main>
+  <div id="resultados" class="search-results-container"></div>
   
   <button id="categoriaBtn">Categorías</button>
   <div class="categoria-panel" id="categoriaPanel">
+    <div class="categoria" data-etiqueta="todos">Todos</div>
     <div class="categoria" data-etiqueta="accion">Acción</div>
     <div class="categoria" data-etiqueta="zombies">Zombies</div>
     <div class="categoria" data-etiqueta="robots">Robots</div>
@@ -274,49 +284,54 @@
   </div>
 
   <section class="untitled1">
-    <div class="juego" data-etiquetas="accion,zombies">
+    <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="UntitledBeta.html">
         <span>Untitled</span>
         <img src="icono.png" alt="Icono Juego 1">
       </a>
     </div>
-    <div class="juego" data-etiquetas="accion">
+    <div class="juego" data-etiquetas="todos,accion">
       <a href="Untitled2.html">
         <span>Untitled 2</span>
         <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
       </a>
     </div>
-    <div class="juego" data-etiquetas="accion,carreras">
+    <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="Jump.html">
         <span>Jump To Survive</span>
         <img src="iconojump.png" alt="Icono Juego 3">
       </a>
     </div>
-    <div class="juego" data-etiquetas="accion">
-      <a href="JumpPrologue.html">
-        <span>Jump Prologue</span>
-        <img src="IconoJump2.png" alt="Icono Juego 4">
+    <div class="juego" data-etiquetas="todos,robots,accion">
+      <a href="Revenge.html">
+        <span>Revenge</span>
+        <img src="RobotIco.png" alt="Icono Juego 4">
       </a>
     </div>
-    <div class="juego" data-etiquetas="zombies">
-      <a href="Kasper.html">
-        <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 5">
+    <div class="juego" data-etiquetas="todos,zombies">
+      <a href="Danger.html">
+        <span>Danger</span>
+        <img src="ZombieIcon.png" alt="Icono Juego 5">
       </a>
     </div>
-    <div class="juego" data-etiquetas="accion">
+    <div class="juego" data-etiquetas="todos,accion">
       <a href="SurviveIn2D.html">
         <span>Survive In 2D</span>
         <img src="In2DIcon.png" alt="Icono Juego 6">
       </a>
     </div>
-    <div class="juego" data-etiquetas="accion">
+    <div class="juego" data-etiquetas="todos,accion">
       <a href="Viktor.html">
         <span>Viktor</span>
         <img src="ViktorIcon.png" alt="Icono Juego 7">
       </a>
     </div>
-    <!-- ... más juegos ... -->
+   <div class="juego" data-etiquetas="todos,accion">
+      <a href="Untitled3.html">
+        <span>Untitledd 3</span>
+        <img src="Untitled3Icon.png" alt="Icono Juego 7">
+      </a>
+    </div>
   </section>
 
   <script>
@@ -363,7 +378,7 @@
         const etiqueta = this.dataset.etiqueta;
         const juegos = document.querySelectorAll('.untitled1 .juego');
         juegos.forEach(juego => {
-          if (juego.dataset.etiquetas.includes(etiqueta)) {
+          if (etiqueta === 'todos' || juego.dataset.etiquetas.includes(etiqueta)) {
             juego.style.display = 'block';
           } else {
             juego.style.display = 'none';
