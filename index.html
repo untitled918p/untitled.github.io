@@ -192,58 +192,49 @@
       }
     }
 
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 200px;
-      height: 100vh;
-      background-color: #444;
-      color: #fff;
+    .categoria-panel {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
+      justify-content: center;
+      background-color: #444;
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .sidebar h2 {
-      margin: 0;
-      padding: 10px;
+    .categoria-panel .categoria {
+      margin: 0 10px;
       background-color: #555;
-      width: 100%;
-      text-align: center;
-      cursor: pointer;
-      border-bottom: 2px solid #666;
-    }
-
-    .categorias {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      width: 100%;
-    }
-
-    .categoria {
-      background-color: #666;
       color: #fff;
       padding: 10px 15px;
       border-radius: 5px;
-      text-transform: uppercase;
-      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
-      margin: 5px 0;
     }
 
-    .categoria:hover {
-      background-color: #777;
+    .categoria-panel .categoria:hover {
+      background-color: #666;
       transform: scale(1.1);
     }
 
-    .sidebar.active .categorias {
+    .subcategorias {
+      display: none;
+      flex-direction: column;
+      background-color: #555;
+      padding: 10px;
+    }
+
+    .subcategoria {
+      color: #fff;
+      padding: 10px;
+      border-bottom: 1px solid #666;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .subcategoria:hover {
+      background-color: #666;
+    }
+
+    .subcategorias.active {
       display: flex;
       animation: slideIn 0.5s ease-in-out;
     }
@@ -280,15 +271,16 @@
     </div>
   </header>
 
-  <div class="sidebar" id="sidebar">
-    <h2 id="sidebar-toggle">Categorías</h2>
-    <div class="categorias">
-      <span class="categoria">Acción</span>
-      <span class="categoria">Zombies</span>
-      <span class="categoria">Robots</span>
-      <span class="categoria">Carreras</span>
-      <!-- Puedes añadir más categorías aquí -->
-    </div>
+  <div class="categoria-panel">
+    <div class="categoria" data-category="accion">Acción</div>
+    <div class="categoria" data-category="zombies">Zombies</div>
+    <div class="categoria" data-category="robots">Robots</div>
+    <div class="categoria" data-category="carreras">Carreras</div>
+    <!-- Puedes añadir más categorías aquí -->
+  </div>
+
+  <div class="subcategorias" id="subcategorias">
+    <!-- Las subcategorías se insertarán aquí -->
   </div>
 
   <main id="resultados"></main>
