@@ -192,15 +192,38 @@
       }
     }
 
-    .categorias-container {
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 100vh;
+      background-color: #444;
+      color: #fff;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .sidebar h2 {
+      margin: 0;
       padding: 10px;
       background-color: #555;
-      border-radius: 10px;
-      margin: 20px 0;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: 2px solid #666;
+    }
+
+    .categorias {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      width: 100%;
     }
 
     .categoria {
@@ -212,11 +235,28 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
+      margin: 5px 0;
     }
 
     .categoria:hover {
       background-color: #777;
       transform: scale(1.1);
+    }
+
+    .sidebar.active .categorias {
+      display: flex;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -240,12 +280,15 @@
     </div>
   </header>
 
-  <div class="categorias-container">
-    <span class="categoria">Acción</span>
-    <span class="categoria">Zombies</span>
-    <span class="categoria">Robots</span>
-    <span class="categoria">Carreras</span>
-    <!-- Puedes añadir más categorías aquí -->
+  <div class="sidebar" id="sidebar">
+    <h2 id="sidebar-toggle">Categorías</h2>
+    <div class="categorias">
+      <span class="categoria">Acción</span>
+      <span class="categoria">Zombies</span>
+      <span class="categoria">Robots</span>
+      <span class="categoria">Carreras</span>
+      <!-- Puedes añadir más categorías aquí -->
+    </div>
   </div>
 
   <main id="resultados"></main>
@@ -342,6 +385,11 @@
       }
 
       document.getElementById("buscador").addEventListener("input", buscarJuego);
+
+      // Sidebar toggle
+      document.getElementById("sidebar-toggle").addEventListener("click", function() {
+        document.getElementById("sidebar").classList.toggle("active");
+      });
     });
   </script>
 </body>
