@@ -307,33 +307,35 @@
     <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="JumpPrologue.html">
         <span>Jump Prologue</span>
-        <img src="IconoJump2.png"></a>
+        <img src="IconoJumpPrologue.png" alt="Icono Juego 4">
+      </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,robots">
+    <div class="juego" data-etiquetas="todos,robots">
       <a href="Kasper.html">
         <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 4">
+        <img src="iconokasper.png" alt="Icono Juego 5">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,robots">
+    <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="SurviveIn2D.html">
         <span>Survive In 2D</span>
-        <img src="In2DIcon.png" alt="Icono Juego 5">
+        <img src="IconoSurviveIn2D.png" alt="Icono Juego 6">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,robots">
-      <a href="ViktorIcon.html">
+    <div class="juego" data-etiquetas="todos,robots">
+      <a href="Viktor.html">
         <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 6">
+        <img src="IconoViktor.png" alt="Icono Juego 7">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,robots">
+    <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="Untitled3.html">
         <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg"></a>
+        <img src="iconout3.png" alt="Icono Juego 8">
+      </a>
     </div>
   </section>
-  
+
   <script>
     const buscador = document.getElementById('buscador');
     const resultados = document.getElementById('resultados');
@@ -342,33 +344,14 @@
     const categoriaPanel = document.getElementById('categoriaPanel');
     const categorias = document.querySelectorAll('.categoria');
 
-    buscador.addEventListener('input', function() {
-      const valor = buscador.value.toLowerCase();
-      resultados.innerHTML = '';
-      let encontrado = false;
-      juegos.forEach(juego => {
-        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-        const iconoJuego = juego.querySelector('img').src;
-        if (nombreJuego.includes(valor) && valor.trim() !== '') {
-          const resultado = document.createElement('div');
-          resultado.className = 'resultados-busqueda';
-          resultado.innerHTML = `
-            <img src="${iconoJuego}" alt="Icono del juego">
-            <div class="info">${nombreJuego}</div>
-          `;
-          resultados.appendChild(resultado);
-          encontrado = true;
-        }
-      });
-      if (!encontrado || valor.trim() === '') {
-        resultados.style.display = 'none';
-      } else {
-        resultados.style.display = 'block';
-      }
+    categoriaBtn.addEventListener('click', () => {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
     });
 
-    categoriaBtn.addEventListener('click', () => {
-      categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
+    document.addEventListener('click', function(event) {
+      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
+        categoriaPanel.style.display = 'none';
+      }
     });
 
     categorias.forEach(categoria => {
@@ -386,10 +369,36 @@
       });
     });
 
-    document.addEventListener('click', function(event) {
-      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
-        categoriaPanel.style.display = 'none';
+    buscador.addEventListener('input', function() {
+      const valor = buscador.value.toLowerCase().trim();
+      resultados.innerHTML = '';
+      let encontrado = false;
+
+      juegos.forEach(juego => {
+        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+        const iconoJuego = juego.querySelector('img').src;
+
+        if (nombreJuego.includes(valor) && valor !== '') {
+          const resultado = document.createElement('div');
+          resultado.className = 'resultados-busqueda';
+          resultado.innerHTML = `
+            <img src="${iconoJuego}" alt="Icono del juego">
+            <div class="info">${nombreJuego}</div>
+          `;
+          resultados.appendChild(resultado);
+          encontrado = true;
+        }
+      });
+
+      if (!encontrado) {
+        resultados.style.display = 'none';
+      } else {
+        resultados.style.display = 'block';
       }
+    });
+
+    buscador.addEventListener('focus', function() {
+      resultados.style.display = 'block';
     });
 
     buscador.addEventListener('blur', function() {
