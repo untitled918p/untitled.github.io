@@ -12,6 +12,7 @@
       font-family: Arial, sans-serif;
       color: #fff;
     }
+
     .menu-container {
       background-color: #444;
       overflow: hidden;
@@ -21,15 +22,18 @@
       display: flex;
       justify-content: center;
     }
+
     .menu-container ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
       display: flex;
     }
+
     .menu-container li {
       margin: 0 2%;
     }
+
     .menu-container li a {
       display: inline-block;
       color: #fff;
@@ -39,10 +43,12 @@
       border-radius: 5px;
       transition: background-color 0.3s, transform 0.3s;
     }
+
     .menu-container li a:hover {
       background-color: #555;
       transform: scale(1.1);
     }
+
     .header {
       background-image: url('Fondo.png');
       background-size: cover;
@@ -53,16 +59,19 @@
       align-items: center;
       padding: 0 2%;
     }
+
     .header img {
       height: auto;
       max-height: 75px;
       width: auto;
     }
+
     .search-container {
       flex-grow: 1;
       display: flex;
       justify-content: center;
     }
+
     #buscador {
       width: 100%;
       padding: 15px 20px;
@@ -74,6 +83,7 @@
       background-color: #444;
       color: #fff;
     }
+
     #resultados {
       max-width: 90%;
       margin: 20px auto;
@@ -88,12 +98,13 @@
       border: 2px solid #fff;
       border-radius: 10px;
       margin-bottom: 10px;
-      background-color: #444;
+      background-color: #555;
       box-sizing: border-box;
       width: 100%;
       max-width: 400px;
       transition: transform 0.3s ease;
       margin: 10px auto;
+      color: #fff;
     }
 
     .resultados-busqueda img {
@@ -104,14 +115,16 @@
     }
 
     .resultados-busqueda .info {
-      color: #fff;
       font-size: 18px;
       text-align: left;
+      flex-grow: 1;
     }
 
     .resultados-busqueda:hover {
       transform: scale(1.05);
+      background-color: #666;
     }
+
     .juego {
       display: flex;
       flex-direction: column;
@@ -127,19 +140,23 @@
       text-align: center;
       width: 120px;
     }
+
     .juego span {
       margin-bottom: 10px;
       color: #fff;
       font-size: 16px;
       display: block;
     }
+
     .juego img {
       width: 100px;
       height: 100px;
     }
+
     .juego:hover {
       transform: scale(1.1);
     }
+
     .untitled1 {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -148,6 +165,7 @@
       max-width: 100%;
       margin: 0 auto;
     }
+
     .untitled1 div {
       text-align: center;
       border: 2px solid #fff;
@@ -156,17 +174,20 @@
       background-color: #333;
       padding: 10px;
     }
+
     .untitled1 a {
       color: #fff;
       text-decoration: none;
       display: block;
     }
+
     .photo-container img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       border: 2px solid white;
     }
+
     #categoriaBtn {
       background-color: #444;
       color: #fff;
@@ -178,9 +199,11 @@
       margin-top: 10px;
       transition: background-color 0.3s;
     }
+
     #categoriaBtn:hover {
       background-color: #555;
     }
+
     .categoria-panel {
       display: none;
       position: absolute;
@@ -192,6 +215,7 @@
       z-index: 1000;
       flex-direction: column;
     }
+
     .categoria {
       padding: 10px;
       color: #fff;
@@ -199,26 +223,34 @@
       margin-bottom: 5px;
       transition: background-color 0.3s;
     }
+
     .categoria:hover {
       background-color: #555;
     }
+
     .search-results-container {
-      background-color: #000;
+      background-color: #222;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
-      display: none; /* Ocultar por defecto */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 20px auto;
     }
+
     @media (max-width: 768px) {
       .header {
         height: 15vh;
       }
+
       #buscador {
         width: 80%;
       }
+
       .menu-container li {
         margin: 0 5px;
       }
+
       .untitled1 {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       }
@@ -272,101 +304,96 @@
         <img src="iconojump.png" alt="Icono Juego 3">
       </a>
     </div>
-<div class="juego" data-etiquetas="todos,accion,carreras">
+    <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="JumpPrologue.html">
         <span>Jump Prologue</span>
-        <img src="IconoJump2.png" alt="Icono Juego 3">
-      </a>
+        <img src="Icon"></a>
     </div>
-    
-    <div class="juego" data-etiquetas="todos,robots,accion">
+    <div class="juego" data-etiquetas="todos,accion,robots">
       <a href="Kasper.html">
         <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 4">
+        <img src="IconoDeKasper.png" alt="Icono Juego 4">
       </a>
     </div>
-    
-    <div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion,robots">
       <a href="SurviveIn2D.html">
         <span>Survive In 2D</span>
-        <img src="In2DIcon.png" alt="Icono Juego 6">
+        <img src="IconoDeSurviveIn2D.png" alt="Icono Juego 5">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion,robots">
       <a href="Viktor.html">
         <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 7">
+        <img src="IconoDeViktor.png" alt="Icono Juego 6">
       </a>
     </div>
-   <div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion,robots">
       <a href="Untitled3.html">
         <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg" alt="Icono Juego 7">
-      </a>
+        <img src="Icon"></a>
     </div>
   </section>
+  
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const juegos = document.querySelectorAll(".juego");
-      const buscador = document.getElementById("buscador");
-      const resultados = document.getElementById("resultados");
-      const categoriaBtn = document.getElementById("categoriaBtn");
-      const categoriaPanel = document.getElementById("categoriaPanel");
-      const categorias = document.querySelectorAll(".categoria");
+    const buscador = document.getElementById('buscador');
+    const resultados = document.getElementById('resultados');
+    const juegos = document.querySelectorAll('.juego');
+    const categoriaBtn = document.getElementById('categoriaBtn');
+    const categoriaPanel = document.getElementById('categoriaPanel');
+    const categorias = document.querySelectorAll('.categoria');
 
-      buscador.addEventListener("input", function () {
-        const filtro = buscador.value.toLowerCase();
-        if (filtro === "") {
-          resultados.style.display = "none";
-        } else {
-          resultados.innerHTML = "";
-          let contador = 0;
-          juegos.forEach(function (juego) {
-            const nombre = juego.querySelector("span").textContent.toLowerCase();
-            if (nombre.includes(filtro) && contador < 4) {
-              const clon = juego.cloneNode(true);
-              clon.classList.remove("juego");
-              clon.classList.add("resultados-busqueda");
-              resultados.appendChild(clon);
-              contador++;
-            }
-          });
-          resultados.style.display = contador > 0 ? "block" : "none";
+    buscador.addEventListener('input', function() {
+      const valor = buscador.value.toLowerCase();
+      resultados.innerHTML = '';
+      let encontrado = false;
+      juegos.forEach(juego => {
+        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+        const iconoJuego = juego.querySelector('img').src;
+        if (nombreJuego.includes(valor) && valor.trim() !== '') {
+          const resultado = document.createElement('div');
+          resultado.className = 'resultados-busqueda';
+          resultado.innerHTML = `
+            <img src="${iconoJuego}" alt="Icono del juego">
+            <div class="info">${nombreJuego}</div>
+          `;
+          resultados.appendChild(resultado);
+          encontrado = true;
         }
       });
+      if (!encontrado || valor.trim() === '') {
+        resultados.style.display = 'none';
+      } else {
+        resultados.style.display = 'block';
+      }
+    });
 
-      categoriaBtn.addEventListener("click", function () {
-        categoriaPanel.style.display =
-          categoriaPanel.style.display === "flex" ? "none" : "flex";
-      });
+    categoriaBtn.addEventListener('click', () => {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
+    });
 
-      categorias.forEach(function (categoria) {
-        categoria.addEventListener("click", function () {
-          const etiquetaSeleccionada = this.getAttribute("data-etiqueta");
-          juegos.forEach(function (juego) {
-            const etiquetas = juego.getAttribute("data-etiquetas").split(",");
-            if (etiquetaSeleccionada === "todos" || etiquetas.includes(etiquetaSeleccionada)) {
-              juego.style.display = "flex";
-            } else {
-              juego.style.display = "none";
-            }
-          });
-          categoriaPanel.style.display = "none";
+    categorias.forEach(categoria => {
+      categoria.addEventListener('click', () => {
+        const etiqueta = categoria.getAttribute('data-etiqueta');
+        juegos.forEach(juego => {
+          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
+          if (etiqueta === 'todos' || etiquetas.includes(etiqueta)) {
+            juego.style.display = 'block';
+          } else {
+            juego.style.display = 'none';
+          }
         });
+        categoriaPanel.style.display = 'none';
       });
+    });
 
-      document.addEventListener("click", function (event) {
-        if (!buscador.contains(event.target) && !categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
-          categoriaPanel.style.display = "none";
-        }
-      });
+    document.addEventListener('click', function(event) {
+      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
+        categoriaPanel.style.display = 'none';
+      }
+    });
 
-      document.addEventListener("click", function (event) {
-        if (!buscador.contains(event.target)) {
-          buscador.value = "";  // Limpiar el buscador al hacer clic fuera de él
-          resultados.style.display = "none";  // Ocultar los resultados de búsqueda
-        }
-      });
+    buscador.addEventListener('blur', function() {
+      setTimeout(() => resultados.style.display = 'none', 100);
     });
   </script>
 </body>
