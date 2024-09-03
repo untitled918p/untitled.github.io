@@ -261,8 +261,15 @@
                 </a>
             </div>
         </div>
-
         <div id="programas" class="juego-section">
+            <div class="programas">
+                <div class="juego">
+                    <a href="CodigoMorse.html">
+                        <img src="iconoCodigoM.png" alt="Icono programa 1">
+                        <p>Codigo Morse</p>
+                    </a>
+                </div>
+            </div>
             <div class="empty-message">No hay programas disponibles.</div>
         </div>
     </section>
@@ -288,6 +295,30 @@
             const fotoGrande = document.getElementById('foto-grande');
             const fotoPerfilGrande = document.getElementById('foto-perfil-grande');
             const cerrar = document.querySelector('.cerrar');
+            const btn = document.getElementById('seguir-btn');
+
+            // Inicializa el estado del botón según lo que está almacenado en localStorage
+            const siguiendo = localStorage.getItem('siguiendo');
+            if (siguiendo === 'true') {
+                btn.innerText = 'Siguiendo';
+                btn.classList.add('siguiendo');
+            } else {
+                btn.innerText = 'Seguir';
+                btn.classList.remove('siguiendo');
+            }
+
+            // Función para alternar entre Seguir y Siguiendo
+            btn.addEventListener('click', function() {
+                if (btn.innerText === 'Seguir') {
+                    btn.innerText = 'Siguiendo';
+                    btn.classList.add('siguiendo');
+                    localStorage.setItem('siguiendo', 'true');
+                } else {
+                    btn.innerText = 'Seguir';
+                    btn.classList.remove('siguiendo');
+                    localStorage.setItem('siguiendo', 'false');
+                }
+            });
 
             fotoPerfil.addEventListener('click', function() {
                 fotoPerfilGrande.src = fotoPerfil.src;
