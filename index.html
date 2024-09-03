@@ -4,346 +4,245 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #333, #555);
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      color: #fff;
-    }
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
 
-    .menu-container {
-      background-color: #444;
-      overflow: hidden;
-      text-align: center;
-      padding: 15px 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      display: flex;
-      justify-content: center;
-    }
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: #444;
+        }
 
-    .menu-container ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-    }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
 
-    .menu-container li {
-      margin: 0 2%;
-    }
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
 
-    .menu-container li a {
-      display: inline-block;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background-color 0.3s, transform 0.3s;
-    }
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            max-width: 80%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
 
-    .menu-container li a:hover {
-      background-color: #555;
-      transform: scale(1.1);
-    }
+        .categorias {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .header {
-      background-image: url('Fondo.png');
-      background-size: cover;
-      background-position: center;
-      height: 20vh;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2%;
-    }
+        .categorias button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 0;
+            border: none;
+            cursor: pointer;
+            background-color: #555;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
 
-    .header img {
-      height: auto;
-      max-height: 75px;
-      width: auto;
-    }
+        .categorias button:hover {
+            background-color: #666;
+        }
 
-    .search-container {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-    }
+        .categorias .panel-categorias {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: #555;
+            border: 1px solid #444;
+            padding: 10px;
+            z-index: 100;
+            width: 200px;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-    #buscador {
-      width: 100%;
-      padding: 15px 20px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-      box-sizing: border-box;
-      background-color: #444;
-      color: #fff;
-    }
+        .categorias .panel-categorias button {
+            width: 100%;
+            margin: 5px 0;
+        }
 
-    #resultados {
-      max-width: 90%;
-      margin: 20px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
+        .untitled1 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
-    .resultados-busqueda {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background-color: #555;
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 400px;
-      transition: transform 0.3s ease;
-      margin: 10px auto;
-      color: #fff;
-    }
+        .juego {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.3s ease-in-out;
+            cursor: pointer;
+            background-color: #444;
+            box-sizing: border-box;
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+        }
 
-    .resultados-busqueda img {
-      width: 50px;
-      height: 50px;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
+        .juego img {
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+            border-radius: 10px;
+        }
 
-    .resultados-busqueda .info {
-      font-size: 18px;
-      text-align: left;
-      flex-grow: 1;
-    }
+        .juego .info {
+            color: #fff;
+            font-size: 16px;
+        }
 
-    .resultados-busqueda:hover {
-      transform: scale(1.05);
-      background-color: #666;
-    }
+        .juego .info .nombre {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: block;
+        }
 
-    .juego {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      transition: background-color 0.3s, transform 0.3s ease-in-out;
-      cursor: pointer;
-      background-color: #444;
-      box-sizing: border-box;
-      text-align: center;
-      width: 120px;
-    }
+        .juego .info .gratis {
+            color: #00ff00;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-    .juego span {
-      margin-bottom: 10px;
-      color: #fff;
-      font-size: 16px;
-      display: block;
-    }
+        .juego:hover {
+            transform: scale(1.05);
+        }
 
-    .juego img {
-      width: 100px;
-      height: 100px;
-      loading: lazy;
-    }
+        @media (max-width: 768px) {
+            .juego {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
 
-    .juego:hover {
-      transform: scale(1.1);
-    }
+            .juego img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
 
-    .untitled1 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      padding: 20px;
-      max-width: 100%;
-      margin: 0 auto;
-    }
+            .juego .info {
+                text-align: center;
+            }
+        }
 
-    .untitled1 div {
-      text-align: center;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      box-sizing: border-box;
-      background-color: #333;
-      padding: 10px;
-    }
-
-    .untitled1 a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-    }
-
-    .photo-container img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid white;
-      loading: lazy;
-    }
-
-    #categoriaBtn {
-      background-color: #444;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-      display: inline-block;
-      margin-top: 10px;
-      transition: background-color 0.3s;
-    }
-
-    #categoriaBtn:hover {
-      background-color: #555;
-    }
-
-    .categoria-panel {
-      display: none;
-      position: absolute;
-      left: 20px;
-      background-color: #444;
-      border: 1px solid #555;
-      border-radius: 5px;
-      padding: 10px;
-      z-index: 1000;
-      flex-direction: column;
-    }
-
-    .categoria {
-      padding: 10px;
-      color: #fff;
-      cursor: pointer;
-      margin-bottom: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .categoria:hover {
-      background-color: #555;
-    }
-
-    .search-results-container {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      margin: 20px auto;
-    }
-
-    mark {
-      background-color: yellow;
-      color: black;
-      font-weight: bold;
-    }
-
-    @media (max-width: 768px) {
-      .header {
-        height: 15vh;
-      }
-
-      #buscador {
-        width: 80%;
-      }
-
-      .menu-container li {
-        margin: 0 5px;
-      }
-
-      .untitled1 {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
-    }
-  </style>
+        .no-resultados {
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav class="menu-container">
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Página oficial</a></li>
-        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-        <li id="profile-photo-container" class="photo-container"></li>
-      </ul>
-    </nav>
-    <div class="header">
-      <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
-      <div class="search-container">
-        <input type="text" id="buscador" placeholder="Buscar juegos...">
-      </div>
-    </div>
-  </header>
-  <div id="resultados" class="search-results-container"></div>
-  
-  <button id="categoriaBtn">Categorías</button>
-  <div class="categoria-panel" id="categoriaPanel">
-    <div class="categoria" data-etiqueta="todos">Todos</div>
-    <div class="categoria" data-etiqueta="accion">Acción</div>
-    <div class="categoria" data-etiqueta="zombies">Zombies</div>
-    <div class="categoria" data-etiqueta="robots">Robots</div>
-    <div class="categoria" data-etiqueta="carreras">Carreras</div>
-  </div>
-  <section class="untitled1">
-    <div class="juego" data-etiquetas="todos,accion,zombies">
-      <a href="UntitledBeta.html">
-        <span>Untitled</span>
-        <img src="icono.png" alt="Icono Juego 1" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,accion">
-      <a href="Untitled2.html">
-        <span>Untitled 2</span>
-        <img src="IconoDeUntitled2.png" alt="Icono Juego 2" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,carreras">
-      <a href="JumpToSurvive.html">
-        <span>Jump To Survive</span>
-        <img src="iconojump.png" alt="Icono Juego 3" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,carreras">
-      <a href="JumpPrologue.html">
-        <span>Jump Prologue</span>
-        <img src="IconoJump2.png" alt="Icono Juego 4" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,robots">
-      <a href="Kasper.html">
-        <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 5" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,accion,zombies">
-      <a href="SurviveIn2D.html">
-        <span>Survive In 2D</span>
-        <img src="In2DIcon.png" alt="Icono Juego 6" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,robots">
-      <a href="Viktor.html">
-        <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 7" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-    <div class="juego" data-etiquetas="todos,accion,zombies">
-      <a href="Untitled3.html">
-        <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg" alt="Icono Juego 8" loading="lazy" width="100" height="100">
-      </a>
-    </div>
-  </section>
 
+    <div class="header">
+        <h1>Juegos</h1>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar juegos...">
+    </div>
+
+    <div class="categorias">
+        <button id="categoriaBtn">Categoría</button>
+        <div class="panel-categorias" id="panelCategorias">
+            <button class="categoria" data-etiqueta="accion">Acción</button>
+            <button class="categoria" data-etiqueta="zombies">Zombies</button>
+            <button class="categoria" data-etiqueta="carreras">Carreras</button>
+            <button class="categoria" data-etiqueta="robots">Robots</button>
+        </div>
+    </div>
+
+    <section class="untitled1" id="juegosContainer">
+        <div class="juego" data-etiquetas="todos,accion,zombies">
+            <img src="icono.png" alt="Icono Juego 1">
+            <div class="info">
+                <span class="nombre">Untitled</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,accion">
+            <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+            <div class="info">
+                <span class="nombre">Untitled 2</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,accion,carreras">
+            <img src="iconojump.png" alt="Icono Juego 3">
+            <div class="info">
+                <span class="nombre">Jump To Survive</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,accion,carreras">
+            <img src="IconoJump2.png" alt="Icono Juego 4">
+            <div class="info">
+                <span class="nombre">Jump Prologue</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,robots">
+            <img src="KasperIcono.png" alt="Icono Juego 5">
+            <div class="info">
+                <span class="nombre">Kasper</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,accion,zombies">
+            <img src="In2DIcon.png" alt="Icono Juego 6">
+            <div class="info">
+                <span class="nombre">Survive In 2D</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,robots">
+            <img src="ViktorIcon.png" alt="Icono Juego 7">
+            <div class="info">
+                <span class="nombre">Viktor</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+        <div class="juego" data-etiquetas="todos,accion,carreras">
+            <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+            <div class="info">
+                <span class="nombre">Untitled 3</span>
+                <span class="gratis">Gratis</span>
+            </div>
+        </div>
+    </section>
+<div class="no-resultados" id="noResultados">
+        No se encontraron resultados.
+    </div>
   <script>
     const buscador = document.getElementById('buscador');
     const resultados = document.getElementById('resultados');
