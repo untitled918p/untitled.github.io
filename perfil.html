@@ -70,23 +70,13 @@
             text-align: center;
             position: relative;
         }
-        .perfil-bg-img {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 90px;
-            right: 90px;
-            z-index: 1;
-            border-radius: 10px;
-            opacity: 0.5;
-        }
         .perfil-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             margin-bottom: 20px;
             position: relative;
-            z-index: 2;
+            cursor: pointer; /* Cursor de mano para indicar que es clickeable */
         }
         .btn {
             background-color: var(--btn-bg-color);
@@ -165,6 +155,33 @@
             color: #888;
             font-style: italic;
         }
+        /* Estilos para la vista en grande de la foto de perfil */
+        .foto-grande {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .foto-grande img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        .cerrar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -182,7 +199,6 @@
     <!-- Contenedor principal -->
     <main class="main-container">
         <div class="perfil-container">
-            <img src="BackgroundImage.png" alt="Imagen de fondo" class="perfil-bg-img">
             <h2>Untitled (Juegos)</h2>
             <img src="Perfilimagen.png" alt="Foto de perfil" class="perfil-img">
             <button id="seguir-btn" class="btn">Seguir</button>
@@ -238,7 +254,6 @@
                     <p>Viktor</p>
                 </a>
             </div>
-
             <div class="juego">
                 <a href="Untitled3.html">
                     <img src="Untitled3Icon.jpg" alt="Icono Juego 6">
@@ -248,50 +263,47 @@
         </div>
 
         <div id="programas" class="juego-section">
-            <div class="programas">
-            <div class="juego">
-                <a href="CodigoMorse.html">
-                    <img src="iconoCodigoM.png" alt="Icono programa 1">
-                    <p>Codigo Morse</p>
-                </a>
-            </div>
+            <div class="empty-message">No hay programas disponibles.</div>
         </div>
     </section>
-    <!-- Script para manejar el comportamiento dinámico -->
+    
+    <!-- Contenedor de la vista en grande -->
+    <div id="foto-grande" class="foto-grande">
+        <span class="cerrar">&times;</span>
+        <img id="foto-perfil-grande" src="Perfilimagen.png" alt="Foto de perfil">
+    </div>
+
     <script>
+        // Función para mostrar la sección activa
+        function showSection(sectionId) {
+            document.querySelectorAll('.juego-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Mostrar la foto en grande
         window.onload = function() {
-            const btn = document.getElementById('seguir-btn');
-            const siguiendo = localStorage.getItem('siguiendo');
-            // Inicializa el estado del botón según lo que está almacenado en localStorage
-            if (siguiendo === 'true') {
-                btn.innerText = 'Siguiendo';
-                btn.classList.add('siguiendo');
-            } else {
-                btn.innerText = 'Seguir';
-                btn.classList.remove('siguiendo');
-            }
-            // Función para alternar entre Seguir y Siguiendo
-            btn.addEventListener('click', function() {
-                if (btn.innerText === 'Seguir') {
-                    btn.innerText = 'Siguiendo';
-                    btn.classList.add('siguiendo');
-                    localStorage.setItem('siguiendo', 'true');
-                } else {
-                    btn.innerText = 'Seguir';
-                    btn.classList.remove('siguiendo');
-                    localStorage.setItem('siguiendo', 'false');
+            const fotoPerfil = document.querySelector('.perfil-img');
+            const fotoGrande = document.getElementById('foto-grande');
+            const fotoPerfilGrande = document.getElementById('foto-perfil-grande');
+            const cerrar = document.querySelector('.cerrar');
+
+            fotoPerfil.addEventListener('click', function() {
+                fotoPerfilGrande.src = fotoPerfil.src;
+                fotoGrande.style.display = 'flex';
+            });
+
+            cerrar.addEventListener('click', function() {
+                fotoGrande.style.display = 'none';
+            });
+
+            fotoGrande.addEventListener('click', function(event) {
+                if (event.target === fotoGrande) {
+                    fotoGrande.style.display = 'none';
                 }
             });
         };
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.juego-section');
-            const tabs = document.querySelectorAll('.tab');
-            sections.forEach(section => section.classList.remove('active'));
-            tabs.forEach(tab => tab.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            const activeTab = [...tabs].find(tab => tab.innerText.trim().toLowerCase() === sectionId.toLowerCase());
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-        }
     </script>
+</body>
+</html>
