@@ -5,258 +5,257 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-  body {
-    background: linear-gradient(135deg, #333, #555);
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: #fff;
-  }
-
-  .menu-container {
-    background-color: #444;
-    overflow: hidden;
-    text-align: center;
-    padding: 15px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-  }
-
-  .menu-container ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-
-  .menu-container li {
-    margin: 0 2%;
-  }
-
-  .menu-container li a {
-    display: inline-block;
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-
-  .menu-container li a:hover {
-    background-color: #555;
-    transform: scale(1.1);
-  }
-
-  .header {
-    background-image: url('Fondo.png');
-    background-size: cover;
-    background-position: center;
-    height: 20vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2%;
-  }
-
-  .header img {
-    height: auto;
-    max-height: 75px;
-    width: auto;
-  }
-
-  .search-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-  }
-
-  #buscador {
-    width: 100%;
-    padding: 15px 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    box-sizing: border-box;
-    background-color: #444;
-    color: #fff;
-  }
-
-  #resultados {
-    max-width: 90%;
-    margin: 20px auto;
-    padding: 0 20px;
-    text-align: center;
-  }
-
-  .resultados-busqueda {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    background-color: #555;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 400px;
-    transition: transform 0.3s ease;
-    margin: 10px auto;
-    color: #fff;
-  }
-
-  .resultados-busqueda img {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    margin-right: 15px;
-  }
-
-  .resultados-busqueda .info {
-    font-size: 18px;
-    text-align: left;
-    flex-grow: 1;
-  }
-
-  .resultados-busqueda:hover {
-    transform: scale(1.05);
-    background-color: #666;
-  }
-
-  .juego {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s, transform 0.3s ease-in-out;
-    cursor: pointer;
-    background-color: #444;
-    box-sizing: border-box;
-    width: 320px;
-    margin: 10px auto;
-  }
-
-  .juego img {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-    margin-right: 15px;
-  }
-
-  .info {
-    text-align: left;
-    flex-grow: 1;
-    color: #fff;
-    font-size: 16px;
-  }
-
-  .info span {
-    font-weight: bold;
-    display: block;
-  }
-
-  .info .gratis {
-    color: #00ff00;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-
-  .juego:hover {
-    transform: scale(1.05);
-  }
-
-  .untitled1 {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 10px;
-    padding: 20px;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .untitled1 div {
-    box-sizing: border-box;
-  }
-
-  .photo-container img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
-
-  #categoriaBtn {
-    background-color: #444;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 10px;
-    transition: background-color 0.3s;
-  }
-
-  #categoriaBtn:hover {
-    background-color: #555;
-  }
-
-  .categoria-panel {
-    display: none;
-    position: absolute;
-    left: 20px;
-    background-color: #444;
-    border: 1px solid #555;
-    border-radius: 5px;
-    padding: 10px;
-    z-index: 1000;
-    flex-direction: column;
-  }
-
-  .categoria {
-    padding: 10px;
-    color: #fff;
-    cursor: pointer;
-    margin-bottom: 5px;
-    transition: background-color 0.3s;
-  }
-
-  .categoria:hover {
-    background-color: #555;
-  }
-
-  .search-results-container {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 20px auto;
-  }
-
-  @media (max-width: 768px) {
-    .header {
-      height: 15vh;
+    body {
+      background: linear-gradient(135deg, #333, #555);
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
 
-    #buscador {
-      width: 80%;
+    .menu-container {
+      background-color: #444;
+      overflow: hidden;
+      text-align: center;
+      padding: 15px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+    }
+
+    .menu-container ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
     }
 
     .menu-container li {
-      margin: 0 5px;
+      margin: 0 2%;
+    }
+
+    .menu-container li a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .menu-container li a:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
+
+    .header {
+      background-image: url('Fondo.png');
+      background-size: cover;
+      background-position: center;
+      height: 20vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2%;
+    }
+
+    .header img {
+      height: auto;
+      max-height: 75px;
+      width: auto;
+    }
+
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    #buscador {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      box-sizing: border-box;
+      background-color: #444;
+      color: #fff;
+    }
+
+    #resultados {
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .resultados-busqueda {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #555;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+      margin: 10px auto;
+      color: #fff;
+    }
+
+    .resultados-busqueda img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+
+    .resultados-busqueda .info {
+      font-size: 18px;
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .resultados-busqueda:hover {
+      transform: scale(1.05);
+      background-color: #666;
+    }
+
+    .juego {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s, transform 0.3s ease-in-out;
+      cursor: pointer;
+      background-color: #444;
+      box-sizing: border-box;
+      text-align: center;
+      width: 120px;
+    }
+
+    .juego span {
+      margin-bottom: 10px;
+      color: #fff;
+      font-size: 16px;
+      display: block;
+    }
+
+    .juego img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .juego:hover {
+      transform: scale(1.1);
     }
 
     .untitled1 {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      padding: 20px;
+      max-width: 100%;
+      margin: 0 auto;
     }
-  }
-</style>
+
+    .untitled1 div {
+      text-align: center;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      box-sizing: border-box;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .untitled1 a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .photo-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    #categoriaBtn {
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    #categoriaBtn:hover {
+      background-color: #555;
+    }
+
+    .categoria-panel {
+      display: none;
+      position: absolute;
+      left: 20px;
+      background-color: #444;
+      border: 1px solid #555;
+      border-radius: 5px;
+      padding: 10px;
+      z-index: 1000;
+      flex-direction: column;
+    }
+
+    .categoria {
+      padding: 10px;
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .categoria:hover {
+      background-color: #555;
+    }
+
+    .search-results-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        height: 15vh;
+      }
+
+      #buscador {
+        width: 80%;
+      }
+
+      .menu-container li {
+        margin: 0 5px;
+      }
+
+      .untitled1 {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -289,146 +288,121 @@
   <section class="untitled1">
     <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="UntitledBeta.html">
+        <span>Untitled</span>
         <img src="icono.png" alt="Icono Juego 1">
-        <div class="contenido">
-          <span class="nombre">Untitled</span>
-          <span class="gratis">Gratis</span>
-        </div>
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Untitled2.html">
+        <span>Untitled 2</span>
         <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-        <div class="contenido">
-          <span class="nombre">Untitled 2</span>
-          <span class="gratis">Gratis</span>
-        </div>
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,plataformas">
-      <a href="JumpToSurvive.html">
-        <img src="JumpToSurvive.png" alt="Icono Jump To Survive">
-        <div class="contenido">
-          <span class="nombre">Jump To Survive</span>
-          <span class="gratis">Gratis</span>
-        </div>
+    <div class="juego" data-etiquetas="todos,accion,carreras">
+      <a href="Jump.html">
+        <span>Jump To Survive</span>
+        <img src="iconojump.png" alt="Icono Juego 3">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,plataformas">
+    <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="JumpPrologue.html">
-        <img src="JumpPrologue.png" alt="Icono Jump Prologue">
-        <div class="contenido">
-          <span class="nombre">Jump Prologue</span>
-          <span class="gratis">Gratis</span>
-        </div>
+        <span>Jump Prologue</span>
+        <img src="IconoJump2.png" alt="Icono Juego 4">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,plataformas">
+    <div class="juego" data-etiquetas="todos,robots">
       <a href="Kasper.html">
-        <img src="IconoKasper.png" alt="Icono Kasper">
-        <div class="contenido">
-          <span class="nombre">Kasper</span>
-          <span class="gratis">Gratis</span>
-        </div>
+        <span>Kasper</span>
+        <img src="KasperIcono.png" alt="Icono Juego 5">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="SurviveIn2D.html">
-        <img src="SurviveIn2D.png" alt="Icono Survive In 2D">
-        <div class="contenido">
-          <span class="nombre">Survive In 2D</span>
-          <span class="gratis">Gratis</span>
-        </div>
+        <span>Survive In 2D</span>
+        <img src="In2DIcon.png" alt="Icono Juego 6">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,aventura">
+    <div class="juego" data-etiquetas="todos,robots">
       <a href="Viktor.html">
-        <img src="Viktor.png" alt="Icono Viktor">
-        <div class="contenido">
-          <span class="nombre">Viktor</span>
-          <span class="gratis">Gratis</span>
-        </div>
+        <span>Viktor</span>
+        <img src="ViktorIcon.png" alt="Icono Juego 7">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion,carreras">
       <a href="Untitled3.html">
-        <img src="IconoDeUntitled3.png" alt="Icono Juego 3">
-        <div class="contenido">
-          <span class="nombre">Untitled 3</span>
-          <span class="gratis">Gratis</span>
-        </div>
+        <span>Untitled 3</span>
+        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
       </a>
     </div>
   </section>
-  
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const buscador = document.getElementById('buscador');
-      const resultados = document.getElementById('resultados');
-      const categoriaBtn = document.getElementById('categoriaBtn');
-      const categoriaPanel = document.getElementById('categoriaPanel');
-      const juegos = document.querySelectorAll('.juego');
-      const categorias = document.querySelectorAll('.categoria');
+    const buscador = document.getElementById('buscador');
+    const resultados = document.getElementById('resultados');
+    const juegos = document.querySelectorAll('.juego');
+    const categoriaBtn = document.getElementById('categoriaBtn');
+    const categoriaPanel = document.getElementById('categoriaPanel');
+    const categorias = document.querySelectorAll('.categoria');
 
-      buscador.addEventListener('input', function () {
-        const query = buscador.value.toLowerCase().trim();
-        resultados.innerHTML = '';
+    categoriaBtn.addEventListener('click', () => {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
+    });
 
-        if (query === '') {
-          resultados.style.display = 'none';
-          categoriaBtn.style.display = 'inline-block';
-        } else {
-          juegos.forEach(function (juego) {
-            const nombreJuego = juego.querySelector('.nombre').textContent.toLowerCase();
+    document.addEventListener('click', function(event) {
+      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
+        categoriaPanel.style.display = 'none';
+      }
+    });
 
-            if (nombreJuego.includes(query)) {
-              const resultado = document.createElement('div');
-              resultado.classList.add('resultados-busqueda');
-              resultado.innerHTML = juego.innerHTML;
-              resultados.appendChild(resultado);
-            }
-          });
-
-          if (resultados.children.length > 0) {
-            resultados.style.display = 'block';
-            categoriaBtn.style.display = 'none';
+    categorias.forEach(categoria => {
+      categoria.addEventListener('click', () => {
+        const etiqueta = categoria.getAttribute('data-etiqueta');
+        juegos.forEach(juego => {
+          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
+          if (etiqueta === 'todos' || etiquetas.includes(etiqueta)) {
+            juego.style.display = 'block';
           } else {
-            resultados.style.display = 'none';
+            juego.style.display = 'none';
           }
-        }
-      });
-
-      document.addEventListener('click', function (event) {
-        if (!event.target.closest('#buscador') && !event.target.closest('#resultados')) {
-          resultados.style.display = 'none';
-          buscador.value = '';
-          categoriaBtn.style.display = 'inline-block';
-        }
-      });
-
-      categoriaBtn.addEventListener('click', function () {
-        categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
-      });
-
-      categorias.forEach(function (categoria) {
-        categoria.addEventListener('click', function () {
-          const etiqueta = this.dataset.etiqueta;
-
-          juegos.forEach(function (juego) {
-            const etiquetasJuego = juego.dataset.etiquetas.split(',');
-
-            if (etiquetasJuego.includes(etiqueta) || etiqueta === 'todos') {
-              juego.style.display = 'block';
-            } else {
-              juego.style.display = 'none';
-            }
-          });
-
-          categoriaPanel.style.display = 'none';
         });
+        categoriaPanel.style.display = 'none';
+      });
+    });
+
+    buscador.addEventListener('input', function() {
+      const valor = buscador.value.toLowerCase().trim();
+      resultados.innerHTML = '';
+      let encontrado = false;
+
+      juegos.forEach(juego => {
+        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+        const iconoJuego = juego.querySelector('img').src;
+
+        if (nombreJuego.includes(valor) && valor !== '') {
+          const resultado = document.createElement('div');
+          resultado.className = 'resultados-busqueda';
+          resultado.innerHTML = 
+            <img src="${iconoJuego}" alt="Icono del juego">
+            <div class="info">${nombreJuego}</div>
+          ;
+          resultados.appendChild(resultado);
+          encontrado = true;
+        }
       });
 
-      // Lógica adicional para manejar la selección del perfil o ajustes.
+      if (!encontrado) {
+        resultados.style.display = 'none';
+      } else {
+        resultados.style.display = 'block';
+      }
+    });
+
+    buscador.addEventListener('focus', function() {
+      resultados.style.display = 'block';
+    });
+
+    buscador.addEventListener('blur', function() {
+      setTimeout(() => resultados.style.display = 'none', 100);
     });
   </script>
 </body>
