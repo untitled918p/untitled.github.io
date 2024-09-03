@@ -1,312 +1,409 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #333;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled Juegos</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #333, #555);
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
 
-        .header {
-            padding: 20px;
-            text-align: center;
-            background: #444;
-        }
+    .menu-container {
+      background-color: #444;
+      overflow: hidden;
+      text-align: center;
+      padding: 15px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+    }
 
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-        }
+    .menu-container ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
 
-        .search-bar {
-            text-align: center;
-            margin: 20px 0;
-        }
+    .menu-container li {
+      margin: 0 2%;
+    }
 
-        .search-bar input {
-            padding: 10px;
-            font-size: 16px;
-            width: 300px;
-            max-width: 80%;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-        }
+    .menu-container li a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
 
-        .categorias {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .menu-container li a:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
 
-        .categorias button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 0;
-            border: none;
-            cursor: pointer;
-            background-color: #555;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
+    .header {
+      background-image: url('Fondo.png');
+      background-size: cover;
+      background-position: center;
+      height: 20vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2%;
+    }
 
-        .categorias button:hover {
-            background-color: #666;
-        }
+    .header img {
+      height: auto;
+      max-height: 75px;
+      width: auto;
+    }
 
-        .categorias .panel-categorias {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            background-color: #555;
-            border: 1px solid #444;
-            padding: 10px;
-            z-index: 100;
-            width: 200px;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
 
-        .categorias .panel-categorias button {
-            width: 100%;
-            margin: 5px 0;
-        }
+    #buscador {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      box-sizing: border-box;
+      background-color: #444;
+      color: #fff;
+    }
 
-        .untitled1 {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            padding: 20px;
-            max-width: 100%;
-            margin: 0 auto;
-        }
+    #resultados {
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
 
-        .juego {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border: 2px solid #fff;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: background-color 0.3s, transform 0.3s ease-in-out;
-            cursor: pointer;
-            background-color: #444;
-            box-sizing: border-box;
-            text-align: left;
-            width: 100%;
-            max-width: 400px;
-        }
+    .resultados-busqueda {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #555;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+      margin: 10px auto;
+      color: #fff;
+    }
 
-        .juego img {
-            width: 100px;
-            height: 100px;
-            margin-right: 15px;
-            border-radius: 10px;
-        }
+    .resultados-busqueda img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
 
-        .juego .info {
-            color: #fff;
-            font-size: 16px;
-        }
+    .resultados-busqueda .info {
+      font-size: 18px;
+      text-align: left;
+      flex-grow: 1;
+    }
 
-        .juego .info .nombre {
-            font-size: 18px;
-            margin-bottom: 5px;
-            display: block;
-        }
+    .resultados-busqueda:hover {
+      transform: scale(1.05);
+      background-color: #666;
+    }
 
-        .juego .info .gratis {
-            color: #00ff00;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    .juego {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s, transform 0.3s ease-in-out;
+      cursor: pointer;
+      background-color: #444;
+      box-sizing: border-box;
+      text-align: center;
+      width: 120px;
+    }
 
-        .juego:hover {
-            transform: scale(1.05);
-        }
+    .juego span {
+      margin-bottom: 10px;
+      color: #fff;
+      font-size: 16px;
+      display: block;
+    }
 
-        @media (max-width: 768px) {
-            .juego {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
+    .juego img {
+      width: 100px;
+      height: 100px;
+    }
 
-            .juego img {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
+    .juego:hover {
+      transform: scale(1.1);
+    }
 
-            .juego .info {
-                text-align: center;
-            }
-        }
+    .untitled1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      padding: 20px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
 
-        .no-resultados {
-            text-align: center;
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+    .untitled1 div {
+      text-align: center;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      box-sizing: border-box;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .untitled1 a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+
+    .photo-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    #categoriaBtn {
+      background-color: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    #categoriaBtn:hover {
+      background-color: #555;
+    }
+
+    .categoria-panel {
+      display: none;
+      position: absolute;
+      left: 20px;
+      background-color: #444;
+      border: 1px solid #555;
+      border-radius: 5px;
+      padding: 10px;
+      z-index: 1000;
+      flex-direction: column;
+    }
+
+    .categoria {
+      padding: 10px;
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .categoria:hover {
+      background-color: #555;
+    }
+
+    .search-results-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        height: 15vh;
+      }
+
+      #buscador {
+        width: 80%;
+      }
+
+      .menu-container li {
+        margin: 0 5px;
+      }
+
+      .untitled1 {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-
+  <header>
+    <nav class="menu-container">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Contacto.html">Contacto</a></li>
+        <li><a href="Informacion.html">Página oficial</a></li>
+        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+        <li id="profile-photo-container" class="photo-container"></li>
+      </ul>
+    </nav>
     <div class="header">
-        <h1>Juegos</h1>
+      <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
+      <div class="search-container">
+        <input type="text" id="buscador" placeholder="Buscar juegos...">
+      </div>
     </div>
-
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Buscar juegos...">
+  </header>
+  <div id="resultados" class="search-results-container"></div>
+  
+  <button id="categoriaBtn">Categorías</button>
+  <div class="categoria-panel" id="categoriaPanel">
+    <div class="categoria" data-etiqueta="todos">Todos</div>
+    <div class="categoria" data-etiqueta="accion">Acción</div>
+    <div class="categoria" data-etiqueta="zombies">Zombies</div>
+    <div class="categoria" data-etiqueta="robots">Robots</div>
+    <div class="categoria" data-etiqueta="carreras">Carreras</div>
+  </div>
+  <section class="untitled1">
+    <div class="juego" data-etiquetas="todos,accion,zombies">
+      <a href="UntitledBeta.html">
+        <span>Untitled</span>
+        <img src="icono.png" alt="Icono Juego 1">
+      </a>
     </div>
-
-    <div class="categorias">
-        <button id="categoriaBtn">Categoría</button>
-        <div class="panel-categorias" id="panelCategorias">
-            <button class="categoria" data-etiqueta="accion">Acción</button>
-            <button class="categoria" data-etiqueta="zombies">Zombies</button>
-            <button class="categoria" data-etiqueta="carreras">Carreras</button>
-            <button class="categoria" data-etiqueta="robots">Robots</button>
-        </div>
+    <div class="juego" data-etiquetas="todos,accion">
+      <a href="Untitled2.html">
+        <span>Untitled 2</span>
+        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+      </a>
     </div>
-
-    <section class="untitled1" id="juegosContainer">
-        <div class="juego" data-etiquetas="todos,accion,zombies">
-            <img src="icono.png" alt="Icono Juego 1">
-            <div class="info">
-                <span class="nombre">Untitled</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,accion">
-            <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
-            <div class="info">
-                <span class="nombre">Untitled 2</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,accion,carreras">
-            <img src="iconojump.png" alt="Icono Juego 3">
-            <div class="info">
-                <span class="nombre">Jump To Survive</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,accion,carreras">
-            <img src="IconoJump2.png" alt="Icono Juego 4">
-            <div class="info">
-                <span class="nombre">Jump Prologue</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,robots">
-            <img src="KasperIcono.png" alt="Icono Juego 5">
-            <div class="info">
-                <span class="nombre">Kasper</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,accion,zombies">
-            <img src="In2DIcon.png" alt="Icono Juego 6">
-            <div class="info">
-                <span class="nombre">Survive In 2D</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,robots">
-            <img src="ViktorIcon.png" alt="Icono Juego 7">
-            <div class="info">
-                <span class="nombre">Viktor</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-        <div class="juego" data-etiquetas="todos,accion,carreras">
-            <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
-            <div class="info">
-                <span class="nombre">Untitled 3</span>
-                <span class="gratis">Gratis</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="no-resultados" id="noResultados">
-        No se encontraron resultados.
+    <div class="juego" data-etiquetas="todos,accion,carreras">
+      <a href="Jump.html">
+        <span>Jump To Survive</span>
+        <img src="iconojump.png" alt="Icono Juego 3">
+      </a>
     </div>
+    <div class="juego" data-etiquetas="todos,accion,carreras">
+      <a href="JumpPrologue.html">
+        <span>Jump Prologue</span>
+        <img src="IconoJump2.png" alt="Icono Juego 4">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="todos,robots">
+      <a href="Kasper.html">
+        <span>Kasper</span>
+        <img src="KasperIcono.png" alt="Icono Juego 5">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="todos,accion,zombies">
+      <a href="SurviveIn2D.html">
+        <span>Survive In 2D</span>
+        <img src="In2DIcon.png" alt="Icono Juego 6">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="todos,robots">
+      <a href="Viktor.html">
+        <span>Viktor</span>
+        <img src="ViktorIcon.png" alt="Icono Juego 7">
+      </a>
+    </div>
+    <div class="juego" data-etiquetas="todos,accion,carreras">
+      <a href="Untitled3.html">
+        <span>Untitled 3</span>
+        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+      </a>
+    </div>
+  </section>
 
-    <script>
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const juegos = document.querySelectorAll('.juego');
-            let resultados = 0;
+  <script>
+    const buscador = document.getElementById('buscador');
+    const resultados = document.getElementById('resultados');
+    const juegos = document.querySelectorAll('.juego');
+    const categoriaBtn = document.getElementById('categoriaBtn');
+    const categoriaPanel = document.getElementById('categoriaPanel');
+    const categorias = document.querySelectorAll('.categoria');
 
-            juegos.forEach(juego => {
-                const nombre = juego.querySelector('.nombre').textContent.toLowerCase();
-                if (nombre.includes(searchTerm)) {
-                    juego.style.display = 'flex';
-                    resultados++;
-                } else {
-                    juego.style.display = 'none';
-                }
-            });
+    categoriaBtn.addEventListener('click', () => {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
+    });
 
-            document.getElementById('noResultados').style.display = resultados === 0 ? 'block' : 'none';
+    document.addEventListener('click', function(event) {
+      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
+        categoriaPanel.style.display = 'none';
+      }
+    });
+
+    categorias.forEach(categoria => {
+      categoria.addEventListener('click', () => {
+        const etiqueta = categoria.getAttribute('data-etiqueta');
+        juegos.forEach(juego => {
+          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
+          if (etiqueta === 'todos' || etiquetas.includes(etiqueta)) {
+            juego.style.display = 'block';
+          } else {
+            juego.style.display = 'none';
+          }
         });
+        categoriaPanel.style.display = 'none';
+      });
+    });
 
-        document.getElementById('categoriaBtn').addEventListener('click', function() {
-            const panel = document.getElementById('panelCategorias');
-            panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
-        });
+    buscador.addEventListener('input', function() {
+      const valor = buscador.value.toLowerCase().trim();
+      resultados.innerHTML = '';
+      let encontrado = false;
 
-        const categorias = document.querySelectorAll('.categoria');
-        categorias.forEach(categoria => {
-            categoria.addEventListener('click', function() {
-                const etiqueta = this.getAttribute('data-etiqueta');
-                const juegos = document.querySelectorAll('.juego');
+      juegos.forEach(juego => {
+        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+        const iconoJuego = juego.querySelector('img').src;
 
-                juegos.forEach(juego => {
-                    if (juego.getAttribute('data-etiquetas').includes(etiqueta)) {
-                        juego.style.display = 'flex';
-                    } else {
-                        juego.style.display = 'none';
-                    }
-                });
+        if (nombreJuego.includes(valor) && valor !== '') {
+          const resultado = document.createElement('div');
+          resultado.className = 'resultados-busqueda';
+          resultado.innerHTML = 
+            <img src="${iconoJuego}" alt="Icono del juego">
+            <div class="info">${nombreJuego}</div>
+          ;
+          resultados.appendChild(resultado);
+          encontrado = true;
+        }
+      });
 
-                document.getElementById('panelCategorias').style.display = 'none';
-            });
-        });
+      if (!encontrado) {
+        resultados.style.display = 'none';
+      } else {
+        resultados.style.display = 'block';
+      }
+    });
 
-        document.addEventListener('click', function(event) {
-            const panel = document.getElementById('panelCategorias');
-            const categoriaBtn = document.getElementById('categoriaBtn');
+    buscador.addEventListener('focus', function() {
+      resultados.style.display = 'block';
+    });
 
-            if (!panel.contains(event.target) && !categoriaBtn.contains(event.target)) {
-                panel.style.display = 'none';
-            }
-        });
-
-        document.getElementById('searchInput').addEventListener('focus', function() {
-            document.getElementById('categoriaBtn').style.display = 'none';
-        });
-
-        document.getElementById('searchInput').addEventListener('blur', function() {
-            if (!this.value) {
-                document.getElementById('categoriaBtn').style.display = 'block';
-            }
-        });
-
-        document.addEventListener('click', function(event) {
-            const searchInput = document.getElementById('searchInput');
-            if (!searchInput.contains(event.target) && event.target !== searchInput) {
-                searchInput.blur();
-            }
-        });
-    </script>
-
+    buscador.addEventListener('blur', function() {
+      setTimeout(() => resultados.style.display = 'none', 100);
+    });
+  </script>
 </body>
 </html>
