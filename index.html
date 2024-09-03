@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Untitled Juegos</title>
-  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -240,81 +234,79 @@
             </div>
         </div>
     </section>
-<div class="no-resultados" id="noResultados">
+
+    <div class="no-resultados" id="noResultados">
         No se encontraron resultados.
     </div>
-  <script>
-    const buscador = document.getElementById('buscador');
-    const resultados = document.getElementById('resultados');
-    const juegos = document.querySelectorAll('.juego');
-    const categoriaBtn = document.getElementById('categoriaBtn');
-    const categoriaPanel = document.getElementById('categoriaPanel');
-    const categorias = document.querySelectorAll('.categoria');
 
-    // Funcionalidad del buscador
-    buscador.addEventListener('input', function() {
-      const valor = buscador.value.toLowerCase().trim();
-      resultados.innerHTML = '';
-      let encontrado = false;
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const juegos = document.querySelectorAll('.juego');
+            let resultados = 0;
 
-      juegos.forEach(juego => {
-        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-        const iconoJuego = juego.querySelector('img').src;
+            juegos.forEach(juego => {
+                const nombre = juego.querySelector('.nombre').textContent.toLowerCase();
+                if (nombre.includes(searchTerm)) {
+                    juego.style.display = 'flex';
+                    resultados++;
+                } else {
+                    juego.style.display = 'none';
+                }
+            });
 
-        if (nombreJuego.includes(valor) && valor !== '') {
-          const inicioCoincidencia = nombreJuego.indexOf(valor);
-          const finCoincidencia = inicioCoincidencia + valor.length;
-          const nombreJuegoResaltado = `
-            ${nombreJuego.substring(0, inicioCoincidencia)}
-            <mark>${nombreJuego.substring(inicioCoincidencia, finCoincidencia)}</mark>
-            ${nombreJuego.substring(finCoincidencia)}
-          `;
-
-          const resultado = document.createElement('div');
-          resultado.className = 'resultados-busqueda';
-          resultado.innerHTML = `
-            <img src="${iconoJuego}" alt="Icono del juego" loading="lazy" width="50" height="50">
-            <div class="info">${nombreJuegoResaltado}</div>
-          `;
-          resultados.appendChild(resultado);
-          encontrado = true;
-        }
-      });
-
-      if (!encontrado) {
-        resultados.style.display = 'none';
-      } else {
-        resultados.style.display = 'block';
-      }
-    });
-
-    // Mostrar/ocultar panel de categorías
-    categoriaBtn.addEventListener('click', function() {
-      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // Filtrar juegos por categoría
-    categorias.forEach(categoria => {
-      categoria.addEventListener('click', function() {
-        const etiqueta = categoria.getAttribute('data-etiqueta');
-        juegos.forEach(juego => {
-          if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
-            juego.style.display = 'block';
-          } else {
-            juego.style.display = 'none';
-          }
+            document.getElementById('noResultados').style.display = resultados === 0 ? 'block' : 'none';
         });
-        categoriaPanel.style.display = 'none';
-      });
-    });
 
-    // Cerrar el buscador si se hace clic fuera de él
-    document.addEventListener('click', function(event) {
-      if (!buscador.contains(event.target) && !categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
-        resultados.style.display = 'none';
-        categoriaPanel.style.display = 'none';
-      }
-    });
-  </script>
+        document.getElementById('categoriaBtn').addEventListener('click', function() {
+            const panel = document.getElementById('panelCategorias');
+            panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        const categorias = document.querySelectorAll('.categoria');
+        categorias.forEach(categoria => {
+            categoria.addEventListener('click', function() {
+                const etiqueta = this.getAttribute('data-etiqueta');
+                const juegos = document.querySelectorAll('.juego');
+
+                juegos.forEach(juego => {
+                    if (juego.getAttribute('data-etiquetas').includes(etiqueta)) {
+                        juego.style.display = 'flex';
+                    } else {
+                        juego.style.display = 'none';
+                    }
+                });
+
+                document.getElementById('panelCategorias').style.display = 'none';
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('panelCategorias');
+            const categoriaBtn = document.getElementById('categoriaBtn');
+
+            if (!panel.contains(event.target) && !categoriaBtn.contains(event.target)) {
+                panel.style.display = 'none';
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('focus', function() {
+            document.getElementById('categoriaBtn').style.display = 'none';
+        });
+
+        document.getElementById('searchInput').addEventListener('blur', function() {
+            if (!this.value) {
+                document.getElementById('categoriaBtn').style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const searchInput = document.getElementById('searchInput');
+            if (!searchInput.contains(event.target) && event.target !== searchInput) {
+                searchInput.blur();
+            }
+        });
+    </script>
+
 </body>
 </html>
