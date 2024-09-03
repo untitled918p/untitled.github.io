@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
-  <style>
+   <style>
     body {
       background: linear-gradient(135deg, #333, #555);
       margin: 0;
@@ -128,15 +128,17 @@
     .juego {
       display: flex;
       align-items: center;
-      padding: 15px;
+      padding: 10px;
       border: 2px solid #fff;
       border-radius: 10px;
       margin-bottom: 10px;
+      transition: background-color 0.3s, transform 0.3s ease-in-out;
+      cursor: pointer;
+      background-color: #444;
+      box-sizing: border-box;
+      text-align: left;
       width: 100%;
       max-width: 400px;
-      box-sizing: border-box;
-      background-color: #444;
-      transition: transform 0.3s, background-color 0.3s;
     }
 
     .juego img {
@@ -148,7 +150,6 @@
 
     .juego .info {
       flex-grow: 1;
-      text-align: left;
     }
 
     .juego .info .nombre {
