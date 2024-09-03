@@ -151,6 +151,7 @@
     .juego img {
       width: 100px;
       height: 100px;
+      loading: lazy;
     }
 
     .juego:hover {
@@ -186,6 +187,7 @@
       height: 40px;
       border-radius: 50%;
       border: 2px solid white;
+      loading: lazy;
     }
 
     #categoriaBtn {
@@ -236,6 +238,12 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       max-width: 600px;
       margin: 20px auto;
+    }
+
+    mark {
+      background-color: yellow;
+      color: black;
+      font-weight: bold;
     }
 
     @media (max-width: 768px) {
@@ -289,49 +297,49 @@
     <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="UntitledBeta.html">
         <span>Untitled</span>
-        <img src="icono.png" alt="Icono Juego 1">
+        <img src="icono.png" alt="Icono Juego 1" loading="lazy" width="100" height="100">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Untitled2.html">
         <span>Untitled 2</span>
-        <img src="IconoDeUntitled2.png" alt="Icono Juego 2">
+        <img src="IconoDeUntitled2.png" alt="Icono Juego 2" loading="lazy" width="100" height="100">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,carreras">
-      <a href="Jump.html">
+    <div class="juego" data-etiquetas="todos,carreras">
+      <a href="JumpToSurvive.html">
         <span>Jump To Survive</span>
-        <img src="iconojump.png" alt="Icono Juego 3">
+        <img src="IconoDeJumpToSurvive.png" alt="Icono Juego 3" loading="lazy" width="100" height="100">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,carreras">
+    <div class="juego" data-etiquetas="todos,carreras">
       <a href="JumpPrologue.html">
         <span>Jump Prologue</span>
-        <img src="IconoJump2.png" alt="Icono Juego 4">
+        <img src="IconoDeJumpPrologue.png" alt="Icono Juego 4" loading="lazy" width="100" height="100">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,robots">
       <a href="Kasper.html">
         <span>Kasper</span>
-        <img src="KasperIcono.png" alt="Icono Juego 5">
+        <img src="IconoDeKasper.png" alt="Icono Juego 5" loading="lazy" width="100" height="100">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="SurviveIn2D.html">
         <span>Survive In 2D</span>
-        <img src="In2DIcon.png" alt="Icono Juego 6">
+        <img src="IconoDeSurviveIn2D.png" alt="Icono Juego 6" loading="lazy" width="100" height="100">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,robots">
       <a href="Viktor.html">
         <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 7">
+        <img src="IconoDeViktor.png" alt="Icono Juego 7" loading="lazy" width="100" height="100">
       </a>
     </div>
-    <div class="juego" data-etiquetas="todos,accion,carreras">
+    <div class="juego" data-etiquetas="todos,accion,zombies">
       <a href="Untitled3.html">
         <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+        <img src="IconoDeUntitled3.png" alt="Icono Juego 8" loading="lazy" width="100" height="100">
       </a>
     </div>
   </section>
@@ -344,31 +352,7 @@
     const categoriaPanel = document.getElementById('categoriaPanel');
     const categorias = document.querySelectorAll('.categoria');
 
-    categoriaBtn.addEventListener('click', () => {
-      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', function(event) {
-      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
-        categoriaPanel.style.display = 'none';
-      }
-    });
-
-    categorias.forEach(categoria => {
-      categoria.addEventListener('click', () => {
-        const etiqueta = categoria.getAttribute('data-etiqueta');
-        juegos.forEach(juego => {
-          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
-          if (etiqueta === 'todos' || etiquetas.includes(etiqueta)) {
-            juego.style.display = 'block';
-          } else {
-            juego.style.display = 'none';
-          }
-        });
-        categoriaPanel.style.display = 'none';
-      });
-    });
-
+    // Funcionalidad del buscador
     buscador.addEventListener('input', function() {
       const valor = buscador.value.toLowerCase().trim();
       resultados.innerHTML = '';
@@ -379,11 +363,19 @@
         const iconoJuego = juego.querySelector('img').src;
 
         if (nombreJuego.includes(valor) && valor !== '') {
+          const inicioCoincidencia = nombreJuego.indexOf(valor);
+          const finCoincidencia = inicioCoincidencia + valor.length;
+          const nombreJuegoResaltado = `
+            ${nombreJuego.substring(0, inicioCoincidencia)}
+            <mark>${nombreJuego.substring(inicioCoincidencia, finCoincidencia)}</mark>
+            ${nombreJuego.substring(finCoincidencia)}
+          `;
+
           const resultado = document.createElement('div');
           resultado.className = 'resultados-busqueda';
           resultado.innerHTML = `
-            <img src="${iconoJuego}" alt="Icono del juego">
-            <div class="info">${nombreJuego}</div>
+            <img src="${iconoJuego}" alt="Icono del juego" loading="lazy" width="50" height="50">
+            <div class="info">${nombreJuegoResaltado}</div>
           `;
           resultados.appendChild(resultado);
           encontrado = true;
@@ -397,12 +389,32 @@
       }
     });
 
-    buscador.addEventListener('focus', function() {
-      resultados.style.display = 'block';
+    // Mostrar/ocultar panel de categorías
+    categoriaBtn.addEventListener('click', function() {
+      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
     });
 
-    buscador.addEventListener('blur', function() {
-      setTimeout(() => resultados.style.display = 'none', 100);
+    // Filtrar juegos por categoría
+    categorias.forEach(categoria => {
+      categoria.addEventListener('click', function() {
+        const etiqueta = categoria.getAttribute('data-etiqueta');
+        juegos.forEach(juego => {
+          if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
+            juego.style.display = 'block';
+          } else {
+            juego.style.display = 'none';
+          }
+        });
+        categoriaPanel.style.display = 'none';
+      });
+    });
+
+    // Cerrar el buscador si se hace clic fuera de él
+    document.addEventListener('click', function(event) {
+      if (!buscador.contains(event.target) && !categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
+        resultados.style.display = 'none';
+        categoriaPanel.style.display = 'none';
+      }
     });
   </script>
 </body>
