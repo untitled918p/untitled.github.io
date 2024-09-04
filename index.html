@@ -337,72 +337,76 @@
   </section>
 
   <script>
-    const buscador = document.getElementById('buscador');
-    const resultados = document.getElementById('resultados');
-    const juegos = document.querySelectorAll('.juego');
-    const categoriaBtn = document.getElementById('categoriaBtn');
-    const categoriaPanel = document.getElementById('categoriaPanel');
-    const categorias = document.querySelectorAll('.categoria');
+    document.addEventListener('DOMContentLoaded', function () {
+      const categoriaBtn = document.getElementById('categoriaBtn');
+      const categoriaPanel = document.getElementById('categoriaPanel');
+      const buscador = document.getElementById('buscador');
+      const resultadosDiv = document.getElementById('resultados');
+      const juegos = document.querySelectorAll('.juego');
+      const categorias = document.querySelectorAll('.categoria');
 
-    categoriaBtn.addEventListener('click', () => {
-      categoriaPanel.style.display = categoriaPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', function(event) {
-      if (!categoriaPanel.contains(event.target) && !categoriaBtn.contains(event.target)) {
-        categoriaPanel.style.display = 'none';
-      }
-    });
-
-    categorias.forEach(categoria => {
-      categoria.addEventListener('click', () => {
-        const etiqueta = categoria.getAttribute('data-etiqueta');
-        juegos.forEach(juego => {
-          const etiquetas = juego.getAttribute('data-etiquetas').split(',');
-          if (etiqueta === 'todos' || etiquetas.includes(etiqueta)) {
-            juego.style.display = 'block';
-          } else {
-            juego.style.display = 'none';
-          }
-        });
-        categoriaPanel.style.display = 'none';
-      });
-    });
-
-    buscador.addEventListener('input', function() {
-      const valor = buscador.value.toLowerCase().trim();
-      resultados.innerHTML = '';
-      let encontrado = false;
-
-      juegos.forEach(juego => {
-        const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-        const iconoJuego = juego.querySelector('img').src;
-
-        if (nombreJuego.includes(valor) && valor !== '') {
-          const resultado = document.createElement('div');
-          resultado.className = 'resultados-busqueda';
-          resultado.innerHTML = 
-            <img src="${iconoJuego}" alt="Icono del juego">
-            <div class="info">${nombreJuego}</div>
-          ;
-          resultados.appendChild(resultado);
-          encontrado = true;
+      // Función para cerrar el panel de categorías al tocar fuera de él
+      document.addEventListener('click', function (event) {
+        if (!categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
+          categoriaPanel.style.display = 'none';
         }
       });
 
-      if (!encontrado) {
-        resultados.style.display = 'none';
-      } else {
-        resultados.style.display = 'block';
-      }
-    });
+      // Función para mostrar/ocultar panel de categorías
+      categoriaBtn.addEventListener('click', function () {
+        categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
+      });
 
-    buscador.addEventListener('focus', function() {
-      resultados.style.display = 'block';
-    });
+      // Función para filtrar juegos por categoría
+      categorias.forEach(function (categoria) {
+        categoria.addEventListener('click', function () {
+          const etiqueta = categoria.getAttribute('data-etiqueta');
+          juegos.forEach(function (juego) {
+            if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
+              juego.style.display = 'flex';
+            } else {
+              juego.style.display = 'none';
+            }
+          });
+        });
+      });
 
-    buscador.addEventListener('blur', function() {
-      setTimeout(() => resultados.style.display = 'none', 100);
+      // Función para buscar juegos y limitar a 4 resultados
+      buscador.addEventListener('input', function () {
+        const filtro = buscador.value.toLowerCase();
+        resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
+        let contadorResultados = 0;
+
+        juegos.forEach(function (juego) {
+          const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+          if (nombreJuego.includes(filtro)) {
+            if (filtro !== '' && contadorResultados < 4) {
+              const resultadoBusqueda = document.createElement('div');
+              resultadoBusqueda.classList.add('resultados-busqueda');
+              resultadoBusqueda.innerHTML = juego.innerHTML;
+              resultadosDiv.appendChild(resultadoBusqueda);
+              contadorResultados++;
+            }
+          }
+        });
+
+        // Ocultar resultados si no hay búsqueda
+        resultadosDiv.style.display = filtro === '' ? 'none' : 'block';
+      });
+
+      // Cerrar el campo de búsqueda al hacer clic fuera de él
+      document.addEventListener('click', function (event) {
+        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
+          resultadosDiv.style.display = 'none';
+        }
+      });
+
+      // Mostrar los resultados nuevamente si se hace clic dentro del buscador
+      buscador.addEventListener('click', function () {
+        if (buscador.value !== '') {
+          resultadosDiv.style.display = 'block';
+        }
+      });
     });
   </script>
 </body>
