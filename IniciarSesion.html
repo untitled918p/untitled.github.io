@@ -52,10 +52,6 @@
             color: #777;
         }
     </style>
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-    <!-- Firebase Authentication -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -63,12 +59,16 @@
         <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
     </div>
 
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"></script>
+
     <script>
-        // Your web app's Firebase configuration
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
             authDomain: "untitled-3bfa8.firebaseapp.com",
-            databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
             projectId: "untitled-3bfa8",
             storageBucket: "untitled-3bfa8.appspot.com",
             messagingSenderId: "841576951279",
@@ -76,17 +76,18 @@
             measurementId: "G-MJ4RGPGV36"
         };
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Inicializar Auth
         const auth = firebase.auth();
 
-        // Google login
+        // Inicio de sesión con Google
         document.getElementById('googleLogin').addEventListener('click', () => {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then(result => {
                     console.log('Usuario autenticado:', result.user);
-                    // Puedes redirigir al usuario o mostrar su información aquí
                 })
                 .catch(error => {
                     console.error('Error durante la autenticación:', error);
