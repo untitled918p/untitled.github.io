@@ -11,290 +11,111 @@
             color: #333;
             margin: 0;
             padding: 0;
-        }
-
-        .menu-container {
-            background-color: #444;
-            padding: 15px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
+            height: 100vh;
         }
-
-        .menu-container ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-container li {
-            display: inline-block;
-            margin: 0 15px;
-        }
-
-        .menu-container li a {
-            display: inline-block;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .menu-container li a:hover {
-            background-color: #555;
-            transform: scale(1.1);
-        }
-
-        .profile-photo-container {
-            display: flex;
-            align-items: center;
-            position: absolute;
-            right: 20px;
-        }
-
-        .profile-photo-container img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            margin-left: 10px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
+        .login-container {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
-
-        .photo-container {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
+        .login-container h2 {
+            margin-bottom: 20px;
         }
-
-        .photo-container img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid #333;
-        }
-
-        input[type="text"], input[type="email"], input[type="password"], input[type="file"], button {
+        .login-container button {
             display: block;
+            width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin: 10px 0;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        #name, #lastname {
-            width: calc(50% - 10px);
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        #lastname {
-            margin-right: 0;
-        }
-
-        button {
-            background-color: #4285f4;
-            color: #fff;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        button:hover {
-            background-color: #357ae8;
+        .login-container .google-btn {
+            background-color: #db4437;
+            color: #fff;
         }
-
-        .success-message {
-            color: #333;
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .login-container .facebook-btn {
+            background-color: #3b5998;
+            color: #fff;
         }
-
-        .small-message {
-            font-size: 12px;
+        .login-container .google-btn:hover {
+            background-color: #c33c2e;
+        }
+        .login-container .facebook-btn:hover {
+            background-color: #324b82;
+        }
+        .login-container .or {
+            margin: 15px 0;
+            font-size: 14px;
             color: #777;
-            margin-top: 10px;
         }
-
-        .error-message {
-            color: #f44336;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
-
     </style>
 </head>
 <body>
-
-    <div class="menu-container">
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="Contacto.html">Contacto</a></li>
-            <li><a href="Informacion.html">Página oficial</a></li>
-            <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-        </ul>
-        <div class="profile-photo-container" id="menuProfilePhotoContainer" style="display: none;">
-            <img id="menuProfilePhoto" src="" alt="Foto de perfil">
-        </div>
-    </div>
-
-    <div class="container" id="loginContainer">
+    <div class="login-container">
         <h2>Iniciar sesión</h2>
-        <input type="text" id="name" placeholder="Nombre">
-        <input type="text" id="lastname" placeholder="Apellido">
-        <input type="email" id="email" placeholder="Correo electrónico">
-        <p id="emailError" class="error-message" style="display: none;">El correo debe ser una dirección @gmail.com.</p>
-        <input type="password" id="password" placeholder="Contraseña">
-        <p id="passwordError" class="error-message" style="display: none;">La contraseña debe tener entre 4 y 16 caracteres.</p>
-        <div class="photo-container">
-            <label for="profilePhotoInput">Foto de perfil (PNG)</label>
-            <input type="file" id="profilePhotoInput" accept="image/png">
-            <p id="photoError" class="error-message" style="display: none;">Debes subir una foto de perfil en formato PNG.</p>
-            <img id="profilePhotoPreview" src="" alt="Previsualización de foto de perfil" style="display: none;">
-        </div>
-        <button onclick="createAccount()">Crear cuenta</button>
+        <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
+        <button class="facebook-btn" id="facebookLogin">Iniciar sesión con Facebook</button>
+        <p class="or">o</p>
+        <button class="email-btn">Iniciar sesión con Email</button>
     </div>
 
-    <div class="success-message" id="successMessage" style="display: none;">
-        <h2>Cuenta creada</h2>
-        <p class="small-message">Disfruta de nuestros servicios.(Toca tu foto de perfil para mas informacion.)</p>
-        
-    </div>
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-            if (loggedInUser) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                document.getElementById('menuProfilePhoto').src = loggedInUser.profilePhoto;
-                document.getElementById('menuProfilePhotoContainer').style.display = 'flex';
-            }
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+  authDomain: "untitled-3bfa8.firebaseapp.com",
+  databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
+  projectId: "untitled-3bfa8",
+  storageBucket: "untitled-3bfa8.appspot.com",
+  messagingSenderId: "841576951279",
+  appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+  measurementId: "G-MJ4RGPGV36"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+        const auth = firebase.auth();
+
+        // Google login
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log(result.user);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         });
 
-        const profilePhotoInput = document.getElementById('profilePhotoInput');
-        const profilePhotoPreview = document.getElementById('profilePhotoPreview');
-        const menuProfilePhoto = document.getElementById('menuProfilePhoto');
-        const menuProfilePhotoContainer = document.getElementById('menuProfilePhotoContainer');
-
-        profilePhotoInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file && file.type === 'image/png') {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePhotoPreview.src = e.target.result;
-                    profilePhotoPreview.style.display = 'block';
-                    document.getElementById('photoError').style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                profilePhotoPreview.style.display = 'none';
-                document.getElementById('photoError').style.display = 'block';
-            }
+        // Facebook login
+        document.getElementById('facebookLogin').addEventListener('click', () => {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    console.log(result.user);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         });
-
-        function createAccount() {
-            const name = document.getElementById('name').value;
-            const lastname = document.getElementById('lastname').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const profilePhoto = profilePhotoPreview.src;
-
-            let valid = true;
-
-            if (!validateName(name)) {
-                valid = false;
-            }
-
-            if (!validateLastname(lastname)) {
-                valid = false;
-            }
-
-            if (!validateEmail(email)) {
-                document.getElementById('emailError').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('emailError').style.display = 'none';
-            }
-
-            if (!validatePassword(password)) {
-                document.getElementById('passwordError').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('passwordError').style.display = 'none';
-            }
-
-            if (!profilePhoto || !profilePhotoInput.files[0] || profilePhotoInput.files[0].type !== 'image/png') {
-                document.getElementById('photoError').style.display = 'block';
-                valid = false;
-            } else {
-                document.getElementById('photoError').style.display = 'none';
-            }
-
-            if (valid) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                menuProfilePhoto.src = profilePhoto;
-                menuProfilePhotoContainer.style.display = 'flex';
-                localStorage.setItem('loggedInUser', JSON.stringify({ profilePhoto }));
-                clearForm();
-            }
-        }
-
-        function validateName(name) {
-            return name.trim() !== '';
-        }
-
-        function validateLastname(lastname) {
-            return lastname.trim() !== '';
-        }
-
-        function validateEmail(email) {
-            const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-            return regex.test(email);
-        }
-
-        function validatePassword(password) {
-            return password.length >= 4 && password.length <= 16;
-        }
-
-        function clearForm() {
-            document.getElementById('name').value = '';
-            document.getElementById('lastname').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('password').value = '';
-            profilePhotoInput.value = '';
-            profilePhotoPreview.src = '';
-            profilePhotoPreview.style.display = 'none';
-        }
-
-        function logout() {
-            localStorage.removeItem('loggedInUser');
-            document.getElementById('loginContainer').style.display = 'block';
-            document.getElementById('successMessage').style.display = 'none';
-            menuProfilePhotoContainer.style.display = 'none';
-        }
     </script>
 </body>
 </html>
