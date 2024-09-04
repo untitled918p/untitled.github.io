@@ -87,6 +87,7 @@
             display: flex;
             align-items: center;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .captura img {
@@ -130,6 +131,53 @@
             border-radius: 5px;
             cursor: pointer;
             display: none;
+        }
+
+        /* Estilos para la vista ampliada */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #overlay img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #overlay .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #overlay .nav {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+        #overlay .prev {
+            left: 20px;
+        }
+
+        #overlay .next {
+            right: 20px;
         }
     </style>
 </head>
@@ -186,7 +234,45 @@
 
 <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
 
+<div id="overlay">
+    <span class="close" onclick="closeOverlay()">&times;</span>
+    <span class="nav prev" onclick="prevImage()">&#10094;</span>
+    <span class="nav next" onclick="nextImage()">&#10095;</span>
+    <img id="overlay-image" src="" alt="">
+</div>
+
 <script>
+    const images = document.querySelectorAll('.captura img');
+    const overlay = document.getElementById('overlay');
+    const overlayImage = document.getElementById('overlay-image');
+    let currentIndex = 0;
+
+    images.forEach((image, index) => {
+        image.addEventListener('click', () => {
+            currentIndex = index;
+            showOverlay(image.src);
+        });
+    });
+
+    function showOverlay(src) {
+        overlayImage.src = src;
+        overlay.style.display = 'flex';
+    }
+
+    function closeOverlay() {
+        overlay.style.display = 'none';
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+        overlayImage.src = images[currentIndex].src;
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+        overlayImage.src = images[currentIndex].src;
+    }
+
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
