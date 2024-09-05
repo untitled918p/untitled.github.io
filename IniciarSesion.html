@@ -17,15 +17,14 @@
             height: 100vh;
         }
 
-        /* Ajustes para que el menú ocupe todo el ancho de la pantalla */
         .menu-container {
             background-color: #444;
-            width: 100vw; /* Asegurar que ocupe todo el ancho de la ventana */
+            width: 100vw;
             text-align: center;
             padding: 15px 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin: 0;
-            position: relative; /* Evitar márgenes innecesarios */
+            position: relative;
         }
 
         .menu-container ul {
@@ -70,6 +69,18 @@
             margin-bottom: 20px;
         }
 
+        .login-container .form-container {
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
         .login-container button {
             display: block;
             width: 100%;
@@ -85,6 +96,16 @@
         .login-container .google-btn {
             background-color: #db4437;
             color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .login-container .google-btn img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
 
         .login-container .google-btn:hover {
@@ -96,6 +117,15 @@
             font-size: 14px;
             color: #777;
         }
+
+        #recaptcha-container {
+            margin: 10px 0;
+        }
+
+        #authMessage {
+            color: #f00;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -105,19 +135,43 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
                 <li><a href="Informacion.html">Página oficial</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+                <li><a href="IniciarSesion.html">Crear Cuenta</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <div class="login-container">
         <h2>Iniciar sesión</h2>
-        <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
+        <!-- Botón de Google -->
+        <button class="google-btn" id="googleLogin">
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
+            Iniciar sesión con Google
+        </button>
+
+        <!-- Formulario de correo electrónico y contraseña -->
+        <div class="form-container">
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button id="emailLogin">Iniciar sesión con correo</button>
+        </div>
+
+        <!-- Formulario de número de teléfono -->
+        <div class="form-container">
+            <input type="text" id="phoneNumber" placeholder="Número de teléfono" required>
+            <button id="phoneLogin">Enviar código</button>
+            <div id="recaptcha-container"></div>
+            <input type="text" id="verificationCode" placeholder="Código de verificación" required>
+            <button id="verifyCode">Verificar código</button>
+        </div>
+
+        <p id="authMessage"></p>
     </div>
 
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <!-- Firebase reCAPTCHA (optional) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
     <script>
@@ -143,10 +197,61 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then(result => {
-                    console.log('Usuario autenticado:', result.user);
+                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + result.user.displayName + '!';
                 })
                 .catch(error => {
-                    console.error('Error durante la autenticación:', error);
+                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
+                });
+        });
+
+        // Inicio de sesión con correo electrónico y contraseña
+        document.getElementById('emailLogin').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + userCredential.user.email + '!';
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
+                });
+        });
+
+        // Inicializar reCAPTCHA
+        window.onload = function () {
+            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+                'size': 'invisible',
+                'callback': function(response) {
+                    // ReCAPTCHA resuelto
+                }
+            });
+        };
+
+        // Inicio de sesión con número de teléfono
+        document.getElementById('phoneLogin').addEventListener('click', () => {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const appVerifier = window.recaptchaVerifier;
+
+            auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+                .then(confirmationResult => {
+                    window.confirmationResult = confirmationResult;
+                    document.getElementById('authMessage').textContent = 'Código enviado, verifica tu teléfono.';
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = 'Error durante el envío del código: ' + error.message;
+                });
+        });
+
+        document.getElementById('verifyCode').addEventListener('click', () => {
+            const code = document.getElementById('verificationCode').value;
+
+            window.confirmationResult.confirm(code)
+                .then(result => {
+                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + result.user.phoneNumber + '!';
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = 'Error durante la verificación: ' + error.message;
                 });
         });
     </script>
