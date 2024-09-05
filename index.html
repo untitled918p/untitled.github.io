@@ -70,6 +70,7 @@
       flex-grow: 1;
       display: flex;
       justify-content: center;
+      position: relative; /* Para posicionar el botón de sesión a la derecha */
     }
 
     #buscador {
@@ -188,6 +189,7 @@
       border: 2px solid white;
     }
 
+    /* Estilo del botón de Categorías */
     #categoriaBtn {
       background-color: #444;
       color: #fff;
@@ -238,6 +240,20 @@
       margin: 20px auto;
     }
 
+    /* Mover el "Iniciar Sesión" al lado del buscador */
+    .menu-container li:last-child {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Estilo para el botón "Iniciar Sesión" con imagen */
+    .menu-container li a img {
+      width: 100px;
+      height: auto;
+    }
+
     @media (max-width: 768px) {
       .header {
         height: 15vh;
@@ -264,7 +280,7 @@
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
-        <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+        <li><a href="IniciarSesion.html"><img src="Crear cuenta.png" alt="Crear cuenta"></a></li>
         <li id="profile-photo-container" class="photo-container"></li>
       </ul>
     </nav>
