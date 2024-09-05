@@ -115,10 +115,58 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .captura img:hover {
             transform: scale(1.05);
+        }
+
+        #imagen-grande-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        #imagen-grande {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        #cerrar-imagen-grande {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .boton-navegacion {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #boton-anterior {
+            left: 20px;
+        }
+
+        #boton-siguiente {
+            right: 20px;
         }
 
         #boton-descarga {
@@ -186,13 +234,13 @@
 
 <div class="capturas">
     <div class="captura">
-        <img src="ViktorCap1.png" alt="captura 1">
+        <img src="ViktorCap1.png" alt="captura 1" onclick="mostrarImagen(0)">
     </div>
     <div class="captura">
-        <img src="ViktorCap2.png" alt="captura 2">
+        <img src="ViktorCap2.png" alt="captura 2" onclick="mostrarImagen(1)">
     </div>
     <div class="captura">
-        <img src="ViktorCap3.png" alt="captura 3">
+        <img src="ViktorCap3.png" alt="captura 3" onclick="mostrarImagen(2)">
     </div>
 </div>
 
@@ -210,21 +258,46 @@
 
 <button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
 
-<script>
-    window.onscroll = function() {scrollFunction()};
+<div id="imagen-grande-container">
+    <span id="cerrar-imagen-grande" onclick="cerrarImagenGrande()">X</span>
+    <button class="boton-navegacion" id="boton-anterior" onclick="cambiarImagen(-1)">&#10094;</button>
+    <img id="imagen-grande" src="">
+    <button class="boton-navegacion" id="boton-siguiente" onclick="cambiarImagen(1)">&#10095;</button>
+</div>
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("boton-scroll").style.display = "block";
-        } else {
-            document.getElementById("boton-scroll").style.display = "none";
-        }
+<script>
+    const imagenes = ["ViktorCap1.png", "ViktorCap2.png", "ViktorCap3.png"];
+    let imagenActual = 0;
+
+    function mostrarImagen(indice) {
+        imagenActual = indice;
+        document.getElementById('imagen-grande').src = imagenes[indice];
+        document.getElementById('imagen-grande-container').style.display = 'flex';
     }
+
+    function cerrarImagenGrande() {
+        document.getElementById('imagen-grande-container').style.display = 'none';
+    }
+
+    function cambiarImagen(direccion) {
+        imagenActual = (imagenActual + direccion + imagenes.length) % imagenes.length;
+        document.getElementById('imagen-grande').src = imagenes[imagenActual];
+    }
+
+    window.onscroll = function() {
+        const botonScroll = document.getElementById("boton-scroll");
+        if (window.scrollY > 300) {
+            botonScroll.style.display = "block";
+        } else {
+            botonScroll.style.display = "none";
+        }
+    };
 
     function scrollToDisqus() {
-        var disqusSection = document.getElementById("contenedor-disqus");
-        disqusSection.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById("contenedor-disqus").scrollIntoView({ behavior: "smooth" });
     }
 </script>
+
+<noscript>Por favor habilita JavaScript para ver los comentarios de Disqus.</noscript>
 </body>
 </html>
