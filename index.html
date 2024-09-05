@@ -271,6 +271,25 @@
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       }
     }
+
+
+ #crearCuenta {
+    background-image: url('CrearCuenta.png');
+    background-size: cover;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s;
+  }
+
+  #crearCuenta:hover {
+    transform: scale(1.1);
+  }
+    
+  
   </style>
 </head>
 <body>
@@ -280,15 +299,16 @@
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
-        <li><a href="IniciarSesion.html"><img src="Crear cuenta.png" alt="Crear cuenta"></a></li>
-        <li id="profile-photo-container" class="photo-container"></li>
       </ul>
     </nav>
     <div class="header">
       <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
       <div class="search-container">
         <input type="text" id="buscador" placeholder="Buscar juegos...">
+        <a href="IniciarSesion.html">
+      <button id="crearCuenta"></button>
       </div>
+      
     </div>
   </header>
   <div id="resultados" class="search-results-container"></div>
