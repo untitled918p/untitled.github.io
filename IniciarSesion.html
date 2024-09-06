@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear cuenta</title>
+    <title>Crear cuenta / Iniciar sesión</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -117,6 +117,20 @@
             margin-bottom: 5px;
         }
 
+        .toggle-form-btn {
+            background-color: #007BFF;
+            color: white;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-form-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -131,7 +145,7 @@
         </nav>
     </header>
     
-    <div class="login-container">
+    <div class="login-container" id="createAccountForm">
         <h2>Crear cuenta</h2>
         <label for="email">Correo electrónico</label>
         <input type="email" id="email" placeholder="Correo electrónico" required>
@@ -151,6 +165,24 @@
         <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
 
         <div id="authMessage" class="message"></div>
+        <button class="toggle-form-btn" onclick="toggleForms()">Iniciar sesión</button>
+    </div>
+
+    <div class="login-container" id="loginForm" style="display:none;">
+        <h2>Iniciar sesión</h2>
+        <label for="loginEmail">Correo electrónico</label>
+        <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+        
+        <label for="loginPassword">Contraseña</label>
+        <input type="password" id="loginPassword" placeholder="Contraseña" required>
+
+        <button id="loginAccount">Iniciar sesión</button>
+
+        <div class="or">O iniciar sesión con Google</div>
+        <button class="google-btn" id="googleLogin2">Iniciar sesión con Google</button>
+
+        <div id="loginMessage" class="message"></div>
+        <button class="toggle-form-btn" onclick="toggleForms()">Crear cuenta</button>
     </div>
 
     <!-- Firebase App (the core Firebase SDK) -->
@@ -177,6 +209,19 @@
 
         const auth = firebase.auth();
         const storage = firebase.storage();
+
+        // Alternar entre formularios
+        function toggleForms() {
+            const createAccountForm = document.getElementById('createAccountForm');
+            const loginForm = document.getElementById('loginForm');
+            if (createAccountForm.style.display === 'none') {
+                createAccountForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            } else {
+                createAccountForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        }
 
         // Crear cuenta
         document.getElementById('createAccount').addEventListener('click', () => {
@@ -205,7 +250,21 @@
                     document.getElementById('authMessage').textContent = 'Cuenta creada exitosamente con foto de perfil. ¡Bienvenido!';
                 })
                 .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error al crear la cuenta: ' + error.message;
+                    document.getElementById('authMessage').textContent = error.message;
+                });
+        });
+
+        // Iniciar sesión
+        document.getElementById('loginAccount').addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    document.getElementById('loginMessage').textContent = 'Inicio de sesión exitoso.';
+                })
+                .catch(error => {
+                    document.getElementById('loginMessage').textContent = error.message;
                 });
         });
 
@@ -214,10 +273,21 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then(result => {
-                    document.getElementById('authMessage').textContent = '¡Bienvenido!';
+                    document.getElementById('authMessage').textContent = 'Inicio de sesión con Google exitoso.';
                 })
                 .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
+                    document.getElementById('authMessage').textContent = error.message;
+                });
+        });
+
+        document.getElementById('googleLogin2').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    document.getElementById('loginMessage').textContent = 'Inicio de sesión con Google exitoso.';
+                })
+                .catch(error => {
+                    document.getElementById('loginMessage').textContent = error.message;
                 });
         });
     </script>
