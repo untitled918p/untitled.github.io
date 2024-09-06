@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear cuenta</title>
+    <title>Crear cuenta / Iniciar sesión</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,16 +15,20 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
+            justify-content: center;
         }
 
+        /* Menú de navegación */
         .menu-container {
             background-color: #444;
             width: 100vw;
             text-align: center;
             padding: 15px 0;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 0;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
 
         .menu-container ul {
@@ -54,7 +58,7 @@
             transform: scale(1.1);
         }
 
-        .auth-container, .loading-panel, .success-panel {
+        #auth-container, #success-panel {
             background-color: #fff;
             padding: 30px;
             border-radius: 10px;
@@ -62,10 +66,18 @@
             text-align: center;
             max-width: 400px;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 60px; /* Para asegurar que no quede debajo del menú de navegación */
         }
 
-        .auth-container input, .auth-container button {
+        input[type="email"], input[type="password"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -73,75 +85,100 @@
             font-size: 16px;
             border: none;
             border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .auth-container button {
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .auth-container .google-btn {
+        #createAccount {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        #createAccount:hover {
+            background-color: #45a049;
+        }
+
+        #loginAccount {
+            background-color: #2196F3;
+            color: #fff;
+        }
+
+        #loginAccount:hover {
+            background-color: #0b7dda;
+        }
+
+        #googleLogin, #googleLogin2 {
             background-color: #db4437;
             color: #fff;
         }
 
-        .auth-container .google-btn:hover {
+        #googleLogin:hover, #googleLogin2:hover {
             background-color: #c33c2e;
         }
 
-        .loading-panel, .success-panel {
-            display: none;
+        #authMessage, #loginMessage {
+            color: #f44336;
         }
 
-        .loading-panel img, .success-panel img {
+        #profile-image {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            margin-bottom: 20px;
+        }
+
+        #success-panel {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="menu-container">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Página oficial</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Menú de navegación -->
+    <nav class="menu-container">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Informacion.html">Página oficial</a></li>
+            <li><a href="#" id="showLogin">Iniciar sesión</a></li>
+        </ul>
+    </nav>
 
-    <!-- Panel de autenticación -->
-    <div id="auth-container" class="auth-container">
-        <h2>Crear Cuenta</h2>
-        <input type="email" id="email" placeholder="Correo electrónico">
-        <input type="password" id="password" placeholder="Contraseña">
-        <input type="password" id="confirm-password" placeholder="Confirmar contraseña">
-        <input type="file" id="profile-picture" accept="image/*">
-        <button id="createAccount">Crear cuenta</button>
-        <p id="authMessage"></p>
+    <!-- Formulario de autenticación -->
+    <div id="auth-container">
+        <!-- Formulario de creación de cuenta -->
+        <div id="create-account-container">
+            <h2>Crear cuenta</h2>
+            <input type="email" id="email" placeholder="Correo electrónico" />
+            <input type="password" id="password" placeholder="Contraseña" />
+            <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
+            <input type="file" id="profile-picture" />
+            <button id="createAccount">Crear cuenta</button>
+            <button id="showLoginForm">Iniciar sesión</button>
+            <button id="googleLogin">O iniciar sesión con Google</button>
+            <p id="authMessage"></p>
+        </div>
 
-        <button id="showLogin">Iniciar sesión</button>
-        <button class="google-btn" id="googleLogin">O iniciar con Google</button>
-    </div>
-
-    <!-- Panel de carga -->
-    <div id="loading-panel" class="loading-panel">
-        <p id="loading-message">Creando su cuenta...</p>
+        <!-- Formulario de inicio de sesión -->
+        <div id="login-container" style="display: none;">
+            <h2>Iniciar sesión</h2>
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" />
+            <input type="password" id="loginPassword" placeholder="Contraseña" />
+            <button id="loginAccount">Iniciar sesión</button>
+            <button id="googleLogin2">O iniciar sesión con Google</button>
+            <p id="loginMessage"></p>
+        </div>
     </div>
 
     <!-- Panel de éxito -->
-    <div id="success-panel" class="success-panel">
-        <img id="profile-image" src="" alt="Imagen de perfil">
-        <p id="success-message">Cuenta creada</p>
+    <div id="success-panel">
+        <img id="profile-image" src="" alt="Imagen de perfil" />
+        <p id="success-message"></p>
     </div>
 
-    <!-- Firebase -->
+    <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <!-- Firebase Authentication -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <!-- Firebase Storage -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <script>
@@ -156,7 +193,10 @@
             measurementId: "G-MJ4RGPGV36"
         };
 
+        // Inicializar Firebase
         firebase.initializeApp(firebaseConfig);
+
+        // Inicializar Auth y Storage
         const auth = firebase.auth();
         const storage = firebase.storage();
 
@@ -177,9 +217,6 @@
                 return;
             }
 
-            // Mostrar panel de carga
-            showLoadingPanel('Creando su cuenta...');
-
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
@@ -187,66 +224,63 @@
                     storageRef.put(profilePicture).then(() => {
                         storageRef.getDownloadURL().then(url => {
                             showSuccessPanel(url, 'Cuenta creada');
-                        }).catch(() => {
-                            showSuccessPanel('default_profile.png', 'Cuenta creada');
                         });
                     });
                 })
                 .catch(error => {
-                    hideLoadingPanel();
                     document.getElementById('authMessage').textContent = error.message;
                 });
         });
 
         // Iniciar sesión
-        document.getElementById('showLogin').addEventListener('click', () => {
-            document.getElementById('auth-container').innerHTML = `
-                <h2>Iniciar Sesión</h2>
-                <input type="email" id="loginEmail" placeholder="Correo electrónico">
-                <input type="password" id="loginPassword" placeholder="Contraseña">
-                <button id="loginAccount">Iniciar sesión</button>
-                <p id="loginMessage"></p>
-            `;
-            document.getElementById('loginAccount').addEventListener('click', () => {
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
+        document.getElementById('loginAccount').addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
 
-                showLoadingPanel('Iniciando sesión...');
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
 
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(userCredential => {
-                        const user = userCredential.user;
-                        const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                        storageRef.getDownloadURL().then(url => {
-                            showSuccessPanel(url, 'Bienvenido de vuelta');
-                        }).catch(() => {
-                            showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                        });
-                    })
-                    .catch(error => {
-                        hideLoadingPanel();
-                        document.getElementById('loginMessage').textContent = error.message;
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
                     });
-            });
+                })
+                .catch(error => {
+                    document.getElementById('loginMessage').textContent = error.message;
+                });
         });
 
-        // Mostrar panel de carga
-        function showLoadingPanel(message) {
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('loading-panel').style.display = 'block';
-            document.getElementById('loading-message').textContent = message;
-        }
+        // Inicio de sesión con Google
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    const user = result.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
 
-        // Ocultar panel de carga
-        function hideLoadingPanel() {
-            document.getElementById('loading-panel').style.display = 'none';
-            document.getElementById('auth-container').style.display = 'block';
-        }
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = error.message;
+                });
+        });
+
+        // Alternar entre formularios
+        document.getElementById('showLoginForm').addEventListener('click', () => {
+            document.getElementById('create-account-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
 
         // Mostrar panel de éxito
         function showSuccessPanel(imageUrl, message) {
-            document.getElementById('loading-panel').style.display = 'none';
+            document.getElementById('auth-container').style.display = 'none';
             document.getElementById('success-panel').style.display = 'block';
             document.getElementById('profile-image').src = imageUrl;
             document.getElementById('success-message').textContent = message;
