@@ -69,15 +69,13 @@
             margin-bottom: 20px;
         }
 
-        .login-container .form-container {
-            margin-bottom: 20px;
-        }
-
         .login-container input {
-            width: calc(100% - 22px);
+            display: block;
+            width: 100%;
             padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
 
@@ -96,16 +94,6 @@
         .login-container .google-btn {
             background-color: #db4437;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 15px;
-        }
-
-        .login-container .google-btn img {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
         }
 
         .login-container .google-btn:hover {
@@ -118,17 +106,9 @@
             color: #777;
         }
 
-        #recaptcha-container {
-            margin: 10px 0;
-        }
-
-        #authMessage {
-            color: #f00;
-            font-size: 14px;
-        }
-
-        .hidden {
-            display: none;
+        .login-container .message {
+            color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -139,49 +119,26 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="Contacto.html">Contacto</a></li>
                 <li><a href="Informacion.html">Página oficial</a></li>
-                <li><a href="IniciarSesion.html">Crear Cuenta</a></li>
+                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
             </ul>
         </nav>
     </header>
-
+    
     <div class="login-container">
         <h2>Iniciar sesión</h2>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button id="emailLogin">Iniciar sesión con correo</button>
+        
+        <div class="or">O iniciar sesión con Google</div>
+        <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
 
-        <!-- Formulario de correo electrónico -->
-        <div id="emailForm" class="form-container">
-            <input type="email" id="email" placeholder="Correo electrónico" required>
-            <input type="password" id="password" placeholder="Contraseña" required>
-            <button id="emailLogin">Iniciar sesión con correo</button>
-            <button id="switchToPhone">O iniciar con teléfono</button>
-        </div>
-
-        <!-- Formulario de número de teléfono -->
-        <div id="phoneForm" class="form-container hidden">
-            <input type="text" id="phoneNumber" placeholder="Número de teléfono" required>
-            <button id="phoneLogin">Enviar código</button>
-            <div id="recaptcha-container"></div>
-            <input type="text" id="verificationCode" placeholder="Código de verificación" required>
-            <button id="verifyCode">Verificar código</button>
-            <button id="switchToEmail">O iniciar con correo</button>
-        </div>
-
-        <!-- Mensaje de alternativa -->
-        <p class="or">O iniciar sesión con Google</p>
-
-        <!-- Botón de Google -->
-        <button class="google-btn" id="googleLogin">
-            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
-            Iniciar sesión con Google
-        </button>
-
-        <p id="authMessage"></p>
+        <div id="authMessage" class="message"></div>
     </div>
 
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <!-- Firebase Authentication -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <!-- Firebase reCAPTCHA (optional) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
     <script>
@@ -202,18 +159,18 @@
         // Inicializar Auth
         const auth = firebase.auth();
 
-        // Alternar entre formularios
-        const emailForm = document.getElementById('emailForm');
-        const phoneForm = document.getElementById('phoneForm');
+        // Inicio de sesión con correo
+        document.getElementById('emailLogin').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-        document.getElementById('switchToPhone').addEventListener('click', () => {
-            emailForm.classList.add('hidden');
-            phoneForm.classList.remove('hidden');
-        });
-
-        document.getElementById('switchToEmail').addEventListener('click', () => {
-            phoneForm.classList.add('hidden');
-            emailForm.classList.remove('hidden');
+            auth.signInWithEmailAndPassword(email, password)
+                .then(result => {
+                    document.getElementById('authMessage').textContent = '¡Bienvenido!';
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
+                });
         });
 
         // Inicio de sesión con Google
@@ -221,61 +178,10 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
                 .then(result => {
-                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + result.user.displayName + '!';
-                })
-                .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
-                });
-        });
-
-        // Inicio de sesión con correo electrónico y contraseña
-        document.getElementById('emailLogin').addEventListener('click', () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + userCredential.user.email + '!';
-                })
-                .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
-                });
-        });
-
-        // Inicializar reCAPTCHA
-        window.onload = function () {
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                'size': 'invisible',
-                'callback': function(response) {
-                    // ReCAPTCHA resuelto
-                }
-            });
-        };
-
-        // Inicio de sesión con número de teléfono
-        document.getElementById('phoneLogin').addEventListener('click', () => {
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const appVerifier = window.recaptchaVerifier;
-
-            auth.signInWithPhoneNumber(phoneNumber, appVerifier)
-                .then(confirmationResult => {
-                    window.confirmationResult = confirmationResult;
-                })
-                .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
-                });
-        });
-
-        // Verificar el código de verificación
-        document.getElementById('verifyCode').addEventListener('click', () => {
-            const code = document.getElementById('verificationCode').value;
-
-            confirmationResult.confirm(code)
-                .then(result => {
                     document.getElementById('authMessage').textContent = '¡Bienvenido!';
                 })
                 .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante la verificación: ' + error.message;
+                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
                 });
         });
     </script>
