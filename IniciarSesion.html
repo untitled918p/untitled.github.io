@@ -112,6 +112,7 @@
             <button id="loginAccount">Iniciar sesión</button>
             <button id="googleLogin2">O iniciar sesión con Google</button>
             <p id="loginMessage"></p>
+            <button id="showCreateAccount">Crear cuenta</button>
         </div>
     </div>
 
@@ -223,12 +224,25 @@
                 });
         });
 
+        // Mostrar panel de éxito
         function showSuccessPanel(profileImageUrl, message) {
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('success-panel').style.display = 'block';
             document.getElementById('profile-image').src = profileImageUrl;
             document.getElementById('success-message').textContent = message;
         }
+
+        // Mostrar el formulario de inicio de sesión
+        document.getElementById('showCreateAccount').addEventListener('click', () => {
+            document.getElementById('create-account-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
+
+        // Volver al formulario de creación de cuenta
+        document.getElementById('showCreateAccountFromLogin').addEventListener('click', () => {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('create-account-container').style.display = 'block';
+        });
     </script>
 </body>
 </html>
