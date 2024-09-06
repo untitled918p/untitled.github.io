@@ -126,6 +126,10 @@
             color: #f00;
             font-size: 14px;
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -144,23 +148,21 @@
         <h2>Iniciar sesión</h2>
 
         <!-- Formulario de correo electrónico -->
-        <div class="form-container">
+        <div id="emailForm" class="form-container">
             <input type="email" id="email" placeholder="Correo electrónico" required>
-        </div>
-
-        <!-- Formulario de contraseña -->
-        <div class="form-container">
             <input type="password" id="password" placeholder="Contraseña" required>
             <button id="emailLogin">Iniciar sesión con correo</button>
+            <button id="switchToPhone">O iniciar con teléfono</button>
         </div>
 
         <!-- Formulario de número de teléfono -->
-        <div class="form-container">
+        <div id="phoneForm" class="form-container hidden">
             <input type="text" id="phoneNumber" placeholder="Número de teléfono" required>
             <button id="phoneLogin">Enviar código</button>
             <div id="recaptcha-container"></div>
             <input type="text" id="verificationCode" placeholder="Código de verificación" required>
             <button id="verifyCode">Verificar código</button>
+            <button id="switchToEmail">O iniciar con correo</button>
         </div>
 
         <!-- Mensaje de alternativa -->
@@ -199,6 +201,20 @@
 
         // Inicializar Auth
         const auth = firebase.auth();
+
+        // Alternar entre formularios
+        const emailForm = document.getElementById('emailForm');
+        const phoneForm = document.getElementById('phoneForm');
+
+        document.getElementById('switchToPhone').addEventListener('click', () => {
+            emailForm.classList.add('hidden');
+            phoneForm.classList.remove('hidden');
+        });
+
+        document.getElementById('switchToEmail').addEventListener('click', () => {
+            phoneForm.classList.add('hidden');
+            emailForm.classList.remove('hidden');
+        });
 
         // Inicio de sesión con Google
         document.getElementById('googleLogin').addEventListener('click', () => {
@@ -244,19 +260,19 @@
             auth.signInWithPhoneNumber(phoneNumber, appVerifier)
                 .then(confirmationResult => {
                     window.confirmationResult = confirmationResult;
-                    document.getElementById('authMessage').textContent = 'Código enviado, verifica tu teléfono.';
                 })
                 .catch(error => {
-                    document.getElementById('authMessage').textContent = 'Error durante el envío del código: ' + error.message;
+                    document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
                 });
         });
 
+        // Verificar el código de verificación
         document.getElementById('verifyCode').addEventListener('click', () => {
             const code = document.getElementById('verificationCode').value;
 
-            window.confirmationResult.confirm(code)
+            confirmationResult.confirm(code)
                 .then(result => {
-                    document.getElementById('authMessage').textContent = '¡Bienvenido, ' + result.user.phoneNumber + '!';
+                    document.getElementById('authMessage').textContent = '¡Bienvenido!';
                 })
                 .catch(error => {
                     document.getElementById('authMessage').textContent = 'Error durante la verificación: ' + error.message;
