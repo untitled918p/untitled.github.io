@@ -142,15 +142,14 @@
 
     <div class="login-container">
         <h2>Iniciar sesión</h2>
-        <!-- Botón de Google -->
-        <button class="google-btn" id="googleLogin">
-            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
-            Iniciar sesión con Google
-        </button>
 
-        <!-- Formulario de correo electrónico y contraseña -->
+        <!-- Formulario de correo electrónico -->
         <div class="form-container">
             <input type="email" id="email" placeholder="Correo electrónico" required>
+        </div>
+
+        <!-- Formulario de contraseña -->
+        <div class="form-container">
             <input type="password" id="password" placeholder="Contraseña" required>
             <button id="emailLogin">Iniciar sesión con correo</button>
         </div>
@@ -163,6 +162,15 @@
             <input type="text" id="verificationCode" placeholder="Código de verificación" required>
             <button id="verifyCode">Verificar código</button>
         </div>
+
+        <!-- Mensaje de alternativa -->
+        <p class="or">O iniciar sesión con Google</p>
+
+        <!-- Botón de Google -->
+        <button class="google-btn" id="googleLogin">
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
+            Iniciar sesión con Google
+        </button>
 
         <p id="authMessage"></p>
     </div>
