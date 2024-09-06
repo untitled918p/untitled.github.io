@@ -15,46 +15,10 @@
             flex-direction: column;
             align-items: center;
             height: 100vh;
-        }
-
-        .menu-container {
-            background-color: #444;
-            width: 100vw;
-            text-align: center;
-            padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 0;
-            position: relative;
-        }
-
-        .menu-container ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
             justify-content: center;
         }
 
-        .menu-container li {
-            margin: 0 2%;
-        }
-
-        .menu-container li a {
-            display: inline-block;
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .menu-container li a:hover {
-            background-color: #555;
-            transform: scale(1.1);
-        }
-
-        .login-container {
+        #auth-container, #success-panel {
             background-color: #fff;
             padding: 30px;
             border-radius: 10px;
@@ -62,24 +26,17 @@
             text-align: center;
             max-width: 400px;
             width: 100%;
-            margin-top: 20px;
         }
 
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-
-        .login-container input {
-            display: block;
+        input[type="email"], input[type="password"], input[type="file"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            font-size: 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: 5px;
         }
 
-        .login-container button {
+        button {
             display: block;
             width: 100%;
             padding: 10px;
@@ -91,105 +48,84 @@
             transition: background-color 0.3s;
         }
 
-        .login-container .google-btn {
+        #createAccount {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        #createAccount:hover {
+            background-color: #45a049;
+        }
+
+        #loginAccount {
+            background-color: #2196F3;
+            color: #fff;
+        }
+
+        #loginAccount:hover {
+            background-color: #0b7dda;
+        }
+
+        #googleLogin, #googleLogin2 {
             background-color: #db4437;
             color: #fff;
         }
 
-        .login-container .google-btn:hover {
+        #googleLogin:hover, #googleLogin2:hover {
             background-color: #c33c2e;
         }
 
-        .login-container .or {
-            margin: 15px 0;
-            font-size: 14px;
-            color: #777;
+        #authMessage, #loginMessage {
+            color: #f44336;
         }
 
-        .login-container .message {
-            color: red;
-            margin-top: 10px;
+        #profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
         }
 
-        .login-container label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-        }
-
-        .toggle-form-btn {
-            background-color: #007BFF;
-            color: white;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .toggle-form-btn:hover {
-            background-color: #0056b3;
+        #success-panel {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav class="menu-container">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Informacion.html">Página oficial</a></li>
-                <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div class="login-container" id="createAccountForm">
-        <h2>Crear cuenta</h2>
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" placeholder="Correo electrónico" required>
-        
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Contraseña" required>
+    <div id="auth-container">
+        <!-- Formulario de creación de cuenta -->
+        <div id="create-account-container">
+            <h2>Crear cuenta</h2>
+            <input type="email" id="email" placeholder="Correo electrónico" />
+            <input type="password" id="password" placeholder="Contraseña" />
+            <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
+            <input type="file" id="profile-picture" />
+            <button id="createAccount">Crear cuenta</button>
+            <button id="googleLogin">O iniciar sesión con Google</button>
+            <p id="authMessage"></p>
+        </div>
 
-        <label for="confirm-password">Confirmar contraseña</label>
-        <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required>
-
-        <label for="profile-picture">Foto de perfil</label>
-        <input type="file" id="profile-picture" accept="image/*" required>
-
-        <button id="createAccount">Crear cuenta</button>
-
-        <div class="or">O iniciar sesión con Google</div>
-        <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
-
-        <div id="authMessage" class="message"></div>
-        <button class="toggle-form-btn" onclick="toggleForms()">Iniciar sesión</button>
+        <!-- Formulario de inicio de sesión -->
+        <div id="login-container" style="display: none;">
+            <h2>Iniciar sesión</h2>
+            <input type="email" id="loginEmail" placeholder="Correo electrónico" />
+            <input type="password" id="loginPassword" placeholder="Contraseña" />
+            <button id="loginAccount">Iniciar sesión</button>
+            <button id="googleLogin2">O iniciar sesión con Google</button>
+            <p id="loginMessage"></p>
+        </div>
     </div>
 
-    <div class="login-container" id="loginForm" style="display:none;">
-        <h2>Iniciar sesión</h2>
-        <label for="loginEmail">Correo electrónico</label>
-        <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
-        
-        <label for="loginPassword">Contraseña</label>
-        <input type="password" id="loginPassword" placeholder="Contraseña" required>
-
-        <button id="loginAccount">Iniciar sesión</button>
-
-        <div class="or">O iniciar sesión con Google</div>
-        <button class="google-btn" id="googleLogin2">Iniciar sesión con Google</button>
-
-        <div id="loginMessage" class="message"></div>
-        <button class="toggle-form-btn" onclick="toggleForms()">Crear cuenta</button>
+    <!-- Panel de éxito -->
+    <div id="success-panel">
+        <img id="profile-image" src="" alt="Imagen de perfil" />
+        <p id="success-message"></p>
     </div>
 
     <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <!-- Firebase Authentication -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <!-- Firebase Storage for uploading profile picture -->
+    <!-- Firebase Storage -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <script>
@@ -207,21 +143,9 @@
         // Inicializar Firebase
         firebase.initializeApp(firebaseConfig);
 
+        // Inicializar Auth y Storage
         const auth = firebase.auth();
         const storage = firebase.storage();
-
-        // Alternar entre formularios
-        function toggleForms() {
-            const createAccountForm = document.getElementById('createAccountForm');
-            const loginForm = document.getElementById('loginForm');
-            if (createAccountForm.style.display === 'none') {
-                createAccountForm.style.display = 'block';
-                loginForm.style.display = 'none';
-            } else {
-                createAccountForm.style.display = 'none';
-                loginForm.style.display = 'block';
-            }
-        }
 
         // Crear cuenta
         document.getElementById('createAccount').addEventListener('click', () => {
@@ -236,18 +160,19 @@
             }
 
             if (!profilePicture) {
-                document.getElementById('authMessage').textContent = 'Por favor, sube una foto de perfil.';
+                document.getElementById('authMessage').textContent = 'Sube una foto de perfil.';
                 return;
             }
 
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid + '/' + profilePicture.name);
-                    return storageRef.put(profilePicture);
-                })
-                .then(snapshot => {
-                    document.getElementById('authMessage').textContent = 'Cuenta creada exitosamente con foto de perfil. ¡Bienvenido!';
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
+                    storageRef.put(profilePicture).then(() => {
+                        storageRef.getDownloadURL().then(url => {
+                            showSuccessPanel(url, 'Cuenta creada');
+                        });
+                    });
                 })
                 .catch(error => {
                     document.getElementById('authMessage').textContent = error.message;
@@ -261,7 +186,14 @@
 
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
-                    document.getElementById('loginMessage').textContent = 'Inicio de sesión exitoso.';
+                    const user = userCredential.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
+
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
+                    });
                 })
                 .catch(error => {
                     document.getElementById('loginMessage').textContent = error.message;
@@ -290,6 +222,13 @@
                     document.getElementById('loginMessage').textContent = error.message;
                 });
         });
+
+        function showSuccessPanel(profileImageUrl, message) {
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('success-panel').style.display = 'block';
+            document.getElementById('profile-image').src = profileImageUrl;
+            document.getElementById('success-message').textContent = message;
+        }
     </script>
 </body>
 </html>
