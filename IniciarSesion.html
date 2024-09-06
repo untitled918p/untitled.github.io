@@ -152,6 +152,7 @@
             <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
             <input type="file" id="profile-picture" />
             <button id="createAccount">Crear cuenta</button>
+            <button id="showLoginForm">Iniciar sesión</button>
             <button id="googleLogin">O iniciar sesión con Google</button>
             <p id="authMessage"></p>
         </div>
@@ -164,7 +165,6 @@
             <button id="loginAccount">Iniciar sesión</button>
             <button id="googleLogin2">O iniciar sesión con Google</button>
             <p id="loginMessage"></p>
-            <button id="showCreateAccount">Crear cuenta</button>
         </div>
     </div>
 
@@ -262,9 +262,9 @@
                     const storageRef = storage.ref('profile_pictures/' + user.uid);
 
                     storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Cuenta creada');
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
                     }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Cuenta creada');
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
                     });
                 })
                 .catch(error => {
@@ -272,44 +272,19 @@
                 });
         });
 
-        // Inicio de sesión con Google (segunda opción)
-        document.getElementById('googleLogin2').addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    const user = result.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                    storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Bienvenido de vuelta');
-                    }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                    });
-                })
-                .catch(error => {
-                    document.getElementById('loginMessage').textContent = error.message;
-                });
+        // Alternar entre formularios
+        document.getElementById('showLoginForm').addEventListener('click', () => {
+            document.getElementById('create-account-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
         });
 
-        // Mostrar el panel de éxito
+        // Mostrar panel de éxito
         function showSuccessPanel(imageUrl, message) {
             document.getElementById('auth-container').style.display = 'none';
             document.getElementById('success-panel').style.display = 'block';
             document.getElementById('profile-image').src = imageUrl;
             document.getElementById('success-message').textContent = message;
         }
-
-        // Mostrar formulario de creación de cuenta
-        document.getElementById('showCreateAccount').addEventListener('click', () => {
-            document.getElementById('login-container').style.display = 'none';
-            document.getElementById('create-account-container').style.display = 'block';
-        });
-
-        // Mostrar formulario de inicio de sesión
-        document.getElementById('showLogin').addEventListener('click', () => {
-            document.getElementById('create-account-container').style.display = 'none';
-            document.getElementById('login-container').style.display = 'block';
-        });
     </script>
 </body>
 </html>
