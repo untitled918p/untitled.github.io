@@ -129,6 +129,14 @@
         #success-panel {
             display: none;
         }
+
+        /* Estilo para el mensaje de espera */
+        #loadingMessage {
+            display: none;
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -155,6 +163,8 @@
             <button id="showLoginForm">Iniciar sesión</button>
             <button id="googleLogin">O iniciar sesión con Google</button>
             <p id="authMessage"></p>
+            <!-- Mensaje de espera -->
+            <p id="loadingMessage">Creando tu cuenta... Espere.</p>
         </div>
 
         <!-- Formulario de inicio de sesión -->
@@ -206,6 +216,7 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             const profilePicture = document.getElementById('profile-picture').files[0];
+            const loadingMessage = document.getElementById('loadingMessage');
 
             if (password !== confirmPassword) {
                 document.getElementById('authMessage').textContent = 'Las contraseñas no coinciden.';
@@ -217,43 +228,29 @@
                 return;
             }
 
+            // Mostrar mensaje de espera
+            loadingMessage.style.display = 'block';
+
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
                     const storageRef = storage.ref('profile_pictures/' + user.uid);
-                    storageRef.put(profilePicture).then(() => {
-                        storageRef.getDownloadURL().then(url => {
+                    return storageRef.put(profilePicture).then(() => {
+                        return storageRef.getDownloadURL().then(url => {
                             showSuccessPanel(url, 'Cuenta creada');
                         });
                     });
                 })
                 .catch(error => {
                     document.getElementById('authMessage').textContent = error.message;
+                })
+                .finally(() => {
+                    // Ocultar mensaje de espera al finalizar el proceso
+                    loadingMessage.style.display = 'none';
                 });
         });
 
         // Iniciar sesión
-        document.getElementById('loginAccount').addEventListener('click', () => {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    const user = userCredential.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                    storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Bienvenido de vuelta');
-                    }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                    });
-                })
-                .catch(error => {
-                    document.getElementById('loginMessage').textContent = error.message;
-                });
-        });
-
-        // Inicio de sesión con Google
         document.getElementById('googleLogin').addEventListener('click', () => {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
