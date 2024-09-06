@@ -133,9 +133,15 @@
         /* Estilo para el mensaje de espera */
         #loadingMessage {
             display: none;
-            font-size: 14px;
+            font-size: 20px; /* Tamaño más grande */
+            font-weight: bold;
             color: #555;
             margin-top: 10px;
+        }
+
+        /* Ocultar el resto del formulario cuando se muestra el mensaje de espera */
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -155,14 +161,16 @@
         <!-- Formulario de creación de cuenta -->
         <div id="create-account-container">
             <h2>Crear cuenta</h2>
-            <input type="email" id="email" placeholder="Correo electrónico" />
-            <input type="password" id="password" placeholder="Contraseña" />
-            <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
-            <input type="file" id="profile-picture" />
-            <button id="createAccount">Crear cuenta</button>
-            <button id="showLoginForm">Iniciar sesión</button>
-            <button id="googleLogin">O iniciar sesión con Google</button>
-            <p id="authMessage"></p>
+            <div id="form-elements">
+                <input type="email" id="email" placeholder="Correo electrónico" />
+                <input type="password" id="password" placeholder="Contraseña" />
+                <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
+                <input type="file" id="profile-picture" />
+                <button id="createAccount">Crear cuenta</button>
+                <button id="showLoginForm">Iniciar sesión</button>
+                <button id="googleLogin">O iniciar sesión con Google</button>
+                <p id="authMessage"></p>
+            </div>
             <!-- Mensaje de espera -->
             <p id="loadingMessage">Creando tu cuenta... Espere.</p>
         </div>
@@ -217,6 +225,7 @@
             const confirmPassword = document.getElementById('confirm-password').value;
             const profilePicture = document.getElementById('profile-picture').files[0];
             const loadingMessage = document.getElementById('loadingMessage');
+            const formElements = document.getElementById('form-elements'); // Contenedor de elementos del formulario
 
             if (password !== confirmPassword) {
                 document.getElementById('authMessage').textContent = 'Las contraseñas no coinciden.';
@@ -228,6 +237,9 @@
                 return;
             }
 
+            // Ocultar los demás elementos del formulario
+            formElements.classList.add('hidden');
+
             // Mostrar mensaje de espera
             loadingMessage.style.display = 'block';
 
@@ -237,20 +249,17 @@
                     const storageRef = storage.ref('profile_pictures/' + user.uid);
                     return storageRef.put(profilePicture).then(() => {
                         return storageRef.getDownloadURL().then(url => {
-                            showSuccessPanel(url, 'Cuenta creada');
+                            showSuccessPanel(url, 'Cuenta creada con éxito');
                         });
                     });
                 })
                 .catch(error => {
                     document.getElementById('authMessage').textContent = error.message;
-                })
-                .finally(() => {
-                    // Ocultar mensaje de espera al finalizar el proceso
                     loadingMessage.style.display = 'none';
+                    formElements.classList.remove('hidden'); // Mostrar el formulario nuevamente si falla
                 });
         });
 
-        // Iniciar sesión
         document.getElementById('googleLogin').addEventListener('click', () => {
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
