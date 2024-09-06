@@ -129,6 +129,7 @@
         <input type="email" id="email" placeholder="Correo electrónico" required>
         <input type="password" id="password" placeholder="Contraseña" required>
         <button id="emailLogin">Iniciar sesión con correo</button>
+        <button id="createAccount">Crear cuenta</button>
         
         <div class="or">O iniciar sesión con Google</div>
         <button class="google-btn" id="googleLogin">Iniciar sesión con Google</button>
@@ -170,6 +171,20 @@
                 })
                 .catch(error => {
                     document.getElementById('authMessage').textContent = 'Error durante la autenticación: ' + error.message;
+                });
+        });
+
+        // Crear cuenta con correo y contraseña
+        document.getElementById('createAccount').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(result => {
+                    document.getElementById('authMessage').textContent = 'Cuenta creada exitosamente. ¡Bienvenido!';
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = 'Error al crear la cuenta: ' + error.message;
                 });
         });
 
