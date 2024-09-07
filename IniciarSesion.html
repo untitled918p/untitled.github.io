@@ -97,6 +97,15 @@
             background-color: #45a049;
         }
 
+        #loginAccount {
+            background-color: #2196F3;
+            color: #fff;
+        }
+
+        #loginAccount:hover {
+            background-color: #0b7dda;
+        }
+
         #googleLogin, #googleLogin2 {
             background-color: #db4437;
             color: #fff;
@@ -158,7 +167,7 @@
             <input type="email" id="email" placeholder="Correo electrónico" />
             <input type="password" id="password" placeholder="Contraseña" />
             <input type="password" id="confirm-password" placeholder="Confirmar contraseña" />
-            <input type="file" id="profile-picture" accept=".png,.jpg,.jpeg" />
+            <input type="file" id="profile-picture" />
             <button id="createAccount">Crear cuenta</button>
             <p class="switch-panel" id="switchToLogin">Ya tienes cuenta? Iniciar sesión</p>
             <p id="authMessage"></p>
@@ -190,13 +199,13 @@
     <script>
         // Configuración de Firebase
         const firebaseConfig = {
-            apiKey: "YOUR_FIREBASE_API_KEY",
-            authDomain: "YOUR_FIREBASE_PROJECT.firebaseapp.com",
-            projectId: "YOUR_FIREBASE_PROJECT_ID",
-            storageBucket: "YOUR_FIREBASE_PROJECT.appspot.com",
-            messagingSenderId: "YOUR_FIREBASE_SENDER_ID",
-            appId: "YOUR_FIREBASE_APP_ID",
-            measurementId: "YOUR_FIREBASE_MEASUREMENT_ID"
+            apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+            authDomain: "untitled-3bfa8.firebaseapp.com",
+            projectId: "untitled-3bfa8",
+            storageBucket: "untitled-3bfa8.appspot.com",
+            messagingSenderId: "841576951279",
+            appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+            measurementId: "G-MJ4RGPGV36"
         };
 
         // Inicializar Firebase
@@ -213,72 +222,113 @@
             const confirmPassword = document.getElementById('confirm-password').value;
             const profilePicture = document.getElementById('profile-picture').files[0];
             const loadingMessage = document.getElementById('loadingMessage');
-            const authMessage = document.getElementById('authMessage');
 
-            // Validar contraseñas
             if (password !== confirmPassword) {
-                authMessage.textContent = "Las contraseñas no coinciden";
+                document.getElementById('authMessage').textContent = 'Las contraseñas no coinciden.';
                 return;
             }
 
-            // Validar imagen
             if (!profilePicture) {
-                authMessage.textContent = "Debe cargar una imagen de perfil";
+                document.getElementById('authMessage').textContent = 'Sube una foto de perfil.';
                 return;
             }
 
-            // Ocultar todo y mostrar el mensaje de carga
-            document.getElementById('create-account-container').classList.add('hidden');
             loadingMessage.style.display = 'block';
 
-            // Crear usuario en Firebase Auth
             auth.createUserWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
-
-                    // Subir imagen al Firebase Storage
-                    const storageRef = storage.ref('profile_pictures/' + user.uid + '.png');
-                    storageRef.put(profilePicture).then(() => {
-                        storageRef.getDownloadURL().then(url => {
-                            // Guardar la imagen en el localStorage
-                            localStorage.setItem('profileImageUrl', url);
-
-                            // Mostrar perfil
-                            displayProfile(user, url);
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
+                    return storageRef.put(profilePicture).then(() => {
+                        return storageRef.getDownloadURL().then(url => {
+                            showSuccessPanel(url, 'Cuenta creada con éxito');
                         });
                     });
                 })
                 .catch(error => {
-                    authMessage.textContent = error.message;
-                    document.getElementById('create-account-container').classList.remove('hidden');
+                    document.getElementById('authMessage').textContent = error.message;
                     loadingMessage.style.display = 'none';
                 });
         });
 
-        // Mostrar perfil y guardar datos en localStorage
-        function displayProfile(user, imageUrl) {
-            const successPanel = document.getElementById('success-panel');
-            document.getElementById('profile-image').src = imageUrl;
-            document.getElementById('success-message').textContent = 'Bienvenido, ' + user.email;
+        // Iniciar sesión
+        document.getElementById('loginAccount').addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginMessage = document.getElementById('loginMessage');
 
-            localStorage.setItem('userEmail', user.email);
-            localStorage.setItem('userId', user.uid);
+            auth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
 
-            document.getElementById('auth-container').style.display = 'none';
-            successPanel.style.display = 'block';
-        }
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
+                    });
+                })
+                .catch(error => {
+                    loginMessage.textContent = error.message;
+                });
+        });
 
-        // Cambiar a iniciar sesión
+        // Iniciar sesión con Google
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    const user = result.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
+
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = error.message;
+                });
+        });
+
+        // Iniciar sesión con Google desde el panel de inicio de sesión
+        document.getElementById('googleLogin2').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    const user = result.user;
+                    const storageRef = storage.ref('profile_pictures/' + user.uid);
+
+                    storageRef.getDownloadURL().then(url => {
+                        showSuccessPanel(url, 'Bienvenido de vuelta');
+                    }).catch(() => {
+                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('loginMessage').textContent = error.message;
+                });
+        });
+
+        // Alternar entre formularios
         document.getElementById('switchToLogin').addEventListener('click', () => {
             document.getElementById('create-account-container').classList.add('hidden');
             document.getElementById('login-container').classList.remove('hidden');
         });
 
-        // Cambiar a crear cuenta
         document.getElementById('switchToCreateAccount').addEventListener('click', () => {
             document.getElementById('login-container').classList.add('hidden');
             document.getElementById('create-account-container').classList.remove('hidden');
         });
+
+        // Mostrar panel de éxito
+        function showSuccessPanel(imageUrl, message) {
+            document.getElementById('auth-container').style.display = 'none';
+            document.getElementById('success-panel').style.display = 'block';
+            document.getElementById('profile-image').src = imageUrl;
+            document.getElementById('success-message').textContent = message;
+        }
     </script>
 </body>
 </html>
