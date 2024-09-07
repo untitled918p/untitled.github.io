@@ -215,7 +215,7 @@
         const auth = firebase.auth();
         const storage = firebase.storage();
 
-        // Crear cuenta
+       // Crear cuenta
         document.getElementById('createAccount').addEventListener('click', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -243,6 +243,7 @@
                     const storageRef = storage.ref('profile_pictures/' + user.uid);
                     return storageRef.put(profilePicture).then(() => {
                         return storageRef.getDownloadURL().then(url => {
+                            saveUserToLocalStorage(user, url);
                             showSuccessPanel(url, 'Cuenta creada con éxito');
                         });
                     });
@@ -262,6 +263,7 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
+                    saveUserToLocalStorage(user, user.photoURL);
                     showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
                 })
                 .catch(error => {
@@ -274,6 +276,15 @@
             document.getElementById('success-panel').style.display = 'block';
             document.getElementById('profile-image').src = imageUrl;
             document.getElementById('success-message').textContent = message;
+        }
+
+        // Guardar usuario en localStorage
+        function saveUserToLocalStorage(user, photoURL) {
+            const userData = {
+                email: user.email,
+                photoURL: photoURL || user.photoURL
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
         }
 
         // Alternar entre crear cuenta e iniciar sesión
@@ -293,6 +304,7 @@
             auth.signInWithPopup(provider)
                 .then(result => {
                     const user = result.user;
+                    saveUserToLocalStorage(user, user.photoURL);
                     showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
                 })
                 .catch(error => {
@@ -305,6 +317,7 @@
             auth.signInWithPopup(provider)
                 .then(result => {
                     const user = result.user;
+                    saveUserToLocalStorage(user, user.photoURL);
                     showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
                 })
                 .catch(error => {
