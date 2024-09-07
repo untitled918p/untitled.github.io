@@ -233,6 +233,8 @@
                 return;
             }
 
+            // Ocultar todo y mostrar el mensaje de "Creando su cuenta..."
+            document.getElementById('auth-container').style.display = 'none';
             loadingMessage.style.display = 'block';
 
             auth.createUserWithEmailAndPassword(email, password)
@@ -248,6 +250,7 @@
                 .catch(error => {
                     document.getElementById('authMessage').textContent = error.message;
                     loadingMessage.style.display = 'none';
+                    document.getElementById('auth-container').style.display = 'block'; // Volver a mostrar el formulario
                 });
         });
 
@@ -255,63 +258,25 @@
         document.getElementById('loginAccount').addEventListener('click', () => {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            const loginMessage = document.getElementById('loginMessage');
 
             auth.signInWithEmailAndPassword(email, password)
                 .then(userCredential => {
                     const user = userCredential.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                    storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Bienvenido de vuelta');
-                    }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                    });
-                })
-                .catch(error => {
-                    loginMessage.textContent = error.message;
-                });
-        });
-
-        // Iniciar sesión con Google
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    const user = result.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                    storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Bienvenido de vuelta');
-                    }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                    });
-                })
-                .catch(error => {
-                    document.getElementById('authMessage').textContent = error.message;
-                });
-        });
-
-        // Iniciar sesión con Google desde el panel de inicio de sesión
-        document.getElementById('googleLogin2').addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    const user = result.user;
-                    const storageRef = storage.ref('profile_pictures/' + user.uid);
-
-                    storageRef.getDownloadURL().then(url => {
-                        showSuccessPanel(url, 'Bienvenido de vuelta');
-                    }).catch(() => {
-                        showSuccessPanel('default_profile.png', 'Bienvenido de vuelta');
-                    });
+                    showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
                 })
                 .catch(error => {
                     document.getElementById('loginMessage').textContent = error.message;
                 });
         });
 
-        // Alternar entre formularios
+        // Mostrar panel de éxito
+        function showSuccessPanel(imageUrl, message) {
+            document.getElementById('success-panel').style.display = 'block';
+            document.getElementById('profile-image').src = imageUrl;
+            document.getElementById('success-message').textContent = message;
+        }
+
+        // Alternar entre crear cuenta e iniciar sesión
         document.getElementById('switchToLogin').addEventListener('click', () => {
             document.getElementById('create-account-container').classList.add('hidden');
             document.getElementById('login-container').classList.remove('hidden');
@@ -322,13 +287,30 @@
             document.getElementById('create-account-container').classList.remove('hidden');
         });
 
-        // Mostrar panel de éxito
-        function showSuccessPanel(imageUrl, message) {
-            document.getElementById('auth-container').style.display = 'none';
-            document.getElementById('success-panel').style.display = 'block';
-            document.getElementById('profile-image').src = imageUrl;
-            document.getElementById('success-message').textContent = message;
-        }
+        // Manejo de autenticación con Google
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    const user = result.user;
+                    showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
+                })
+                .catch(error => {
+                    document.getElementById('authMessage').textContent = error.message;
+                });
+        });
+
+        document.getElementById('googleLogin2').addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(result => {
+                    const user = result.user;
+                    showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
+                })
+                .catch(error => {
+                    document.getElementById('loginMessage').textContent = error.message;
+                });
+        });
     </script>
 </body>
 </html>
