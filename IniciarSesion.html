@@ -242,6 +242,7 @@
     }
 
     // Crear cuenta
+    // Crear cuenta
     document.getElementById('createAccount').addEventListener('click', () => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
@@ -266,9 +267,14 @@
             .then(userCredential => {
                 const user = userCredential.user;
                 const storageRef = storage.ref('profile_pictures/' + user.uid);
+
+                // Subir la imagen de perfil al Storage
                 return storageRef.put(profilePicture).then(() => {
                     return storageRef.getDownloadURL().then(url => {
+                        // Guardar la URL de la imagen en localStorage
                         saveUserToLocalStorage(user, url);
+
+                        // Mostrar el panel de éxito con la imagen y mensaje
                         showSuccessPanel(url, 'Cuenta creada con éxito');
                     });
                 });
@@ -280,52 +286,31 @@
             });
     });
 
-    // Iniciar sesión
-    document.getElementById('loginAccount').addEventListener('click', () => {
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        auth.signInWithEmailAndPassword(email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                const photoURL = user.photoURL || 'default-profile.png'; // Usa la imagen de perfil predeterminada si no hay una
-                saveUserToLocalStorage(user, photoURL);
-                showSuccessPanel(photoURL, 'Inicio de sesión exitoso');
-            })
-            .catch(error => {
-                document.getElementById('loginMessage').textContent = error.message;
-            });
-    });
-
-    // Alternar entre crear cuenta e iniciar sesión
-    document.getElementById('switchToLogin').addEventListener('click', () => {
-        document.getElementById('create-account-container').classList.add('hidden');
-        document.getElementById('login-container').classList.remove('hidden');
-    });
-
-    document.getElementById('switchToCreateAccount').addEventListener('click', () => {
-        document.getElementById('login-container').classList.add('hidden');
-        document.getElementById('create-account-container').classList.remove('hidden');
-    });
-
-      const storageRef = storage.ref('profile_pictures/' + user.uid);
-storageRef.put(profilePicture).then(() => {
-    return storageRef.getDownloadURL().then(url => {
-        // Aquí debes guardar la URL obtenida
-        console.log("Imagen cargada desde la URL:", url);
-        saveUserToLocalStorage(user, url);
-        showSuccessPanel(url, 'Cuenta creada con éxito');
-    });
-});
-        function showSuccessPanel(url, message) {
-    const profileImage = document.getElementById('profileImage'); // Asegúrate de tener un <img> con este id
-    if (profileImage) {
-        profileImage.src = url;
-        console.log('Imagen de perfil cargada correctamente.');
+    // Mostrar el panel de éxito
+    function showSuccessPanel(imageUrl, message) {
+        document.getElementById('success-panel').style.display = 'block';
+        document.getElementById('profile-image').src = imageUrl || 'default-profile.png'; // Imagen predeterminada si no hay URL
+        document.getElementById('success-message').textContent = message;
+        document.getElementById('auth-container').style.display = 'none';
     }
-    const messageElement = document.getElementById('message');
-    messageElement.textContent = message;
-}
+
+    // Guardar usuario en localStorage
+    function saveUserToLocalStorage(user, photoURL) {
+        const userData = {
+            email: user.email,
+            photoURL: photoURL || user.photoURL || 'default-profile.png' // Imagen predeterminada si no hay photoURL
+        };
+        localStorage.setItem('user', JSON.stringify(userData));
+    }
+
+    // Recuperar el usuario guardado al cargar la página
+    window.onload = function() {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+            // Si ya hay un usuario guardado, mostrar el perfil
+            showSuccessPanel(storedUser.photoURL, 'Ya has iniciado sesión como ' + storedUser.email);
+        }
+    };
 </script>
 
 </body>
