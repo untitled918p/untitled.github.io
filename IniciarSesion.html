@@ -215,7 +215,33 @@
         const auth = firebase.auth();
         const storage = firebase.storage();
 
-       // Crear cuenta
+       // Guardar usuario en localStorage
+        function saveUserToLocalStorage(user, photoURL) {
+            const userData = {
+                email: user.email,
+                photoURL: photoURL || user.photoURL
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
+        }
+
+        // Recuperar el usuario guardado al cargar la página
+        window.onload = function() {
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            if (storedUser) {
+                // Si ya hay un usuario guardado, mostrar el perfil
+                showSuccessPanel(storedUser.photoURL, 'Ya has iniciado sesión como ' + storedUser.email);
+            }
+        };
+
+        // Mostrar panel de éxito
+        function showSuccessPanel(imageUrl, message) {
+            document.getElementById('success-panel').style.display = 'block';
+            document.getElementById('profile-image').src = imageUrl;
+            document.getElementById('success-message').textContent = message;
+            document.getElementById('auth-container').style.display = 'none';
+        }
+
+        // Crear cuenta
         document.getElementById('createAccount').addEventListener('click', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
@@ -233,7 +259,6 @@
                 return;
             }
 
-            // Ocultar todo y mostrar el mensaje de "Creando su cuenta..."
             document.getElementById('auth-container').style.display = 'none';
             loadingMessage.style.display = 'block';
 
@@ -251,7 +276,7 @@
                 .catch(error => {
                     document.getElementById('authMessage').textContent = error.message;
                     loadingMessage.style.display = 'none';
-                    document.getElementById('auth-container').style.display = 'block'; // Volver a mostrar el formulario
+                    document.getElementById('auth-container').style.display = 'block';
                 });
         });
 
@@ -271,22 +296,6 @@
                 });
         });
 
-        // Mostrar panel de éxito
-        function showSuccessPanel(imageUrl, message) {
-            document.getElementById('success-panel').style.display = 'block';
-            document.getElementById('profile-image').src = imageUrl;
-            document.getElementById('success-message').textContent = message;
-        }
-
-        // Guardar usuario en localStorage
-        function saveUserToLocalStorage(user, photoURL) {
-            const userData = {
-                email: user.email,
-                photoURL: photoURL || user.photoURL
-            };
-            localStorage.setItem('user', JSON.stringify(userData));
-        }
-
         // Alternar entre crear cuenta e iniciar sesión
         document.getElementById('switchToLogin').addEventListener('click', () => {
             document.getElementById('create-account-container').classList.add('hidden');
@@ -297,33 +306,4 @@
             document.getElementById('login-container').classList.add('hidden');
             document.getElementById('create-account-container').classList.remove('hidden');
         });
-
-        // Manejo de autenticación con Google
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    const user = result.user;
-                    saveUserToLocalStorage(user, user.photoURL);
-                    showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
-                })
-                .catch(error => {
-                    document.getElementById('authMessage').textContent = error.message;
-                });
-        });
-
-        document.getElementById('googleLogin2').addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    const user = result.user;
-                    saveUserToLocalStorage(user, user.photoURL);
-                    showSuccessPanel(user.photoURL, 'Inicio de sesión exitoso');
-                })
-                .catch(error => {
-                    document.getElementById('loginMessage').textContent = error.message;
-                });
-        });
     </script>
-</body>
-</html>
