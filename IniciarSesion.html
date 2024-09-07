@@ -308,14 +308,24 @@
         document.getElementById('create-account-container').classList.remove('hidden');
     });
 
-        const storageRef = storage.ref('profile_pictures/' + user.uid);
+      const storageRef = storage.ref('profile_pictures/' + user.uid);
 storageRef.put(profilePicture).then(() => {
     return storageRef.getDownloadURL().then(url => {
-        // Aquí se obtiene la URL de descarga de la imagen subida
+        // Aquí debes guardar la URL obtenida
+        console.log("Imagen cargada desde la URL:", url);
         saveUserToLocalStorage(user, url);
         showSuccessPanel(url, 'Cuenta creada con éxito');
     });
 });
+        function showSuccessPanel(url, message) {
+    const profileImage = document.getElementById('profileImage'); // Asegúrate de tener un <img> con este id
+    if (profileImage) {
+        profileImage.src = url;
+        console.log('Imagen de perfil cargada correctamente.');
+    }
+    const messageElement = document.getElementById('message');
+    messageElement.textContent = message;
+}
 </script>
 
 </body>
