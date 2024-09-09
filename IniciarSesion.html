@@ -324,6 +324,48 @@
             showSuccessPanel(storedUser.photoURL, 'Ya has iniciado sesión como ' + storedUser.email);
         }
     };
+
+
+
+
+
+function saveUserToLocalStorage(user, photoURL) {
+    const userData = {
+        email: user.email,
+        photoURL: photoURL || user.photoURL || 'default-profile.png' // Imagen predeterminada si no hay photoURL
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
+}
+
+// Convertir imagen a base64 y guardarla en localStorage
+function imageToBase64(file, callback) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+        callback(reader.result); // Esta es la imagen en base64
+    };
+}
+
+// Crear cuenta
+document.getElementById('createAccount').addEventListener('click', () => {
+    const profilePicture = document.getElementById('profile-picture').files[0];
+
+    if (!profilePicture) {
+        document.getElementById('authMessage').textContent = 'Sube una foto de perfil.';
+        return;
+    }
+
+    imageToBase64(profilePicture, (base64Image) => {
+        // Guardar la imagen base64 en localStorage
+        localStorage.setItem('profilePicture', base64Image);
+        
+        // Aquí va el resto del código para crear la cuenta y subir los datos a Firebase...
+    });
+});
+
+
+
+        
 </script>
 
 </body>
