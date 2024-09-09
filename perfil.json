@@ -1,0 +1,7 @@
+{
+  "usuario": {
+    "id": "123",
+    "nombre": "Nombre del Usuario",
+    "foto": "ruta/de/la/foto.png"
+  }
+}
