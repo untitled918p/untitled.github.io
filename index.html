@@ -5,11 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+#categoriaBtn {
+  background-color: #444;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+  position: absolute; /* Para que el botón también se posicione */
+  top: 15px;
+  left: 15px;
+}
+
 .categoria-panel {
   display: none;
   position: absolute;
-  top: 15px; /* Posición en la esquina superior */
-  left: 15px; /* Posición en la esquina izquierda */
+  top: 60px; /* Ajustado para evitar que se superponga con el botón */
+  left: 15px;
   background-color: #444;
   border: 1px solid #555;
   border-radius: 5px;
