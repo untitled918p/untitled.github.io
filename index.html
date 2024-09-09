@@ -7,6 +7,7 @@
   <style>
 
      #profile-image {
+            display: none;
             position: fixed;
             top: 10px;
             left: 10px;
@@ -446,10 +447,12 @@ fetch('perfil.json')
 //Eliminar si no sirve
      // Recuperar la imagen guardada en localStorage
         const storedProfilePicture = localStorage.getItem('profilePicture');
+        
         if (storedProfilePicture) {
-            document.getElementById('profile-image').src = storedProfilePicture;
-        } else {
-            document.getElementById('profile-image').src = 'default-profile.png'; // Imagen por defecto si no hay foto
+            // Si hay una imagen guardada, mostrarla
+            const profileImageElement = document.getElementById('profile-image');
+            profileImageElement.src = storedProfilePicture;
+            profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
   </script>
 </body>
