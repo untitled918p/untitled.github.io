@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Force</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e96443, #904e95);
+            color: white;
+        }
+
+        .icono {
+            border: 4px solid white; /* Borde blanco de 4px */
+            border-radius: 0 0 20px 20px; /* Bordes redondeados solo en las esquinas inferiores */
+        }
+
+        .menu-container {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-container nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-container nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .menu-container nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        .menu-container nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-container nav ul li a:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        #contenedor-superior {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin-top: 60px; /* Añade espacio para el menú fijo */
+            text-align: center;
+        }
+
+        .info-cuadrados {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .info-cuadrados .cuadrado {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #contenedor-disqus {
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            padding-bottom: 50px;
+            min-height: 200px;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .capturas {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .captura {
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .captura img {
+            width: 140px;
+            height: 120px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .captura img:hover {
+            transform: scale(1.05);
+        }
+
+        #boton-descarga {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #boton-descarga:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        #boton-scroll {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Estilos para la vista ampliada */
+        #imagen-ampliada {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        #imagen-ampliada img {
+            max-width: 90%;
+            max-height: 80%;
+        }
+
+        #imagen-ampliada .cerrar {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .navegacion {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+        .navegacion span {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="menu-container">
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+            <li><a href="Informacion.html">Pagina oficial y más información</a></li>
+        </ul>
+    </nav>
+</div>
+
+<section id="contenedor-superior">
+    <h2>Bot Force</h2>
+    <img src="BotForceIcono.png" width="100" height="100" class="icono">
+    <p>Peso Del Juego: 100 MB<br> Terror/ Robots / 2D / indie</p>
+    <section><a href="Bot Force V1.0.rar" download>
+        <button id="boton-descarga">Descargar</button>
+    </a></section>
+    <section><h2>Juegos creados por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
+    <section><h2>Requisitos Minimos</h2></section>
+    <section>Windows: XP/Vista/7/8/10</section>
+    <section>Ram: 1 GB</section>
+    <section>Tipo de sistema: 32/64 Bits</section>
+    <section>Procesador: 1.4 GHz</section>
+</section>
+
+<div class="info-cuadrados">
+    <div class="cuadrado">Lanzamiento: 09/09/2024</div>
+    <div class="cuadrado">Recomendado</div>
+</div>
+
+<div class="capturas">
+    <div class="captura">
+        <img src="BotForceImagen1.png" alt="captura 1" onclick="ampliarImagen(0)">
+    </div>
+    <div class="captura">
+        <img src="BotForceImagen2.png" alt="captura 2" onclick="ampliarImagen(1)">
+    </div>
+    <div class="captura">
+        <img src="BotForceImagen3.png" alt="captura 3" onclick="ampliarImagen(2)">
+    </div>
+</div>
+
+<section id="contenedor-disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://https-untitled918p-github-io-untitled-github-io.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</section>
+
+<button id="boton-scroll" onclick="scrollToDisqus()">Ver Comentarios</button>
+
+<!-- Vista ampliada de la imagen -->
+<div id="imagen-ampliada">
+    <span class="cerrar" onclick="cerrarImagen()">&times;</span>
+    <img id="imagen-ampliada-src" src="">
+    <div class="navegacion">
+        <span onclick="cambiarImagen(-1)">&#10094;</span>
+        <span onclick="cambiarImagen(1)">&#10095;</span>
+    </div>
+</div>
+
+<script>
+    let imagenes = [
+        "BotForceImagen1.png",
+        "BotForceImagen2.png",
+        "BotForceImagen3.png"
+    ];
+    let indiceActual = 0;
+
+    function ampliarImagen(indice) {
+        indiceActual = indice;
+        document.getElementById('imagen-ampliada-src').src = imagenes[indice];
+        document.getElementById('imagen-ampliada').style.display = 'flex';
+    }
+
+    function cerrarImagen() {
+        document.getElementById('imagen-ampliada').style.display = 'none';
+    }
+
+    function cambiarImagen(direccion) {
+        indiceActual += direccion;
+        if (indiceActual < 0) {
+            indiceActual = imagenes.length - 1;
+        } else if (indiceActual >= imagenes.length) {
+            indiceActual = 0;
+        }
+        document.getElementById('imagen-ampliada-src').src = imagenes[indiceActual];
+    }
+
+    function scrollToDisqus() {
+        document.getElementById('contenedor-disqus').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.onscroll = function() {
+        let botonScroll = document.getElementById('boton-scroll');
+        if (window.pageYOffset > 100) {
+            botonScroll.style.display = 'block';
+        } else {
+            botonScroll.style.display = 'none';
+        }
+    };
+</script>
+
+</body>
+</html>
