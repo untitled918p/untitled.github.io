@@ -5,25 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-.photo-container {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 50px;
-      height: 50px;
-    }
 
-    .photo-container img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-
-
-    
     
     body {
       background: linear-gradient(135deg, #333, #555);
@@ -281,11 +263,12 @@
   <header>
     <nav class="menu-container">
       <ul>
+<img id="profile-image" src="" alt="Imagen de perfil" width="100" height="100">
+        
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
         <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
-        <div class="photo-container" id="photo-container">
       </ul>
     </nav>
     <div class="header">
@@ -452,6 +435,14 @@ fetch('perfil.json')
         }
       });
     });
+//Eliminar si no sirve
+     // Recuperar la imagen guardada en localStorage
+        const storedProfilePicture = localStorage.getItem('profilePicture');
+        if (storedProfilePicture) {
+            document.getElementById('profile-image').src = storedProfilePicture;
+        } else {
+            document.getElementById('profile-image').src = 'default-profile.png'; // Imagen por defecto si no hay foto
+        }
   </script>
 </body>
 </html>
