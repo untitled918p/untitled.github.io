@@ -577,20 +577,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      // Cerrar el campo de búsqueda al hacer clic fuera de él
-      document.addEventListener('click', function (event) {
-        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
-          resultadosDiv.style.display = 'none';
-        }
-      });
+      document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const juegos = document.querySelectorAll('.untitled1 .juego');
 
-      // Mostrar los resultados nuevamente si se hace clic dentro del buscador
-      buscador.addEventListener('click', function () {
-        if (buscador.value !== '') {
-          resultadosDiv.style.display = 'block';
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    searchResults.innerHTML = '';
+
+    if (query.trim() === '') {
+      searchResults.style.display = 'none';
+      return;
+    }
+
+    let count = 0;
+    juegos.forEach(juego => {
+      const name = juego.querySelector('span').textContent.toLowerCase();
+      if (name.includes(query)) {
+        if (count < 4) {
+          const clonedJuego = juego.cloneNode(true);
+          searchResults.appendChild(clonedJuego);
+          count++;
         }
-      });
+      }
     });
+
+    searchResults.style.display = count > 0 ? 'block' : 'none';
+  });
+});
   </script>
 </body>
 </html>
