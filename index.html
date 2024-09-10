@@ -5,24 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-.search-container {
-    display: flex;
-    align-items: center;
-    width: 100%; /* Ancho completo */
-    max-width: 800px; /* Aumenta el ancho total del contenedor */
-    margin-left: 10px; /* Ajusta la separación del borde izquierdo */
-}
+ .search-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin-left: 10px;
+    }
 
-.search-bar {
-    flex-grow: 1;
-    padding: 8px;
-    font-size: 16px;
-    margin-right: 12px; /* Espacio entre el buscador y el PNG */
-}
+    .search-bar {
+        flex-grow: 1;
+        padding: 8px;
+        font-size: 16px;
+        margin-right: 12px;
+        background-color: #444;
+        color: #fff;
+    }
 
-.search-icon {
-    width: 24px;  /* Tamaño más pequeño de la imagen */
-}
+    .search-icon {
+        width: 24px;
+    }
+    
+    #resultados {
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .resultados-busqueda {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background-color: #555;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+      margin: 10px auto;
+      color: #fff;
+    }
+
+    .resultados-busqueda img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+
+    .resultados-busqueda .info {
+      font-size: 18px;
+      text-align: left;
+      flex-grow: 1;
+    }
+
+    .resultados-busqueda:hover {
+      transform: scale(1.05);
+      background-color: #666;
+    }
     
      #profile-image {
             display: none;
@@ -507,6 +550,47 @@ document.addEventListener('DOMContentLoaded', function () {
             profileImageElement.src = storedProfilePicture;
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
+
+    document.addEventListener('click', function (event) {
+        if (!document.getElementById('categoriaBtn').contains(event.target) && !document.getElementById('categoriaPanel').contains(event.target)) {
+          document.getElementById('categoriaPanel').style.display = 'none';
+        }
+      });
+
+      // Función para mostrar/ocultar panel de categorías
+      document.getElementById('categoriaBtn').addEventListener('click', function () {
+        const categoriaPanel = document.getElementById('categoriaPanel');
+        categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
+      });
+
+      // Función para filtrar juegos por categoría
+      document.querySelectorAll('.categoria').forEach(function (categoria) {
+        categoria.addEventListener('click', function () {
+          const etiqueta = categoria.getAttribute('data-etiqueta');
+          juegos.forEach(function (juego) {
+            if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
+              juego.style.display = 'flex';
+            } else {
+              juego.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Cerrar el campo de búsqueda al hacer clic fuera de él
+      document.addEventListener('click', function (event) {
+        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
+          resultadosDiv.style.display = 'none';
+        }
+      });
+
+      // Mostrar los resultados nuevamente si se hace clic dentro del buscador
+      buscador.addEventListener('click', function () {
+        if (buscador.value !== '') {
+          resultadosDiv.style.display = 'block';
+        }
+      });
+    });
   </script>
 </body>
 </html>
