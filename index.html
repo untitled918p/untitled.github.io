@@ -5,7 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Se ajusta al ancho del contenedor padre */
+    max-width: 400px; /* Cambia este valor para reducir el ancho */
+}
 
+.search-bar {
+    flex-grow: 1;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%; /* Se ajusta al espacio disponible */
+}
+
+.search-icon {
+    width: 25px;  /* Ajusta el tamaño del PNG */
+    margin-left: 8px;
+}
+    
      #profile-image {
             display: none;
             position: fixed;
@@ -283,7 +301,8 @@
     <div class="header">
       <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
       <div class="search-container">
-        <input type="text" id="buscador" placeholder="Buscar juegos...">
+        <input type="text" class="search-bar" placeholder="Buscar...">
+    <img src="Crear cuenta.png" alt="icono" class="search-icon">
       </div>
     </div>
   </header>
