@@ -390,7 +390,41 @@ fetch('perfil.json')
       .catch(error => {
         console.error('Error cargando la imagen de perfil:', error);
       });
+document.addEventListener('DOMContentLoaded', function () {
+    const buscador = document.getElementById('buscador');
+    const resultadosDiv = document.getElementById('resultados');
+    const juegos = document.querySelectorAll('.juego');
 
+    // Función para mostrar resultados de búsqueda
+    buscador.addEventListener('input', function () {
+        const searchTerm = buscador.value.toLowerCase();
+        resultadosDiv.innerHTML = ''; // Limpia los resultados anteriores
+
+        if (searchTerm === '') {
+            resultadosDiv.style.display = 'none'; // Oculta si está vacío
+        } else {
+            resultadosDiv.style.display = 'block'; // Muestra los resultados
+
+            juegos.forEach(function (juego) {
+                const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+                if (nombreJuego.includes(searchTerm)) {
+                    const resultado = document.createElement('div');
+                    resultado.classList.add('resultados-busqueda');
+
+                    const img = juego.querySelector('img').cloneNode(true); // Clona la imagen
+                    const info = document.createElement('div');
+                    info.classList.add('info');
+                    info.textContent = nombreJuego;
+
+                    resultado.appendChild(img);
+                    resultado.appendChild(info);
+
+                    resultadosDiv.appendChild(resultado);
+                }
+            });
+        }
+    });
+});
   
     document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
