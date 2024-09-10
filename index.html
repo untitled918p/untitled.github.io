@@ -297,6 +297,37 @@
 
   <script>
 
+ document.addEventListener('DOMContentLoaded', function () {
+      const categoriaBtn = document.getElementById('categoriaBtn');
+      const categoriaPanel = document.getElementById('categoriaPanel');
+      const juegos = document.querySelectorAll('.juego');
+      const categorias = document.querySelectorAll('.categoria');
+
+      // Mostrar/ocultar panel de categorías
+      categoriaBtn.addEventListener('click', function () {
+        const isVisible = categoriaPanel.style.display === 'flex';
+        categoriaPanel.style.display = isVisible ? 'none' : 'flex';
+      });
+
+      // Cerrar panel de categorías al hacer clic fuera de él
+      document.addEventListener('click', function (event) {
+        if (!categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
+          categoriaPanel.style.display = 'none';
+        }
+      });
+
+      // Filtrar juegos por categoría
+      categorias.forEach(function (categoria) {
+        categoria.addEventListener('click', function () {
+          const etiqueta = categoria.getAttribute('data-etiqueta');
+          juegos.forEach(function (juego) {
+            juego.style.display = etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta) ? 'flex' : 'none';
+          });
+        });
+      });
+    });
+
+    
 fetch('perfil.json')
       .then(response => response.json())
       .then(data => {
@@ -310,37 +341,7 @@ fetch('perfil.json')
         console.error('Error cargando la imagen de perfil:', error);
       });
   
-    document.addEventListener('DOMContentLoaded', function () {
-      const categoriaBtn = document.getElementById('categoriaBtn');
-      const categoriaPanel = document.getElementById('categoriaPanel');
-      const juegos = document.querySelectorAll('.juego');
-      const categorias = document.querySelectorAll('.categoria');
-
-      // Función para cerrar el panel de categorías al tocar fuera de él
-      document.addEventListener('click', function (event) {
-        if (!categoriaBtn.contains(event.target) && !categoriaPanel.contains(event.target)) {
-          categoriaPanel.style.display = 'none';
-        }
-      });
-
-      // Función para mostrar/ocultar panel de categorías
-      categoriaBtn.addEventListener('click', function () {
-        categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
-      });
-
-      // Función para filtrar juegos por categoría
-      categorias.forEach(function (categoria) {
-        categoria.addEventListener('click', function () {
-          const etiqueta = categoria.getAttribute('data-etiqueta');
-          juegos.forEach(function (juego) {
-            if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
-              juego.style.display = 'flex';
-            } else {
-              juego.style.display = 'none';
-            }
-          });
-        });
-      });
+    
 
       
      // Recuperar la imagen guardada en localStorage
@@ -353,31 +354,7 @@ fetch('perfil.json')
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
 
-    document.addEventListener('click', function (event) {
-        if (!document.getElementById('categoriaBtn').contains(event.target) && !document.getElementById('categoriaPanel').contains(event.target)) {
-          document.getElementById('categoriaPanel').style.display = 'none';
-        }
-      });
-
-      // Función para mostrar/ocultar panel de categorías
-      document.getElementById('categoriaBtn').addEventListener('click', function () {
-        const categoriaPanel = document.getElementById('categoriaPanel');
-        categoriaPanel.style.display = categoriaPanel.style.display === 'flex' ? 'none' : 'flex';
-      });
-
-      // Función para filtrar juegos por categoría
-      document.querySelectorAll('.categoria').forEach(function (categoria) {
-        categoria.addEventListener('click', function () {
-          const etiqueta = categoria.getAttribute('data-etiqueta');
-          juegos.forEach(function (juego) {
-            if (etiqueta === 'todos' || juego.getAttribute('data-etiquetas').includes(etiqueta)) {
-              juego.style.display = 'flex';
-            } else {
-              juego.style.display = 'none';
-            }
-          });
-        });
-      });
+    
   </script>
 </body>
 </html>
