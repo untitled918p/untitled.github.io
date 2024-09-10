@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+
+        .info {
+            margin-left: 10px;
+        }
+
+        .juego {
+            display: flex;
+            align-items: center;
+        }
+    
+     #profile-image {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Hace la imagen redonda */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Añadir sombra a la imagen */
+        }
     body {
       background: linear-gradient(135deg, #333, #555);
       margin: 0;
@@ -66,26 +86,8 @@
       width: auto;
     }
 
-    .search-container {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      max-width: 800px;
-      margin-left: 10px;
-    }
 
-    .search-bar {
-      flex-grow: 1;
-      padding: 8px;
-      font-size: 16px;
-      margin-right: 12px;
-      background-color: #444;
-      color: #fff;
-    }
-
-    .search-icon {
-      width: 24px;
-    }
+ 
 
     .juego {
       display: flex;
@@ -190,16 +192,6 @@
       background-color: #555;
     }
 
-    .search-results-container {
-      background-color: #222;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      margin: 20px auto;
-    }
-
     @media (max-width: 768px) {
       .header {
         height: 15vh;
@@ -218,7 +210,8 @@
   <header>
     <nav class="menu-container">
       <ul>
-        <img id="profile-image" src="" alt="Imagen de perfil">
+ <img id="profile-image" src="" alt="Imagen de perfil">
+        
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
@@ -227,12 +220,12 @@
     </nav>
     <div class="header">
       <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
-      <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Buscar...">
-        <img src="Crear cuenta.png" alt="icono" class="search-icon">
+    <img src="Crear cuenta.png" alt="icono" class="search-icon">
       </div>
     </div>
+    
   </header>
+  
   
   <button id="categoriaBtn">Categorías</button>
   <div class="categoria-panel" id="categoriaPanel">
@@ -243,12 +236,15 @@
     <div class="categoria" data-etiqueta="carreras">Carreras</div>
   </div>
   <section class="untitled1">
-    <div class="juego" data-etiquetas="todos,accion">
+    
+<div class="juego" data-etiquetas="todos,accion">
       <a href="BotForce.html">
         <span>Bot Force</span>
         <img src="BotForceIcono.png" alt="Icono Juego 1">
       </a>
     </div>
+
+    
     <div class="juego" data-etiquetas="todos,accion">
       <a href="UntitledBeta.html">
         <span>Untitled</span>
@@ -288,13 +284,13 @@
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Viktor.html">
         <span>Viktor</span>
-        <img src="IconoViktor.png" alt="Icono Juego 7">
+        <img src="ViktorIcon.png" alt="Icono Juego 7">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Untitled3.html">
         <span>Untitled 3</span>
-        <img src="icono.png" alt="Icono Juego 8">
+        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
       </a>
     </div>
   </section>
@@ -313,28 +309,6 @@ fetch('perfil.json')
       .catch(error => {
         console.error('Error cargando la imagen de perfil:', error);
       });
-
-
-            juegos.forEach(function (juego) {
-                const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-                if (nombreJuego.includes(searchTerm)) {
-                    const resultado = document.createElement('div');
-                    resultado.classList.add('resultados-busqueda');
-
-                    const img = juego.querySelector('img').cloneNode(true); // Clona la imagen
-                    const info = document.createElement('div');
-                    info.classList.add('info');
-                    info.textContent = nombreJuego;
-
-                    resultado.appendChild(img);
-                    resultado.appendChild(info);
-
-                    resultadosDiv.appendChild(resultado);
-                }
-            });
-        }
-    });
-});
   
     document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
@@ -369,7 +343,6 @@ fetch('perfil.json')
       });
 
       
-
      // Recuperar la imagen guardada en localStorage
         const storedProfilePicture = localStorage.getItem('profilePicture');
         
@@ -405,8 +378,6 @@ fetch('perfil.json')
           });
         });
       });
-
-     
   </script>
 </body>
 </html>
