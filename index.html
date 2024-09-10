@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+#buscador {
+            width: 300px; /* Ajusta el ancho según sea necesario */
+        }
+
+        #resultados {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
+        .resultados-busqueda {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .resultados-busqueda:hover {
+            background-color: #f0f0f0;
+        }
+
+        .info {
+            margin-left: 10px;
+        }
+
+        .juego {
+            display: flex;
+            align-items: center;
+        }
+
+
+    
     #search {
     width: 100%;
     padding: 10px;
@@ -175,58 +208,7 @@
       justify-content: center;
     }
 
-    #buscador {
-      width: 100%;
-      padding: 15px 20px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-      box-sizing: border-box;
-      background-color: #444;
-      color: #fff;
-    }
-
-    #resultados {
-      max-width: 90%;
-      margin: 20px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-
-    .resultados-busqueda {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background-color: #555;
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 400px;
-      transition: transform 0.3s ease;
-      margin: 10px auto;
-      color: #fff;
-    }
-
-    .resultados-busqueda img {
-      width: 50px;
-      height: 50px;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
-
-    .resultados-busqueda .info {
-      font-size: 18px;
-      text-align: left;
-      flex-grow: 1;
-    }
-
-    .resultados-busqueda:hover {
-      transform: scale(1.05);
-      background-color: #666;
-    }
+ 
 
     .juego {
       display: flex;
@@ -345,11 +327,6 @@
       .header {
         height: 15vh;
       }
-
-      #buscador {
-        width: 80%;
-      }
-
       .menu-container li {
         margin: 0 5px;
       }
@@ -535,43 +512,63 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      // Función para buscar juegos y limitar a 4 resultados
-      buscador.addEventListener('input', function () {
-        const filtro = buscador.value.toLowerCase();
-        resultadosDiv.innerHTML = ''; // Limpiar resultados anteriores
-        let contadorResultados = 0;
+      document.addEventListener('DOMContentLoaded', function () {
+    const buscador = document.getElementById('search'); // Corregido el ID
+    const resultadosDiv = document.getElementById('resultados');
+    const juegos = document.querySelectorAll('.juego');
 
-        juegos.forEach(function (juego) {
-          const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-          if (nombreJuego.includes(filtro)) {
-            if (filtro !== '' && contadorResultados < 4) {
-              const resultadoBusqueda = document.createElement('div');
-              resultadoBusqueda.classList.add('resultados-busqueda');
-              resultadoBusqueda.innerHTML = juego.innerHTML;
-              resultadosDiv.appendChild(resultadoBusqueda);
-              contadorResultados++;
+    // Función para mostrar resultados de búsqueda
+    buscador.addEventListener('input', function () {
+        const searchTerm = buscador.value.toLowerCase();
+        resultadosDiv.innerHTML = ''; // Limpia los resultados anteriores
+
+        if (searchTerm === '') {
+            resultadosDiv.style.display = 'none'; // Oculta si está vacío
+        } else {
+            resultadosDiv.style.display = 'block'; // Muestra los resultados
+
+            juegos.forEach(function (juego) {
+                const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
+                if (nombreJuego.includes(searchTerm)) {
+                    const resultado = document.createElement('div');
+                    resultado.classList.add('resultados-busqueda');
+
+                    const img = juego.querySelector('img').cloneNode(true); // Clona la imagen
+                    const info = document.createElement('div');
+                    info.classList.add('info');
+                    info.textContent = nombreJuego;
+
+                    resultado.appendChild(img);
+                    resultado.appendChild(info);
+
+                    resultadosDiv.appendChild(resultado);
+                }
+            });
+
+            // Limitar a 4 resultados
+            const resultados = resultadosDiv.querySelectorAll('.resultados-busqueda');
+            if (resultados.length > 4) {
+                for (let i = 4; i < resultados.length; i++) {
+                    resultados[i].style.display = 'none';
+                }
             }
-          }
-        });
-
-        // Ocultar resultados si no hay búsqueda
-        resultadosDiv.style.display = filtro === '' ? 'none' : 'block';
-      });
-
-      // Cerrar el campo de búsqueda al hacer clic fuera de él
-      document.addEventListener('click', function (event) {
-        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
-          resultadosDiv.style.display = 'none';
         }
-      });
-
-      // Mostrar los resultados nuevamente si se hace clic dentro del buscador
-      buscador.addEventListener('click', function () {
-        if (buscador.value !== '') {
-          resultadosDiv.style.display = 'block';
-        }
-      });
     });
+
+    // Cerrar el campo de búsqueda al hacer clic fuera de él
+    document.addEventListener('click', function (event) {
+        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
+            resultadosDiv.style.display = 'none';
+        }
+    });
+
+    // Mostrar los resultados nuevamente si se hace clic dentro del buscador
+    buscador.addEventListener('click', function () {
+        if (buscador.value !== '') {
+            resultadosDiv.style.display = 'block';
+        }
+    });
+});
 //Eliminar si no sirve
      // Recuperar la imagen guardada en localStorage
         const storedProfilePicture = localStorage.getItem('profilePicture');
