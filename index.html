@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+    #search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: calc(25% - 20px); /* Ajusta el tamaño según tu preferencia */
+}
+
+.result-item img {
+    width: 50px; /* Ajusta el tamaño según tu preferencia */
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.result-item .text {
+    flex-grow: 1;
+}
+    
  .search-container {
         display: flex;
         align-items: center;
