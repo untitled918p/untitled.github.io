@@ -5,142 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-#buscador {
-            width: 300px; /* Ajusta el ancho según sea necesario */
-        }
-
-        #resultados {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            z-index: 1000;
-        }
-
-        .resultados-busqueda {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .resultados-busqueda:hover {
-            background-color: #f0f0f0;
-        }
-
-        .info {
-            margin-left: 10px;
-        }
-
-        .juego {
-            display: flex;
-            align-items: center;
-        }
-
-
-    
-    #search {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-#results {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.result-item {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: calc(25% - 20px); /* Ajusta el tamaño según tu preferencia */
-}
-
-.result-item img {
-    width: 50px; /* Ajusta el tamaño según tu preferencia */
-    height: 50px;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-.result-item .text {
-    flex-grow: 1;
-}
-    
- .search-container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        max-width: 800px;
-        margin-left: 10px;
-    }
-
-    .search-bar {
-        flex-grow: 1;
-        padding: 8px;
-        font-size: 16px;
-        margin-right: 12px;
-        background-color: #444;
-        color: #fff;
-    }
-
-    .search-icon {
-        width: 24px;
-    }
-    
-    #resultados {
-      max-width: 90%;
-      margin: 20px auto;
-      padding: 0 20px;
-      text-align: center;
-    }
-
-    .resultados-busqueda {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 2px solid #fff;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      background-color: #555;
-      box-sizing: border-box;
-      width: 100%;
-      max-width: 400px;
-      transition: transform 0.3s ease;
-      margin: 10px auto;
-      color: #fff;
-    }
-
-    .resultados-busqueda img {
-      width: 50px;
-      height: 50px;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
-
-    .resultados-busqueda .info {
-      font-size: 18px;
-      text-align: left;
-      flex-grow: 1;
-    }
-
-    .resultados-busqueda:hover {
-      transform: scale(1.05);
-      background-color: #666;
-    }
-    
-     #profile-image {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Hace la imagen redonda */
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Añadir sombra a la imagen */
-        }
     body {
       background: linear-gradient(135deg, #333, #555);
       margin: 0;
@@ -203,12 +67,25 @@
     }
 
     .search-container {
-      flex-grow: 1;
       display: flex;
-      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 800px;
+      margin-left: 10px;
     }
 
- 
+    .search-bar {
+      flex-grow: 1;
+      padding: 8px;
+      font-size: 16px;
+      margin-right: 12px;
+      background-color: #444;
+      color: #fff;
+    }
+
+    .search-icon {
+      width: 24px;
+    }
 
     .juego {
       display: flex;
@@ -341,8 +218,7 @@
   <header>
     <nav class="menu-container">
       <ul>
- <img id="profile-image" src="" alt="Imagen de perfil">
-        
+        <img id="profile-image" src="" alt="Imagen de perfil">
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
@@ -353,12 +229,10 @@
       <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
       <div class="search-container">
         <input type="text" class="search-bar" placeholder="Buscar...">
-    <img src="Crear cuenta.png" alt="icono" class="search-icon">
+        <img src="Crear cuenta.png" alt="icono" class="search-icon">
       </div>
     </div>
-    <div id="searchResults"></div>
   </header>
-  <div id="resultados" class="search-results-container"></div>
   
   <button id="categoriaBtn">Categorías</button>
   <div class="categoria-panel" id="categoriaPanel">
@@ -369,15 +243,12 @@
     <div class="categoria" data-etiqueta="carreras">Carreras</div>
   </div>
   <section class="untitled1">
-    
-<div class="juego" data-etiquetas="todos,accion">
+    <div class="juego" data-etiquetas="todos,accion">
       <a href="BotForce.html">
         <span>Bot Force</span>
         <img src="BotForceIcono.png" alt="Icono Juego 1">
       </a>
     </div>
-
-    
     <div class="juego" data-etiquetas="todos,accion">
       <a href="UntitledBeta.html">
         <span>Untitled</span>
@@ -417,13 +288,13 @@
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Viktor.html">
         <span>Viktor</span>
-        <img src="ViktorIcon.png" alt="Icono Juego 7">
+        <img src="IconoViktor.png" alt="Icono Juego 7">
       </a>
     </div>
     <div class="juego" data-etiquetas="todos,accion">
       <a href="Untitled3.html">
         <span>Untitled 3</span>
-        <img src="Untitled3Icon.jpg" alt="Icono Juego 8">
+        <img src="icono.png" alt="Icono Juego 8">
       </a>
     </div>
   </section>
@@ -442,20 +313,7 @@ fetch('perfil.json')
       .catch(error => {
         console.error('Error cargando la imagen de perfil:', error);
       });
-document.addEventListener('DOMContentLoaded', function () {
-    const buscador = document.getElementById('buscador');
-    const resultadosDiv = document.getElementById('resultados');
-    const juegos = document.querySelectorAll('.juego');
 
-    // Función para mostrar resultados de búsqueda
-    buscador.addEventListener('input', function () {
-        const searchTerm = buscador.value.toLowerCase();
-        resultadosDiv.innerHTML = ''; // Limpia los resultados anteriores
-
-        if (searchTerm === '') {
-            resultadosDiv.style.display = 'none'; // Oculta si está vacío
-        } else {
-            resultadosDiv.style.display = 'block'; // Muestra los resultados
 
             juegos.forEach(function (juego) {
                 const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
@@ -481,8 +339,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
       const categoriaPanel = document.getElementById('categoriaPanel');
-      const buscador = document.getElementById('buscador');
-      const resultadosDiv = document.getElementById('resultados');
       const juegos = document.querySelectorAll('.juego');
       const categorias = document.querySelectorAll('.categoria');
 
@@ -512,64 +368,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-      document.addEventListener('DOMContentLoaded', function () {
-    const buscador = document.getElementById('search'); // Corregido el ID
-    const resultadosDiv = document.getElementById('resultados');
-    const juegos = document.querySelectorAll('.juego');
+      
 
-    // Función para mostrar resultados de búsqueda
-    buscador.addEventListener('input', function () {
-        const searchTerm = buscador.value.toLowerCase();
-        resultadosDiv.innerHTML = ''; // Limpia los resultados anteriores
-
-        if (searchTerm === '') {
-            resultadosDiv.style.display = 'none'; // Oculta si está vacío
-        } else {
-            resultadosDiv.style.display = 'block'; // Muestra los resultados
-
-            juegos.forEach(function (juego) {
-                const nombreJuego = juego.querySelector('span').textContent.toLowerCase();
-                if (nombreJuego.includes(searchTerm)) {
-                    const resultado = document.createElement('div');
-                    resultado.classList.add('resultados-busqueda');
-
-                    const img = juego.querySelector('img').cloneNode(true); // Clona la imagen
-                    const info = document.createElement('div');
-                    info.classList.add('info');
-                    info.textContent = nombreJuego;
-
-                    resultado.appendChild(img);
-                    resultado.appendChild(info);
-
-                    resultadosDiv.appendChild(resultado);
-                }
-            });
-
-            // Limitar a 4 resultados
-            const resultados = resultadosDiv.querySelectorAll('.resultados-busqueda');
-            if (resultados.length > 4) {
-                for (let i = 4; i < resultados.length; i++) {
-                    resultados[i].style.display = 'none';
-                }
-            }
-        }
-    });
-
-    // Cerrar el campo de búsqueda al hacer clic fuera de él
-    document.addEventListener('click', function (event) {
-        if (!buscador.contains(event.target) && !resultadosDiv.contains(event.target)) {
-            resultadosDiv.style.display = 'none';
-        }
-    });
-
-    // Mostrar los resultados nuevamente si se hace clic dentro del buscador
-    buscador.addEventListener('click', function () {
-        if (buscador.value !== '') {
-            resultadosDiv.style.display = 'block';
-        }
-    });
-});
-//Eliminar si no sirve
      // Recuperar la imagen guardada en localStorage
         const storedProfilePicture = localStorage.getItem('profilePicture');
         
@@ -606,35 +406,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
 
-     document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('searchInput');
-  const searchResults = document.getElementById('searchResults');
-  const juegos = document.querySelectorAll('.untitled1 .juego');
-
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    searchResults.innerHTML = '';
-
-    if (query.trim() === '') {
-      searchResults.style.display = 'none';
-      return;
-    }
-
-    let count = 0;
-    juegos.forEach(juego => {
-      const name = juego.querySelector('span').textContent.toLowerCase();
-      if (name.includes(query)) {
-        if (count < 4) {
-          const clonedJuego = juego.cloneNode(true);
-          searchResults.appendChild(clonedJuego);
-          count++;
-        }
-      }
-    });
-
-    searchResults.style.display = count > 0 ? 'block' : 'none';
-  });
-});
+     
   </script>
 </body>
 </html>
