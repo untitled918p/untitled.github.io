@@ -332,15 +332,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 measurementId: "G-MJ4RGPGV36"
             };
 
-            const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+           // Inicializa la aplicación de Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database(app);
 
         // Referencia al contador de descargas en la base de datos
         const downloadCountRef = db.ref('bot_force/downloads');
 
         // Mostrar el número de descargas actual
         downloadCountRef.on('value', (snapshot) => {
-            const downloadCount = snapshot.val();
+            const downloadCount = snapshot.val() || 0;
             document.getElementById('download-count').textContent = 'Descargas: ' + downloadCount;
         });
 
@@ -353,6 +354,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 // Primera descarga desde este dispositivo: se incrementa el contador
                 downloadCountRef.transaction((currentCount) => {
                     return (currentCount || 0) + 1;
+                }, (error, committed, snapshot) => {
+                    if (error) {
+                        console.error('Error incrementando el contador:', error);
+                    } else if (committed) {
+                        console.log('Contador incrementado correctamente.');
+                    }
+                    // Mostrar el número de descargas actualizado
+                    const newCount = snapshot.val() || 0;
+                    document.getElementById('download-count').textContent = 'Descargas: ' + newCount;
                 });
 
                 // Marcar en localStorage que ya se descargó el juego en este dispositivo
@@ -369,7 +379,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Mostrar el botón solo para administradores (opcional)
         function isAdmin() {
             // Aquí puedes colocar tu lógica para verificar si el usuario es administrador
-            // Ejemplo simple para desarrollo: return true para mostrar el botón
             return true; // Cambia a tu lógica de administración real
         }
 
