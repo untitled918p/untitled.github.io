@@ -332,56 +332,63 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 measurementId: "G-MJ4RGPGV36"
             };
 
-            // Inicializar Firebase
-            firebase.initializeApp(firebaseConfig);
+            const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-            // Referencia a la base de datos
-            var database = firebase.database();
-            var downloadCountRef = database.ref('bot_force/downloads');
+        // Referencia al contador de descargas en la base de datos
+        const downloadCountRef = db.ref('bot_force/downloads');
 
-            // Actualizar el número de descargas en la página web
-            downloadCountRef.on('value', (snapshot) => {
-                var downloadCount = snapshot.val() || 0;
-                document.getElementById('download-count').textContent = `Descargas: ${downloadCount}`;
-            });
+        // Mostrar el número de descargas actual
+        downloadCountRef.on('value', (snapshot) => {
+            const downloadCount = snapshot.val();
+            document.getElementById('download-count').textContent = 'Descargas: ' + downloadCount;
+        });
 
-            // Verificar si ya ha descargado en este dispositivo
-            function hasDownloaded() {
-                return localStorage.getItem('hasDownloadedBotForce') === 'true';
-            }
+        // Botón de descarga
+        const downloadButton = document.getElementById('download-button');
+        downloadButton.addEventListener('click', () => {
+            const hasDownloaded = localStorage.getItem('hasDownloadedBotForce');
 
-            // Marcar que ya ha descargado en este dispositivo
-            function markAsDownloaded() {
+            if (!hasDownloaded) {
+                // Primera descarga desde este dispositivo: se incrementa el contador
+                downloadCountRef.transaction((currentCount) => {
+                    return (currentCount || 0) + 1;
+                });
+
+                // Marcar en localStorage que ya se descargó el juego en este dispositivo
                 localStorage.setItem('hasDownloadedBotForce', 'true');
             }
 
-            // Función para incrementar el número de descargas
-            function incrementDownloadCount() {
-                downloadCountRef.transaction((currentCount) => {
-                    return (currentCount || 0) + 1;
-                }, function (error, committed, snapshot) {
-                    if (committed) {
-                        markAsDownloaded(); // Marcar que el usuario ya descargó
-                        alert('Gracias por descargar el juego.');
+            // Descargar el juego (reemplaza con el enlace real de tu juego)
+            window.location.href = 'enlace_a_tu_juego.zip';
+        });
+
+        // Botón para reiniciar el contador (solo visible para administradores)
+        const resetButton = document.getElementById('reset-count');
+
+        // Mostrar el botón solo para administradores (opcional)
+        function isAdmin() {
+            // Aquí puedes colocar tu lógica para verificar si el usuario es administrador
+            // Ejemplo simple para desarrollo: return true para mostrar el botón
+            return true; // Cambia a tu lógica de administración real
+        }
+
+        if (isAdmin()) {
+            resetButton.style.display = 'block'; // Mostrar el botón si es administrador
+        }
+
+        // Función para restablecer el contador a 0
+        resetButton.addEventListener('click', () => {
+            const confirmReset = confirm('¿Estás seguro de que deseas restablecer el contador de descargas a 0?');
+            if (confirmReset) {
+                downloadCountRef.set(0, (error) => {
+                    if (error) {
+                        alert('Error al restablecer el contador');
                     } else {
-                        alert('Hubo un problema al registrar tu descarga.');
+                        alert('El contador se ha restablecido a 0.');
                     }
                 });
             }
-
-            // Manejo del clic en el botón de descarga
-            document.getElementById('boton-descarga').addEventListener('click', (event) => {
-                // Permitir la descarga siempre
-                var downloadLink = document.getElementById('download-link');
-
-                // Si es la primera vez que descarga, incrementar el contador
-                if (!hasDownloaded()) {
-                    incrementDownloadCount(); // Incrementar solo en la primera descarga
-                } else {
-                    alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
-                }
-                // La descarga siempre ocurre
-            });
         });
 </script>
 </body>
