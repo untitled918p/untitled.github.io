@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById('boton-descarga').addEventListener('click', (event) => {
         // Permitir la descarga siempre
         var downloadLink = document.getElementById('download-link');
+        window.location.href = downloadLink.href; // Iniciar descarga
 
         // Si es la primera vez que descarga, incrementar el contador
         if (!hasDownloaded()) {
@@ -380,7 +381,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
         }
-        // La descarga siempre ocurre
     });
 
     // Función para restablecer el contador a 0
