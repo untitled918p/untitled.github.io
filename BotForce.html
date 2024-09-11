@@ -310,14 +310,6 @@
     };
 
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
   authDomain: "untitled-3bfa8.firebaseapp.com",
@@ -329,23 +321,17 @@ const firebaseConfig = {
   measurementId: "G-MJ4RGPGV36"
 };
 
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+// Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Referencia a la base de datos
   const database = firebase.database();
-    // Referencia a la ubicación del contador en la base de datos
-  const downloadCountRef = database.ref('downloads/botforce');
 
-  // Incrementa el contador de descargas
-  function incrementarDescargas() {
-    downloadCountRef.transaction(function(currentCount) {
-      return (currentCount || 0) + 1;
-    });
-  }
-
-  // Muestra el número de descargas
+  // Leer el número de descargas
+  const downloadCountRef = database.ref('bot_force/downloads');
   downloadCountRef.on('value', (snapshot) => {
-    const count = snapshot.val() || 0;
-    document.getElementById('numero-descargas').innerText = `Descargas: ${count}`;
+    const downloadCount = snapshot.val();
+    document.getElementById('download-count').textContent = `Descargas: ${downloadCount}`;
   });
 </script>
 
