@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 measurementId: "G-MJ4RGPGV36"
             };
 
-           // Inicializar Firebase
+            // Inicializar Firebase
             firebase.initializeApp(firebaseConfig);
 
             // Referencia a la base de datos
@@ -381,6 +381,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
                 }
                 // La descarga siempre ocurre
+            });
+
+            // Función para restablecer el contador a 0
+            document.getElementById('reset-count').addEventListener('click', () => {
+                var confirmReset = confirm('¿Estás seguro de que deseas restablecer el contador de descargas a 0?');
+                if (confirmReset) {
+                    downloadCountRef.set(0, (error) => {
+                        if (error) {
+                            alert('Error al restablecer el contador');
+                        } else {
+                            alert('El contador se ha restablecido a 0.');
+                        }
+                    });
+                }
             });
         });
 </script>
