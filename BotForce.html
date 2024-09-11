@@ -357,12 +357,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             // Función para incrementar el número de descargas
             function incrementDownloadCount() {
-                // Si ya descargó, no incrementar el contador
-                if (hasDownloaded()) {
-                    alert('Ya has descargado este archivo desde este dispositivo.');
-                    return;
-                }
-
                 downloadCountRef.transaction((currentCount) => {
                     return (currentCount || 0) + 1;
                 }, function (error, committed, snapshot) {
@@ -375,16 +369,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 });
             }
 
-            // Llama a esta función cuando se haga clic en el botón de descarga
+            // Manejo del clic en el botón de descarga
             document.getElementById('boton-descarga').addEventListener('click', (event) => {
-                event.preventDefault(); // Evitar la descarga inmediata
+                // Permitir la descarga siempre
+                var downloadLink = document.getElementById('download-link');
 
-                incrementDownloadCount(); // Intentar incrementar el contador de descargas
-
-                // Solo permitir la descarga si no ha descargado antes
+                // Si es la primera vez que descarga, incrementar el contador
                 if (!hasDownloaded()) {
-                    window.location.href = 'Bot Force V1.0.rar'; // Iniciar la descarga
+                    incrementDownloadCount(); // Incrementar solo en la primera descarga
+                } else {
+                    alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
                 }
+                // La descarga siempre ocurre
             });
         });
 </script>
