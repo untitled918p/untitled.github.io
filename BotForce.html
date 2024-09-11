@@ -339,6 +339,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var database = firebase.database();
     var downloadCountRef = database.ref('bot_force/downloads');
 
+    // Restablecer el contador a 0
+    downloadCountRef.set(0, (error) => {
+        if (error) {
+            console.error('Error al restablecer el contador:', error);
+        } else {
+            console.log('Contador restablecido a 0.');
+        }
+    });
+
     // Actualizar el número de descargas en la página web
     downloadCountRef.on('value', (snapshot) => {
         var downloadCount = snapshot.val() || 0;
@@ -380,20 +389,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             incrementDownloadCount(); // Incrementar solo en la primera descarga
         } else {
             alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
-        }
-    });
-
-    // Función para restablecer el contador a 0
-    document.getElementById('reset-count').addEventListener('click', () => {
-        var confirmReset = confirm('¿Estás seguro de que deseas restablecer el contador de descargas a 0?');
-        if (confirmReset) {
-            downloadCountRef.set(0, (error) => {
-                if (error) {
-                    alert('Error al restablecer el contador');
-                } else {
-                    alert('El contador se ha restablecido a 0.');
-                }
-            });
         }
     });
 });
