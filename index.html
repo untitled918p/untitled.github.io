@@ -16,24 +16,6 @@
             border-radius: 50%; 
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
         }
-    /* Panel deslizante */
-    #sliding-panel {
-      position: fixed;
-      top: 0;
-      left: -300px; /* Fuera de la pantalla inicialmente */
-      width: 300px;
-      height: 100%;
-      background-color: #444;
-      color: white;
-      transition: left 0.5s ease; /* Deslizar */
-      z-index: 1000;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Contenido del panel */
-    #sliding-panel-content {
-      padding: 20px;
-    }
     
     .photo-container img {
       width: 40px;
@@ -47,7 +29,6 @@
       padding: 0;
       font-family: Arial, sans-serif;
       color: #fff;
-      
     }
 
     .menu-container {
@@ -311,16 +292,7 @@
   </section>
 
   <script>
-// Abrir el panel cuando se toca la imagen
-    profileImageElement.addEventListener('click', function() {
-      if (slidingPanel.style.left === "0px") {
-        // Si el panel está abierto, lo cerramos
-        slidingPanel.style.left = "-300px";
-      } else {
-        // Si el panel está cerrado, lo abrimos
-        slidingPanel.style.left = "0px";
-      }
-    });
+
  document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
       const categoriaPanel = document.getElementById('categoriaPanel');
