@@ -11,10 +11,12 @@
   bottom: 0; /* Ubicar el panel en la parte inferior */
   left: 0;
   width: 100%;
+  height: 70vh; /* Ajusta la altura del panel aquí (70% del alto de la vista) */
   background: rgba(0, 0, 0, 0.7);
   z-index: 1000; /* Asegurarse de que esté encima de todo */
-  align-items: flex-end; /* Alinear el contenido al fondo */
+  align-items: center; /* Centrar el contenido verticalmente */
   justify-content: center;
+  overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es largo */
 }
 
 .profile-panel-content {
@@ -24,9 +26,12 @@
   text-align: center;
   color: #fff;
   position: relative;
-  width: 100%;
+  width: 90%; /* Ajusta el ancho del panel según sea necesario */
   max-width: 600px; /* Tamaño máximo del panel */
-  margin: 0 auto; /* Centrar el panel horizontalmente */
+  height: 80%; /* Ajusta la altura del contenido del panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #close-panel {
