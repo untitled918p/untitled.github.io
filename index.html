@@ -5,43 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-/* #profile-panel {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }*/
 
-    #profile-panel .panel-content {
-      background-color: #444;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      position: relative;
-    }
-
-    #profile-panel .close-btn {
-      background: #ff0000;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    
      #profile-image {
             display: none;
             position: fixed;
@@ -240,15 +204,9 @@
 </head>
 <body>
   <header>
-    
     <nav class="menu-container">
       <ul>
  <img id="profile-image" src="" alt="Imagen de perfil">
-
-        
-        
-  </div>
-
         
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
@@ -274,16 +232,7 @@
     <div class="categoria" data-etiqueta="carreras">Carreras</div>
   </div>
   <section class="untitled1">
-
     
-    <div id="profile-panel">
-    <div class="panel-content">
-      <button class="close-btn" onclick="closePanel()">×</button>
-      <h1>Contenido del panel</h1>
-      <p>Detalles adicionales sobre el perfil.</p>
-    </div>
-
-      
 <div class="juego" data-etiquetas="todos,accion">
       <a href="BotForce.html">
         <span>Bot Force</span>
@@ -343,16 +292,7 @@
   </section>
 
   <script>
-document.getElementById('profile-image').onclick = function() {
-      document.getElementById('profile-panel').style.display = 'flex';
-    };
 
-    function closePanel() {
-      document.getElementById('profile-panel').style.display = 'none';
-    }
-    
-
-    
  document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
       const categoriaPanel = document.getElementById('categoriaPanel');
