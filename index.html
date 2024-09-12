@@ -6,16 +6,37 @@
   <title>Untitled Juegos</title>
   <style>
 
-     #profile-image {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
-        }
+     /* Imagen de perfil */
+    #profile-image {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    /* Panel deslizante */
+    #sliding-panel {
+      position: fixed;
+      top: 0;
+      left: -300px; /* Fuera de la pantalla inicialmente */
+      width: 300px;
+      height: 100%;
+      background-color: #444;
+      color: white;
+      transition: left 0.5s ease; /* Deslizar */
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Contenido del panel */
+    #sliding-panel-content {
+      padding: 20px;
+    }
     
     .photo-container img {
       width: 40px;
@@ -29,6 +50,7 @@
       padding: 0;
       font-family: Arial, sans-serif;
       color: #fff;
+      
     }
 
     .menu-container {
@@ -207,7 +229,11 @@
     <nav class="menu-container">
       <ul>
  <img id="profile-image" src="" alt="Imagen de perfil">
-        
+        <div id="sliding-panel">
+    <div id="sliding-panel-content">
+      <h2>Panel de Usuario</h2>
+      <p>Bienvenido, usuario.</p>
+      <p>Este es un panel deslizante.</p>
         <li><a href="index.html">Inicio</a></li>
         <li><a href="Contacto.html">Contacto</a></li>
         <li><a href="Informacion.html">Página oficial</a></li>
@@ -292,7 +318,16 @@
   </section>
 
   <script>
-
+// Abrir el panel cuando se toca la imagen
+    profileImageElement.addEventListener('click', function() {
+      if (slidingPanel.style.left === "0px") {
+        // Si el panel está abierto, lo cerramos
+        slidingPanel.style.left = "-300px";
+      } else {
+        // Si el panel está cerrado, lo abrimos
+        slidingPanel.style.left = "0px";
+      }
+    });
  document.addEventListener('DOMContentLoaded', function () {
       const categoriaBtn = document.getElementById('categoriaBtn');
       const categoriaPanel = document.getElementById('categoriaPanel');
