@@ -413,6 +413,7 @@ fetch('perfil.json')
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
 //Panel de imagen de perfil
+    document.addEventListener('DOMContentLoaded', function () {
     const profileImage = document.getElementById('profile-image');
     const profilePanel = document.getElementById('profile-panel');
     const closeBtn = document.getElementById('close-btn');
@@ -439,7 +440,7 @@ fetch('perfil.json')
       if (e.target === profilePanel) {
         profilePanel.style.display = 'none';
       }
-    });
+    }});
   </script>
   <div id="profile-panel">
     <div id="profile-content">
