@@ -8,13 +8,12 @@
 .profile-panel {
   display: none; /* Ocultar el panel por defecto */
   position: fixed;
-  top: 0;
+  bottom: 0; /* Ubicar el panel en la parte inferior */
   left: 0;
   width: 100%;
-  height: 100%;
   background: rgba(0, 0, 0, 0.7);
   z-index: 1000; /* Asegurarse de que esté encima de todo */
-  align-items: center;
+  align-items: flex-end; /* Alinear el contenido al fondo */
   justify-content: center;
 }
 
@@ -25,6 +24,9 @@
   text-align: center;
   color: #fff;
   position: relative;
+  width: 100%;
+  max-width: 600px; /* Tamaño máximo del panel */
+  margin: 0 auto; /* Centrar el panel horizontalmente */
 }
 
 #close-panel {
@@ -36,6 +38,16 @@
   color: #fff;
   font-size: 24px;
   cursor: pointer;
+}
+
+#logout-button {
+  margin-top: 20px;
+  background: transparent;
+  border: none;
+  color: red;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
     
@@ -383,11 +395,12 @@ fetch('perfil.json')
             profileImageElement.src = storedProfilePicture;
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
-
+//Panel de imagen de perfil
     document.addEventListener('DOMContentLoaded', function () {
   const profileImage = document.getElementById('profile-image');
   const profilePanel = document.getElementById('profile-panel');
   const closePanelButton = document.getElementById('close-panel');
+  const logoutButton = document.getElementById('logout-button');
 
   // Mostrar el panel al hacer clic en la imagen de perfil
   profileImage.addEventListener('click', function () {
@@ -405,12 +418,19 @@ fetch('perfil.json')
       profilePanel.style.display = 'none';
     }
   });
+
+  // Acción del botón "Cerrar sesión"
+  logoutButton.addEventListener('click', function () {
+    // Aquí puedes agregar la lógica para cerrar sesión
+    alert('Cerrar sesión');
+  });
 });
   </script>
   <div id="profile-panel" class="profile-panel">
   <div class="profile-panel-content">
     <button id="close-panel">&times;</button>
     <p>Contenido del panel</p>
+    <button id="logout-button">Cerrar sesión</button>
   </div>
 </div>
 </body>
