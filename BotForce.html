@@ -225,9 +225,9 @@
     <img src="BotForceIcono.png" width="100" height="100" class="icono">
     <p>Peso Del Juego: 100 MB<br> Terror/ Robots / 2D / indie</p>
     <section><a href="Bot Force V1.0.rar" download>
-                <button id="boton-descarga">Descargar</button>
+                <button id="resetCounter">Restablecer Descargas</button>
             </a>
-            <p id="download-count">Descargas: 0</p></section>
+            <p>Descargas: <span id="contadorDescargas">0</span></p>
     <section><h2>Juegos creados por:</h2><a href="perfil.html"><h2>Untitled(Games)</h2></a></section>
     <section><h2>Requisitos Minimos</h2></section>
     <section>Windows: XP/Vista/7/8/10</section>
@@ -331,8 +331,11 @@
                 measurementId: "G-MJ4RGPGV36"
             };
 
-            // Inicializar Firebase
-            firebase.initializeApp(firebaseConfig);
+            
+firebase.initializeApp(firebaseConfig);
+
+
+/*var db = firebase.database();
 
             // Referencia a la base de datos
             var database = firebase.database();
@@ -381,7 +384,37 @@
                 }
                 // La descarga siempre ocurre
             });
-        });
+        });*/
+
+
+    // Obtener el botón por su ID
+document.getElementById("resetCounter").addEventListener("click", function() {
+    // Referencia a la ubicación del contador en Realtime Database
+    var contadorRef = db.ref("descargas/contador");
+
+    // Establecer el contador a 0
+    contadorRef.set(0, function(error) {
+        if (error) {
+            console.error("Error al restablecer el contador: ", error);
+        } else {
+            console.log("Contador restablecido a 0.");
+            // Aquí puedes actualizar la interfaz si es necesario
+        }
+    });
+});
+
+    // Referencia al contador de descargas en la base de datos
+var contadorRef = db.ref("descargas/contador");
+
+// Escuchar cambios en tiempo real
+contadorRef.on("value", function(snapshot) {
+    var numeroDescargas = snapshot.val();
+    if (numeroDescargas !== null) {
+        document.getElementById("contadorDescargas").textContent = numeroDescargas;
+    } else {
+        console.log("No se encontró el valor del contador.");
+    }
+});
 </script>
 </body>
 </html>
