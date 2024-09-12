@@ -319,74 +319,69 @@
     };
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    // Configuración de Firebase
-    var firebaseConfig = {
-        apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
-        authDomain: "untitled-3bfa8.firebaseapp.com",
-        databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
-        projectId: "untitled-3bfa8",
-        storageBucket: "untitled-3bfa8.appspot.com",
-        messagingSenderId: "841576951279",
-        appId: "1:841576951279:web:deabdeb786d955642a1a1a",
-        measurementId: "G-MJ4RGPGV36"
-    };
+            // Configuración de Firebase
+            var firebaseConfig = {
+                apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
+                authDomain: "untitled-3bfa8.firebaseapp.com",
+                databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
+                projectId: "untitled-3bfa8",
+                storageBucket: "untitled-3bfa8.appspot.com",
+                messagingSenderId: "841576951279",
+                appId: "1:841576951279:web:deabdeb786d955642a1a1a",
+                measurementId: "G-MJ4RGPGV36"
+            };
 
-   // Inicializar Firebase
-    firebase.initializeApp(firebaseConfig);
+           // Inicializar Firebase
+            firebase.initializeApp(firebaseConfig);
 
-    // Referencia a la base de datos
-    var database = firebase.database();
-    var downloadCountRef = database.ref('bot_force/downloads');
+            // Referencia a la base de datos
+            var database = firebase.database();
+            var downloadCountRef = database.ref('bot_force/downloads');
 
-    // Actualizar el número de descargas en la página web
-    downloadCountRef.on('value', (snapshot) => {
-        var downloadCount = snapshot.val() || 0;
-        console.log("Número de descargas actual:", downloadCount); // Log de depuración
-        document.getElementById('download-count').textContent = `Descargas: ${downloadCount}`;
-    });
+            // Actualizar el número de descargas en la página web
+            downloadCountRef.on('value', (snapshot) => {
+                var downloadCount = snapshot.val() || 0;
+                document.getElementById('download-count').textContent = Descargas: ${downloadCount};
+            });
 
-    // Verificar si ya ha descargado en este dispositivo
-    function hasDownloaded() {
-        return localStorage.getItem('hasDownloadedBotForce') === 'true';
-    }
-
-    // Marcar que ya ha descargado en este dispositivo
-    function markAsDownloaded() {
-        localStorage.setItem('hasDownloadedBotForce', 'true');
-    }
-
-    // Función para incrementar el número de descargas
-    function incrementDownloadCount() {
-        console.log("Intentando incrementar el número de descargas..."); // Log de depuración
-        downloadCountRef.transaction((currentCount) => {
-            console.log("Contador actual:", currentCount); // Log de depuración
-            return (currentCount || 0) + 1;
-        }, function (error, committed, snapshot) {
-            if (committed) {
-                console.log("Incremento exitoso"); // Log de depuración
-                markAsDownloaded(); // Marcar que el usuario ya descargó
-                alert('Gracias por descargar el juego.');
-            } else {
-                console.error('Error al incrementar el contador:', error); // Log de error
-                alert('Hubo un problema al registrar tu descarga.');
+            // Verificar si ya ha descargado en este dispositivo
+            function hasDownloaded() {
+                return localStorage.getItem('hasDownloadedBotForce') === 'true';
             }
+
+            // Marcar que ya ha descargado en este dispositivo
+            function markAsDownloaded() {
+                localStorage.setItem('hasDownloadedBotForce', 'true');
+            }
+
+            // Función para incrementar el número de descargas
+            function incrementDownloadCount() {
+                downloadCountRef.transaction((currentCount) => {
+                    return (currentCount || 0) + 1;
+                }, function (error, committed, snapshot) {
+                    if (committed) {
+                        markAsDownloaded(); // Marcar que el usuario ya descargó
+                        alert('Gracias por descargar el juego.');
+                    } else {
+                        alert('Hubo un problema al registrar tu descarga.');
+                    }
+                });
+            }
+
+            // Manejo del clic en el botón de descarga
+            document.getElementById('boton-descarga').addEventListener('click', (event) => {
+                // Permitir la descarga siempre
+                var downloadLink = document.getElementById('download-link');
+
+                // Si es la primera vez que descarga, incrementar el contador
+                if (!hasDownloaded()) {
+                    incrementDownloadCount(); // Incrementar solo en la primera descarga
+                } else {
+                    alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
+                }
+                // La descarga siempre ocurre
+            });
         });
-    }
-
-    // Manejo del clic en el botón de descarga
-    document.getElementById('boton-descarga').addEventListener('click', (event) => {
-        // Permitir la descarga siempre
-        var downloadLink = document.getElementById('download-link');
-        window.location.href = downloadLink.href; // Iniciar descarga
-
-        // Si es la primera vez que descarga, incrementar el contador
-        if (!hasDownloaded()) {
-            incrementDownloadCount(); // Incrementar solo en la primera descarga
-        } else {
-            alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
-        }
-    });
-});
 </script>
 </body>
 </html>
