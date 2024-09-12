@@ -16,8 +16,8 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     outline: none;
-    width: 200px; /* Ancho del campo de búsqueda */
-    margin-right: 10px; /* Espacio entre el campo y el botón */
+    width: 200px;
+    margin-left: auto; /* Esto mueve el campo de búsqueda a la derecha */
 }
 
 .search-button {
@@ -239,16 +239,13 @@
       <li><a href="Informacion.html">Página oficial</a></li>
     </ul>
   </nav>
-  <div class="header">
+ <div class="header">
     <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
-    <form class="search-form" action="buscar.html" method="GET">
-        <input type="text" placeholder="Buscar juegos..." name="query" class="search-input">
-        <button type="submit" class="search-button">Buscar</button>
-    </form>
+    <input type="text" placeholder="Buscar juegos..." id="search-input" class="search-input">
     <a href="IniciarSesion.html">
-      <img src="Crear cuenta.png" alt="icono" class="search-icon" id="crear-cuenta">
+        <img src="Crear cuenta.png" alt="icono" class="search-icon" id="crear-cuenta">
     </a>
-  </div>
+</div>
 </header>
   
   
@@ -392,7 +389,27 @@ document.addEventListener('DOMContentLoaded', function() {
     crearCuentaImageElement.style.display = 'none'; // Ocultar la imagen de "Crear cuenta"
   }
 });
-    
+    //Buscar
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const juegos = document.querySelectorAll('.juego');
+
+    // Escuchar el evento input en el campo de búsqueda
+    searchInput.addEventListener('input', function() {
+        const searchText = searchInput.value.toLowerCase();
+
+        juegos.forEach(function(juego) {
+            const gameTitle = juego.querySelector('span').textContent.toLowerCase();
+
+            // Mostrar o esconder los juegos en función del texto buscado
+            if (gameTitle.includes(searchText)) {
+                juego.style.display = 'flex'; // Mostrar el juego si coincide
+            } else {
+                juego.style.display = 'none'; // Ocultar el juego si no coincide
+            }
+        });
+    });
+});
   </script>
 </body>
 </html>
