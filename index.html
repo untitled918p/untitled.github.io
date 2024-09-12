@@ -5,7 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
+.profile-panel {
+  display: none; /* Ocultar el panel por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000; /* Asegurarse de que esté encima de todo */
+  align-items: center;
+  justify-content: center;
+}
 
+.profile-panel-content {
+  background: #444;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+#close-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+    
+    
      #profile-image {
             display: none;
             position: fixed;
@@ -350,7 +384,34 @@ fetch('perfil.json')
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
 
-    
+    document.addEventListener('DOMContentLoaded', function () {
+  const profileImage = document.getElementById('profile-image');
+  const profilePanel = document.getElementById('profile-panel');
+  const closePanelButton = document.getElementById('close-panel');
+
+  // Mostrar el panel al hacer clic en la imagen de perfil
+  profileImage.addEventListener('click', function () {
+    profilePanel.style.display = 'flex';
+  });
+
+  // Cerrar el panel al hacer clic en el botón de cierre
+  closePanelButton.addEventListener('click', function () {
+    profilePanel.style.display = 'none';
+  });
+
+  // Cerrar el panel al hacer clic fuera del contenido del panel
+  profilePanel.addEventListener('click', function (event) {
+    if (event.target === profilePanel) {
+      profilePanel.style.display = 'none';
+    }
+  });
+});
   </script>
+  <div id="profile-panel" class="profile-panel">
+  <div class="profile-panel-content">
+    <button id="close-panel">&times;</button>
+    <p>Contenido del panel</p>
+  </div>
+</div>
 </body>
 </html>
