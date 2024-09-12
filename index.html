@@ -246,6 +246,7 @@
         <img src="Crear cuenta.png" alt="icono" class="search-icon" id="crear-cuenta">
     </a>
 </div>
+    <p id="no-results-message" style="display: none; color: red; text-align: center;">No se encontraron juegos</p>
 </header>
   
   
@@ -393,21 +394,31 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const juegos = document.querySelectorAll('.juego');
+    const noResultsMessage = document.getElementById('no-results-message'); // Mensaje de no resultados
 
     // Escuchar el evento input en el campo de búsqueda
     searchInput.addEventListener('input', function() {
         const searchText = searchInput.value.toLowerCase();
+        let found = false; // Bandera para comprobar si se encontró al menos un juego
 
         juegos.forEach(function(juego) {
             const gameTitle = juego.querySelector('span').textContent.toLowerCase();
 
-            // Mostrar o esconder los juegos en función del texto buscado
+            // Mostrar u ocultar los juegos según el texto buscado
             if (gameTitle.includes(searchText)) {
                 juego.style.display = 'flex'; // Mostrar el juego si coincide
+                found = true; // Se encontró al menos un juego
             } else {
                 juego.style.display = 'none'; // Ocultar el juego si no coincide
             }
         });
+
+        // Mostrar el mensaje si no se encontró ningún juego
+        if (found) {
+            noResultsMessage.style.display = 'none'; // Ocultar el mensaje
+        } else {
+            noResultsMessage.style.display = 'block'; // Mostrar el mensaje
+        }
     });
 });
   </script>
