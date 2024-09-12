@@ -5,57 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-.profile-panel {
-  display: none; /* Ocultar el panel por defecto */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; /* Ocupa el 100% del ancho de la ventana */
-  height: 100vh; /* Ocupa el 100% del alto de la ventana */
-  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
-  z-index: 1000; /* Asegurarse de que esté encima de todo */
-  align-items: center; /* Centrar el contenido verticalmente */
-  justify-content: center;
-}
 
-.profile-panel-content {
-  background: #444;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  width: 95%; /* Ajusta el ancho del contenido dentro del panel */
-  max-width: 700px; /* Tamaño máximo del contenido */
-  height: 90%; /* Aumenta la altura del contenido */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-#close-panel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-#logout-button {
-  margin-top: 20px;
-  background: transparent;
-  border: none;
-  color: red;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-    
-    
      #profile-image {
             display: none;
             position: fixed;
@@ -399,45 +349,8 @@ fetch('perfil.json')
             profileImageElement.src = storedProfilePicture;
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
-//Panel de imagen de perfil
-    document.addEventListener('DOMContentLoaded', function () {
-  const profileImage = document.getElementById('profile-image');
-  const profilePanel = document.getElementById('profile-panel');
-  const closePanelButton = document.getElementById('close-panel');
-  const logoutButton = document.getElementById('logout-button');
 
-  // Mostrar el panel al hacer clic en la imagen de perfil
-  profileImage.addEventListener('click', function () {
-    profilePanel.style.display = 'flex';
-  });
-
-  // Cerrar el panel al hacer clic en el botón de cierre
-  closePanelButton.addEventListener('click', function () {
-    profilePanel.style.display = 'none';
-  });
-
-  // Cerrar el panel al hacer clic fuera del contenido del panel
-  profilePanel.addEventListener('click', function (event) {
-    if (event.target === profilePanel) {
-      profilePanel.style.display = 'none';
-    }
-  });
-
-  // Acción del botón "Cerrar sesión"
-  logoutButton.addEventListener('click', function () {
-    alert('Cerrar sesión');
-  });
-});
+    
   </script>
-  <div id="profile-panel">
-    <div id="profile-content">
-      <img id="profile-image-large" src="" alt="Foto de perfil">
-      <button id="close-btn">X</button>
-      <button id="logout-btn">Cerrar sesión</button>
-    </div>
-  </div>
-
-  
-
 </body>
 </html>
