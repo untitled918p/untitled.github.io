@@ -204,24 +204,22 @@
 </head>
 <body>
   <header>
-    <nav class="menu-container">
-      <ul>
- 
-        <img id="profile-image" src="" alt="Imagen de perfil">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="Contacto.html">Contacto</a></li>
-        <li><a href="Informacion.html">Página oficial</a></li>
-      </ul>
-    </nav>
-    <div class="header">
-      <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
+  <nav class="menu-container">
+    <ul>
+      <img id="profile-image" src="" alt="Imagen de perfil">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="Contacto.html">Contacto</a></li>
+      <li><a href="Informacion.html">Página oficial</a></li>
+      <li><a href="IniciarSesion.html">Iniciar sesión</a></li>
+    </ul>
+  </nav>
+  <div class="header">
+    <img src="Logo.png" alt="Logo de Untitled Games" id="logo">
     <a href="IniciarSesion.html">
-  <img src="Crear cuenta.png" alt="icono" class="search-icon">
-</a>
-      </div>
-    </div>
-    
-  </header>
+      <img src="Crear cuenta.png" alt="icono" class="search-icon" id="crear-cuenta">
+    </a>
+  </div>
+</header>
   
   
   <button id="categoriaBtn">Categorías</button>
@@ -350,7 +348,20 @@ fetch('perfil.json')
             profileImageElement.src = storedProfilePicture;
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
+document.addEventListener('DOMContentLoaded', function() {
+  const profileImageElement = document.getElementById('profile-image');
+  const crearCuentaImageElement = document.getElementById('crear-cuenta');
 
+  // Recuperar la imagen guardada en localStorage (esto ya lo tienes en tu código)
+  const storedProfilePicture = localStorage.getItem('profilePicture');
+
+  // Si hay una imagen de perfil guardada
+  if (storedProfilePicture) {
+    profileImageElement.src = storedProfilePicture;
+    profileImageElement.style.display = 'block'; // Mostrar la imagen de perfil
+    crearCuentaImageElement.style.display = 'none'; // Ocultar la imagen de "Crear cuenta"
+  }
+});
     
   </script>
 </body>
