@@ -5,54 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Untitled Juegos</title>
   <style>
-.profile-panel {
-  display: none; /* Ocultar el panel por defecto */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; /* Ocupa el 100% del ancho de la ventana */
-  height: 100vh; /* Ocupa el 100% del alto de la ventana */
-  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
-  z-index: 1000; /* Asegurarse de que esté encima de todo */
-  align-items: center; /* Centrar el contenido verticalmente */
-  justify-content: center;
-}
+#profile-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
 
-.profile-panel-content {
-  background: #444;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  width: 95%; /* Ajusta el ancho del contenido dentro del panel */
-  max-width: 700px; /* Tamaño máximo del contenido */
-  height: 90%; /* Aumenta la altura del contenido */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    #profile-image-large {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
 
-#close-panel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-}
+    #profile-image-large:hover {
+      transform: scale(1.1);
+    }
 
-#logout-button {
-  margin-top: 20px;
-  background: transparent;
-  border: none;
-  color: red;
-  font-size: 18px;
-  cursor: pointer;
-  text-decoration: underline;
-}
+    #close-btn {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background-color: #f00;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #close-btn:hover {
+      background-color: #d00;
+    }
+
+    #logout-btn {
+      margin-top: 20px;
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    #logout-btn:hover {
+      background-color: darkred;
+    }
 
     
     
@@ -400,41 +413,43 @@ fetch('perfil.json')
             profileImageElement.style.display = 'block'; // Mostrar la imagen
         }
 //Panel de imagen de perfil
-   document.addEventListener('DOMContentLoaded', function () {
-  const profileImage = document.getElementById('profile-image');
-  const profilePanel = document.getElementById('profile-panel');
-  const closePanelButton = document.getElementById('close-panel');
-  const logoutButton = document.getElementById('logout-button');
+    const profileImage = document.getElementById('profile-image');
+    const profilePanel = document.getElementById('profile-panel');
+    const closeBtn = document.getElementById('close-btn');
+    const profileImageLarge = document.getElementById('profile-image-large');
 
-  // Mostrar el panel al hacer clic en la imagen de perfil
-  profileImage.addEventListener('click', function () {
-    profilePanel.style.display = 'flex';
-  });
-
-  // Cerrar el panel al hacer clic en el botón de cierre
-  closePanelButton.addEventListener('click', function () {
-    profilePanel.style.display = 'none';
-  });
-
-  // Cerrar el panel al hacer clic fuera del contenido del panel
-  profilePanel.addEventListener('click', function (event) {
-    if (event.target === profilePanel) {
-      profilePanel.style.display = 'none';
+    // Cargar la imagen de perfil desde localStorage
+    const storedProfilePicture = localStorage.getItem('profilePicture');
+    if (storedProfilePicture) {
+      profileImage.src = storedProfilePicture;
+      profileImageLarge.src = storedProfilePicture;
     }
-  });
 
-  // Acción del botón "Cerrar sesión"
-  logoutButton.addEventListener('click', function () {
-    alert('Cerrar sesión');
-  });
-});
+    // Mostrar el panel al hacer clic en la imagen de perfil
+    profileImage.addEventListener('click', () => {
+      profilePanel.style.display = 'flex';
+    });
+
+    // Cerrar el panel al hacer clic en la "X" o fuera de la foto
+    closeBtn.addEventListener('click', () => {
+      profilePanel.style.display = 'none';
+    });
+
+    profilePanel.addEventListener('click', (e) => {
+      if (e.target === profilePanel) {
+        profilePanel.style.display = 'none';
+      }
+    });
   </script>
-  <div id="profile-panel" class="profile-panel">
-  <div class="profile-panel-content">
-    <button id="close-panel">&times;</button>
-    <p>Contenido del panel</p>
-    <button id="logout-button">Cerrar sesión</button>
+  <div id="profile-panel">
+    <div id="profile-content">
+      <img id="profile-image-large" src="" alt="Foto de perfil">
+      <button id="close-btn">X</button>
+      <button id="logout-btn">Cerrar sesión</button>
+    </div>
   </div>
-</div>
+
+  <img id="profile-image" src="" alt="Foto de perfil" width="50" height="50" style="border-radius: 50%; cursor: pointer;">
+
 </body>
 </html>
