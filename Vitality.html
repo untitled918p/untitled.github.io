@@ -81,7 +81,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin-top: 60px; /* Añade espacio para el menú fijo */
+            margin-top: 60px; /* AÃ±ade espacio para el menÃº fijo */
             text-align: center;
         }
 
@@ -224,7 +224,7 @@
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="Contacto.html">Contacto</a></li>
-            <li><a href="Informacion.html">Pagina oficial y mas información</a></li>
+            <li><a href="Informacion.html">Pagina oficial y mas informaciÃ³n</a></li>
         </ul>
     </nav>
 </div>
@@ -329,17 +329,17 @@
     };
 
  document.addEventListener('DOMContentLoaded', (event) => {
-            // Configuración de Firebase
-            var firebaseConfig = {
-                apiKey: "AIzaSyCkTD2WKRBxuSZbK_gZchdFwxBq6Jtjzs4",
-                authDomain: "untitled-3bfa8.firebaseapp.com",
-                databaseURL: "https://untitled-3bfa8-default-rtdb.firebaseio.com",
-                projectId: "untitled-3bfa8",
-                storageBucket: "untitled-3bfa8.appspot.com",
-                messagingSenderId: "841576951279",
-                appId: "1:841576951279:web:deabdeb786d955642a1a1a",
-                measurementId: "G-MJ4RGPGV36"
-            };
+            // ConfiguraciÃ³n de Firebase
+            const firebaseConfig = {
+  apiKey: "AIzaSyDp1pCG2rnF6jgV4Gmp4xTR-f7UJXhu-Jg",
+  authDomain: "untitled-games-c1ac6.firebaseapp.com",
+  databaseURL: "https://untitled-games-c1ac6-default-rtdb.firebaseio.com",
+  projectId: "untitled-games-c1ac6",
+  storageBucket: "untitled-games-c1ac6.firebasestorage.app",
+  messagingSenderId: "589650965735",
+  appId: "1:589650965735:web:00418d5a75d4c293721e42",
+  measurementId: "G-YD2GX1EXKR"
+};
 
             // Inicializar Firebase
             firebase.initializeApp(firebaseConfig);
@@ -348,7 +348,7 @@
             var database = firebase.database();
             var downloadCountRef = database.ref('vitality/downloads');
 
-            // Actualizar el número de descargas en la página web
+            // Actualizar el nÃºmero de descargas en la pÃ¡gina web
             downloadCountRef.on('value', (snapshot) => {
                 var downloadCount = snapshot.val() || 0;
                 document.getElementById('download-count').textContent = `Descargas: ${downloadCount}`;
@@ -364,13 +364,13 @@
                 localStorage.setItem('hasDownloadedBotForce', 'true');
             }
 
-            // Función para incrementar el número de descargas
+            // FunciÃ³n para incrementar el nÃºmero de descargas
             function incrementDownloadCount() {
                 downloadCountRef.transaction((currentCount) => {
                     return (currentCount || 0) + 1;
                 }, function (error, committed, snapshot) {
                     if (committed) {
-                        markAsDownloaded(); // Marcar que el usuario ya descargó
+                        markAsDownloaded(); // Marcar que el usuario ya descargÃ³
                         alert('Gracias por descargar el juego.');
                     } else {
                         alert('Hubo un problema al registrar tu descarga.');
@@ -378,7 +378,7 @@
                 });
             }
 
-            // Manejo del clic en el botón de descarga
+            // Manejo del clic en el botÃ³n de descarga
             document.getElementById('boton-descarga').addEventListener('click', (event) => {
                 // Permitir la descarga siempre
                 var downloadLink = document.getElementById('download-link');
@@ -387,7 +387,7 @@
                 if (!hasDownloaded()) {
                     incrementDownloadCount(); // Incrementar solo en la primera descarga
                 } else {
-                    alert('Ya has descargado este archivo antes. La descarga comenzará ahora.');
+                    alert('Ya has descargado este archivo antes. La descarga comenzarÃ¡ ahora.');
                 }
                 // La descarga siempre ocurre
             });
