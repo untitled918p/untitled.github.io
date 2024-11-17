@@ -210,52 +210,18 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
-  apiKey: "AIzaSyDp1pCG2rnF6jgV4Gmp4xTR-f7UJXhu-Jg",
-  authDomain: "untitled-games-c1ac6.firebaseapp.com",
-  databaseURL: "https://untitled-games-c1ac6-default-rtdb.firebaseio.com",
-  projectId: "untitled-games-c1ac6",
-  storageBucket: "untitled-games-c1ac6.firebasestorage.app",
-  messagingSenderId: "589650965735",
-  appId: "1:589650965735:web:00418d5a75d4c293721e42",
-  measurementId: "G-YD2GX1EXKR"
-};
-
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Inicializar Auth y Storage
-        const auth = firebase.auth();
-        const storage = firebase.storage();
-
-       // Guardar usuario en localStorage
-    function saveUserToLocalStorage(user, photoURL) {
-        const userData = {
-            email: user.email,
-            photoURL: photoURL || user.photoURL || 'default-profile.png' // Imagen predeterminada si no hay photoURL
+    // Función para convertir imagen a base64
+    function imageToBase64(file, callback) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function() {
+            callback(reader.result); // Devuelve la imagen en base64
         };
-        localStorage.setItem('user', JSON.stringify(userData));
+        reader.onerror = function(error) {
+            console.error("Error al leer la imagen:", error);
+        };
     }
 
-    // Recuperar el usuario guardado al cargar la página
-    window.onload = function() {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (storedUser) {
-            // Si ya hay un usuario guardado, mostrar el perfil
-            showSuccessPanel(storedUser.photoURL, 'Ya has iniciado sesión como ' + storedUser.email);
-        }
-    };
-
-    // Mostrar panel de éxito
-    function showSuccessPanel(imageUrl, message) {
-        document.getElementById('success-panel').style.display = 'block';
-        document.getElementById('profile-image').src = imageUrl || 'default-profile.png'; // Imagen predeterminada si no hay URL
-        document.getElementById('success-message').textContent = message;
-        document.getElementById('auth-container').style.display = 'none';
-    }
-
-    // Crear cuenta
     // Crear cuenta
     document.getElementById('createAccount').addEventListener('click', () => {
         const email = document.getElementById('email').value;
@@ -277,30 +243,24 @@
         document.getElementById('auth-container').style.display = 'none';
         loadingMessage.style.display = 'block';
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(userCredential => {
-                const user = userCredential.user;
-                const storageRef = storage.ref('profile_pictures/' + user.uid);
+        // Convertir imagen a base64 y guardar en localStorage
+        imageToBase64(profilePicture, (base64Image) => {
+            // Guardar la imagen base64 en localStorage
+            localStorage.setItem('profilePicture', base64Image);
 
-                // Subir la imagen de perfil al Storage
-                return storageRef.put(profilePicture).then(() => {
-                    return storageRef.getDownloadURL().then(url => {
-                        // Guardar la URL de la imagen en localStorage
-                        saveUserToLocalStorage(user, url);
+            // Guardar los datos del usuario (aunque no se suben a Firebase ahora)
+            const userData = {
+                email: email,
+                photoURL: base64Image // Usamos la imagen base64
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
 
-                        // Mostrar el panel de éxito con la imagen y mensaje
-                        showSuccessPanel(url, 'Cuenta creada con éxito');
-                    });
-                });
-            })
-            .catch(error => {
-                document.getElementById('authMessage').textContent = error.message;
-                loadingMessage.style.display = 'none';
-                document.getElementById('auth-container').style.display = 'block';
-            });
+            // Mostrar mensaje de éxito
+            showSuccessPanel(base64Image, 'Cuenta creada con éxito');
+        });
     });
 
-    // Mostrar el panel de éxito
+    // Mostrar panel de éxito
     function showSuccessPanel(imageUrl, message) {
         document.getElementById('success-panel').style.display = 'block';
         document.getElementById('profile-image').src = imageUrl || 'default-profile.png'; // Imagen predeterminada si no hay URL
@@ -308,65 +268,14 @@
         document.getElementById('auth-container').style.display = 'none';
     }
 
-    // Guardar usuario en localStorage
-    function saveUserToLocalStorage(user, photoURL) {
-        const userData = {
-            email: user.email,
-            photoURL: photoURL || user.photoURL || 'default-profile.png' // Imagen predeterminada si no hay photoURL
-        };
-        localStorage.setItem('user', JSON.stringify(userData));
-    }
-
-    // Recuperar el usuario guardado al cargar la página
+    // Recuperar usuario del localStorage al cargar la página
     window.onload = function() {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
-            // Si ya hay un usuario guardado, mostrar el perfil
+            // Si hay un usuario guardado, mostrar el perfil
             showSuccessPanel(storedUser.photoURL, 'Ya has iniciado sesión como ' + storedUser.email);
         }
     };
-
-
-
-
-
-function saveUserToLocalStorage(user, photoURL) {
-    const userData = {
-        email: user.email,
-        photoURL: photoURL || user.photoURL || 'default-profile.png' // Imagen predeterminada si no hay photoURL
-    };
-    localStorage.setItem('user', JSON.stringify(userData));
-}
-
-// Convertir imagen a base64 y guardarla en localStorage
-function imageToBase64(file, callback) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-        callback(reader.result); // Esta es la imagen en base64
-    };
-}
-
-// Crear cuenta
-document.getElementById('createAccount').addEventListener('click', () => {
-    const profilePicture = document.getElementById('profile-picture').files[0];
-
-    if (!profilePicture) {
-        document.getElementById('authMessage').textContent = 'Sube una foto de perfil.';
-        return;
-    }
-
-    imageToBase64(profilePicture, (base64Image) => {
-        // Guardar la imagen base64 en localStorage
-        localStorage.setItem('profilePicture', base64Image);
-        
-        // Aquí va el resto del código para crear la cuenta y subir los datos a Firebase...
-    });
-});
-
-
-
-        
 </script>
 
 </body>
